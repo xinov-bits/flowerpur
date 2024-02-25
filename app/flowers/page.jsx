@@ -79,7 +79,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-auto h-auto mt-0 sm:mt-0 md:mt-4 lg:mt-4 xl:mt-4 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+                    <div className="flex justify-start items-center w-auto h-auto mt-1 sm:mt-1 md:mt-4 lg:mt-4 xl:mt-4 pb-4 px-1 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto overflow-y-hidden">
                         {flowerCategories.map((item) => (<Link className="flex justify-start items-center w-auto h-full  no-outline" href={item.url} key={item.name}>
                             <div className="flex flex-col justify-center items-center w-full h-full hover:text-[#191919]">
                                 <div className="flex justify-center items-center w-32 sm:w-32 md:w-44 lg:w-44 xl:w-44">
@@ -90,7 +90,7 @@ const Page = () => {
                                         height={1080}
                                     />
                                 </div>
-                                <div className="flex justify-center items-center w-full text-lg font-semibold">
+                                <div className="flex justify-center items-center w-full mt-1 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg text-center font-semibold leading-none">
                                     {item.name}
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className="block w-full h-auto my-6 sm:my-6 md:my-10 lg:my-10 xl:my-10 py-6 sm:py-6 md:py-10 lg:py-10 xl:py-10 px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 border-y-[1.5px] border-[#e5e5e5]">
+                <div className="block w-full h-auto my-2 sm:my-2 md:my-10 lg:my-10 xl:my-10 py-6 sm:py-6 md:py-10 lg:py-10 xl:py-10 px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 border-y-[1.5px] border-[#e5e5e5]">
                     <div className="flex flex-col justify-start items-center w-full">
                         <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
                             Flowers
@@ -108,8 +108,8 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-auto h-auto mt-4 pb-4 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
-                        {flowerKinds.map((item) => (<Link className="flex justify-start items-center w-auto h-full  no-outline" href={item.url} key={item.name}>
+                    <div className="flex justify-start items-center w-auto h-auto mt-2 pb-4 px-1 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto overflow-y-hidden">
+                        {flowerKinds.map((item) => (<Link className="flex justify-start items-center w-auto h-full pt-2  no-outline" href={item.url} key={item.name}>
                             <div className="flex flex-col justify-center items-center w-full h-full hover:text-[#191919]">
                                 <div className="flex justify-center items-center w-32 sm:w-32 md:w-44 lg:w-44 xl:w-44">
                                     <Image className="flex justify-center items-center w-full h-full rounded-full hover:ring-2 hover:ring-[#e5e5e5] ring-offset-2 duration-100"
@@ -119,7 +119,7 @@ const Page = () => {
                                         height={1080}
                                     />
                                 </div>
-                                <div className="flex justify-center items-center w-full text-lg font-semibold">
+                                <div className="flex justify-center items-center w-full mt-1 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg text-center font-semibold leading-none">
                                     {item.name}
                                 </div>
                             </div>

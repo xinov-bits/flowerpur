@@ -351,7 +351,7 @@ const Header = () => {
                 <div className="relative flex justify-start items-center w-full h-18 py-2 px-3.5 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5]
                     after:absolute after:right-0 after:w-14 after:h-full after:bg-gradient-to-l after:from-[#f7f7f7] after:to-transparent after:pointer-events-none
                 ">
-                    <ul className="flex justify-start items-center w-full h-full space-x-2 overflow-x-scroll  no-scrollbar">
+                    <ul className="flex justify-start items-center w-full h-full space-x-4 overflow-x-scroll  no-scrollbar">
                         {menuItems.map((item, index) => (
                             <Link className="flex justify-center items-center w-auto h-full  no-outline" key={index} href={item.link}>
                                 <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">
