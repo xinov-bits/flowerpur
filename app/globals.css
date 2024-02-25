@@ -31,27 +31,15 @@ body {
   body {
     margin-top: 164px !important;
   }
-
-  .checkout-page {
-    margin-top: -91px !important;
-  }
 }
 @media (min-width: 1024px) {
   body {
-    margin-top: 93px !important;
-  }
-
-  .checkout-page {
-    margin-top: -38px !important;
+    margin-top: 135px !important;
   }
 }
 @media (min-width: 1280px) {
   body {
-    margin-top: 93px !important;
-  }
-
-  .checkout-page {
-    margin-top: -38px !important;
+    margin-top: 135px !important;
   }
 }
 
