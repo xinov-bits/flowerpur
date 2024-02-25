@@ -73,8 +73,8 @@ const Page = () => {
 
   // RENDER SKELETON
   const Skeleton = (
-    <div className="relative flex flex-col justify-start items-center w-[13rem] h-[18.5rem] bg-[#fafafa] rounded-md cursor-pointer select-none overflow-hidden">
-      <div className="absolute flex justify-center items-center w-[13rem] h-[18.5rem]" id="skeleton_gradient" />
+    <div className="relative flex flex-col justify-start items-center w-[9.5rem] sm:w-[9.5rem] md:w-[13rem] lg:w-[13rem] xl:w-[13rem] h-[14.6rem] sm:h-[14.6rem] md:h-[18.5rem] lg:h-[18.5rem] xl:h-[18.5rem] bg-[#fafafa] rounded-md cursor-pointer select-none overflow-hidden">
+      <div className="absolute flex justify-center items-center w-[9.5rem] sm:w-[9.5rem] md:w-[13rem] lg:w-[13rem] xl:w-[13rem] h-[14.6rem] sm:h-[14.6rem] md:h-[18.5rem] lg:h-[18.5rem] xl:h-[18.5rem]" id="skeleton_gradient" />
     </div>
   )
 
