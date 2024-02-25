@@ -68,21 +68,21 @@ const Page = () => {
 
     return (
         <>
-            <div className="block justify-start items-start w-full h-auto bg-white py-8 text-[#494949]">
-                <div className="block w-full h-auto px-10">
+            <div className="block justify-start items-start w-screen h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949] overflow-x-hidden">
+                <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
                     <div className="flex flex-col justify-start items-center w-full">
-                        <div className="flex justify-start items-center w-full text-4xl font-bold text-[#191919]">
+                        <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-xl font-medium text-[#797979]">
+                        <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-medium text-[#797979]">
                             Select from categories
                         </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-auto h-auto mt-4 select-none space-x-6">
-                        {flowerCategories.map((item) => (<Link className="flex justify-start items-center w-auto h-full" href={item.url} key={item.name}>
+                    <div className="flex justify-start items-center w-auto h-auto mt-0 sm:mt-0 md:mt-4 lg:mt-4 xl:mt-4 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+                        {flowerCategories.map((item) => (<Link className="flex justify-start items-center w-auto h-full  no-outline" href={item.url} key={item.name}>
                             <div className="flex flex-col justify-center items-center w-full h-full hover:text-[#191919]">
-                                <div className="flex justify-center items-center w-44">
+                                <div className="flex justify-center items-center w-32 sm:w-32 md:w-44 lg:w-44 xl:w-44">
                                     <Image className="flex justify-center items-center w-full h-full rounded-full hover:ring-2 hover:ring-[#e5e5e5] ring-offset-2 duration-100"
                                         src={item.image}
                                         alt={item.name}
@@ -98,20 +98,20 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className="block w-full h-auto my-10 py-10 px-10 border-y-[1.5px] border-[#e5e5e5]">
+                <div className="block w-full h-auto my-6 sm:my-6 md:my-10 lg:my-10 xl:my-10 py-6 sm:py-6 md:py-10 lg:py-10 xl:py-10 px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 border-y-[1.5px] border-[#e5e5e5]">
                     <div className="flex flex-col justify-start items-center w-full">
-                        <div className="flex justify-start items-center w-full text-4xl font-bold text-[#191919]">
+                        <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-xl font-medium text-[#797979]">
+                        <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-medium text-[#797979]">
                             Select from different kinds
                         </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-auto h-auto mt-4 select-none space-x-6">
-                        {flowerKinds.map((item) => (<Link className="flex justify-start items-center w-auto h-full" href={item.url} key={item.name}>
+                    <div className="flex justify-start items-center w-auto h-auto mt-4 pb-4 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+                        {flowerKinds.map((item) => (<Link className="flex justify-start items-center w-auto h-full  no-outline" href={item.url} key={item.name}>
                             <div className="flex flex-col justify-center items-center w-full h-full hover:text-[#191919]">
-                                <div className="flex justify-center items-center w-44">
+                                <div className="flex justify-center items-center w-32 sm:w-32 md:w-44 lg:w-44 xl:w-44">
                                     <Image className="flex justify-center items-center w-full h-full rounded-full hover:ring-2 hover:ring-[#e5e5e5] ring-offset-2 duration-100"
                                         src={item.image}
                                         alt={item.name}
