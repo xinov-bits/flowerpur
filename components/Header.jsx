@@ -127,7 +127,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full select-none text-[#292929]">
+            <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full select-none bg-white text-[#292929]">
                 <div className="flex justify-center items-center w-full h-16 py-2 px-8 space-x-2 border-b border-[#e5e5e5]">
                     <div className="flex justify-start items-center w-[16%] h-full cursor-pointer space-x-2">
                         <div className="flex justify-center items-center w-auto h-full cursor-pointer rounded-md overflow-hidden">
@@ -218,7 +218,7 @@ const Header = () => {
                                 <svg className="text-[#292929]" width={28} height={28}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#-user_dd"
+                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
                                     ></use>
                                 </svg>
 
