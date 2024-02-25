@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const page = () => {
+const Page = () => {
     const flowerCategories = [
         {
             name: 'Flower in Vase',
@@ -131,4 +131,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

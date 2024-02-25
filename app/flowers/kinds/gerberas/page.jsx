@@ -1,6 +1,6 @@
 import React from 'react'
 
-const page = () => {
+const Page = () => {
   return (
     <>
         <div className="flex justify-center items-center w-full bg-white">

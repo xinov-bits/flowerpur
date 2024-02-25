@@ -15,7 +15,7 @@ import axios from 'axios';
 // FRAMER
 import { motion, AnimatePresence } from "framer-motion"
 
-const page = () => {
+const Page = () => {
   const [addedAnim, setAddedAnim] = useState(false);
 
   useEffect(() => {
