@@ -82,14 +82,14 @@ const Page = () => {
 
   return (
     <>
-      <div className="block justify-start items-start w-full h-auto bg-white py-8 text-[#494949]">
-        <div className="block w-full h-auto px-10">
+      <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
+        <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
           <div className="flex flex-col justify-start items-center w-full select-none">
-            <div className="flex justify-start items-center w-full text-3xl font-bold text-[#191919]">
+            <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
               Roses
             </div>
 
-            <div className="flex justify-start items-center w-full text-lg font-normal text-[#797979]">
+            <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-normal text-[#797979]">
               Select from different bouquets
             </div>
 
@@ -125,7 +125,7 @@ const Page = () => {
             </div>
           </div>
 
-          {products.length <= 0 ? <div className="grid grid-cols-5 gap-5 justify-start items-center w-full mt-6">
+          {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-center w-full mt-6">
             {Skeleton}
             {Skeleton}
             {Skeleton}
@@ -138,70 +138,72 @@ const Page = () => {
             {/* {Skeleton} */}
           </div>
             :
-            <div className="grid grid-cols-5 gap-5 justify-start items-start w-full mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full mt-6">
               {Object.keys(products).map((item) => {
-                return <Link key={products[item]._id} href={"/"}>
+                return <motion.div key={products[item]._id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.6 }}
-                      className="flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
+                    transition={{ delay: 0.6 }}
+                    className="flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
+                    <Link href={"/"}>
                       <Image className="flex justify-center items-center w-full h-full"
                         src={products[item].dimg}
                         width={800}
                         height={800}
                         alt={products[item].title}
                       />
-                    </motion.div>
+                    </Link>
+                  </motion.div>
 
+                  <Link href={"/"}>
                     <div className="flex justify-start items-start w-full h-10 mt-2 text-nd font-semibold text-[#191919] capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden group-hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2">
                       {products[item].title}
                     </div>
+                  </Link>
 
-                    <div className="flex justify-between items-center w-full h-auto mt-1">
-                      <div className="flex justify-start items-center w-auto text-lg font-bold text-[#7a7a7a]">
-                        ₹{products[item].price}.00
-                      </div>
-                      <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
-                        {!addedAnim ? <button
-                          onClick={() => addToCart(
-                            products[item].title,
-                            products[item].price,
-                            products[item].dimg,
-                            1
-                          )} // [ TEMPORARY ]
-                          className="flex justify-center items-center w-auto py-1.5 px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1">
-                          <svg className="text-[#191919]" width={18} height={18}>
+                  <div className="flex justify-between items-center w-full h-auto mt-1">
+                    <div className="flex justify-start items-center w-auto text-lg font-bold text-[#7a7a7a]">
+                      ₹{products[item].price}.00
+                    </div>
+                    <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
+                      {!addedAnim ? <button
+                        onClick={() => addToCart(
+                          products[item].title,
+                          products[item].price,
+                          products[item].dimg,
+                          1
+                        )} // [ TEMPORARY ]
+                        className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1">
+                        <svg className="text-[#191919]" width={18} height={18}>
+                          <use
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
+                          ></use>
+                        </svg>
+
+                        <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
+                      </button>
+                        :
+                        <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1">
+                          <svg className="" width={14} height={14}>
                             <use
                               xmlnsXlink="http://www.w3.org/1999/xlink"
-                              xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
+                              xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
                             ></use>
                           </svg>
 
-                          <div> Add to cart </div>
-                        </button>
-                          :
-                          <button className="flex justify-center items-center w-auto py-1.5 px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1">
-                            <svg className="" width={14} height={14}>
-                              <use
-                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                              ></use>
-                            </svg>
-
-                            <div> Added </div>
-                          </button>}
-                      </div>
+                          <div className="hidden sm:hidden md:block lg:block xl:block"> Added </div>
+                        </button>}
                     </div>
-                  </motion.div>
-                </Link>
+                  </div>
+                </motion.div>
               })}
             </div>}
         </div>
