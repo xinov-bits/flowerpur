@@ -148,11 +148,11 @@ const Page = () => {
                     transition={{ delay: 0.2 }}
                     className="flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
                     <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: 0.6 }}
+                      className="flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
                       <Image className="flex justify-center items-center w-full h-full"
                         src={products[item].dimg}
                         width={800}
