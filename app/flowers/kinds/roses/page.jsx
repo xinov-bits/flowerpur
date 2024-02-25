@@ -68,6 +68,8 @@ const Page = () => {
     fetchData();
   }, []);
 
+  console.log(products)
+
 
   // RENDER SKELETON
   const Skeleton = (
