@@ -202,10 +202,10 @@ const Header = () => {
                             </li>
 
                             <li className="relative flex flex-col justify-center items-center w-auto h-12 px-3 bg-white hover:bg-[#f7f7f7] border-[1.5px] border-[#e5e5e5] rounded-full cursor-pointer space-x-2">
-                                <svg className="text-[#494949]" width={22} height={22}>
+                                <svg className="text-[#494949]" width={20} height={20}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
                                     ></use>
                                 </svg>
 
@@ -292,12 +292,12 @@ const Header = () => {
                         </div>
 
                         <div className="flex justify-end items-center w-auto h-full cursor-pointer rounded-md space-x-4">
-                            <div className="flex justify-center items-center w-8 h-8">
+                            <div className="flex justify-center items-center w-8 h-8" onClick={() => setIsSelectLocationMenuOpen(true)}>
                                 <IconButton className="z-[1] flex justify-center items-center">
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
                                         ></use>
                                     </svg>
                                 </IconButton>
@@ -378,7 +378,7 @@ const Header = () => {
             {/* SELECT LOCATION */}
             <AnimatePresence>
                 {isSelectLocationMenuOpen && (
-                    <motion.div className="fixed top-14 left-56 flex justify-start items-start w-[25%] h-auto z-[100] text-[#292929]"
+                    <motion.div className="fixed top-14 left-14 sm:left-14 md:left-56 lg:left-56 xl:left-56 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
@@ -387,7 +387,7 @@ const Header = () => {
                         onFocus={() => setIsSelectLocationMenuOpen(true)}
                     >
                         <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md
-                    after:absolute after:-top-2 after:left-8 after:z-10 after:w-4 after:h-4 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
+                        after:absolute after:-top-2 after:right-7 sm:after:right-7 md:after:left-8 lg:after:left-8 xl:after:left-8 after:z-10 after:w-4 after:h-4 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
                             onBlur={() => setIsSelectLocationMenuOpen(false)}
                             onClick={() => setIsSelectLocationMenuOpen(true)}
                             onFocus={() => setIsSelectLocationMenuOpen(true)}>
@@ -402,7 +402,7 @@ const Header = () => {
                                             <svg className="text-[#494949]" width={24} height={24}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
                                                 ></use>
                                             </svg>
                                         </div>
