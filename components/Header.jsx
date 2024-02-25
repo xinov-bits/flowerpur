@@ -215,7 +215,7 @@ const Header = () => {
                             </li>
 
                             <li className="relative flex justify-center items-center w-auto h-12 px-2 border-[1.5px] border-[#e5e5e5] rounded-full duration-100 space-x-2">
-                                <svg className="text-[#292929]" width={28} height={28}>
+                                <svg className="text-[#797979]" width={26} height={26}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                         xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
