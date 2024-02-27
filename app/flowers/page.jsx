@@ -47,22 +47,22 @@ const Page = () => {
         {
             name: 'Lilies',
             image: 'https://imgcdn.floweraura.com/lilies_14.jpg',
-            url: '/flowers/kinds/lilies'
+            url: '/flowers/kinds/roses'
         },
         {
             name: 'Orchids',
             image: 'https://imgcdn.floweraura.com/orchids_5.jpg',
-            url: '/flowers/kinds/orchids'
+            url: '/flowers/kinds/roses'
         },
         {
             name: 'Carnations',
             image: 'https://imgcdn.floweraura.com/carnations_15.jpg',
-            url: '/flowers/kinds/carnations'
+            url: '/flowers/kinds/roses'
         },
         {
             name: 'Gerberas',
             image: 'https://imgcdn.floweraura.com/gerberas_5.jpg',
-            url: '/flowers/kinds/gerberas'
+            url: '/flowers/kinds/roses'
         },
     ]
 
