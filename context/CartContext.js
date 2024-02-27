@@ -47,7 +47,7 @@ export const CartProvider = ({ children }) => {
         }
 
         setKey(Math.random()); // Generate new key for re-renders
-    }, [localStorage]);
+    }, []);
 
 
     // Function to calculate cart totals
