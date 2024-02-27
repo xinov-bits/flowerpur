@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie'; // Import useCookies hook
 // NEXT JS
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 // SUB COMPONENTS
 

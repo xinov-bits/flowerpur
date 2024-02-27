@@ -2,7 +2,7 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext, createContext } from 'react'
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -12,7 +12,6 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const router = useRouter();
-    const query = useSearchParams();
 
     // State variables for cart, favorites, and recent views
     const [cart, setCart] = useState({}); // Object to store cart items

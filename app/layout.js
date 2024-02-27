@@ -11,7 +11,7 @@ const figtree = Figtree({ subsets: ["latin"] });
 // REACT & NEXT JS "" VERCEL
 import React, { useState, useEffect } from 'react';
 import { Analytics } from "@vercel/analytics/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 // COMPONENTS
