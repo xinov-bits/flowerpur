@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-color: #fff;
@@ -47,6 +49,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.font_figtree {
+  font-family: "Figtree", sans-serif !important;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 // NEXT JS
 import Link from 'next/link'
@@ -15,37 +15,33 @@ import axios from 'axios';
 // FRAMER
 import { motion, AnimatePresence } from "framer-motion"
 
+// CONTEXT
+import CartContext from '@/context/CartContext';
+
 const Page = () => {
-  const [addedAnim, setAddedAnim] = useState(false);
+  const {
+    cart,
+    subTotal,
+    numTotal,
+    mrpTotal,
+    favList,
+    recentView,
+    addToCart,
+    clearCart,
+    removeFromCart,
+    removeAtOnce,
+  } = useContext(CartContext);
+
+
+  const [addedAnim, setAddedAnim] = useState([false, '']);
 
   useEffect(() => {
-    if (addedAnim === true) {
+    if (addedAnim[0] === true) {
       setTimeout(() => {
-        setAddedAnim(false);
+        setAddedAnim([false, '']);
       }, 2000);
     }
   }, [addedAnim])
-
-
-  // CART
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (name, price, image, quantity) => {
-    let updatedCart;
-    if (cart.some(item => item.name === name)) {
-      updatedCart = cart.map(item => {
-        if (item.name === name) {
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      });
-    } else {
-      updatedCart = [...cart, { name, price, image, quantity }];
-    }
-
-    // Store the encrypted cart data
-    setCart(updatedCart); // encryptedCart
-  };
 
 
   // GET PRODUCTS
@@ -68,8 +64,6 @@ const Page = () => {
     fetchData();
   }, []);
 
-  console.log(products)
-
 
   // RENDER SKELETON
   const Skeleton = (
@@ -81,6 +75,29 @@ const Page = () => {
 
   // SORT BY
   const [isSortBy, setIsSortBy] = useState(false);
+
+
+  // ADD TO CART
+  const [cartLoading, setCartLoading] = useState([false, '']);
+
+  const addProductToCart = (itemCode, url, qty, availableQty, price, img, name) => {
+    setCartLoading([true, url]);
+
+    setTimeout(() => {
+      setCartLoading([false, '']);
+
+      addToCart(
+        itemCode,
+        url,
+        qty,
+        availableQty,
+        price,
+        img,
+        name,
+      );
+      setAddedAnim([true, url]);
+    }, 1000);
+  }
 
   return (
     <>
@@ -133,11 +150,6 @@ const Page = () => {
             {Skeleton}
             {Skeleton}
             {Skeleton}
-            {/* {Skeleton} */}
-            {/* {Skeleton} */}
-            {/* {Skeleton} */}
-            {/* {Skeleton} */}
-            {/* {Skeleton} */}
           </div>
             :
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full mt-6">
@@ -152,7 +164,7 @@ const Page = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ delay: 0.6 }}
+                    transition={{ delay: 0.8 }}
                     className="flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
                     <Link href={"/"}>
                       <Image className="flex justify-center items-center w-full h-full"
@@ -174,14 +186,17 @@ const Page = () => {
                     <div className="flex justify-start items-center w-auto text-lg font-bold text-[#7a7a7a]">
                       ₹{products[item].price}.00
                     </div>
-                    <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
-                      {!addedAnim ? <button
-                        onClick={() => addToCart(
-                          products[item].title,
+                    {(!cartLoading[0] || cartLoading[1] != products[item].slug) ? <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
+                      {(!addedAnim[0] || addedAnim[1] != products[item].slug) && <button
+                        onClick={() => addProductToCart(
+                          products[item].slug,
+                          products[item].slug,
+                          1,
+                          products[item].availableQty,
                           products[item].price,
                           products[item].dimg,
-                          1
-                        )} // [ TEMPORARY ]
+                          products[item].title,
+                        )}
                         className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1">
                         <svg className="text-[#191919]" width={18} height={18}>
                           <use
@@ -191,19 +206,32 @@ const Page = () => {
                         </svg>
 
                         <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
-                      </button>
-                        :
-                        <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1">
-                          <svg className="" width={14} height={14}>
+                      </button>}
+
+                      {(addedAnim[0] && addedAnim[1] === products[item].slug) && <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1">
+                        <svg className="" width={14} height={14}>
+                          <use
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
+                          ></use>
+                        </svg>
+
+                        <div className="hidden sm:hidden md:block lg:block xl:block"> Added </div>
+                      </button>}
+                    </div>
+                      :
+                      <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#767676] cursor-default">
+                        <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] space-x-1">
+                          <svg className="animate-[spin_800ms_linear_infinite]" width={12} height={12}>
                             <use
                               xmlnsXlink="http://www.w3.org/1999/xlink"
-                              xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
+                              xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
                             ></use>
                           </svg>
 
-                          <div className="hidden sm:hidden md:block lg:block xl:block"> Added </div>
-                        </button>}
-                    </div>
+                          <div className="hidden sm:hidden md:block lg:block xl:block"> Adding </div>
+                        </button>
+                      </div>}
                   </div>
                 </motion.div>
               })}
