@@ -159,13 +159,13 @@ const Page = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
+                  className="relative flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group overflow-hidden">
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
+                    className="relative flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
                     <Link href={"/"}>
                       <Image className="flex justify-center items-center w-full h-full"
                         src={products[item].dimg}
@@ -174,6 +174,18 @@ const Page = () => {
                         alt={products[item].title}
                       />
                     </Link>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: 0.8 }}
+                      className="absolute bottom-0 -right-1 flex justify-center items-center w-auto h-7 px-2.5 rounded-tl-md bg-[#65CDE7] leading-none text-xs font-semibold text-[#010E36] -skew-x-12  anim__pulse-wave"
+                    >
+                      <span className="skew-x-12">
+                        Buy 2 Get 1 Free
+                      </span>
+                    </motion.div>
                   </motion.div>
 
                   <Link href={"/"}>

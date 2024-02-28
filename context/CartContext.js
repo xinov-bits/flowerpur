@@ -21,6 +21,8 @@ export const CartProvider = ({ children }) => {
     const [favList, setFavList] = useState({}); // Favorite items
     const [recentView, setRecentView] = useState({}); // Recently viewed items
 
+    const [isCartOpenATC, setIsCartOpenATC] = useState(false);
+
     // Key used for re-renders
     const [key, setKey] = useState(Math.random());
 
@@ -77,6 +79,8 @@ export const CartProvider = ({ children }) => {
             newCart[itemCode] = { qty: qty, availableQty, url, price, img, name };
         }
 
+        setIsCartOpenATC(true);
+
         setCart(newCart);
         saveCart(newCart);
     };
@@ -130,6 +134,8 @@ export const CartProvider = ({ children }) => {
                 clearCart,
                 removeFromCart,
                 removeAtOnce,
+                isCartOpenATC,
+                setIsCartOpenATC,
             }}
         >
             {children}

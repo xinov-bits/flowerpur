@@ -39,6 +39,8 @@ const Header = () => {
         clearCart,
         removeFromCart,
         removeAtOnce,
+        isCartOpenATC,
+        setIsCartOpenATC,
     } = useContext(CartContext);
 
     // const [address, setAddress] = useState('');
@@ -156,13 +158,12 @@ const Header = () => {
                     <div className="flex justify-start items-center w-[16%] h-full cursor-pointer space-x-2">
                         <div className="flex justify-center items-center w-auto h-full cursor-pointer rounded-md overflow-hidden">
                             <div className="flex justify-center items-center w-full">
-                                <Image src={"/assets/logo_dummy.png"} alt={"logo_dummy"} width={22} height={22} />
                             </div>
                         </div>
 
                         <div className="flex justify-center items-center w-auto h-full cursor-pointer rounded-md overflow-hidden">
                             <Link className="no-outline" href={'/'}>
-                                <div className="flex justify-center items-center font-bold text-xl text-[#eb1700] uppercase tracking-widest">
+                                <div className="flex justify-center items-center font-bold text-xl text-[#1D8D37] uppercase tracking-widest">
                                     Flowerpur
                                 </div>
                             </Link>
@@ -249,7 +250,7 @@ const Header = () => {
                             </li>
 
                             <li className="flex justify-center items-center w-[4.5rem] h-10 overflow-hidden cursor-pointer">
-                                <button className="relative flex justify-center items-center w-full h-full bg-[#eb1700] rounded-full cursor-pointer space-x-2 hover:bg-[#d91400] overflow-hidden" onClick={() => setIsCartOpen(true)}>
+                                <button className="relative flex justify-center items-center w-full h-full bg-[#1D8D37] rounded-full cursor-pointer space-x-2 hover:bg-[#035D28] overflow-hidden duration-200" onClick={() => setIsCartOpen(true)}>
                                     <svg className="text-white" width={22} height={22}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -307,7 +308,7 @@ const Header = () => {
                                 </IconButton>
                             </div>
 
-                            <div className="flex justify-center items-center w-8 h-8 text-[#eb1700]">
+                            <div className="flex justify-center items-center w-8 h-8 text-[#1D8D37]">
                                 <Link href={"/"}>
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
@@ -332,7 +333,7 @@ const Header = () => {
                             </div>
 
                             <div className="relative flex justify-center items-center w-8 h-8">
-                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-3.5 h-3.5 leading-none text-[10px] bg-[#eb1700] rounded-full font-bold text-white text-ellipsis overflow-hidden">
+                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-3.5 h-3.5 leading-none text-[10px] bg-[#1D8D37] rounded-full font-bold text-white text-ellipsis overflow-hidden">
                                     {numTotal}
                                 </div>
 
