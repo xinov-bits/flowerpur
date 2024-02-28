@@ -16,8 +16,10 @@ export async function POST(req) {
                 // desc: res[i].desc,
                 dimg: res[i].dimg,
                 img1: res[i].img1,
-                catagory: res[i].catagory,
-                subCatagory: res[i].subCatagory,
+                img2: res[i].img2,
+                img3: res[i].img3,
+                category: res[i].category,
+                subCategory: res[i].subCategory,
                 availableQty: res[i].availableQty,
                 price: res[i].price,
                 sku: res[i].sku,
@@ -26,7 +28,6 @@ export async function POST(req) {
             await p.save();
         }
 
-        console.log(res)
         return NextResponse.json({ success: "success" });
     } else {
         return NextResponse.json({ error: "Products array is empty" });

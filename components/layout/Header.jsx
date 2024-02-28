@@ -157,14 +157,14 @@ const Header = () => {
                 <div className="flex justify-center items-center w-full h-16 py-2 px-8 space-x-2 border-b border-[#e5e5e5] select-none">
                     <div className="flex justify-start items-center w-[16%] h-full cursor-pointer space-x-2">
                         <div className="flex justify-center items-center w-auto h-full cursor-pointer rounded-md overflow-hidden">
-                            <div className="flex justify-center items-center w-full">
-                            </div>
-                        </div>
-
-                        <div className="flex justify-center items-center w-auto h-full cursor-pointer rounded-md overflow-hidden">
                             <Link className="no-outline" href={'/'}>
-                                <div className="flex justify-center items-center font-bold text-xl text-[#1D8D37] uppercase tracking-widest">
-                                    Flowerpur
+                                <div className="flex justify-center items-center w-full h-full">
+                                    <svg className="" width={180} height={180}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/critical.svg#flowerpur"
+                                        ></use>
+                                    </svg>
                                 </div>
                             </Link>
                         </div>
@@ -213,7 +213,7 @@ const Header = () => {
 
                     <div className="flex justify-end items-center w-[37%] h-full">
                         <ul className="flex justify-center items-center w-full h-full space-x-2 text-base font-semibold">
-                            <li className="relative flex flex-col justify-center items-center w-auto h-12 px-3 bg-white hover:bg-[#f7f7f7] border-[1.5px] border-[#e5e5e5] rounded-full cursor-pointer overflow-hidden">
+                            <li className="relative flex flex-col justify-center items-center w-auto h-12 px-3 bg-white hover:bg-[#f7f7f7] border-[1.5px] border-[#e5e5e5] rounded-full cursor-pointer">
                                 <svg className="w-5 h-5 text-[#797979]" width={20} height={20}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -226,7 +226,7 @@ const Header = () => {
                                 </div>
                             </li>
 
-                            <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-100 space-x-2 overflow-hidden">
+                            <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-100 space-x-2">
                                 <svg className="text-[#797979]" width={26} height={26}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -235,13 +235,13 @@ const Header = () => {
                                 </svg>
 
                                 <div className="flex justify-center items-center w-full space-x-2">
-                                    <Link href="/" className="flex justify-center items-center w-auto">
+                                    <Link href="/" className="flex justify-center items-center w-auto no-outline">
                                         <div className="flex justify-center items-center w-full px-3 py-1 bg-white hover:bg-[#f7f7f7] border border-[#d6d6d6] rounded-full cursor-pointer">
                                             Sign In
                                         </div>
                                     </Link>
 
-                                    <Link href="/" className="flex justify-center items-center w-auto">
+                                    <Link href="/" className="flex justify-center items-center w-auto no-outline">
                                         <div className="flex justify-center items-center w-full px-3 py-1 bg-[#d6d6d6] rounded-full cursor-pointer">
                                             Sign Up
                                         </div>
@@ -249,8 +249,8 @@ const Header = () => {
                                 </div>
                             </li>
 
-                            <li className="flex justify-center items-center w-[4.5rem] h-10 overflow-hidden cursor-pointer">
-                                <button className="relative flex justify-center items-center w-full h-full bg-[#1D8D37] rounded-full cursor-pointer space-x-2 hover:bg-[#035D28] overflow-hidden duration-200" onClick={() => setIsCartOpen(true)}>
+                            <li className="flex justify-center items-center w-[4.5rem] h-10 cursor-pointer">
+                                <button className="relative flex justify-center items-center w-full h-full bg-[#24543e] rounded-full cursor-pointer space-x-2 hover:bg-[#1C4632] overflow-hidden duration-200" onClick={() => setIsCartOpen(true)}>
                                     <svg className="text-white" width={22} height={22}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -271,7 +271,7 @@ const Header = () => {
                 <div className="flex justify-center items-center w-full h-18 py-2 px-6 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5]">
                     <ul className="flex justify-center items-center w-full h-full space-x-4">
                         {menuItems.map((item, index) => (
-                            <Link className="flex justify-center items-center w-auto h-full" key={index} href={item.link}>
+                            <Link className="flex justify-center items-center w-auto h-full rounded-full" key={index} href={item.link}>
                                 <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">
                                     <div className="flex justify-center items-center w-auto h-full">
                                         <Image
@@ -308,7 +308,7 @@ const Header = () => {
                                 </IconButton>
                             </div>
 
-                            <div className="flex justify-center items-center w-8 h-8 text-[#1D8D37]">
+                            <div className="flex justify-center items-center w-8 h-8 text-[#24543e]">
                                 <Link href={"/"}>
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
@@ -333,7 +333,7 @@ const Header = () => {
                             </div>
 
                             <div className="relative flex justify-center items-center w-8 h-8">
-                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-3.5 h-3.5 leading-none text-[10px] bg-[#1D8D37] rounded-full font-bold text-white text-ellipsis overflow-hidden">
+                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-3.5 h-3.5 leading-none text-[10px] bg-[#24543e] rounded-full font-bold text-white text-ellipsis overflow-hidden">
                                     {numTotal}
                                 </div>
 

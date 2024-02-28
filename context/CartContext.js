@@ -74,9 +74,13 @@ export const CartProvider = ({ children }) => {
         let newCart = { ...cart }; // Create a copy of the cart state using spread syntax
 
         if (itemCode in cart) {
-            newCart[itemCode].qty = Math.min(newCart[itemCode].qty + qty, 10); // Limit quantity to 9
-        } else {
-            newCart[itemCode] = { qty: qty, availableQty, url, price, img, name, offer };
+            if (newCart[itemCode]["qty"] <= 9) {
+                newCart[itemCode]["qty"] = cart[itemCode]["qty"] + 1
+            }
+            else { newCart[itemCode]["qty"] = cart[itemCode]["qty"] }
+        }
+        else {
+            newCart[itemCode] = { qty: 1, availableQty, url, price, img, name, offer }
         }
 
         setIsCartOpenATC(true);
@@ -88,6 +92,7 @@ export const CartProvider = ({ children }) => {
     // Function to save cart data to local storage
     const saveCart = (myCart) => {
         localStorage.setItem("cart", JSON.stringify(myCart));
+
         calculateCartTotals(myCart); // Recalculate totals after saving
     };
 

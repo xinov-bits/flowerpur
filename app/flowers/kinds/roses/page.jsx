@@ -167,7 +167,7 @@ const Page = () => {
                     exit={{ opacity: 0 }}
                     transition={{ delay: 0.8 }}
                     className="relative flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
-                    <Link href={"/"}>
+                    <Link href={`/product/${products[item].slug}`}>
                       <Image className="flex justify-center items-center w-full h-full"
                         src={products[item].dimg}
                         width={800}
@@ -189,7 +189,7 @@ const Page = () => {
                     </motion.div>)}
                   </motion.div>
 
-                  <Link href={"/"}>
+                  <Link href={`/product/${products[item].slug}`}>
                     <div className="flex justify-start items-start w-full h-10 mt-2 text-nd font-semibold text-[#191919] capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden group-hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2">
                       {products[item].title}
                     </div>
@@ -236,7 +236,7 @@ const Page = () => {
                       :
                       <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#767676] cursor-default">
                         <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] space-x-1">
-                          <svg className="animate-[spin_800ms_linear_infinite]" width={12} height={12}>
+                          <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                             <use
                               xmlnsXlink="http://www.w3.org/1999/xlink"
                               xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"

@@ -536,7 +536,7 @@
         <symbol id="icon-star_slug" fill="none" viewBox="0 0 54 54">
             <path
                 d="M27.0004 4L34.107 19.1421L50 21.5709L38.4998 33.3566L41.2145 50L27.0004 42.1425L12.7855 50L15.5002 33.3566L4 21.5709L19.893 19.1421L27.0004 4Z"
-                fill="#ffa41c" stroke="currentColor" stroke-width="3" />
+                fill="#ffd700" stroke="currentColor" stroke-width="3" />
         </symbol>
 
         <symbol id="icon-e-star_slug" fill="none" viewBox="0 0 54 54" stroke-width="1.5" stroke="currentColor">

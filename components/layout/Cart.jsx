@@ -122,11 +122,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                         return (<li className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer last:border-b last:border-[#e5e5e5]" key={item.slug}>
                                             <Link className="flex justify-center items-center w-[30%] h-full" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
-                                                    <div className="absolute top-2 right-2 sm:right-2 md:right-4 lg:right-4 xl:right-4 flex justify-center items-center w-5 h-5 bg-[#1D8D37] rounded-full text-white text-xs font-bold">
+                                                    <div className="absolute top-2 right-2 sm:right-2 md:right-4 lg:right-4 xl:right-4 flex justify-center items-center w-5 h-5 bg-[#24543e] rounded-full text-white text-xs font-bold">
                                                         {item.qty}
                                                     </div>
 
-                                                    <Image className="flex justify-center items-center w-20 h-20 border border-[#e5e5e5] rounded-md overflow-hidden"
+                                                    <Image className="flex justify-center items-center w-20 h-20 rounded-md overflow-hidden"
                                                         src={item.img}
                                                         width={800}
                                                         height={800}
@@ -137,14 +137,14 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
                                             <div className="flex justify-start items-center w-[70%] h-[85%] text-[#191919]">
                                                 <div className="flex flex-col justify-start items-center w-[58%] h-full text-start font-semibold">
-                                                    <Link className="flex justify-center items-start w-full h-full" href={`/${item.url}`}>
+                                                    <Link className="flex justify-center items-start w-full h-full" href={`/product/${item.url}`}>
                                                         <div className="flex justify-start items-start w-full h-auto capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer">
                                                             {item.name}
                                                         </div>
                                                     </Link>
 
                                                     <div className="flex justify-start items-start w-full h-auto">
-                                                        <div className="relative flex justify-center items-center w-auto h-full px-2 py-1.5 leading-none bg-[#65CDE7] text-[#010E36] rounded-full text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
+                                                        <div className="relative flex justify-center items-center w-auto h-full px-2 py-1 leading-none bg-[#65CDE7] text-[#010E36] rounded-full text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
                                                             Buy 2 Get 1 Free
                                                         </div>
                                                     </div>
@@ -176,7 +176,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                 </svg>
                                                             </button>}
                                                             {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden">
-                                                                <svg className="animate-[spin_800ms_linear_infinite]" width={12} height={12}>
+                                                                <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                                                         xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
@@ -207,7 +207,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                 </svg>
                                                             </button>}
                                                             {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden">
-                                                                <svg className="animate-[spin_800ms_linear_infinite]" width={12} height={12}>
+                                                                <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                                                         xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
@@ -223,7 +223,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 </ul>
 
                                 <div className="absolute z-[650] bottom-0 flex justify-center items-center w-full h-20 p-4 border-t border-[#e5e5e5]">
-                                    <button className="flex justify-between items-center w-full h-full px-4 bg-[#1D8D37] hover:bg-[#035D28] active:bg-[#004927] rounded-full text-white font-bold duration-200">
+                                    <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200">
                                         <div className="flex justify-start items-center w-auto h-full">
                                             Checkout
                                         </div>

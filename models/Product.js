@@ -9,9 +9,11 @@ const ProductSchema = new mongoose.Schema({
 
     dimg: { type: String, required: true },
     img1: { type: String, required: true },
+    img2: { type: String, required: true },
+    img3: { type: String, required: true },
 
-    catagory: { type: String, required: true },
-    subCatagory: { type: String, required: false },
+    category: { type: String, required: true },
+    subCategory: { type: String, required: false },
 
     availableQty: { type: Number, required: true },
 
