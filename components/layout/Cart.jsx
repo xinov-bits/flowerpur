@@ -95,13 +95,16 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                         }} />
 
                         <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full bg-white border-l border-[#e5e5e5] shadow-lg shadow-black/10">
-                            <div className="flex justify-between items-center w-full h-14 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 py-4 sm:py-4 md:py-6 lg:py-6 xl:py-6 bg-white border-b border-[#e5e5e5]">
-                                <div className="flex justify-start items-center w-auto text-lg font-bold text-[#191919] leading-none cursor-pointer">
+                            <div className="flex justify-between items-center w-full h-14 bg-white border-b border-[#e5e5e5]">
+                                <div className="flex justify-start items-center w-auto px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 py-4 sm:py-4 md:py-6 lg:py-6 xl:py-6 text-lg font-bold text-[#191919] leading-none cursor-pointer">
                                     Your Cart
                                     &#40;{numTotal}&#41;
                                 </div>
 
-                                <button className="flex justify-end items-center w-auto h-full rounded-full cursor-pointer" onClick={() => setIsCartOpen(false)}>
+                                <button className="flex justify-center items-center w-14 h-full cursor-pointer" onClick={() => {
+                                    setIsCartOpen(false);
+                                    setIsCartOpenATC(false);
+                                }}>
                                     <svg className="flex justify-center items-center w-6 h-6 text-[#292929]" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
