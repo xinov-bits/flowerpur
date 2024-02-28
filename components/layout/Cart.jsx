@@ -41,7 +41,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
     // ADD TO CART
     const [cartLoading, setCartLoading] = useState([false, '', '']);
 
-    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name) => {
+    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
         setCartLoading([true, url, 'add']);
 
         setTimeout(() => {
@@ -55,10 +55,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                 price,
                 img,
                 name,
+                offer,
             );
         }, 800);
     }
-    const removeProductToCart = (itemCode, url, qty, availableQty, price, img, name) => {
+    const removeProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
         setCartLoading([true, url, 'delete']);
 
         setTimeout(() => {
@@ -72,6 +73,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                 price,
                 img,
                 name,
+                offer,
             );
         }, 800);
     }
@@ -140,6 +142,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                             {item.name}
                                                         </div>
                                                     </Link>
+
+                                                    <div className="flex justify-start items-start w-full h-auto">
+                                                        <div className="relative flex justify-center items-center w-auto h-full px-2 py-1.5 leading-none bg-[#65CDE7] text-[#010E36] rounded-full text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
+                                                            Buy 2 Get 1 Free
+                                                        </div>
+                                                    </div>
 
                                                     <div className="flex justify-start items-end w-full h-auto mt-1">
                                                         ₹{item.price}.00

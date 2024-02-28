@@ -21,6 +21,7 @@ export async function POST(req) {
                 availableQty: res[i].availableQty,
                 price: res[i].price,
                 sku: res[i].sku,
+                offer: res[i].offer,
             });
             await p.save();
         }

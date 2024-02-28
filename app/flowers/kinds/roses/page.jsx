@@ -80,7 +80,7 @@ const Page = () => {
   // ADD TO CART
   const [cartLoading, setCartLoading] = useState([false, '']);
 
-  const addProductToCart = (itemCode, url, qty, availableQty, price, img, name) => {
+  const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
     setCartLoading([true, url]);
 
     setTimeout(() => {
@@ -94,6 +94,7 @@ const Page = () => {
         price,
         img,
         name,
+        offer,
       );
       setAddedAnim([true, url]);
     }, 1000);
@@ -175,7 +176,7 @@ const Page = () => {
                       />
                     </Link>
 
-                    <motion.div
+                    {JSON.stringify(products[item].offer)?.includes('buy-2-get-1-free') && (<motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -185,7 +186,7 @@ const Page = () => {
                       <span className="skew-x-12">
                         Buy 2 Get 1 Free
                       </span>
-                    </motion.div>
+                    </motion.div>)}
                   </motion.div>
 
                   <Link href={"/"}>
@@ -208,6 +209,7 @@ const Page = () => {
                           products[item].price,
                           products[item].dimg,
                           products[item].title,
+                          products[item].offer,
                         )}
                         className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1">
                         <svg className="text-[#191919]" width={18} height={18}>

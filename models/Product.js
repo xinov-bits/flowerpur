@@ -19,6 +19,8 @@ const ProductSchema = new mongoose.Schema({
 
     sku: { type: Number, required: true, unique: true },
 
+    offer: { type: Number, required: true, unique: false, default: ' ' },
+
 }, { timestamps: true });
 
 

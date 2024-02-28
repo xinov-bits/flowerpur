@@ -70,13 +70,13 @@ export const CartProvider = ({ children }) => {
     };
 
     // Function to add item to cart
-    const addToCart = (itemCode, url, qty, availableQty, price, img, name) => {
+    const addToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
         let newCart = { ...cart }; // Create a copy of the cart state using spread syntax
 
         if (itemCode in cart) {
             newCart[itemCode].qty = Math.min(newCart[itemCode].qty + qty, 10); // Limit quantity to 9
         } else {
-            newCart[itemCode] = { qty: qty, availableQty, url, price, img, name };
+            newCart[itemCode] = { qty: qty, availableQty, url, price, img, name, offer };
         }
 
         setIsCartOpenATC(true);
@@ -98,7 +98,7 @@ export const CartProvider = ({ children }) => {
     };
 
     // Function to remove item from cart
-    const removeFromCart = (itemCode, url, qty, availableQty, price, img, name, offer, size, variant) => {
+    const removeFromCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
         let newCart = { ...cart };
 
         if (itemCode in cart) {
