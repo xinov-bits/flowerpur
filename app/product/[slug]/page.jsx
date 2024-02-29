@@ -228,7 +228,7 @@ export default function Page({ params }) {
 
                 <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-center w-full h-full px-2 bg-white space-x-0 sm:space-x-0 md:space-x-2 lg:space-x-2 xl:space-x-2">
                     <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-1/2 h-[30rem] py-2">
-                        {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <motion.div
+                        {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -381,7 +381,7 @@ export default function Page({ params }) {
                             </div>
                         </motion.div>}
 
-                        {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-[30rem] h-[30rem] py-2 cursor-pointer rounded-md overflow-hidden select-none">
+                        {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-[30rem] h-[30rem] py-2 cursor-pointer rounded-md overflow-hidden select-none">
                             <div className="relative flex justify-start items-center w-full h-full rounded-md overflow-hidden select-none">
                                 <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
                                     <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
@@ -390,7 +390,7 @@ export default function Page({ params }) {
                         </div>}
                     </div>
 
-                    {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] py-2 sm:py-2 md:py-0 lg:py-0 xl:py-0 pr-0 sm:pr-0 md:pr-32 lg:pr-32 xl:pr-32">
+                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] py-2 sm:py-2 md:py-0 lg:py-0 xl:py-0 pr-0 sm:pr-0 md:pr-32 lg:pr-32 xl:pr-32">
                         <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
                             <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
                                 <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
@@ -442,7 +442,7 @@ export default function Page({ params }) {
                         </div>
                     </div>}
 
-                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2">
+                    {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -598,7 +598,7 @@ export default function Page({ params }) {
                     </div>}
 
 
-                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
+                    {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
