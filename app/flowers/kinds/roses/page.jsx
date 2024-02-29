@@ -154,7 +154,11 @@ const Page = () => {
           </div>
             :
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full mt-6">
-              {Object.keys(products).map((item) => {
+              {Object.keys(products).filter((item) => {
+                if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
+                  return products[item]
+                }
+              }).map((item) => {
                 return <motion.div key={products[item]._id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

@@ -227,8 +227,8 @@ export default function Page({ params }) {
                 </div> */}
 
                 <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-center w-full h-full px-2 bg-white space-x-0 sm:space-x-0 md:space-x-2 lg:space-x-2 xl:space-x-2">
-                    <div className="relative flex justify-start items-center w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-[22rem] sm:h-[22rem] md:h-[30rem] lg:h-[30rem] xl:h-[30rem] py-2">
-                        <div className="relative flex justify-start items-center w-[22rem] sm:w-[22rem] md:w-[30rem] lg:w-[30rem] xl:w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none">
+                    <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-1/2 h-[30rem] py-2">
+                        <div className="relative flex justify-start items-center w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none">
                             <Splide className="flex justify-center items-center w-full h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
                                 hasTrack={false}
                                 options={{
@@ -360,6 +360,141 @@ export default function Page({ params }) {
                             </div>
                         </div>
                     </div>
+
+                    <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2">
+                        <div className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none">
+                            <Splide className="flex justify-center items-center w-auto h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
+                                hasTrack={false}
+                                options={{
+                                    rewind: true,
+                                    width: 'auto',
+                                    height: 'auto',
+                                    gap: '0rem',
+                                    pagination: false,
+                                    arrows: false,
+                                    loop: true,
+                                }}
+                                ref={splideRef}
+                            >
+                                <SplideTrack className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden">
+                                    <SplideSlide className="flex justify-center items-center w-auto h-auto overflow-hidden">
+                                        <Image className="flex justify-center items-center w-auto h-auto"
+                                            src={product?.img1}
+                                            width={1080}
+                                            height={1080}
+                                        />
+                                    </SplideSlide>
+
+                                    <SplideSlide className="flex justify-center items-center w-auto h-auto overflow-hidden">
+                                        <Image className="flex justify-center items-center w-auto h-auto"
+                                            src={product?.img2}
+                                            width={1080}
+                                            height={1080}
+                                        />
+                                    </SplideSlide>
+
+                                    <SplideSlide className="flex justify-center items-center w-auto h-auto overflow-hidden">
+                                        <Image className="flex justify-center items-center w-auto h-auto"
+                                            src={product?.img3}
+                                            width={1080}
+                                            height={1080}
+                                        />
+                                    </SplideSlide>
+                                </SplideTrack>
+                            </Splide>
+
+                            {/* Custom pagination */}
+                            <div className="absolute z-[1] bottom-0 left-0 -m-0.5 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
+                                {(product?.img1 != '' || product?.img1 != undefined) && <div className="flex justify-center items-center">
+                                    <input
+                                        className="absolute w-10 h-10 z-50 hidden cursor-pointer"
+                                        type="radio"
+                                        value="product_image_selector-img1"
+                                        name="product_image_selector"
+                                        id="product_image_selector-img1"
+                                        onClick={() => handleRadioButtonClick(0)}
+                                    />
+
+                                    <label
+                                        htmlFor="product_image_selector-img1"
+                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img1"
+                                    >
+                                        {slug !== undefined && product?.img1 !== undefined ? (
+                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                                <Image
+                                                    className="flex justify-start items-center rounded-md"
+                                                    src={product?.img1}
+                                                    width={60}
+                                                    height={60}
+                                                />
+                                            </motion.div>
+                                        ) : (
+                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
+                                        )}
+                                    </label>
+                                </div>}
+
+                                {(product?.img2 != '' || product?.img2 != undefined) && <div className="flex justify-center items-center">
+                                    <input
+                                        className="absolute w-10 h-10 z-50 hidden cursor-pointer"
+                                        type="radio"
+                                        value="product_image_selector-img2"
+                                        name="product_image_selector"
+                                        id="product_image_selector-img2"
+                                        onClick={() => handleRadioButtonClick(1)}
+                                    />
+
+                                    <label
+                                        htmlFor="product_image_selector-img2"
+                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img2"
+                                    >
+                                        {slug !== undefined && product?.img2 !== undefined ? (
+                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                                <Image
+                                                    className="flex justify-start items-center rounded-md"
+                                                    src={product?.img2}
+                                                    width={60}
+                                                    height={60}
+                                                />
+                                            </motion.div>
+                                        ) : (
+                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
+                                        )}
+                                    </label>
+                                </div>}
+
+                                {(product?.img3 != '' || product?.img3 != undefined) && <div className="flex justify-center items-center">
+                                    <input
+                                        className="absolute w-10 h-10 z-50 hidden cursor-pointer"
+                                        type="radio"
+                                        value="product_image_selector-img3"
+                                        name="product_image_selector"
+                                        id="product_image_selector-img3"
+                                        onClick={() => handleRadioButtonClick(2)}
+                                    />
+
+                                    <label
+                                        htmlFor="product_image_selector-img3"
+                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img3"
+                                    >
+                                        {slug !== undefined && product?.img3 !== undefined ? (
+                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                                <Image
+                                                    className="flex justify-start items-center rounded-md"
+                                                    src={product?.img3}
+                                                    width={60}
+                                                    height={60}
+                                                />
+                                            </motion.div>
+                                        ) : (
+                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
+                                        )}
+                                    </label>
+                                </div>}
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]">
                         {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
