@@ -635,8 +635,8 @@ export default function Page({ params }) {
                                 <div className="flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
 
                                 <div className="flex flex-col justify-start items-center w-full sm:w-full md:w-[80%] lg:w-[80%] xl:w-[80%] h-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
-                                    <div className="flex justify-start items-center w-full h-12 space-x-4 select-none">
-                                        <div className="relative flex justify-start items-center w-[26%] sm:w-[26%] md:w-[20%] lg:w-[20%] xl:w-[20%] h-full cursor-pointer">
+                                    <div className="flex justify-start items-center w-full h-12 space-x-2 select-none">
+                                        <div className="relative flex justify-start items-center w-[28%] sm:w-[28%] md:w-[20%] lg:w-[20%] xl:w-[20%] h-full cursor-pointer">
                                             <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer">
                                                 <div className="flex justify-start items-center w-full font-normal"> Qty </div>
 
@@ -653,7 +653,7 @@ export default function Page({ params }) {
                                             </button>
                                         </div>
 
-                                        <div className="flex justify-start items-center w-[74%] sm:w-[74%] md:w-[80%] lg:w-[80%] xl:w-[80%] h-full">
+                                        <div className="flex justify-start items-center w-[72%] sm:w-[72%] md:w-[80%] lg:w-[80%] xl:w-[80%] h-full">
                                             {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200"
                                                 onClick={() => addProductToCart(
                                                     product.slug,
