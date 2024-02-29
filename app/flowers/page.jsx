@@ -65,7 +65,7 @@ const Page = () => {
             url: '/flowers/kinds/roses'
         },
     ]
-
+    
     return (
         <>
             <div className="block justify-start items-start w-screen h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949] overflow-x-hidden">
