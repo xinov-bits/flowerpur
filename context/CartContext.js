@@ -80,7 +80,7 @@ export const CartProvider = ({ children }) => {
             else { newCart[itemCode]["qty"] = cart[itemCode]["qty"] }
         }
         else {
-            newCart[itemCode] = { qty: 1, availableQty, url, price, img, name, offer }
+            newCart[itemCode] = { qty: qty, availableQty, url, price, img, name, offer }
         }
 
         setIsCartOpenATC(true);

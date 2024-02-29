@@ -146,6 +146,24 @@ export default function Page({ params }) {
     }, [sumOfReviews]);
 
 
+    // QTY SELECT POPUP
+    const [qtySelectPop, setQtySelectPop] = useState(false);
+
+    const [qtyValArr, setQtyValArr] = useState([]);
+
+    if (qtyValArr.length < product?.availableQty) {
+        let qty = 1;
+
+        while (qty <= product?.availableQty) {
+            qtyValArr.push(qty);
+
+            qty++;
+        }
+    }
+
+    const [productQty, setProductQty] = useState(1);
+
+
     // ADD TO CART
     const [cartLoading, setCartLoading] = useState(false);
 
@@ -163,7 +181,7 @@ export default function Page({ params }) {
             addToCart(
                 itemCode,
                 url,
-                qty,
+                productQty,
                 availableQty,
                 price,
                 img,
@@ -192,6 +210,23 @@ export default function Page({ params }) {
 
         setAddExtraToCart(false);
     }, [addExtraToCart])
+
+
+    // SCROLL VALUE
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return (
         <>
@@ -491,7 +526,7 @@ export default function Page({ params }) {
                             </Splide>
 
                             {/* Custom pagination */}
-                            <div className="absolute z-[1] bottom-0 left-0 -m-0.5 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
+                            <div className="absolute bottom-0 left-0 -m-0.5 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
                                 {(product?.img1 != '' || product?.img1 != undefined) && <div className="flex justify-center items-center">
                                     <input
                                         className="absolute w-10 h-10 z-50 hidden cursor-pointer"
@@ -607,55 +642,30 @@ export default function Page({ params }) {
                             className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]"
                         >
                             <div className="relative flex flex-col justify-start items-start w-full h-full border-0 sm:border-0 md:border-l lg:border-l xl:border-l border-[#e5e5e5]">
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
+                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
                                     {product?.category}
-                                </motion.div>
+                                </div>
 
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 text-2xl font-bold capitalize">
+                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-1 text-2xl font-bold capitalize">
                                     {product?.title}
-                                </motion.div>
+                                </div>
 
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 capitalize space-x-1.5 cursor-pointer">
+                                <div className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 capitalize space-x-1.5 cursor-pointer">
                                     <div className="flex justify-center items-center w-auto">
                                         {renderStarsCustom(Math.round(reviewMean), 'w-4 h-4')}
                                         {renderStarsCustomE((5 - Math.round(reviewMean)), 'w-4 h-4')}
                                     </div>
 
-                                    <div className="flex justify-center items-center w-auto underline text-[#767676]">
+                                    <div className="flex justify-center items-center w-auto text-[#767676]">
                                         {reviewMean}
                                     </div>
-                                </motion.div>
+                                </div>
 
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 text-2xl font-bold">
+                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 text-2xl font-bold">
                                     ₹{product?.price}.00
-                                </motion.div>
+                                </div>
 
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg border-t border-[#e5e5e5] text-[#191919]">
+                                <div className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg border-t border-[#e5e5e5] text-[#191919]">
                                     <div className="flex justify-start items-center w-full font-semibold">
                                         Additions & Address
                                     </div>
@@ -673,7 +683,7 @@ export default function Page({ params }) {
                                                             ₹199
                                                         </div>
 
-                                                        {extrasToAdd[0] === '' ? <div className="flex justify-end items-center w-[4.25rem] h-7">
+                                                        {extrasToAdd[0] === '' ? <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
                                                             {!extraLoading ? <button className="flex justify-center items-center w-full h-full border-[1.5px] border-[#e5e5e5] rounded-full text-sm hover:bg-[#f7f7f7] hover:border-[#c0c0c0] active:border-[#767676]" onClick={() => {
                                                                 setExtrasToAdd(['vase', '']);
                                                                 setExtraLoading(true);
@@ -698,7 +708,7 @@ export default function Page({ params }) {
                                                                     ></use>
                                                                 </svg>
                                                             </button>}
-                                                        </div> : <div className="flex justify-end items-center w-[4.25rem] h-7">
+                                                        </div> : <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
                                                             <button className="flex justify-center items-center w-full h-full text-sm bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e]">
                                                                 <svg className="" width={12} height={12}>
                                                                     <use
@@ -723,7 +733,7 @@ export default function Page({ params }) {
                                                             ₹349
                                                         </div>
 
-                                                        {extrasToAdd[1] === '' ? <div className="flex justify-end items-center w-[4.25rem] h-7">
+                                                        {extrasToAdd[1] === '' ? <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
                                                             <button className="flex justify-center items-center w-full h-full border-[1.5px] border-[#e5e5e5] rounded-full text-sm hover:bg-[#f7f7f7] hover:border-[#c0c0c0] active:border-[#767676]">
                                                                 <svg className="" width={16} height={16}>
                                                                     <use
@@ -734,7 +744,7 @@ export default function Page({ params }) {
 
                                                                 Add
                                                             </button>
-                                                        </div> : <div className="flex justify-end items-center w-16 h-7">
+                                                        </div> : <div className="flex justify-end items-center w-16 h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
                                                             <button className="flex justify-center items-center w-full h-full border-[1.5px] border-[#e5e5e5] rounded-full text-sm">
                                                                 <svg className="" width={12} height={12}>
                                                                     <use
@@ -757,7 +767,7 @@ export default function Page({ params }) {
                                             </div>
                                         </button>
                                     </div>
-                                </motion.div>
+                                </div>
 
                                 <div className="flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
 
@@ -766,13 +776,15 @@ export default function Page({ params }) {
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ delay: 0.8 }}
-                                    className="flex flex-col justify-start items-center w-full sm:w-full md:w-[80%] lg:w-[80%] xl:w-[80%] h-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
+                                    className="hidden sm:hidden md:flex lg:flex xl:flex flex-col justify-start items-center w-full sm:w-full md:w-[80%] lg:w-[80%] xl:w-[80%] h-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
                                     <div className="flex justify-start items-center w-full h-12 space-x-2 select-none">
                                         <div className="relative flex justify-start items-center w-[28%] sm:w-[28%] md:w-[20%] lg:w-[20%] xl:w-[20%] h-full cursor-pointer">
-                                            <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer">
+                                            <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer"
+                                                onClick={() => setQtySelectPop(!qtySelectPop)}
+                                            >
                                                 <div className="flex justify-start items-center w-full font-normal"> Qty </div>
 
-                                                <div className="flex justify-center items-center w-full font-bold"> 1 </div>
+                                                <div className="flex justify-center items-center w-full font-bold"> {productQty} </div>
 
                                                 <div className="flex justify-end items-center w-full pointer-events-none">
                                                     <svg className="" width={24} height={24}>
@@ -783,6 +795,15 @@ export default function Page({ params }) {
                                                     </svg>
                                                 </div>
                                             </button>
+
+                                            {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-auto h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
+                                                {qtyValArr.map((qty) => <button className="flex justify-center items-center w-full h-auto px-6 py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
+                                                    setProductQty(qty);
+                                                    setQtySelectPop(false);
+                                                }}>
+                                                    {qty}
+                                                </button>)}
+                                            </div>}
                                         </div>
 
                                         <div className="flex justify-start items-center w-[72%] sm:w-[72%] md:w-[80%] lg:w-[80%] xl:w-[80%] h-full">
@@ -811,6 +832,78 @@ export default function Page({ params }) {
                                         </div>
                                     </div>
                                 </motion.div>
+                                <AnimatePresence>
+                                    {(scrollY >= 100) && <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ delay: 0.2 }}
+                                        className="fixed left-0 bottom-0 flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-16 px-2 bg-white border-t border-[#e5e5e5]"
+                                    >
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ delay: 0.8 }}
+                                            className="flex justify-center items-center w-full h-full text-lg text-[#191919]"
+                                        >
+                                            <div className="flex justify-center items-center w-full h-12 space-x-2 select-none">
+                                                <div className="relative flex justify-center items-center w-[28%] h-full cursor-pointer">
+                                                    <button className="flex justify-between items-center w-full h-full px-2 space-x-1 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer"
+                                                        onClick={() => setQtySelectPop(!qtySelectPop)}
+                                                    >
+                                                        <div className="flex justify-start items-center w-full font-normal"> Qty </div>
+
+                                                        <div className="flex justify-center items-center w-full font-bold"> {productQty} </div>
+
+                                                        <div className="flex justify-end items-center w-full pointer-events-none">
+                                                            <svg className="" width={24} height={24}>
+                                                                <use
+                                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"
+                                                                ></use>
+                                                            </svg>
+                                                        </div>
+                                                    </button>
+
+                                                    {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-full h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
+                                                        {qtyValArr.map((qty) => <button className="flex justify-center items-center w-full h-auto py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
+                                                            setProductQty(qty);
+                                                            setQtySelectPop(false);
+                                                        }}>
+                                                            {qty}
+                                                        </button>)}
+                                                    </div>}
+                                                </div>
+
+                                                <div className="flex justify-center items-center w-[72%] h-full">
+                                                    {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200"
+                                                        onClick={() => addProductToCart(
+                                                            product.slug,
+                                                            product.slug,
+                                                            1,
+                                                            product.availableQty,
+                                                            product.price,
+                                                            product.dimg,
+                                                            product.title,
+                                                            product.offer,
+                                                        )}>
+                                                        <div>
+                                                            Add to cart
+                                                        </div>
+                                                    </button> : <button className="flex justify-center items-center w-full h-full bg-[#24543e] text-white font-semibold rounded-md duration-200">
+                                                        <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
+                                                            <use
+                                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                                            ></use>
+                                                        </svg>
+                                                    </button>}
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    </motion.div>}
+                                </AnimatePresence>
                             </div>
                         </motion.div>
                     )}

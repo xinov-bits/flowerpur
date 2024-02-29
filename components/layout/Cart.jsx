@@ -150,7 +150,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                     </div>
 
                                                     <div className="flex justify-start items-end w-full h-auto mt-1">
-                                                        ₹{item.price}.00
+                                                        ₹{(item.price) * item.qty}.00
                                                     </div>
                                                 </div>
 
