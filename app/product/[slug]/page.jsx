@@ -228,7 +228,13 @@ export default function Page({ params }) {
 
                 <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-center w-full h-full px-2 bg-white space-x-0 sm:space-x-0 md:space-x-2 lg:space-x-2 xl:space-x-2">
                     <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-1/2 h-[30rem] py-2">
-                        <div className="relative flex justify-start items-center w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none">
+                        {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="relative flex justify-start items-center w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none"
+                        >
                             <Splide className="flex justify-center items-center w-full h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
                                 hasTrack={false}
                                 options={{
@@ -286,7 +292,12 @@ export default function Page({ params }) {
                                         className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img1"
                                     >
                                         {slug !== undefined && product?.img1 !== undefined ? (
-                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <Image
                                                     className="flex justify-start items-center rounded-md"
                                                     src={product?.img1}
@@ -315,7 +326,12 @@ export default function Page({ params }) {
                                         className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img2"
                                     >
                                         {slug !== undefined && product?.img2 !== undefined ? (
-                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <Image
                                                     className="flex justify-start items-center rounded-md"
                                                     src={product?.img2}
@@ -344,7 +360,12 @@ export default function Page({ params }) {
                                         className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img3"
                                     >
                                         {slug !== undefined && product?.img3 !== undefined ? (
-                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <Image
                                                     className="flex justify-start items-center rounded-md"
                                                     src={product?.img3}
@@ -358,11 +379,77 @@ export default function Page({ params }) {
                                     </label>
                                 </div>}
                             </div>
-                        </div>
+                        </motion.div>}
+
+                        {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-[30rem] h-[30rem] py-2 cursor-pointer rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full rounded-md overflow-hidden select-none">
+                                <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                                </div>
+                            </div>
+                        </div>}
                     </div>
 
-                    <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2">
-                        <div className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none">
+                    {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] py-2 sm:py-2 md:py-0 lg:py-0 xl:py-0 pr-0 sm:pr-0 md:pr-32 lg:pr-32 xl:pr-32">
+                        <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-1/4 h-8 sm:h-8 md:h-8 lg:h-8 xl:h-8 mt-4 sm:mt-4 md:mt-2 lg:mt-2 xl:mt-2 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-full h-24 sm:h-24 md:h-20 lg:h-20 xl:h-20 mt-2 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-1/2 h-14 mt-2 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-full h-12 mt-4 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-full h-24 mt-4 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            </div>
+                        </div>
+
+                        <div className="flex justify-start items-center w-full h-14 mt-2 rounded-md overflow-hidden space-x-2 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-3">
+                            <div className="relative flex justify-center items-center w-1/3 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/4 h-full rounded-md overflow-hidden select-none">
+                                <div className="relative flex justify-center items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-center items-center w-full h-full" id="skeleton_gradient" />
+                                </div>
+                            </div>
+
+                            <div className="relative flex justify-center items-center w-2/3 sm:w-2/3 md:w-3/4 lg:w-3/4 xl:w-3/4 h-full rounded-md overflow-hidden select-none">
+                                <div className="relative flex justify-center items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-center items-center w-full h-full" id="skeleton_gradient" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+
+                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none"
+                        >
                             <Splide className="flex justify-center items-center w-auto h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
                                 hasTrack={false}
                                 options={{
@@ -420,7 +507,12 @@ export default function Page({ params }) {
                                         className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img1"
                                     >
                                         {slug !== undefined && product?.img1 !== undefined ? (
-                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <Image
                                                     className="flex justify-start items-center rounded-md"
                                                     src={product?.img1}
@@ -449,7 +541,12 @@ export default function Page({ params }) {
                                         className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img2"
                                     >
                                         {slug !== undefined && product?.img2 !== undefined ? (
-                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <Image
                                                     className="flex justify-start items-center rounded-md"
                                                     src={product?.img2}
@@ -478,7 +575,12 @@ export default function Page({ params }) {
                                         className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img3"
                                     >
                                         {slug !== undefined && product?.img3 !== undefined ? (
-                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <Image
                                                     className="flex justify-start items-center rounded-md"
                                                     src={product?.img3}
@@ -492,28 +594,43 @@ export default function Page({ params }) {
                                     </label>
                                 </div>}
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </div>}
 
 
-                    <div className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]">
-                        {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
-                            <motion
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ delay: 0.4 }}
-                                className="relative flex flex-col justify-start items-start w-full h-full border-0 sm:border-0 md:border-l lg:border-l xl:border-l border-[#e5e5e5]"
-                            >
-                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
+                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]"
+                        >
+                            <div className="relative flex flex-col justify-start items-start w-full h-full border-0 sm:border-0 md:border-l lg:border-l xl:border-l border-[#e5e5e5]">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
                                     {product?.category}
-                                </div>
+                                </motion.div>
 
-                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 text-2xl font-bold capitalize">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 text-2xl font-bold capitalize">
                                     {product?.title}
-                                </div>
+                                </motion.div>
 
-                                <div className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 capitalize space-x-1.5 cursor-pointer">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 capitalize space-x-1.5 cursor-pointer">
                                     <div className="flex justify-center items-center w-auto">
                                         {renderStarsCustom(Math.round(reviewMean), 'w-4 h-4')}
                                         {renderStarsCustomE((5 - Math.round(reviewMean)), 'w-4 h-4')}
@@ -522,13 +639,23 @@ export default function Page({ params }) {
                                     <div className="flex justify-center items-center w-auto underline text-[#767676]">
                                         {reviewMean}
                                     </div>
-                                </div>
+                                </motion.div>
 
-                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 text-2xl font-bold">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 text-2xl font-bold">
                                     ₹{product?.price}.00
-                                </div>
+                                </motion.div>
 
-                                <div className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg border-t border-[#e5e5e5] text-[#191919]">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg border-t border-[#e5e5e5] text-[#191919]">
                                     <div className="flex justify-start items-center w-full font-semibold">
                                         Additions & Address
                                     </div>
@@ -630,11 +757,16 @@ export default function Page({ params }) {
                                             </div>
                                         </button>
                                     </div>
-                                </div>
+                                </motion.div>
 
                                 <div className="flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
 
-                                <div className="flex flex-col justify-start items-center w-full sm:w-full md:w-[80%] lg:w-[80%] xl:w-[80%] h-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="flex flex-col justify-start items-center w-full sm:w-full md:w-[80%] lg:w-[80%] xl:w-[80%] h-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
                                     <div className="flex justify-start items-center w-full h-12 space-x-2 select-none">
                                         <div className="relative flex justify-start items-center w-[28%] sm:w-[28%] md:w-[20%] lg:w-[20%] xl:w-[20%] h-full cursor-pointer">
                                             <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer">
@@ -678,10 +810,10 @@ export default function Page({ params }) {
                                             </button>}
                                         </div>
                                     </div>
-                                </div>
-                            </motion>
-                        )}
-                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    )}
                 </div>
             </div>
         </>

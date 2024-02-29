@@ -69,7 +69,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #skeleton_gradient {
-  left: 12rem;
+  left: 40rem;
 
   background: rgba(255, 255, 255, 0);
   background: linear-gradient(
@@ -82,13 +82,27 @@ input[type="number"]::-webkit-outer-spin-button {
 
   animation: skeleton_anim 1500ms linear infinite;
 }
+#skeleton_gradient__white {
+  left: 40rem;
+
+  background: rgba(255, 255, 255, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgb(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  opacity: 5%;
+
+  animation: skeleton_anim 1500ms linear infinite;
+}
 
 @keyframes skeleton_anim {
   0% {
-    left: -12rem;
+    left: -40rem;
   }
   100% {
-    left: 12rem;
+    left: 40rem;
   }
 }
 
