@@ -37,7 +37,7 @@ const Page = () => {
             url: '/flowers'
         },
     ]
-    
+
     const flowerKinds = [
         {
             name: 'Roses',
