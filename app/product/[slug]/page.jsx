@@ -797,7 +797,7 @@ export default function Page({ params }) {
                                             </button>
 
                                             {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-auto h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
-                                                {qtyValArr.map((qty) => <button className="flex justify-center items-center w-full h-auto px-6 py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
+                                                {qtyValArr.map((qty, index) => <button key={index} className="flex justify-center items-center w-full h-auto px-6 py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
                                                     setProductQty(qty);
                                                     setQtySelectPop(false);
                                                 }}>
@@ -867,7 +867,7 @@ export default function Page({ params }) {
                                                     </button>
 
                                                     {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-full h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
-                                                        {qtyValArr.map((qty) => <button className="flex justify-center items-center w-full h-auto py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
+                                                        {qtyValArr.map((qty, index) => <button key={index} className="flex justify-center items-center w-full h-auto py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
                                                             setProductQty(qty);
                                                             setQtySelectPop(false);
                                                         }}>
