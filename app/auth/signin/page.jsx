@@ -96,9 +96,11 @@ const Page = () => {
 
                     localStorage.setItem('user', encUserData);
 
+
                     setTimeout(() => {
                         router.push('/');
-                    }, 2000);
+                        router.refresh();
+                    }, 2500);
                 }
             } catch (error) {
                 if (error.response?.data?.details?.includes('Invalid Credentials.')) {
