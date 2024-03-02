@@ -103,7 +103,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                     &#40;{numTotal}&#41;
                                 </div>
 
-                                <button className="flex justify-center items-center w-14 h-full cursor-pointer" onClick={() => {
+                                <button className="flex justify-center items-center w-14 h-full cursor-pointer  no-outline" onClick={() => {
                                     setIsCartOpen(false);
                                     setIsCartOpenATC(false);
                                 }}>
@@ -156,7 +156,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
                                                 <div className="flex justify-end items-center w-[42%] h-full">
                                                     <div className="flex justify-center items-center w-full h-full">
-                                                        <button className="flex justify-between items-center w-full h-12 sm:h-12 md:h-10 lg:h-10 xl:h-10 px-1 bg-[#f7f7f7] rounded-full border border-[#e5e5e5] text-[#292929] overflow-hidden">
+                                                        <button className="flex justify-between items-center w-full h-[2.75rem] sm:h-[2.75rem] md:h-10 lg:h-10 xl:h-10 px-1 bg-[#f7f7f7] rounded-full border border-[#e5e5e5] text-[#292929] overflow-hidden">
                                                             {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5]" onClick={() =>
                                                                 removeProductToCart(
                                                                     item.url,

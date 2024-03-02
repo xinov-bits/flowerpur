@@ -1,5 +1,10 @@
 import { CartProvider } from "@/context/CartContext";
+import { UserProvider } from "@/context/UserContext";
 
 export function GlobalProvider({ children }) {
-    return <CartProvider>{children}</CartProvider>;
+    return <CartProvider>
+        <UserProvider>
+            {children}
+        </UserProvider>
+    </CartProvider>;
 }

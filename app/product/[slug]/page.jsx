@@ -639,7 +639,7 @@ export default function Page({ params }) {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]"
+                            className="relative flex justify-center items-start w-full h-screen sm:h-screen md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]"
                         >
                             <div className="relative flex flex-col justify-start items-start w-full h-full border-0 sm:border-0 md:border-l lg:border-l xl:border-l border-[#e5e5e5]">
                                 <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
@@ -771,6 +771,12 @@ export default function Page({ params }) {
 
                                 <div className="flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
 
+                                <div className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
+                                    <div className="flex justify-start items-center w-full font-semibold">
+                                        Similar recommendations
+                                    </div>
+                                </div>
+
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -833,7 +839,7 @@ export default function Page({ params }) {
                                     </div>
                                 </motion.div>
                                 <AnimatePresence>
-                                    {(scrollY >= 100) && <motion.div
+                                    {(scrollY >= 200) && <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}

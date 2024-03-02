@@ -22,6 +22,7 @@ import CryptoJS from "crypto-js";
 
 // CONTEXT
 import { GlobalProvider } from "./GlobalProvider";
+import UserContext from "@/context/UserContext";
 
 export default function RootLayout({ children }) {
 

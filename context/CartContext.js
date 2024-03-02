@@ -102,6 +102,14 @@ export const CartProvider = ({ children }) => {
         saveCart({});
     };
 
+    useEffect(() => {
+      if (subTotal === 0) {
+        if (cart.length !== 0) {
+            clearCart();
+        }
+      }
+    }, [subTotal])
+
     // Function to remove item from cart
     const removeFromCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
         let newCart = { ...cart };

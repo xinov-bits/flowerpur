@@ -23,6 +23,7 @@ import IconButton from '@mui/material/IconButton';
 
 // CONTEXT
 import CartContext from '@/context/CartContext';
+import UserContext from '@/context/UserContext';
 
 // COMPONENTS
 import Cart from './Cart';
@@ -42,6 +43,11 @@ const Header = () => {
         isCartOpenATC,
         setIsCartOpenATC,
     } = useContext(CartContext);
+
+    const {
+        user,
+        isUserSignedIn,
+    } = useContext(UserContext);
 
     // const [address, setAddress] = useState('');
     // const [pincodes, setPincodes] = useState([]);
@@ -151,18 +157,21 @@ const Header = () => {
     // CART SIDEMENU
     const [isCartOpen, setIsCartOpen] = useState(false);
 
+
+    console.log(isUserSignedIn);
+
     return (
         <>
             <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
                 <div className="flex justify-center items-center w-full h-16 py-2 px-8 space-x-2 border-b border-[#e5e5e5] select-none">
-                    <div className="flex justify-start items-center w-[16%] h-full cursor-pointer space-x-2">
-                        <div className="flex justify-center items-center w-auto h-full cursor-pointer rounded-md overflow-hidden">
-                            <Link className="no-outline" href={'/'}>
-                                <div className="flex justify-center items-center w-full h-full">
-                                    <svg className="" width={180} height={180}>
+                    <div className="flex justify-start items-center w-[16%] h-full cursor-pointer">
+                        <div className="flex justify-start items-center w-full h-full cursor-pointer rounded-md overflow-hidden">
+                            <Link className="flex justify-start items-center w-full h-full no-outline" href={'/'}>
+                                <div className="flex justify-start items-center w-full h-full">
+                                    <svg className="flex justify-start items-center w-[95%] h-full" width={821} height={130}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/critical.svg#flowerpur"
+                                            xlinkHref="/on/demandware/svg/logo.svg#logo"
                                         ></use>
                                     </svg>
                                 </div>
@@ -235,13 +244,13 @@ const Header = () => {
                                 </svg>
 
                                 <div className="flex justify-center items-center w-full space-x-2">
-                                    <Link href="/" className="flex justify-center items-center w-auto no-outline">
+                                    <Link href="/auth/signin" className="flex justify-center items-center w-auto no-outline">
                                         <div className="flex justify-center items-center w-full px-3 py-1 bg-white hover:bg-[#f7f7f7] border border-[#d6d6d6] rounded-full cursor-pointer">
                                             Sign In
                                         </div>
                                     </Link>
 
-                                    <Link href="/" className="flex justify-center items-center w-auto no-outline">
+                                    <Link href="/auth/signup" className="flex justify-center items-center w-auto no-outline">
                                         <div className="flex justify-center items-center w-full px-3 py-1 bg-[#d6d6d6] rounded-full cursor-pointer">
                                             Sign Up
                                         </div>
@@ -295,25 +304,25 @@ const Header = () => {
 
             <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#292929]">
                 <div className="flex justify-start items-center w-full h-14 py-1 px-3.5 space-x-2">
-                    <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#191919]">
+                    <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
                         <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-4">
                             <div className="flex justify-center items-center w-8 h-8">
-                                <IconButton className="z-[1] flex justify-center items-center">
+                                <button className="z-[1] flex justify-center items-center  no-outline">
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-menu_dd"
                                         ></use>
                                     </svg>
-                                </IconButton>
+                                </button>
                             </div>
 
                             <div className="flex justify-center items-center w-8 h-8 text-[#24543e]">
-                                <Link href={"/"}>
-                                    <svg className="flex justify-center items-center" width={28} height={28}>
+                                <Link className="no-outline" href={"/"}>
+                                    <svg className="flex justify-center items-center w-7 h-7" width={128} height={128}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-icon_dd"
+                                            xlinkHref="/on/demandware/svg/logo.svg#logo_icon"
                                         ></use>
                                     </svg>
                                 </Link>
@@ -322,40 +331,52 @@ const Header = () => {
 
                         <div className="flex justify-end items-center w-auto h-full cursor-pointer rounded-md space-x-4">
                             <div className="flex justify-center items-center w-8 h-8">
-                                <IconButton className="z-[1] flex justify-center items-center">
+                                <button className="z-[1] flex justify-center items-center  no-outline">
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
                                         ></use>
                                     </svg>
-                                </IconButton>
+                                </button>
                             </div>
 
                             <div className="relative flex justify-center items-center w-8 h-8">
-                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-3.5 h-3.5 leading-none text-[10px] bg-[#24543e] rounded-full font-bold text-white text-ellipsis overflow-hidden">
+                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-[15px] h-[15px] leading-none text-[10px] bg-[#24543e] rounded-full font-semibold text-white text-ellipsis overflow-hidden">
                                     {numTotal}
                                 </div>
 
-                                <IconButton className="z-[1] flex justify-center items-center" onClick={() => setIsCartOpen(true)}>
+                                <button className="z-[1] flex justify-center items-center  no-outline" onClick={() => setIsCartOpen(true)}>
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart2_dd"
                                         ></use>
                                     </svg>
-                                </IconButton>
+                                </button>
                             </div>
 
                             <div className="flex justify-center items-center w-8 h-8">
-                                <IconButton className="z-[1] flex justify-center items-center">
-                                    <svg className="flex justify-center items-center" width={28} height={28}>
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
-                                        ></use>
-                                    </svg>
-                                </IconButton>
+                                {isUserSignedIn && <Link href="/">
+                                    <button className="z-[1] flex justify-center items-center  no-outline">
+                                        <svg className="flex justify-center items-center" width={28} height={28}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
+                                            ></use>
+                                        </svg>
+                                    </button>
+                                </Link>}
+                                {!isUserSignedIn && <Link href="/auth/signup">
+                                    <button className="z-[1] flex justify-center items-center  no-outline">
+                                        <svg className="flex justify-center items-center" width={28} height={28}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
+                                            ></use>
+                                        </svg>
+                                    </button>
+                                </Link>}
                             </div>
                         </div>
                     </div>
