@@ -157,9 +157,6 @@ const Header = () => {
     // CART SIDEMENU
     const [isCartOpen, setIsCartOpen] = useState(false);
 
-
-    console.log(isUserSignedIn);
-
     return (
         <>
             <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">

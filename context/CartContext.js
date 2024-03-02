@@ -58,8 +58,24 @@ export const CartProvider = ({ children }) => {
         let numTotal = 0;
         let mrptTotal = 0;
 
+        const b2g1freeProducts = Object.keys(cartData).filter((k) => {
+            if (cartData[k].offer === 'buy-2-get-1-free') {
+                return cartData[k]
+            }
+        }).map((k) => cartData[k]);
+
         for (const item of Object.values(cartData)) {
-            subTotal += item.price * item.qty;
+            let b2g1freeDiscount = 0;
+
+            for (let i = 0; i < b2g1freeProducts.length; i++) {
+                const product = b2g1freeProducts[i];
+                
+                if (product.qty % 2 === 0) {
+                    b2g1freeDiscount = (product.qty * product.price) / 2
+                }
+            }
+
+            subTotal += (item.price * item.qty) - (b2g1freeDiscount);
             numTotal += item.qty;
             mrptTotal += ((item.price * item.qty) * 100) / 40; // Assuming MRP calculation logic
         }
