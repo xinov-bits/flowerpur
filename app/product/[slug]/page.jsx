@@ -443,6 +443,9 @@ export default function Page({ params }) {
         };
     }, []);
 
+
+    console.log(reviews);
+
     return (
         <>
             <div className="block justify-center items-center w-full h-full bg-white">
