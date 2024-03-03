@@ -111,42 +111,76 @@ export default function Page({ params }) {
     const API_KEY = '031494b4ce79047904f947c745421438';
     const API_URL = 'https://api.imgbb.com/1/upload';
 
-    const handleImageUpload = useCallback(async () => {
-        try {
-            if (!selectedImage) {
-                console.warn('Please select an image before uploading.');
-                return;
-            }
+    // const handleImageUpload = useCallback(async () => {
+    //     try {
+    //         if (!selectedImage) {
+    //             console.warn('Please select an image before uploading.');
+    //             return;
+    //         }
 
+    //         setLoading(true);
+    //         setImgSuccess(false);
+    //         setUploadError(null);
+
+    //         const formData = new FormData();
+    //         formData.append('image', selectedImage);
+
+    //         const response = await axios.post(API_URL, formData, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //             params: {
+    //                 key: API_KEY,
+    //             },
+    //         });
+
+    //         if (response.data.data) {
+    //             setRImg(response.data.data.url);
+    //         } else {
+    //             setUploadError('Failed to upload image. Please try again.');
+    //         }
+    //     } catch (error) {
+    //         setImgSuccess(false);
+    //         setUploadError('Error uploading image. Please try again.');
+    //     } finally {
+    //         setLoading(false);
+    //         setImgSuccess(true);
+    //     }
+    // }, [selectedImage]);
+
+    const handleImageUpload = useCallback(async () => {
+        if (!selectedImage) {
+            console.log("Please select an image.");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+    
+        try {
             setLoading(true);
             setImgSuccess(false);
             setUploadError(null);
-
-            const formData = new FormData();
-            formData.append('image', selectedImage);
-
-            const response = await axios.post(API_URL, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                params: {
-                    key: API_KEY,
-                },
-            });
-
-            if (response.data.data) {
-                setRImg(response.data.data.url);
+    
+            const response = await axios.post('https://api.imgbb.com/1/upload?key=031494b4ce79047904f947c745421438', formData);
+    
+            if (response.status === 200) {
+                const data = response.data;
+                setRImg(data.data.url);
+                // console.log('Image uploaded successfully:', data);
             } else {
                 setUploadError('Failed to upload image. Please try again.');
+                setImgSuccess(false);
+                // console.error('Failed to upload image:', response.statusText);
             }
         } catch (error) {
             setImgSuccess(false);
-            setUploadError('Error uploading image. Please try again.');
+            // console.error('Error occurred while uploading image:', error);
         } finally {
             setLoading(false);
             setImgSuccess(true);
         }
-    }, [selectedImage]);
+    }, [selectedImage, setLoading, setImgSuccess, setUploadError, setRImg]);
 
     const onDrop = (acceptedFiles) => {
         setSelectedImage(acceptedFiles[0]);
@@ -281,7 +315,7 @@ export default function Page({ params }) {
 
                 <div className="relative flex justify-center items-center w-full h-full bg-[#e7e7e7] rounded-full overflow-hidden">
                     <div className={`absolute left-0 flex justify-start items-center h-full bg-[#e8c500] rounded-full`} style={{
-                        width: size
+                        width: size ? size : 0
                     }} />
                 </div>
             </div>
@@ -498,6 +532,7 @@ export default function Page({ params }) {
                                             src={product?.img1}
                                             width={1080}
                                             height={1080}
+                                            alt={product?.title}
                                         />
                                     </SplideSlide>
 
@@ -506,6 +541,7 @@ export default function Page({ params }) {
                                             src={product?.img2}
                                             width={1080}
                                             height={1080}
+                                            alt={product?.title}
                                         />
                                     </SplideSlide>
 
@@ -514,6 +550,7 @@ export default function Page({ params }) {
                                             src={product?.img3}
                                             width={1080}
                                             height={1080}
+                                            alt={product?.title}
                                         />
                                     </SplideSlide>
                                 </SplideTrack>
@@ -547,6 +584,7 @@ export default function Page({ params }) {
                                                     src={product?.img1}
                                                     width={60}
                                                     height={60}
+                                                    alt={product?.title}
                                                 />
                                             </motion.div>
                                         ) : (
@@ -581,6 +619,7 @@ export default function Page({ params }) {
                                                     src={product?.img2}
                                                     width={60}
                                                     height={60}
+                                                    alt={product?.title}
                                                 />
                                             </motion.div>
                                         ) : (
@@ -615,6 +654,7 @@ export default function Page({ params }) {
                                                     src={product?.img3}
                                                     width={60}
                                                     height={60}
+                                                    alt={product?.title}
                                                 />
                                             </motion.div>
                                         ) : (
@@ -713,6 +753,7 @@ export default function Page({ params }) {
                                             src={product?.img1}
                                             width={1080}
                                             height={1080}
+                                            alt={product?.title}
                                         />
                                     </SplideSlide>
 
@@ -721,6 +762,7 @@ export default function Page({ params }) {
                                             src={product?.img2}
                                             width={1080}
                                             height={1080}
+                                            alt={product?.title}
                                         />
                                     </SplideSlide>
 
@@ -729,6 +771,7 @@ export default function Page({ params }) {
                                             src={product?.img3}
                                             width={1080}
                                             height={1080}
+                                            alt={product?.title}
                                         />
                                     </SplideSlide>
                                 </SplideTrack>
@@ -762,6 +805,7 @@ export default function Page({ params }) {
                                                     src={product?.img1}
                                                     width={60}
                                                     height={60}
+                                                    alt={product?.title}
                                                 />
                                             </motion.div>
                                         ) : (
@@ -796,6 +840,7 @@ export default function Page({ params }) {
                                                     src={product?.img2}
                                                     width={60}
                                                     height={60}
+                                                    alt={product?.title}
                                                 />
                                             </motion.div>
                                         ) : (
@@ -830,6 +875,7 @@ export default function Page({ params }) {
                                                     src={product?.img3}
                                                     width={60}
                                                     height={60}
+                                                    alt={product?.title}
                                                 />
                                             </motion.div>
                                         ) : (
@@ -1149,7 +1195,7 @@ export default function Page({ params }) {
 
                                 <div className="flex flex-col justify-start items-start w-full h-[24.7rem] overflow-y-scroll select-none">
                                     {approvedReviews.map((review) => {
-                                        return <button key={review._id} className="flex justify-start items-start w-full h-full p-2 bg-white hover:bg-[#f7f7f7] no-outline space-x-2">
+                                        return <div key={review._id} className="flex justify-start items-start w-full h-full p-2 bg-white hover:bg-[#f7f7f7] no-outline space-x-2">
                                             <div className="flex justify-start items-start w-20 h-full rounded-md overflow-hidden">
                                                 <Image className="flex justify-center items-start w-16 h-16 rounded-md overflow-hidden"
                                                     src={review.img}
@@ -1188,7 +1234,7 @@ export default function Page({ params }) {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </button>
+                                        </div>
                                     })}
                                 </div>
                             </div>
@@ -1255,41 +1301,41 @@ export default function Page({ params }) {
 
                                         <div className="flex justify-end items-center w-full h-auto">
                                             <div className="flex justify-end items-center w-full">
-                                                <button className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(1)}>
+                                                <div className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(1)}>
                                                     {rStars >= 1 ?
                                                         renderStarsCustom(1, 'w-6 h-6', 'text-[#E8C500]')
                                                         :
                                                         renderStarsCustomE(1, 'w-6 h-6', 'text-[#767676]')
                                                     }
-                                                </button>
-                                                <button className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(2)}>
+                                                </div>
+                                                <div className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(2)}>
                                                     {rStars >= 2 ?
                                                         renderStarsCustom(1, 'w-6 h-6', 'text-[#E8C500]')
                                                         :
                                                         renderStarsCustomE(1, 'w-6 h-6', 'text-[#767676]')
                                                     }
-                                                </button>
-                                                <button className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(3)}>
+                                                </div>
+                                                <div className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(3)}>
                                                     {rStars >= 3 ?
                                                         renderStarsCustom(1, 'w-6 h-6', 'text-[#E8C500]')
                                                         :
                                                         renderStarsCustomE(1, 'w-6 h-6', 'text-[#767676]')
                                                     }
-                                                </button>
-                                                <button className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(4)}>
+                                                </div>
+                                                <div className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(4)}>
                                                     {rStars >= 4 ?
                                                         renderStarsCustom(1, 'w-6 h-6', 'text-[#E8C500]')
                                                         :
                                                         renderStarsCustomE(1, 'w-6 h-6', 'text-[#767676]')
                                                     }
-                                                </button>
-                                                <button className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(5)}>
+                                                </div>
+                                                <div className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(5)}>
                                                     {rStars >= 5 ?
                                                         renderStarsCustom(1, 'w-6 h-6', 'text-[#E8C500]')
                                                         :
                                                         renderStarsCustomE(1, 'w-6 h-6', 'text-[#767676]')
                                                     }
-                                                </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
