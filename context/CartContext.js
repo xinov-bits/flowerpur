@@ -73,6 +73,9 @@ export const CartProvider = ({ children }) => {
                 if (product.qty % 2 === 0) {
                     b2g1freeDiscount = (product.qty * product.price) / 2
                 }
+                else if ((product.qty % 2 - 1) === 0) {
+                    b2g1freeDiscount = ((product.qty - 1) * product.price) / 2
+                }
             }
 
             subTotal += (item.price * item.qty) - (b2g1freeDiscount);
@@ -119,10 +122,8 @@ export const CartProvider = ({ children }) => {
     };
 
     useEffect(() => {
-      if (subTotal === 0) {
-        if (cart.length !== 0) {
+      if (subTotal === 0 && cart.length > 0) {
             clearCart();
-        }
       }
     }, [subTotal])
 

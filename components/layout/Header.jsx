@@ -242,15 +242,15 @@ const Header = () => {
 
                                 <div className="flex justify-center items-center w-full space-x-2">
                                     <Link href="/auth/signin" className="flex justify-center items-center w-auto no-outline">
-                                        <div className="flex justify-center items-center w-full px-3 py-1 bg-white hover:bg-[#f7f7f7] border border-[#d6d6d6] rounded-full cursor-pointer">
+                                        <button className="flex justify-center items-center w-full px-3 py-1 bg-white hover:bg-[#f7f7f7] border border-[#d6d6d6] rounded-full cursor-pointer">
                                             Sign In
-                                        </div>
+                                        </button>
                                     </Link>
 
                                     <Link href="/auth/signup" className="flex justify-center items-center w-auto no-outline">
-                                        <div className="flex justify-center items-center w-full px-3 py-1 bg-[#d6d6d6] rounded-full cursor-pointer">
+                                        <button className="flex justify-center items-center w-full px-3 py-1 bg-[#d6d6d6] rounded-full cursor-pointer">
                                             Sign Up
-                                        </div>
+                                        </button>
                                     </Link>
                                 </div>
                             </li>
@@ -274,7 +274,7 @@ const Header = () => {
                 </div>
 
                 {/* MENU */}
-                <div className="flex justify-center items-center w-full h-18 py-2 px-6 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5]">
+                <div className="flex justify-center items-center w-full h-18 py-2 px-6 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5] select-none">
                     <ul className="flex justify-center items-center w-full h-full space-x-4">
                         {menuItems.map((item, index) => (
                             <Link className="flex justify-center items-center w-auto h-full rounded-full" key={index} href={item.link}>

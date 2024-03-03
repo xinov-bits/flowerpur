@@ -120,13 +120,13 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 <ul className="flex flex-col justify-start items-center w-full h-full text-[#191919] overflow-y-auto">
                                     {mappedCart.map((item) => {
                                         return (<li className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer last:border-b last:border-[#e5e5e5]" key={item.slug}>
-                                            <Link className="flex justify-center items-center w-[30%] h-full" href={`/${item.url}`}>
+                                            <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
                                                     <div className="absolute top-2 right-2 sm:right-2 md:right-4 lg:right-4 xl:right-4 flex justify-center items-center w-5 h-5 bg-[#24543e] rounded-full text-white text-xs font-bold">
                                                         {item.qty}
                                                     </div>
 
-                                                    <Image className="flex justify-center items-center w-20 h-20 rounded-md overflow-hidden"
+                                                    <Image className="flex justify-center items-center w-20 h-20 rounded-md overflow-hidden no-outline"
                                                         src={item.img}
                                                         width={800}
                                                         height={800}
@@ -137,7 +137,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
                                             <div className="flex justify-start items-center w-[70%] h-[85%] text-[#191919]">
                                                 <div className="flex flex-col justify-start items-center w-[58%] h-full text-start font-semibold">
-                                                    <Link className="flex justify-center items-start w-full h-full" href={`/product/${item.url}`}>
+                                                    <Link className="flex justify-center items-start w-full h-full no-outline" href={`/product/${item.url}`}>
                                                         <div className="flex justify-start items-start w-full h-auto capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer">
                                                             {item.name}
                                                         </div>
