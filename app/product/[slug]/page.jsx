@@ -229,7 +229,7 @@ export default function Page({ params }) {
                     }
                 ]
 
-                const apiUrl = `${process.env.NEXT_PUBLIC_HOST}/api/getreviews`;
+                const apiUrl = `${process.env.NEXT_PUBLIC_HOST}/api/getreviews?pn="${slug}"`;
                 // const response = await axios.get(apiUrl, getReviewData);
                 const response = await axios.get(apiUrl);
 
