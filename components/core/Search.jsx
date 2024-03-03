@@ -113,8 +113,10 @@ export const Search = () => {
             || JSON.stringify(products[item].title)?.toLowerCase().includes(searchKeyword)
             || JSON.stringify(products[item].price)?.toLowerCase().includes(searchKeyword)
             || JSON.stringify(products[item].desc)?.toLowerCase().includes(searchKeyword)
-            || JSON.stringify(products[item].category)?.toLowerCase().includes(searchKeyword)
-        )) {
+            || JSON.stringify(products[item].category)?.toLowerCase().includes(searchKeyword))
+            && !JSON.stringify(products[item].category)?.includes('Special')
+            && !JSON.stringify(products[item].category)?.includes('Special')
+        ) {
             return products[item];
         }
     }).map((item) => products[item]);
