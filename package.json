@@ -16,6 +16,7 @@
     "@splidejs/splide": "^4.1.4",
     "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.7",
+    "cookies-next": "^4.1.1",
     "crypto-js": "^4.2.0",
     "framer-motion": "^11.0.5",
     "jsonwebtoken": "^9.0.2",

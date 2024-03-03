@@ -42,6 +42,7 @@ export default function Page({ params }) {
         favList,
         recentView,
         addToCart,
+        addMultipleToCart,
         clearCart,
         removeFromCart,
         removeAtOnce,
@@ -93,7 +94,7 @@ export default function Page({ params }) {
 
 
     // STAR (REVIEW)
-    const [rStars, setRStars] = useState(1);
+    const [rStars, setRStars] = useState(0);
     const [rEmail, setREmail] = useState('');
     const [rName, setRName] = useState('');
     const [rTitle, setRTitle] = useState('');
@@ -426,32 +427,28 @@ export default function Page({ params }) {
                 extrasToAdd.includes('double') &&
                 !(JSON.stringify(cart)?.includes('special__double'))
             ) {
-                while (!(JSON.stringify(cart).includes('special__vase') && JSON.stringify(cart).includes('special__double'))) {
-                    if (!JSON.stringify(cart).includes('special__vase')) {
-                        addToCart(
-                            'special__vase',
-                            'special__vase',
-                            1,
-                            999,
-                            349,
-                            'https://i.ibb.co/3RTxMGR/x2-flowers.png',
-                            'Vase',
-                            '',
-                        );
-                    }
-                    if (!JSON.stringify(cart).includes('special__double')) {
-                        addToCart(
-                            'special__double',
-                            'special__double',
-                            1,
-                            999,
-                            349,
-                            'https://i.ibb.co/3RTxMGR/x2-flowers.png',
-                            'Double Flower Quantity',
-                            '',
-                        );
-                    }
-                }
+                addMultipleToCart(
+                    [
+                        'special__vase',
+                        'special__vase',
+                        1,
+                        999,
+                        199,
+                        'https://i.ibb.co/QjvwMwP/image.png',
+                        'Minimal Flower Vase',
+                        ''
+                    ],
+                    [
+                        'special__double',
+                        'special__double',
+                        1,
+                        999,
+                        349,
+                        'https://i.ibb.co/3RTxMGR/x2-flowers.png',
+                        'Double Flower Quantity',
+                        ''
+                    ],
+                )
             }
         }
 
@@ -474,9 +471,6 @@ export default function Page({ params }) {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
-
-
-    console.log(reviews);
 
     return (
         <>
@@ -1200,7 +1194,7 @@ export default function Page({ params }) {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col justify-start items-start w-full h-[24.7rem] overflow-y-scroll select-none">
+                                <div className="flex flex-col justify-start items-start w-full h-[24.7rem] overflow-y-scroll select-none space-y-2 sm:space-y-2 md:space-y-0 lg:space-y-0 xl:space-y-2">
                                     {approvedReviews.map((review) => {
                                         return <div key={review._id} className="flex justify-start items-start w-full h-full p-2 bg-white hover:bg-[#f7f7f7] no-outline space-x-2">
                                             <div className="flex justify-start items-start w-20 h-full rounded-md overflow-hidden">
@@ -1215,12 +1209,12 @@ export default function Page({ params }) {
                                             <div className="flex flex-col justify-start items-start w-full h-auto no-outline space-y-2">
                                                 <div className="flex flex-col justify-start items-center w-full h-auto text-left leading-snug">
                                                     <div className="flex justify-start items-center w-full">
-                                                        <p className="line-clamp-2 text-ellipsis text-[#191919] font-semibold leading-none">
+                                                        <p className="line-clamp-2 text-ellipsis text-[#191919] font-medium sm:font-medium md:font-semibold lg:font-semibold xl:font-semibold leading-none">
                                                             {review.title}
                                                         </p>
                                                     </div>
                                                     <div className="flex justify-start items-center w-full">
-                                                        <p className="line-clamp-2 text-ellipsis text-[#767676] font-medium">
+                                                        <p className="line-clamp-2 text-ellipsis text-[#767676] font-normal sm:font-normal md:font-medium lg:font-medium xl:font-medium">
                                                             &#34;{review.desc}&#34;
                                                         </p>
                                                     </div>
@@ -1411,6 +1405,21 @@ export default function Page({ params }) {
                                             </div>}
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col justify-start items-center w-full mt-8">
+                        <div className="flex justify-start items-center w-full text-xl font-bold text-[#191919] select-none">
+                            Description
+                        </div>
+
+                        <div className="block justify-center items-start w-full h-full mt-2">
+                            <div className="flex flex-col justify-start items-start w-full h-full px-2.5 py-2 bg-white border border-[#e5e5e5] rounded-lg text-[#292929] overflow-hidden">
+                                <p dangerouslySetInnerHTML={
+                                    {__html: product.desc}
+                                }>
+                                </p>
                             </div>
                         </div>
                     </div>

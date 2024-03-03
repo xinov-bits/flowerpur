@@ -13,7 +13,7 @@ export async function POST(req) {
             let p = new Product({
                 title: res[i].title,
                 slug: res[i].slug,
-                // desc: res[i].desc,
+                desc: res[i].desc,
                 dimg: res[i].dimg,
                 img1: res[i].img1,
                 img2: res[i].img2,

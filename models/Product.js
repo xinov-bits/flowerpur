@@ -5,7 +5,7 @@ const ProductSchema = new mongoose.Schema({
     title: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
 
-    // desc: { type: String, required: true },
+    desc: { type: String, required: true },
 
     dimg: { type: String, required: true },
     img1: { type: String, required: true },
@@ -21,7 +21,7 @@ const ProductSchema = new mongoose.Schema({
 
     sku: { type: Number, required: true, unique: true },
 
-    offer: { type: Number, required: true, unique: false, default: ' ' },
+    offer: { type: String, required: false, unique: false, default: ' ' },
 
 }, { timestamps: true });
 

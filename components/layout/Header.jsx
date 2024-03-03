@@ -2,7 +2,7 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext, createContext } from 'react'
-import { useCookies } from 'react-cookie'; // Import useCookies hook
+import { getCookie, getCookies, hasCookie, setCookie } from 'cookies-next'
 
 // NEXT JS
 import Image from 'next/image';
@@ -29,6 +29,7 @@ import UserContext from '@/context/UserContext';
 import Cart from './Cart';
 
 const Header = () => {
+    // USE CONTEXT
     const {
         cart,
         subTotal,
@@ -43,73 +44,70 @@ const Header = () => {
         isCartOpenATC,
         setIsCartOpenATC,
     } = useContext(CartContext);
-
     const {
         user,
         isUserSignedIn,
     } = useContext(UserContext);
 
-    // const [address, setAddress] = useState('');
-    // const [pincodes, setPincodes] = useState([]);
-    // const [userAddressState, setUserAddressState] = useState('');
-    // const [cookies, setCookie] = useCookies();
-    // const [isSelectLocationMenuOpen, setIsSelectLocationMenuOpen] = useState(false);
-
-    // const addAddressToCookie = (data) => {
-    //     setCookie('user_pincode', data, { secure: true });
-    //     setAddress(data);
-    // };
-
-    // const addStateToCookie = (data) => {
-    //     setCookie('user_state', data, { secure: true });
-    //     setUserAddressState(data);
-    // };
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincodes`, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         });
-    //         setPincodes(response.data);
-    //     } catch (error) {
-    //         console.error('There was a problem with your fetch operation:', error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-
-    // useEffect(() => {
-    //     if (cookies.user_pincode && pincodes.length > 0) {
-    //         const pinArr = pincodes[0];
-    //         const filteredPins = pinArr?.filter((k) => k[0] === JSON.stringify(cookies.user_pincode));
-    //         if (filteredPins && filteredPins.length > 0) {
-    //             let uState = filteredPins[0][1];
-    //             addStateToCookie(uState);
-    //         } else {
-    //             console.log('No matching pins found.');
-    //         }
-    //     }
-    // }, [cookies, pincodes]);
-
-    // const handleAddressChange = (e) => {
-    //     setAddress(e.target.value);
-    // };
-
-    // const handleAddressSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     const pinArr = pincodes[0];
-
-    //     if (JSON.stringify(pinArr).includes(address)) {
-    //         addAddressToCookie(address);
-    //     }
-    // };
+    const router = useRouter();
 
 
+    // ADDRESS
+    const [address, setAddress] = useState('');
+    const [pincodes, setPincodes] = useState([]);
+    const [userAddressState, setUserAddressState] = useState('');
+    const [isSelectLocationMenuOpen, setIsSelectLocationMenuOpen] = useState(false);
+
+    const addAddressToCookie = () => {
+        setCookie('user_pincode', address)
+    };
+
+    const addStateToCookie = (data) => {
+        setCookie('user_state', data)
+
+        setUserAddressState(data);
+    };
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincodes`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setPincodes(response.data);
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value);
+    };
+
+    const handleAddressSubmit = (e) => {
+        e.preventDefault();
+
+        const pinArr = pincodes;
+
+        if (JSON.stringify(pinArr)?.includes(address)) {
+            addAddressToCookie();
+
+            const filteredPins = pincodes?.filter((k) => k[0].includes(getCookie('user_pincode')));
+
+            if (filteredPins && filteredPins.length > 0) {
+                let uState = filteredPins[0][1];
+                addStateToCookie(uState);
+            } else {
+                console.log('No matching pins found.');
+            }
+        }
+    };
+
+    // MENU ITEMS
     const menuItems = [
         {
             name: 'Home',
@@ -157,6 +155,20 @@ const Header = () => {
     // CART SIDEMENU
     const [isCartOpen, setIsCartOpen] = useState(false);
 
+
+    // SEARCH
+    const [searchKey, setSearchKey] = useState('')
+
+    const handleChangeSearch = (e) => {
+        setSearchKey(e.target.value);
+    }
+
+    const handleSubmitSearch = (e) => {
+        e.preventDefault();
+
+        router.push(`/search?keyword=${searchKey}`)
+    }
+
     return (
         <>
             <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
@@ -177,23 +189,25 @@ const Header = () => {
                     </div>
 
                     <div className="flex justify-center items-center w-[47%] h-10 space-x-2">
-                        <div className="relative flex justify-center items-center w-[40%] h-full rounded-full overflow-hidden">
-                            <button className="relative flex justify-center items-center w-full h-full cursor-pointer" htmlFor="s_location">
-                                {/* {cookies.user_pincode ? (
-                                    <div className="flex justify-start items-center w-full h-full pl-9 px-2 bg-white border border-[#e5e5e5] rounded-full font-medium appearance-none cursor-pointer hover:bg-[#f7f7f7]" name="s_location" id="selector_location">
-                                        {`${cookies.user_pincode}, ${cookies.user_state}`}
-                                    </div>
-                                ) : ( */}
-                                <div className="flex justify-start items-center w-full h-full pl-9 px-2 bg-white border border-[#e5e5e5] rounded-full font-medium appearance-none cursor-pointer hover:bg-[#f7f7f7]" name="s_location" id="selector_location">
+                        <div className="relative flex justify-center items-center w-[32%] h-full rounded-full overflow-hidden">
+                            <button className="relative flex justify-center items-center w-full h-full cursor-pointer" onClick={() => setIsSelectLocationMenuOpen(true)}>
+                                {(
+                                    getCookie('user_state') === '' ||
+                                    getCookie('user_state') === undefined ||
+                                    getCookie('user_state') === null ||
+                                    getCookie('user_pincode') === '' ||
+                                    getCookie('user_pincode') === undefined ||
+                                    getCookie('user_pincode') === null
+                                ) ? <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
                                     Select Address
                                 </div>
-                                {/* )} */}
-                                <div className="absolute left-2 flex justify-center items-center w-6 h-6 pointer-events-none">
-                                    <svg className="text-[#494949]" width={20} height={20}>
-                                        <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-world-map"></use>
-                                    </svg>
-                                </div>
-                                <div className="absolute right-2 flex justify-center items-center w-6 h-6 pointer-events-none">
+                                    :
+                                    <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
+                                        {getCookie('user_pincode')}, {getCookie('user_state')}
+                                    </div>
+                                }
+
+                                <div className="absolute right-0 flex justify-center items-center w-5 h-5 pointer-events-none">
                                     <svg className="text-[#494949]" width={20} height={20}>
                                         <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"></use>
                                     </svg>
@@ -201,8 +215,8 @@ const Header = () => {
                             </button>
                         </div>
 
-                        <div className="relative flex justify-center items-center w-[60%] h-full rounded-full overflow-hidden">
-                            <label className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search">
+                        <div className="relative flex justify-center items-center w-[68%] h-full rounded-full overflow-hidden">
+                            <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
                                 <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                                     <svg className="text-[#494949]" width={24} height={24}>
                                         <use
@@ -212,8 +226,14 @@ const Header = () => {
                                     </svg>
                                 </div>
 
-                                <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer" type="text" placeholder="Search for flowers, cakes, gifts, etc." name="search" />
-                            </label>
+                                <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
+                                    onChange={handleChangeSearch}
+                                    value={searchKey}
+                                    placeholder="Search for flowers, cakes, gifts, etc."
+                                    name="search"
+                                    type="text"
+                                />
+                            </form>
                         </div>
                     </div>
 
@@ -299,6 +319,7 @@ const Header = () => {
             </div>
 
 
+            {/* MOBILE HEADER */}
             <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#292929]">
                 <div className="flex justify-start items-center w-full h-14 py-1 px-3.5 space-x-2">
                     <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
@@ -328,7 +349,7 @@ const Header = () => {
 
                         <div className="flex justify-end items-center w-auto h-full cursor-pointer rounded-md space-x-4">
                             <div className="flex justify-center items-center w-8 h-8">
-                                <button className="z-[1] flex justify-center items-center  no-outline">
+                                <button className="z-[1] flex justify-center items-center no-outline">
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -379,8 +400,8 @@ const Header = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-start items-center w-full h-12 py-1.5 px-3.5 space-x-2 border-y border-[#e5e5e5]">
-                    <label className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search">
+                <div className="flex justify-start items-center w-full h-14 py-2 px-3.5 space-x-2 border-y border-[#e5e5e5]">
+                    <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
                         <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                             <svg className="text-[#494949]" width={24} height={24}>
                                 <use
@@ -390,8 +411,14 @@ const Header = () => {
                             </svg>
                         </div>
 
-                        <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer" type="text" placeholder="Search for flowers, cakes, gifts, etc." name="search" />
-                    </label>
+                        <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
+                            onChange={handleChangeSearch}
+                            value={searchKey}
+                            placeholder="Search for flowers, cakes, gifts, etc."
+                            name="search"
+                            type="text"
+                        />
+                    </form>
                 </div>
 
                 {/* MENU (104px) */}
@@ -426,9 +453,9 @@ const Header = () => {
 
 
             {/* SELECT LOCATION */}
-            {/* <AnimatePresence>
+            <AnimatePresence>
                 {isSelectLocationMenuOpen && (
-                    <motion.div className="fixed top-14 left-14 sm:left-14 md:left-56 lg:left-56 xl:left-56 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
+                    <motion.div className="fixed top-14 left-14 sm:left-14 md:left-52 lg:left-52 xl:left-52 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
@@ -437,7 +464,7 @@ const Header = () => {
                         onFocus={() => setIsSelectLocationMenuOpen(true)}
                     >
                         <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md
-                        after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-2 after:right-7 after:left-8 after:z-10 after:w-4 after:h-4 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
+                        after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
                             onBlur={() => setIsSelectLocationMenuOpen(false)}
                             onClick={() => setIsSelectLocationMenuOpen(true)}
                             onFocus={() => setIsSelectLocationMenuOpen(true)}>
@@ -452,7 +479,7 @@ const Header = () => {
                                             <svg className="text-[#494949]" width={24} height={24}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
                                                 ></use>
                                             </svg>
                                         </div>
@@ -467,15 +494,20 @@ const Header = () => {
                                         />
                                     </label>
 
-                                    <button className="flex justify-center items-center w-full h-9 rounded-md bg-[#eb1700] text-white font-semibold" onClick={handleAddressSubmit}>
+                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200" onClick={handleAddressSubmit}>
                                         Confirm Address
                                     </button>
+                                        :
+                                        <div className="flex justify-center items-center w-full h-9 bg-[#24543e] text-white font-semibold rounded-md duration-200 saturate-0 opacity-40">
+                                            Confirm Address
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </motion.div>
                 )}
-            </AnimatePresence> */}
+            </AnimatePresence>
         </>
     )
 }

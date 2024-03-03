@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
 
             for (let i = 0; i < b2g1freeProducts.length; i++) {
                 const product = b2g1freeProducts[i];
-                
+
                 if (product.qty % 2 === 0) {
                     b2g1freeDiscount = (product.qty * product.price) / 2
                 }
@@ -79,6 +79,9 @@ export const CartProvider = ({ children }) => {
             }
 
             subTotal += (item.price * item.qty) - (b2g1freeDiscount);
+
+            console.log(subTotal);
+
             numTotal += item.qty;
             mrptTotal += ((item.price * item.qty) * 100) / 40; // Assuming MRP calculation logic
         }
@@ -108,6 +111,52 @@ export const CartProvider = ({ children }) => {
         saveCart(newCart);
     };
 
+    // Function to add item to cart
+    const addMultipleToCart = (product1, product2) => {
+        let newCart = { ...cart }; // Create a copy of the cart state using spread syntax
+
+        if (product1[0] in cart) {
+            if (newCart[product1[0]]["qty"] <= 9) {
+                newCart[product1[0]]["qty"] = cart[product1[0]]["qty"] + 1
+            }
+            else { newCart[product1[0]]["qty"] = cart[product1[0]]["qty"] }
+        }
+        else {
+            newCart[product1[0]] = {
+                qty: product1[2],
+                availableQty: product1[3],
+                url: product1[1],
+                price: product1[4],
+                img: product1[5],
+                name: product1[6],
+                offer: product1[7]
+            }
+        }
+
+        if (product2[0] in cart) {
+            if (newCart[product2[0]]["qty"] <= 9) {
+                newCart[product2[0]]["qty"] = cart[product2[0]]["qty"] + 1
+            }
+            else { newCart[product2[0]]["qty"] = cart[product2[0]]["qty"] }
+        }
+        else {
+            newCart[product2[0]] = {
+                qty: product2[2],
+                availableQty: product2[3],
+                url: product2[1],
+                price: product2[4],
+                img: product2[5],
+                name: product2[6],
+                offer: product2[7]
+            }
+        }
+
+        setIsCartOpenATC(true);
+
+        setCart(newCart);
+        saveCart(newCart);
+    };
+
     // Function to save cart data to local storage
     const saveCart = (myCart) => {
         localStorage.setItem("cart", JSON.stringify(myCart));
@@ -122,9 +171,9 @@ export const CartProvider = ({ children }) => {
     };
 
     useEffect(() => {
-      if (subTotal === 0 && cart.length > 0) {
+        if (subTotal === 0 && cart.length > 0) {
             clearCart();
-      }
+        }
     }, [subTotal])
 
     // Function to remove item from cart
@@ -161,6 +210,7 @@ export const CartProvider = ({ children }) => {
                 favList,
                 recentView,
                 addToCart,
+                addMultipleToCart,
                 clearCart,
                 removeFromCart,
                 removeAtOnce,

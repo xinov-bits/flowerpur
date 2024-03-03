@@ -122,11 +122,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                         return (<li className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer last:border-b last:border-[#e5e5e5]" key={item.slug}>
                                             <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
-                                                    <div className="absolute top-2 right-2 sm:right-2 md:right-4 lg:right-4 xl:right-4 flex justify-center items-center w-5 h-5 bg-[#24543e] rounded-full text-white text-xs font-bold">
-                                                        {item.qty}
-                                                    </div>
-
-                                                    <Image className="flex justify-center items-center w-20 h-20 rounded-md overflow-hidden no-outline"
+                                                    <Image className="flex justify-center items-center w-[5.5rem] h-[5.5rem] rounded-md overflow-hidden no-outline"
                                                         src={item.img}
                                                         width={800}
                                                         height={800}
@@ -143,11 +139,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                         </div>
                                                     </Link>
 
-                                                    <div className="flex justify-start items-start w-full h-auto">
+                                                    {item.offer === 'buy-2-get-1-free' && <div className="flex justify-start items-start w-full h-auto">
                                                         <div className="relative flex justify-center items-center w-auto h-full px-2 py-1 leading-none bg-[#65CDE7] text-[#010E36] rounded-full text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
                                                             Buy 2 Get 1 Free
                                                         </div>
-                                                    </div>
+                                                    </div>}
 
                                                     <div className="flex justify-start items-end w-full h-auto mt-1">
                                                         ₹{(item.price) * item.qty}.00
@@ -223,7 +219,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 </ul>
 
                                 <div className="absolute z-[650] bottom-0 flex justify-center items-center w-full h-20 p-4 border-t border-[#e5e5e5]">
-                                    <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200">
+                                    {subTotal > 0 ? <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200">
                                         <div className="flex justify-start items-center w-auto h-full">
                                             Checkout
                                         </div>
@@ -231,7 +227,15 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                         <div className="flex justify-start items-center w-auto h-full">
                                             ₹{subTotal}.00
                                         </div>
-                                    </button>
+                                    </button> : <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] rounded-full text-white font-bold saturate-0 opacity-40">
+                                        <div className="flex justify-start items-center w-auto h-full">
+                                            Checkout
+                                        </div>
+
+                                        <div className="flex justify-start items-center w-auto h-full">
+                                            ₹{subTotal}.00
+                                        </div>
+                                    </button>}
                                 </div>
                             </div>
                         </div>
