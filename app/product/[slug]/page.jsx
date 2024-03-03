@@ -153,17 +153,17 @@ export default function Page({ params }) {
             console.log("Please select an image.");
             return;
         }
-    
+
         const formData = new FormData();
         formData.append('image', selectedImage);
-    
+
         try {
             setLoading(true);
             setImgSuccess(false);
             setUploadError(null);
-    
+
             const response = await axios.post('https://api.imgbb.com/1/upload?key=031494b4ce79047904f947c745421438', formData);
-    
+
             if (response.status === 200) {
                 const data = response.data;
                 setRImg(data.data.url);
@@ -223,7 +223,14 @@ export default function Page({ params }) {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const apiUrl = `${process.env.NEXT_PUBLIC_HOST}/api/getreviews?pn="${slug}"`;
+                const getReviewData = [
+                    {
+                        pn: slug
+                    }
+                ]
+
+                const apiUrl = `${process.env.NEXT_PUBLIC_HOST}/api/getreviews`;
+                // const response = await axios.get(apiUrl, getReviewData);
                 const response = await axios.get(apiUrl);
 
                 if (response.status === 200) {
