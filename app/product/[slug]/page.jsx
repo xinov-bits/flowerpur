@@ -5,7 +5,6 @@ import React, { useState, useEffect, useContext, useRef, useCallback } from 'rea
 // NEXT JS
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -34,8 +33,6 @@ import { InputField } from '@/components/core/InputField';
 
 export default function Page({ params }) {
     const slug = params.slug;
-    const router = useRouter();
-
 
     const {
         cart,
@@ -182,10 +179,6 @@ export default function Page({ params }) {
 
             console.log('Review Added Successfully!');
             setRPopup(false);
-
-            setTimeout(() => {
-                router.push(`/product/${slug}/?rdm=${~~(Math.random() * 10)}`);
-            }, 4000);
         } catch (error) {
             console.log(error);
         }
@@ -347,10 +340,8 @@ export default function Page({ params }) {
 
             if (extrasToAdd != ['', ''] && (extrasToAdd[0] !== '' || extrasToAdd[1] !== '') && (extrasToAdd[0] === '' || extrasToAdd[1] === '')) {
                 setAddExtraToCart(true);
-                console.log('01')
             } else if (extrasToAdd != ['', ''] && extrasToAdd[0] !== '' && extrasToAdd[1] !== '') {
                 setAddExtrasToCart(true);
-                console.log('02')
             }
         }, 1000);
     }
