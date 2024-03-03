@@ -218,7 +218,7 @@ export default function Page({ params }) {
         if (sumOfReviews > 0) {
             setReviewMean(sumOfReviews / reviewArr.length);
         }
-    }, [sumOfReviews, router]);
+    }, [sumOfReviews]);
 
     const calculateReviewCount = (rating) => reviewArr.filter((stars) => stars === rating).length;
 
