@@ -1258,7 +1258,7 @@ export default function Page({ params }) {
                                                                 <div className="flex justify-start items-center w-full h-full pl-8 px-3 py-2.5 rounded-full bg-[#f7f7f7] text-[#797979] font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
                                                                     <p className="block space-y-1">
                                                                         <p>
-                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {finalDeliveryType.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
+                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {finalDeliveryType?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
                                                                         </p>
                                                                         <p>
                                                                             {moment(finalDate).format('ddd')} {finalDeliveryTime}
@@ -1773,12 +1773,12 @@ export default function Page({ params }) {
                                 <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
                                     Choose delivery time &#40;{
                                         timeOfDelivery.filter((k) => {
-                                            if (k.id === finalDeliveryType.split(',')[0]) {
+                                            if (k.id === finalDeliveryType?.split(',')[0]) {
                                                 return k
                                             }
                                         }).map((k) => k)[0]['name']} — ₹{
                                         timeOfDelivery.filter((k) => {
-                                            if (k.id === finalDeliveryType.split(',')[0]) {
+                                            if (k.id === finalDeliveryType?.split(',')[0]) {
                                                 return k
                                             }
                                         }).map((k) => k)[0]['price']
@@ -1788,7 +1788,7 @@ export default function Page({ params }) {
                                 <div className="flex justify-center items-center w-full h-full mt-4">
                                     <ul className="flex flex-col justify-center items-center w-full h-full space-y-4">
                                         {timeOfDelivery.filter((k) => {
-                                            if (k.id === finalDeliveryType.split(',')[0]) {
+                                            if (k.id === finalDeliveryType?.split(',')[0]) {
                                                 return k
                                             }
                                         }).map((k) => k)[0]['type'].map((item, index) => <li key={index} className="flex justify-between items-center w-full">
@@ -1816,7 +1816,7 @@ export default function Page({ params }) {
                                         setFinalDeliveryTime(selectedDeliveryTime);
                                         setFinalDeliveryPrice(
                                             timeOfDelivery.filter((k) => {
-                                                if (k.id === finalDeliveryType.split(',')[0]) {
+                                                if (k.id === finalDeliveryType?.split(',')[0]) {
                                                     return k
                                                 }
                                             }).map((k) => k)[0]['price']
