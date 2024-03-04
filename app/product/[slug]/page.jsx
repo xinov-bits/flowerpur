@@ -1722,8 +1722,19 @@ export default function Page({ params }) {
                             </div>}
 
                             {(dateStepsDone[0] === true && dateStepsDone[1] !== true) && <div className="flex flex-col justify-center items-center w-full h-full">
-                                <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
-                                    Choose delivery type
+                                <div className="flex justify-start items-center w-full h-full">
+                                    <div className="flex justify-center items-center w-auto h-full">
+                                        <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => setDateStepsDone([false, false])}>
+                                            <svg className="flex justify-start items-center w-5 h-8" width={24} height={24} strokeWidth={2}
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
+                                        Choose delivery type
+                                    </div>
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-full mt-4">
@@ -1770,19 +1781,34 @@ export default function Page({ params }) {
                             </div>}
 
                             {dateStepsDone[1] === true && <div className="flex flex-col justify-center items-center w-full h-full">
-                                <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
-                                    Choose delivery time &#40;{
-                                        timeOfDelivery.filter((k) => {
-                                            if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
-                                                return k
+                                <div className="flex justify-start items-center w-full h-full">
+                                    <div className="flex justify-center items-center w-auto h-full">
+                                        <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => setDateStepsDone([true, false])}>
+                                            <svg className="flex justify-start items-center w-5 h-8" width={24} height={24} strokeWidth={2}
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div className="flex flex-col justify-start items-center w-full leading-none text-lg font-semibold">
+                                        <div className="flex justify-start items-center w-full"> Choose delivery time </div>
+
+                                        <div className="flex justify-start items-center w-full text-sm text-[#767676]"> 
+                                            {
+                                                timeOfDelivery.filter((k) => {
+                                                    if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
+                                                        return k
+                                                    }
+                                                }).map((k) => k)[0]['name']} — ₹{
+                                                timeOfDelivery.filter((k) => {
+                                                    if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
+                                                        return k
+                                                    }
+                                                }).map((k) => k)[0]['price']
                                             }
-                                        }).map((k) => k)[0]['name']} — ₹{
-                                        timeOfDelivery.filter((k) => {
-                                            if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
-                                                return k
-                                            }
-                                        }).map((k) => k)[0]['price']
-                                    }&#41;
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-full mt-4">
