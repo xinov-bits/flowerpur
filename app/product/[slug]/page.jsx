@@ -157,11 +157,6 @@ export default function Page({ params }) {
     // }, [selectedImage]);
 
     const handleImageUpload = useCallback(async () => {
-        // if (!selectedImage) {
-        //     console.log("Please select an image.");
-        //     return;
-        // }
-
         const formData = new FormData();
         formData.append('image', selectedImage);
 
@@ -188,7 +183,7 @@ export default function Page({ params }) {
             setLoading(false);
             setImgSuccess(true);
         }
-    }, [selectedImage, setLoading, setImgSuccess, setUploadError, setRImg]);
+    }, [selectedImage]);
 
     const onDrop = (acceptedFiles) => {
         setSelectedImage(acceptedFiles[0]);
@@ -197,8 +192,14 @@ export default function Page({ params }) {
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     useEffect(() => {
-        handleImageUpload();
-    }, [handleImageUpload]);
+        if (!(
+            selectedImage === undefined
+            || selectedImage === null
+            || selectedImage === ''
+        )) {
+            handleImageUpload();
+        }
+    }, [selectedImage]);
 
 
     const addReview = async (e) => {
@@ -1423,7 +1424,9 @@ export default function Page({ params }) {
 
                         <div className="block sm:block md:flex lg:flex xl:flex justify-center items-start w-full h-full mt-2 space-x-0 sm:space-x-0 md:space-x-4 lg:space-x-4 xl:space-x-4 space-y-4 sm:space-y-4 md:space-y-0 lg:space-y-0 xl:space-y-0">
                             <div className="flex flex-col justify-start items-start w-full sm:w-full md:w-3/5 lg:w-3/5 xl:w-3/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
-                                <div className="flex justify-center items-center w-full h-auto border-b border-[#e5e5e5]">
+                                <div className={`
+                                    flex justify-center items-center w-full h-auto ${approvedReviews.length > 0 ? 'border-b' : 'border-b-0'} border-[#e5e5e5]
+                                `}>
                                     <div className="flex flex-col justify-center items-center w-[38%] sm:w-[38%] md:w-[32%] lg:w-[32%] xl:w-[32%] h-full p-2 py-4 space-y-2">
                                         <div className="flex justify-center items-center w-full h-full text-4xl font-bold leading-none">
                                             {reviewMean.toFixed(1)}
@@ -1452,7 +1455,9 @@ export default function Page({ params }) {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col justify-start items-start w-full h-[24.7rem] overflow-y-scroll select-none space-y-2 sm:space-y-2 md:space-y-0 lg:space-y-0 xl:space-y-2">
+                                <div className={`
+                                    flex flex-col justify-start items-start w-full ${approvedReviews.length > 0 ? 'h-[24.7rem]' : 'h-auto'} overflow-y-scroll select-none space-y-2 sm:space-y-2 md:space-y-0 lg:space-y-0 xl:space-y-2
+                                `}>
                                     {approvedReviews.map((review) => {
                                         return <div key={review._id} className="flex justify-start items-start w-full h-full p-2 bg-white hover:bg-[#f7f7f7] no-outline space-x-2">
                                             <div className="flex justify-start items-start w-20 h-full rounded-md overflow-hidden">
@@ -1794,7 +1799,7 @@ export default function Page({ params }) {
                                     <div className="flex flex-col justify-start items-center w-full leading-none text-lg font-semibold">
                                         <div className="flex justify-start items-center w-full"> Choose delivery time </div>
 
-                                        <div className="flex justify-start items-center w-full text-sm text-[#767676]"> 
+                                        <div className="flex justify-start items-center w-full text-sm text-[#767676]">
                                             {
                                                 timeOfDelivery.filter((k) => {
                                                     if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
