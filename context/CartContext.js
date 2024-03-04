@@ -90,7 +90,7 @@ export const CartProvider = ({ children }) => {
     };
 
     // Function to add item to cart
-    const addToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
+    const addToCart = (itemCode, url, qty, availableQty, price, img, name, offer, deliveryOptions) => {
         let newCart = { ...cart }; // Create a copy of the cart state using spread syntax
 
         if (itemCode in cart) {
@@ -100,7 +100,7 @@ export const CartProvider = ({ children }) => {
             else { newCart[itemCode]["qty"] = cart[itemCode]["qty"] }
         }
         else {
-            newCart[itemCode] = { qty: qty, availableQty, url, price, img, name, offer }
+            newCart[itemCode] = { qty: qty, availableQty, url, price, img, name, offer, deliveryOptions }
         }
 
         setIsCartOpenATC(true);
@@ -127,7 +127,7 @@ export const CartProvider = ({ children }) => {
                 price: product1[4],
                 img: product1[5],
                 name: product1[6],
-                offer: product1[7]
+                offer: product1[7],
             }
         }
 
@@ -157,7 +157,9 @@ export const CartProvider = ({ children }) => {
 
     // Function to save cart data to local storage
     const saveCart = (myCart) => {
-        localStorage.setItem("cart", JSON.stringify(myCart));
+        const encCart = CryptoJS.AES.encrypt(JSON.stringify(myCart), 'cart').toString();
+
+        localStorage.setItem("cart", encCart);
 
         calculateCartTotals(myCart); // Recalculate totals after saving
     };

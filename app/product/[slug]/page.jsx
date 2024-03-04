@@ -371,7 +371,7 @@ export default function Page({ params }) {
     const [addExtraToCart, setAddExtraToCart] = useState(false);
     const [addExtrasToCart, setAddExtrasToCart] = useState(false);
 
-    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
+    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer, deliveryOptions) => {
         setCartLoading(true);
 
         setTimeout(() => {
@@ -386,6 +386,7 @@ export default function Page({ params }) {
                 img,
                 name,
                 offer,
+                deliveryOptions
             );
 
             if (extrasToAdd != ['', ''] && (extrasToAdd[0] !== '' || extrasToAdd[1] !== '') && (extrasToAdd[0] === '' || extrasToAdd[1] === '')) {
@@ -558,41 +559,11 @@ export default function Page({ params }) {
 
     const currentDate = new Date();
 
+    const tomorrow = new Date(currentDate)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
     const nextSixMonths = new Date();
     nextSixMonths.setMonth(nextSixMonths.getMonth() + 6);
-
-    const speedOfDelivery = [
-        {
-            name: 'Express Delivery',
-            id: ['express_delivery_1', 'Express Delivery'],
-            type: 'Choose from any 5-hour slot during the day',
-            price: 19
-        },
-        {
-            name: 'Morning Delivery',
-            id: ['morning_delivery', 'Morning Delivery'],
-            type: 'Your gift is delivered between 08:00 - 10:00 AM',
-            price: 200
-        },
-        {
-            name: 'Express Delivery',
-            id: ['express_delivery_2', 'Express Delivery'],
-            type: 'Choose from any 3-hour slot during the day',
-            price: 49
-        },
-        {
-            name: 'Fixed Time Delivery',
-            id: ['fixed_time_delivery', 'Fixed Time Delivery'],
-            type: 'Choose from any 1-hour slot',
-            price: 200
-        },
-        {
-            name: 'Pre-Midnight Delivery',
-            id: ['pre_midnight_delivery', 'Pre-Midnight Delivery'],
-            type: 'Gift will be delivered any time between 10:00 PM-11:59 PM',
-            price: 249
-        }
-    ]
 
     const timeOfDelivery = [
         {
@@ -654,6 +625,57 @@ export default function Page({ params }) {
             price: 249
         }
     ]
+
+    const [showDeliveryType1, setShowDeliveryType1] = useState(false);
+    const [showDeliveryType2, setShowDeliveryType2] = useState(false);
+    const [showDeliveryType3, setShowDeliveryType3] = useState(false);
+    const [showDeliveryType4, setShowDeliveryType4] = useState(false);
+    const [showDeliveryType5, setShowDeliveryType5] = useState(false);
+
+    const [selectedTomorrow, setSelectedTomorrow] = useState(currentDate);
+
+    // UNCOMMENT LATER
+    // useEffect(() => {
+    //     const parsedDate = moment(currentDate);
+    //     const hourOfDay = parsedDate.hour();
+
+    //     if (hourOfDay >= 22) {
+    //         setSelectedTomorrow(tomorrow);
+    //     }
+    // }, [])
+
+    const currentHour = moment(currentDate).hour();
+
+    useEffect(() => {
+        const parsedDate = moment(finalDate);
+        const hourOfDay = parsedDate.hour();
+
+        if (hourOfDay <= 9) {
+            setShowDeliveryType1(true);
+        }
+        if (hourOfDay <= 10) {
+            setShowDeliveryType2(true);
+        }
+        if (hourOfDay <= 8) {
+            setShowDeliveryType3(true);
+        }
+        if (hourOfDay <= 10) {
+            setShowDeliveryType4(true);
+        }
+        if (hourOfDay < 24) {
+            setShowDeliveryType5(true);
+        }
+        if (hourOfDay > 24) {
+            setSelectedTomorrow(tomorrow);
+        }
+    }, [finalDate, currentHour])
+
+
+    console.log(
+        moment(selectedTomorrow).format('DD MM YYYY hh A'),
+        moment(selectedTomorrow).format('DD MM YYYY hh A') === moment(currentDate).format('DD MM YYYY hh A'),
+        moment(currentDate).format('DD MM YYYY hh A')
+    )
 
     return (
         <>
@@ -1322,6 +1344,12 @@ export default function Page({ params }) {
                                                     product.dimg,
                                                     product.title,
                                                     product.offer,
+                                                    {
+                                                        date: finalDate,
+                                                        type: finalDeliveryType,
+                                                        time: finalDeliveryTime,
+                                                        price: finalDeliveryPrice,
+                                                    }
                                                 )}>
                                                 <div>
                                                     Add to cart
@@ -1392,6 +1420,12 @@ export default function Page({ params }) {
                                                             product.dimg,
                                                             product.title,
                                                             product.offer,
+                                                            {
+                                                                date: finalDate,
+                                                                type: finalDeliveryType,
+                                                                time: finalDeliveryTime,
+                                                                price: finalDeliveryPrice,
+                                                            }
                                                         )}>
                                                         <div>
                                                             Add to cart
@@ -1472,7 +1506,7 @@ export default function Page({ params }) {
                                             <div className="flex flex-col justify-start items-start w-full h-auto no-outline space-y-2">
                                                 <div className="flex flex-col justify-start items-center w-full h-auto text-left leading-snug">
                                                     <div className="flex justify-start items-center w-full">
-                                                        <p className="line-clamp-2 text-ellipsis text-[#191919] font-medium sm:font-medium md:font-semibold lg:font-semibold xl:font-semibold leading-none">
+                                                        <p className="pb-1 text-[#191919] font-medium sm:font-medium md:font-semibold lg:font-semibold xl:font-semibold leading-none">
                                                             {review.title}
                                                         </p>
                                                     </div>
@@ -1503,7 +1537,8 @@ export default function Page({ params }) {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
+                            {/* POST REVIEW */}
+                            <div className="hidden flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
                                 <div className="flex justify-start items-center w-full p-2 border-b border-[#e5e5e5] text-base font-semibold text-[#191919] select-none">
                                     Post Review
                                 </div>
@@ -1669,20 +1704,20 @@ export default function Page({ params }) {
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                    </div>
 
-                    <div className="flex flex-col justify-start items-center w-full mt-8">
-                        <div className="flex justify-start items-center w-full text-xl font-bold text-[#191919] select-none">
-                            Description
-                        </div>
+                            {/* DESCRIPTION */}
+                            <div className="flex flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
+                                <div className="flex justify-start items-center w-full p-2.5 text-xl font-bold text-[#191919] select-none leading-none border-b border-[#e5e5e5]">
+                                    Description
+                                </div>
 
-                        <div className="block justify-center items-start w-full h-full mt-2">
-                            <div className="flex flex-col justify-start items-start w-full h-full px-2.5 py-2 bg-white border border-[#e5e5e5] rounded-lg text-[#292929] overflow-hidden">
-                                <p dangerouslySetInnerHTML={
-                                    { __html: product.desc }
-                                }>
-                                </p>
+                                <div className="block justify-center items-start w-full h-[16rem] px-2.5 py-2 overflow-y-auto">
+                                    <div className="flex flex-col justify-start items-start w-full h-full text-[#292929]">
+                                        <p className="text-justify">
+                                            {product.desc}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1694,7 +1729,7 @@ export default function Page({ params }) {
             {/* SELECT LOCATION */}
             <AnimatePresence>
                 {isSelectDateOpen && (
-                    <motion.div className="fixed top-0 left-0 flex justify-center items-center w-full h-full px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0 z-[600] text-[#292929]"
+                    <motion.div className="fixed top-0 left-0 flex justify-center items-center w-full h-full px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0 z-[600] text-[#292929] select-none"
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
@@ -1711,7 +1746,7 @@ export default function Page({ params }) {
                                     <Calendar
                                         onChange={onChange}
                                         value={selectedDate}
-                                        minDate={currentDate}
+                                        minDate={selectedTomorrow}
                                         maxDate={nextSixMonths}
                                     />
                                 </div>
@@ -1743,15 +1778,15 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-full mt-4">
-                                    <ul className="flex flex-col justify-center items-center w-full h-full space-y-4">
-                                        {speedOfDelivery.map((k, index) => <li key={index} className="flex justify-between items-center w-full">
-                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={k.id[0]}>
+                                    <ul className="flex flex-col justify-center items-start w-full h-auto space-y-4">
+                                        {showDeliveryType1 && <li className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={'express_delivery_1'}>
                                                 <div className="flex justify-start items-center w-[80%] h-full">
                                                     <input className="flex justify-start items-center w-4 h-4 no-outline"
                                                         type="radio"
                                                         name="type_option"
-                                                        id={k.id[0]}
-                                                        value={k.id}
+                                                        id={'express_delivery_1'}
+                                                        value={['express_delivery_1', 'Express Delivery']}
                                                         onChange={(e) => {
                                                             setSelectedDeliveryType(e.target.value)
                                                         }}
@@ -1759,19 +1794,135 @@ export default function Page({ params }) {
 
                                                     <div className="flex flex-col justify-start items-center w-full h-full ml-2">
                                                         <div className="flex justify-start items-center w-full h-full font-semibold">
-                                                            {k.name}
+                                                            Express Delivery
                                                         </div>
                                                         <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
-                                                            {k.type}
+                                                            Choose from any 5-hour slot during the day
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
-                                                    ₹{k.price}
+                                                    ₹19
                                                 </div>
                                             </label>
-                                        </li>)}
+                                        </li>}
+
+                                        {showDeliveryType2 && <li className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={'morning_delivery'}>
+                                                <div className="flex justify-start items-center w-[80%] h-full">
+                                                    <input className="flex justify-start items-center w-4 h-4 no-outline"
+                                                        type="radio"
+                                                        name="type_option"
+                                                        id={'morning_delivery'}
+                                                        value={['morning_delivery', 'Morning Delivery']}
+                                                        onChange={(e) => {
+                                                            setSelectedDeliveryType(e.target.value)
+                                                        }}
+                                                    />
+
+                                                    <div className="flex flex-col justify-start items-center w-full h-full ml-2">
+                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                            Morning Delivery
+                                                        </div>
+                                                        <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
+                                                            Your gift is delivered between 08:00 - 10:00 AM
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                    ₹200
+                                                </div>
+                                            </label>
+                                        </li>}
+
+                                        {showDeliveryType3 && <li className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={'express_delivery_2'}>
+                                                <div className="flex justify-start items-center w-[80%] h-full">
+                                                    <input className="flex justify-start items-center w-4 h-4 no-outline"
+                                                        type="radio"
+                                                        name="type_option"
+                                                        id={'express_delivery_2'}
+                                                        value={['express_delivery_2', 'Express Delivery']}
+                                                        onChange={(e) => {
+                                                            setSelectedDeliveryType(e.target.value)
+                                                        }}
+                                                    />
+
+                                                    <div className="flex flex-col justify-start items-center w-full h-full ml-2">
+                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                            Express Delivery
+                                                        </div>
+                                                        <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
+                                                            Choose from any 3-hour slot during the day
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                    ₹49
+                                                </div>
+                                            </label>
+                                        </li>}
+
+                                        {showDeliveryType4 && <li className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={'fixed_time_delivery'}>
+                                                <div className="flex justify-start items-center w-[80%] h-full">
+                                                    <input className="flex justify-start items-center w-4 h-4 no-outline"
+                                                        type="radio"
+                                                        name="type_option"
+                                                        id={'fixed_time_delivery'}
+                                                        value={['fixed_time_delivery', 'Fixed Time Delivery']}
+                                                        onChange={(e) => {
+                                                            setSelectedDeliveryType(e.target.value)
+                                                        }}
+                                                    />
+
+                                                    <div className="flex flex-col justify-start items-center w-full h-full ml-2">
+                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                            Fixed Time Delivery
+                                                        </div>
+                                                        <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
+                                                            Choose from any 1-hour slot
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                    ₹200
+                                                </div>
+                                            </label>
+                                        </li>}
+
+                                        {showDeliveryType5 && <li className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={'pre_midnight_delivery'}>
+                                                <div className="flex justify-start items-center w-[80%] h-full">
+                                                    <input className="flex justify-start items-center w-4 h-4 no-outline"
+                                                        type="radio"
+                                                        name="type_option"
+                                                        id={'pre_midnight_delivery'}
+                                                        value={['pre_midnight_delivery', 'Pre-Midnight Delivery']}
+                                                        onChange={(e) => {
+                                                            setSelectedDeliveryType(e.target.value)
+                                                        }}
+                                                    />
+
+                                                    <div className="flex flex-col justify-start items-center w-full h-full ml-2">
+                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                            Pre-Midnight Delivery
+                                                        </div>
+                                                        <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
+                                                            Gift will be delivered any time between 10:00 PM-11:59 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                    ₹249
+                                                </div>
+                                            </label>
+                                        </li>}
                                     </ul>
                                 </div>
 
@@ -1785,7 +1936,7 @@ export default function Page({ params }) {
                                 </div>
                             </div>}
 
-                            {dateStepsDone[1] === true && <div className="flex flex-col justify-center items-center w-full h-full">
+                            {dateStepsDone[1] === true && <div className="flex flex-col justify-center w-full h-full">
                                 <div className="flex justify-start items-center w-full h-full">
                                     <div className="flex justify-center items-center w-auto h-full">
                                         <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => setDateStepsDone([true, false])}>
@@ -1816,14 +1967,28 @@ export default function Page({ params }) {
                                     </div>
                                 </div>
 
-                                <div className="flex justify-center items-center w-full h-full mt-4">
-                                    <ul className="flex flex-col justify-center items-center w-full h-full space-y-4">
+                                <div className="flex justify-center items-start w-full h-auto mt-4">
+                                    <ul className="block justify-center items-start w-full h-auto max-h-[25rem] space-y-4 overflow-y-auto">
                                         {timeOfDelivery.filter((k) => {
                                             if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
                                                 return k
                                             }
-                                        }).map((k) => k)[0]['type'].map((item, index) => <li key={index} className="flex justify-between items-center w-full">
-                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={item}>
+                                        }).map((k) => k)[0]['type'].filter((u) => {
+                                            if (moment(selectedTomorrow).format('DD MM YYYY hh A') === moment(currentDate).format('DD MM YYYY hh A')) {
+                                                let parsedDate = moment(currentDate);
+                                                let hourOfDay = parsedDate.hour();
+
+                                                console.log(parseInt(u.slice(0, 2)) >= hourOfDay);
+
+                                                if (parseInt(u.slice(0, 2)) >= hourOfDay) {
+                                                    return u
+                                                }
+                                            }
+                                            else {
+                                                return u
+                                            }
+                                        }).map((item, index) => <li key={index} className="flex justify-between items-start w-full h-auto">
+                                            <label className="relative flex justify-start items-start w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={item}>
                                                 <div className="flex justify-start items-center w-[80%] h-full">
                                                     <input className="flex justify-start items-center w-4 h-4 no-outline"
                                                         type="radio"
