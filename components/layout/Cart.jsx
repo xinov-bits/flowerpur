@@ -219,23 +219,28 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 </ul>
 
                                 <div className="absolute z-[650] bottom-0 flex justify-center items-center w-full h-20 p-4 border-t border-[#e5e5e5]">
-                                    {subTotal > 0 ? <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200">
-                                        <div className="flex justify-start items-center w-auto h-full">
-                                            Checkout
-                                        </div>
+                                    {subTotal > 0 ? <Link href="/cart/checkout" className="flex justify-center items-center w-full h-full">
+                                        <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200">
+                                            <div className="flex justify-start items-center w-auto h-full">
+                                                Checkout
+                                            </div>
 
-                                        <div className="flex justify-start items-center w-auto h-full">
-                                            ₹{subTotal}.00
-                                        </div>
-                                    </button> : <button className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] rounded-full text-white font-bold saturate-0 opacity-40">
-                                        <div className="flex justify-start items-center w-auto h-full">
-                                            Checkout
-                                        </div>
+                                            <div className="flex justify-start items-center w-auto h-full">
+                                                ₹{subTotal}.00
+                                            </div>
+                                        </button>
+                                    </Link>
+                                        :
+                                        <div className="flex justify-between items-center w-full h-full px-4 bg-[#24543e] rounded-full text-white font-bold saturate-0 opacity-40">
+                                            <div className="flex justify-start items-center w-auto h-full">
+                                                Checkout
+                                            </div>
 
-                                        <div className="flex justify-start items-center w-auto h-full">
-                                            ₹{subTotal}.00
+                                            <div className="flex justify-start items-center w-auto h-full">
+                                                ₹{subTotal}.00
+                                            </div>
                                         </div>
-                                    </button>}
+                                    }
                                 </div>
                             </div>
                         </div>

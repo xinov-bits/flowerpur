@@ -36,7 +36,7 @@ body {
 }
 @media (max-width: 768px) {
   body {
-    margin-top: 174px !important;
+    margin-top: 164px !important;
   }
 }
 @media (min-width: 1024px) {
@@ -151,4 +151,24 @@ input[type="number"]::-webkit-outer-spin-button {
   100% {
     left: 10rem;
   }
+}
+
+
+.no_date_icon[type="date"]::-webkit-inner-spin-button,
+.no_date_icon[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+
+
+/* REACT CALENDAR */
+.react-calendar {
+  width: 100% !important;
+  border: 0px !important;
+  border-radius: 8px !important;
+}
+.react-calendar__navigation__next2-button,
+.react-calendar__navigation__prev2-button {
+  display: none !important;
 }

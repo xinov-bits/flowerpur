@@ -80,8 +80,6 @@ export const CartProvider = ({ children }) => {
 
             subTotal += (item.price * item.qty) - (b2g1freeDiscount);
 
-            console.log(subTotal);
-
             numTotal += item.qty;
             mrptTotal += ((item.price * item.qty) * 100) / 40; // Assuming MRP calculation logic
         }

@@ -28,6 +28,9 @@ import UserContext from '@/context/UserContext';
 // COMPONENTS
 import Cart from './Cart';
 
+// MOMENT JS
+import moment from 'moment';
+
 const Header = () => {
     // USE CONTEXT
     const {
@@ -169,6 +172,20 @@ const Header = () => {
         router.push(`/search?keyword=${searchKey}`)
     }
 
+
+    // USER
+    function generateGreetings() {
+        const hour = moment().hour();
+
+        if (hour > 16) {
+            return "evening";
+        } else if (hour > 11) {
+            return "afternoon";
+        }
+
+        return 'morning';
+    }
+
     return (
         <>
             <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
@@ -190,7 +207,7 @@ const Header = () => {
 
                     <div className="flex justify-center items-center w-[47%] h-10 space-x-2">
                         <div className="relative flex justify-center items-center w-[32%] h-full rounded-full overflow-hidden">
-                            <button className="relative flex justify-center items-center w-full h-full cursor-pointer" onClick={() => setIsSelectLocationMenuOpen(true)}>
+                            <button className="relative flex justify-center items-center w-full h-full cursor-pointer" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
                                 {(
                                     getCookie('user_state') === '' ||
                                     getCookie('user_state') === undefined ||
@@ -238,7 +255,7 @@ const Header = () => {
                     </div>
 
                     <div className="flex justify-end items-center w-[37%] h-full">
-                        <ul className="flex justify-center items-center w-full h-full space-x-2 text-base font-semibold">
+                        <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
                             <li className="relative flex flex-col justify-center items-center w-auto h-12 px-3 bg-white hover:bg-[#f7f7f7] border-[1.5px] border-[#e5e5e5] rounded-full cursor-pointer">
                                 <svg className="w-5 h-5 text-[#797979]" width={20} height={20}>
                                     <use
@@ -252,7 +269,20 @@ const Header = () => {
                                 </div>
                             </li>
 
-                            <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-100 space-x-2">
+                            {isUserSignedIn ? <Link href="/user/orders" className="no-outline">
+                                <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full space-x-1 cursor-pointer hover:bg-[#f7f7f7]">
+                                    <svg className="text-[#797979]" width={26} height={26}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
+                                        ></use>
+                                    </svg>
+
+                                    <div className="flex justify-center items-center w-full space-x-2 capitalize">
+                                        {generateGreetings()}, {!(user === undefined || user === null || user === '') ? JSON.parse(user)[0] : ''}
+                                    </div>
+                                </li>
+                            </Link> : <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-200 space-x-1">
                                 <svg className="text-[#797979]" width={26} height={26}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -273,7 +303,7 @@ const Header = () => {
                                         </button>
                                     </Link>
                                 </div>
-                            </li>
+                            </li>}
 
                             <li className="flex justify-center items-center w-[4.5rem] h-10 cursor-pointer">
                                 <button className="relative flex justify-center items-center w-full h-full bg-[#24543e] rounded-full cursor-pointer space-x-2 hover:bg-[#1C4632] overflow-hidden duration-200" onClick={() => setIsCartOpen(true)}>
@@ -486,7 +516,7 @@ const Header = () => {
 
                                         <input className="flex justify-center items-center w-full h-full pl-8 p-2 rounded-md bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none"
                                             type="number"
-                                            placeholder="Address"
+                                            placeholder="Pincode"
                                             name="address_input"
                                             id="address_input"
                                             onChange={handleAddressChange}

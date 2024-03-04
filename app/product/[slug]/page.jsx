@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react'
+import { getCookie, getCookies, hasCookie, setCookie, deleteCookie } from 'cookies-next'
 
 // NEXT JS
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -31,9 +33,11 @@ import { useDropzone } from 'react-dropzone'
 // COMPONENTS
 import { InputField } from '@/components/core/InputField';
 
-export default function Page({ params }) {
-    const slug = params.slug;
+// REACT CALENDAR
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
+export default function Page({ params }) {
     const {
         cart,
         subTotal,
@@ -49,6 +53,9 @@ export default function Page({ params }) {
         isCartOpenATC,
         setIsCartOpenATC,
     } = useContext(CartContext);
+
+    const slug = params.slug;
+    const router = useRouter();
 
 
     // GET PRODUCTS
@@ -150,10 +157,10 @@ export default function Page({ params }) {
     // }, [selectedImage]);
 
     const handleImageUpload = useCallback(async () => {
-        if (!selectedImage) {
-            console.log("Please select an image.");
-            return;
-        }
+        // if (!selectedImage) {
+        //     console.log("Please select an image.");
+        //     return;
+        // }
 
         const formData = new FormData();
         formData.append('image', selectedImage);
@@ -471,6 +478,181 @@ export default function Page({ params }) {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
+
+
+    // ADDRESS
+    const [address, setAddress] = useState('');
+    const [pincodes, setPincodes] = useState([]);
+    const [userAddressState, setUserAddressState] = useState('');
+    const [isSelectLocationMenuOpen, setIsSelectLocationMenuOpen] = useState(false);
+    const [isSelectDateOpen, setIsSelectDateOpen] = useState(false);
+
+    const addAddressToCookie = () => {
+        setCookie('user_pincode', address)
+    };
+
+    const addStateToCookie = (data) => {
+        setCookie('user_state', data)
+
+        setUserAddressState(data);
+    };
+
+    const fetchPincodeData = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincodes`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setPincodes(response.data);
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchPincodeData();
+    }, []);
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value);
+    };
+
+    const handleAddressSubmit = (e) => {
+        e.preventDefault();
+
+        const pinArr = pincodes;
+
+        if (JSON.stringify(pinArr)?.includes(address)) {
+            addAddressToCookie();
+
+            const filteredPins = pincodes?.filter((k) => k[0].includes(getCookie('user_pincode')));
+
+            if (filteredPins && filteredPins.length > 0) {
+                let uState = filteredPins[0][1];
+                addStateToCookie(uState);
+            } else {
+                console.log('No matching pins found.');
+            }
+        }
+    };
+
+
+    // DATE & TIME
+    const [dateStepsDone, setDateStepsDone] = useState([false, false])
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [finalDate, setFinalDate] = useState('');
+
+    const [selectedDeliveryType, setSelectedDeliveryType] = useState([]);
+    const [finalDeliveryType, setFinalDeliveryType] = useState([]);
+
+    const [selectedDeliveryTime, setSelectedDeliveryTime] = useState(new Date());
+    const [finalDeliveryTime, setFinalDeliveryTime] = useState('');
+
+    const [finalDeliveryPrice, setFinalDeliveryPrice] = useState('');
+
+    const onChange = (newDate) => {
+        setSelectedDate(newDate);
+    };
+
+    const currentDate = new Date();
+
+    const nextSixMonths = new Date();
+    nextSixMonths.setMonth(nextSixMonths.getMonth() + 6);
+
+    const speedOfDelivery = [
+        {
+            name: 'Express Delivery',
+            id: ['express_delivery_1', 'Express Delivery'],
+            type: 'Choose from any 5-hour slot during the day',
+            price: 19
+        },
+        {
+            name: 'Morning Delivery',
+            id: ['morning_delivery', 'Morning Delivery'],
+            type: 'Your gift is delivered between 08:00 - 10:00 AM',
+            price: 200
+        },
+        {
+            name: 'Express Delivery',
+            id: ['express_delivery_2', 'Express Delivery'],
+            type: 'Choose from any 3-hour slot during the day',
+            price: 49
+        },
+        {
+            name: 'Fixed Time Delivery',
+            id: ['fixed_time_delivery', 'Fixed Time Delivery'],
+            type: 'Choose from any 1-hour slot',
+            price: 200
+        },
+        {
+            name: 'Pre-Midnight Delivery',
+            id: ['pre_midnight_delivery', 'Pre-Midnight Delivery'],
+            type: 'Gift will be delivered any time between 10:00 PM-11:59 PM',
+            price: 249
+        }
+    ]
+
+    const timeOfDelivery = [
+        {
+            name: 'Express Delivery',
+            id: 'express_delivery_1',
+            type: [
+                '09:00 - 12:00 hrs',
+                '12:00 - 17:00 hrs',
+                '16:00 - 21:00 hrs',
+                '17:00 - 23:00 hrs',
+            ],
+            price: 19
+        },
+        {
+            name: 'Morning Delivery',
+            id: 'morning_delivery',
+            type: [
+                '08:00 - 10:00 hrs',
+            ],
+            price: 200
+        },
+        {
+            name: 'Express Delivery',
+            id: 'express_delivery_2',
+            type: [
+                '08:00 - 13:00 hrs',
+                '12:00 - 15:00 hrs',
+                '15:00 - 18:00 hrs',
+                '18:00 - 21:00 hrs',
+                '19:00 - 23:00 hrs',
+            ],
+            price: 49
+        },
+        {
+            name: 'Fixed Time Delivery',
+            id: 'fixed_time_delivery',
+            type: [
+                '10:00 - 11:00 hrs',
+                '11:00 - 12:00 hrs',
+                '12:00 - 13:00 hrs',
+                '13:00 - 14:00 hrs',
+                '14:00 - 15:00 hrs',
+                '15:00 - 16:00 hrs',
+                '16:00 - 17:00 hrs',
+                '17:00 - 18:00 hrs',
+                '18:00 - 19:00 hrs',
+                '19:00 - 20:00 hrs',
+                '20:00 - 21:00 hrs',
+                '21:00 - 22:00 hrs',
+            ],
+            price: 200
+        },
+        {
+            name: 'Pre-Midnight Delivery',
+            id: 'pre_midnight_delivery',
+            type: [
+                '23:00 - 23:59 hrs',
+            ],
+            price: 249
+        }
+    ]
 
     return (
         <>
@@ -923,11 +1105,11 @@ export default function Page({ params }) {
 
                                 <div className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg border-t border-[#e5e5e5] text-[#191919]">
                                     <div className="flex justify-start items-center w-full font-semibold">
-                                        Additions & Address
+                                        Additions, Address and Date & Time
                                     </div>
 
-                                    <div className="flex justify-start items-center w-full mt-2 space-x-4 select-none">
-                                        <button className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-md cursor-pointer">
+                                    <div className="block sm:block md:flex lg:flex xl:flex justify-start items-start w-full mt-2 space-x-0 sm:space-x-0 md:space-x-4 lg:space-x-4 xl:space-x-4 space-y-4 sm:space-y-4 md:space-y-0 lg:space-y-0 xl:space-y-0 select-none">
+                                        <div className="flex justify-start items-start w-full h-auto p-2 bg-white border border-[#e5e5e5] rounded-md cursor-pointer">
                                             <ul className="flex flex-col justify-start items-center w-full p-1 text-base font-semibold divide-y divide-[#e5e5e5]">
                                                 <li className="flex justify-between items-center w-full pb-2 leading-none">
                                                     <div className="flex justify-start items-center w-full">
@@ -1005,13 +1187,89 @@ export default function Page({ params }) {
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </button>
+                                        </div>
 
-                                        <button className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-md leading-none cursor-pointer">
-                                            <div className="flex justify-start items-center w-full">
+                                        <div className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-md leading-none cursor-pointer">
+                                            <div className="flex justify-start items-center w-full h-full">
+                                                <ul className="flex flex-col justify-start items-center w-full h-full p-1 text-base font-semibold divide-y divide-[#e5e5e5]">
+                                                    {!(
+                                                        getCookie('user_state') === '' ||
+                                                        getCookie('user_state') === undefined ||
+                                                        getCookie('user_state') === null ||
+                                                        getCookie('user_pincode') === '' ||
+                                                        getCookie('user_pincode') === undefined ||
+                                                        getCookie('user_pincode') === null
+                                                    ) ? <li className="flex justify-between items-center w-full h-auto leading-none">
+                                                        <button className="relative flex justify-center items-center w-full h-full px-3 py-2 bg-white border border-[#e5e5e5] rounded-full cursor-pointer no-outline">
+                                                            <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
+                                                                {getCookie('user_pincode')}, {getCookie('user_state')}
+                                                            </div>
 
+                                                            <div className="flex justify-end items-center w-auto text-sm font-medium underline text-[#767676]" onClick={() => {
+                                                                deleteCookie('user_pincode');
+                                                                deleteCookie('user_state');
+                                                                setAddress('');
+
+                                                                router.push(`?rmd=${Math.random()}`);
+                                                            }}>
+                                                                change
+                                                            </div>
+                                                        </button>
+                                                    </li>
+                                                        :
+                                                        <li className="flex justify-between items-center w-full h-auto leading-none" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
+                                                            <label className="relative flex justify-center items-center w-full h-auto" htmlFor="address_input">
+                                                                <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
+                                                                    <svg className="text-[#494949]" width={24} height={24}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </div>
+
+                                                                <input className="flex justify-center items-center w-full h-full pl-8 px-3 py-2 rounded-full bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none no-outline"
+                                                                    type="number"
+                                                                    placeholder="Pincode"
+                                                                    name="address_input"
+                                                                    id="address_input"
+                                                                    onChange={handleAddressChange}
+                                                                    value={address}
+                                                                />
+                                                            </label>
+                                                        </li>
+                                                    }
+
+                                                    <li className="flex justify-between items-center w-full h-auto mt-1.5 pt-1.5 leading-none">
+                                                        <div className="relative flex justify-center items-center w-full h-auto">
+                                                            <div className="absolute left-2 flex justify-center items-center w-5 h-5">
+                                                                <svg className="text-[#494949]" width={24} height={24}>
+                                                                    <use
+                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
+                                                                    ></use>
+                                                                </svg>
+                                                            </div>
+
+                                                            {finalDate === '' ? <div className="flex justify-start items-center w-full h-full pl-8 px-3 py-2.5 rounded-full bg-[#f7f7f7] text-[#797979] font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                Date & Time
+                                                            </div>
+                                                                :
+                                                                <div className="flex justify-start items-center w-full h-full pl-8 px-3 py-2.5 rounded-full bg-[#f7f7f7] text-[#797979] font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                    <p className="block space-y-1">
+                                                                        <p>
+                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {finalDeliveryType.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
+                                                                        </p>
+                                                                        <p>
+                                                                            {moment(finalDate).format('ddd')} {finalDeliveryTime}
+                                                                        </p>
+                                                                    </p>
+                                                                </div>}
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1417,7 +1675,7 @@ export default function Page({ params }) {
                         <div className="block justify-center items-start w-full h-full mt-2">
                             <div className="flex flex-col justify-start items-start w-full h-full px-2.5 py-2 bg-white border border-[#e5e5e5] rounded-lg text-[#292929] overflow-hidden">
                                 <p dangerouslySetInnerHTML={
-                                    {__html: product.desc}
+                                    { __html: product.desc }
                                 }>
                                 </p>
                             </div>
@@ -1425,6 +1683,212 @@ export default function Page({ params }) {
                     </div>
                 </div>
             </div>
+
+
+
+            {/* SELECT LOCATION */}
+            <AnimatePresence>
+                {isSelectDateOpen && (
+                    <motion.div className="fixed top-0 left-0 flex justify-center items-center w-full h-full px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0 z-[600] text-[#292929]"
+                        initial={{ y: -10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -10, opacity: 0 }}
+                    >
+                        <div className="absolute z-[100] flex justify-center items-center w-full h-full bg-black/20" onClick={() => setIsSelectDateOpen(false)} />
+
+                        <div className="relative z-[200] flex justify-center items-center w-full h-auto max-w-md p-4 bg-white rounded-lg border-[1.5px] border-[#e5e5e5]">
+                            {dateStepsDone[0] === false && <div className="flex flex-col justify-center items-center w-full h-full">
+                                <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
+                                    Choose delivery date
+                                </div>
+
+                                <div className="flex justify-center items-center w-full h-full mt-4 border border-[#e5e5e5] rounded-lg overflow-hidden">
+                                    <Calendar
+                                        onChange={onChange}
+                                        value={selectedDate}
+                                        minDate={currentDate}
+                                        maxDate={nextSixMonths}
+                                    />
+                                </div>
+
+                                <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
+                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                        setDateStepsDone([true, false]);
+                                        setFinalDate(selectedDate)
+                                    }}>
+                                        Continue to delivery time
+                                    </button>
+                                </div>
+                            </div>}
+
+                            {(dateStepsDone[0] === true && dateStepsDone[1] !== true) && <div className="flex flex-col justify-center items-center w-full h-full">
+                                <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
+                                    Choose delivery type
+                                </div>
+
+                                <div className="flex justify-center items-center w-full h-full mt-4">
+                                    <ul className="flex flex-col justify-center items-center w-full h-full space-y-4">
+                                        {speedOfDelivery.map((k, index) => <li key={index} className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={k.id[0]}>
+                                                <div className="flex justify-start items-center w-[80%] h-full">
+                                                    <input className="flex justify-start items-center w-4 h-4 no-outline"
+                                                        type="radio"
+                                                        name="type_option"
+                                                        id={k.id[0]}
+                                                        value={k.id}
+                                                        onChange={(e) => {
+                                                            setSelectedDeliveryType(e.target.value)
+                                                        }}
+                                                    />
+
+                                                    <div className="flex flex-col justify-start items-center w-full h-full ml-2">
+                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                            {k.name}
+                                                        </div>
+                                                        <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
+                                                            {k.type}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                    ₹{k.price}
+                                                </div>
+                                            </label>
+                                        </li>)}
+                                    </ul>
+                                </div>
+
+                                <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
+                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                        setDateStepsDone([true, true]);
+                                        setFinalDeliveryType(selectedDeliveryType);
+                                    }}>
+                                        Continue to delivery time
+                                    </button>
+                                </div>
+                            </div>}
+
+                            {dateStepsDone[1] === true && <div className="flex flex-col justify-center items-center w-full h-full">
+                                <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
+                                    Choose delivery time &#40;{
+                                        timeOfDelivery.filter((k) => {
+                                            if (k.id === finalDeliveryType.split(',')[0]) {
+                                                return k
+                                            }
+                                        }).map((k) => k)[0]['name']} — ₹{
+                                        timeOfDelivery.filter((k) => {
+                                            if (k.id === finalDeliveryType.split(',')[0]) {
+                                                return k
+                                            }
+                                        }).map((k) => k)[0]['price']
+                                    }&#41;
+                                </div>
+
+                                <div className="flex justify-center items-center w-full h-full mt-4">
+                                    <ul className="flex flex-col justify-center items-center w-full h-full space-y-4">
+                                        {timeOfDelivery.filter((k) => {
+                                            if (k.id === finalDeliveryType.split(',')[0]) {
+                                                return k
+                                            }
+                                        }).map((k) => k)[0]['type'].map((item, index) => <li key={index} className="flex justify-between items-center w-full">
+                                            <label className="relative flex justify-start items-center w-full p-2 px-2.5 bg-white hover:bg-[#f7f7f7] rounded-md border border-[#e5e5e5] cursor-pointer" htmlFor={item}>
+                                                <div className="flex justify-start items-center w-[80%] h-full">
+                                                    <input className="flex justify-start items-center w-4 h-4 no-outline"
+                                                        type="radio"
+                                                        name="time_option"
+                                                        id={item}
+                                                        value={item}
+                                                        onChange={(e) => setSelectedDeliveryTime(e.target.value)}
+                                                    />
+
+                                                    <div className="flex justify-start items-center w-full h-full ml-2 font-semibold">
+                                                        {item}
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </li>)}
+                                    </ul>
+                                </div>
+
+                                <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
+                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                        setFinalDeliveryTime(selectedDeliveryTime);
+                                        setFinalDeliveryPrice(
+                                            timeOfDelivery.filter((k) => {
+                                                if (k.id === finalDeliveryType.split(',')[0]) {
+                                                    return k
+                                                }
+                                            }).map((k) => k)[0]['price']
+                                        );
+
+                                        setIsSelectDateOpen(false);
+                                    }}>
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* SELECT LOCATION */}
+            <AnimatePresence>
+                {isSelectLocationMenuOpen && (
+                    <motion.div className="fixed bottom-56 right-10 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
+                        initial={{ y: -10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -10, opacity: 0 }}
+                        onBlur={() => setIsSelectLocationMenuOpen(false)}
+                        onClick={() => setIsSelectLocationMenuOpen(true)}
+                        onFocus={() => setIsSelectLocationMenuOpen(true)}
+                    >
+                        <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
+                            onBlur={() => setIsSelectLocationMenuOpen(false)}
+                            onClick={() => setIsSelectLocationMenuOpen(true)}
+                            onFocus={() => setIsSelectLocationMenuOpen(true)}
+                        >
+                            <div className="flex flex-col justify-start items-center w-full py-2.5">
+                                <div className="flex justify-start items-center w-full px-2.5 font-bold">
+                                    Enter Your Address
+                                </div>
+
+                                <div className="flex flex-col justify-start items-center w-full px-2.5 mt-1 space-y-2">
+                                    <label className="relative flex justify-center items-center w-full" htmlFor="address_input">
+                                        <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
+                                            <svg className="text-[#494949]" width={24} height={24}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
+                                                ></use>
+                                            </svg>
+                                        </div>
+
+                                        <input className="flex justify-center items-center w-full h-full pl-8 p-2 rounded-md bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none"
+                                            type="number"
+                                            placeholder="Pincode"
+                                            name="address_input"
+                                            id="address_input"
+                                            onChange={handleAddressChange}
+                                            value={address}
+                                        />
+                                    </label>
+
+                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200" onClick={handleAddressSubmit}>
+                                        Confirm Address
+                                    </button>
+                                        :
+                                        <div className="flex justify-center items-center w-full h-9 bg-[#24543e] text-white font-semibold rounded-md duration-200 saturate-0 opacity-40">
+                                            Confirm Address
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     )
 }
