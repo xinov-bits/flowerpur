@@ -1971,6 +1971,9 @@ export default function Page({ params }) {
                                             if (moment(selectedTomorrow).format('DD MM YYYY hh A') === moment(currentDate).format('DD MM YYYY hh A')) {
                                                 let parsedDate = moment(currentDate);
                                                 let hourOfDay = parsedDate.hour();
+                                                let minOfDay = parsedDate.minutes();
+
+                                                console.log(minOfDay);
 
                                                 let id = timeOfDelivery.filter((k) => {
                                                     if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
@@ -1979,8 +1982,14 @@ export default function Page({ params }) {
                                                 }).map((k) => k)[0].id;
 
                                                 if (id === 'fixed_time_delivery') {
-                                                    if (parseInt(u.slice(0, 2)) >= hourOfDay + 3) {
-                                                        return u
+                                                    if (minOfDay < 30) {
+                                                        if (parseInt(u.slice(0, 2)) >= hourOfDay + 2) {
+                                                            return u
+                                                        }
+                                                    } else {
+                                                        if (parseInt(u.slice(0, 2)) >= hourOfDay + 3) {
+                                                            return u
+                                                        }
                                                     }
                                                 } else {
                                                     if (parseInt(u.slice(0, 2)) >= hourOfDay) {
