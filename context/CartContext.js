@@ -31,8 +31,11 @@ export const CartProvider = ({ children }) => {
         try {
             const cartData = localStorage.getItem("cart");
             if (cartData) {
-                setCart(JSON.parse(cartData));
-                calculateCartTotals(JSON.parse(cartData)); // Update totals based on loaded cart data
+                let bytes = CryptoJS.AES.decrypt(cartData, 'cart');
+                let decCart = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+                setCart(decCart);
+                calculateCartTotals(decCart); // Update totals based on loaded cart data
             }
 
             const favListData = localStorage.getItem("favList");

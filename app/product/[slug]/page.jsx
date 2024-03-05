@@ -650,16 +650,16 @@ export default function Page({ params }) {
         const parsedDate = moment(finalDate);
         const hourOfDay = parsedDate.hour();
 
-        if (hourOfDay <= 9) {
+        if (hourOfDay <= 23) {
             setShowDeliveryType1(true);
         }
         if (hourOfDay <= 10) {
             setShowDeliveryType2(true);
         }
-        if (hourOfDay <= 8) {
+        if (hourOfDay <= 23) {
             setShowDeliveryType3(true);
         }
-        if (hourOfDay <= 10) {
+        if (hourOfDay <= 22) {
             setShowDeliveryType4(true);
         }
         if (hourOfDay < 24) {
@@ -670,12 +670,6 @@ export default function Page({ params }) {
         }
     }, [finalDate, currentHour])
 
-
-    console.log(
-        moment(selectedTomorrow).format('DD MM YYYY hh A'),
-        moment(selectedTomorrow).format('DD MM YYYY hh A') === moment(currentDate).format('DD MM YYYY hh A'),
-        moment(currentDate).format('DD MM YYYY hh A')
-    )
 
     return (
         <>
@@ -1971,17 +1965,27 @@ export default function Page({ params }) {
                                     <ul className="block justify-center items-start w-full h-auto max-h-[25rem] space-y-4 overflow-y-auto">
                                         {timeOfDelivery.filter((k) => {
                                             if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
-                                                return k
+                                                return k;
                                             }
                                         }).map((k) => k)[0]['type'].filter((u) => {
                                             if (moment(selectedTomorrow).format('DD MM YYYY hh A') === moment(currentDate).format('DD MM YYYY hh A')) {
                                                 let parsedDate = moment(currentDate);
                                                 let hourOfDay = parsedDate.hour();
 
-                                                console.log(parseInt(u.slice(0, 2)) >= hourOfDay);
+                                                let id = timeOfDelivery.filter((k) => {
+                                                    if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
+                                                        return k;
+                                                    }
+                                                }).map((k) => k)[0].id;
 
-                                                if (parseInt(u.slice(0, 2)) >= hourOfDay) {
-                                                    return u
+                                                if (id === 'fixed_time_delivery') {
+                                                    if (parseInt(u.slice(0, 2)) >= hourOfDay + 3) {
+                                                        return u
+                                                    }
+                                                } else {
+                                                    if (parseInt(u.slice(0, 2)) >= hourOfDay) {
+                                                        return u
+                                                    }
                                                 }
                                             }
                                             else {
