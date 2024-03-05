@@ -624,8 +624,13 @@ export default function Page({ params }) {
     useEffect(() => {
         const parsedDate = moment(finalDate);
         const hourOfDay = parsedDate.hour();
+        const minutesOfDay = parsedDate.minutes();
 
-        if (hourOfDay <= 23) {
+        let roundedTime = parsedDate.format('hh:mm');
+
+        console.log(roundedTime);
+
+        if (hourOfDay <= 19) {
             setShowDeliveryType1(true);
         }
         if (hourOfDay <= 10) {
@@ -640,7 +645,7 @@ export default function Page({ params }) {
         if (hourOfDay < 24) {
             setShowDeliveryType5(true);
         }
-        if (hourOfDay > 24) {
+        if (hourOfDay >= 20) {
             setSelectedTomorrow(tomorrow);
         }
     }, [finalDate, currentHour])
