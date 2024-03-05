@@ -196,10 +196,10 @@ const Header = () => {
                         <div className="flex justify-start items-center w-full h-full cursor-pointer rounded-md overflow-hidden">
                             <Link className="flex justify-start items-center w-full h-full no-outline" href={'/'}>
                                 <div className="flex justify-start items-center w-full h-full">
-                                    <svg className="flex justify-start items-center w-[95%] h-full" width={821} height={130}>
+                                    <svg className="flex justify-start items-center w-[95%] h-full" width={760} height={120}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/logo.svg#logo"
+                                            xlinkHref="/on/demandware/svg/logo.svg#logo2"
                                         ></use>
                                     </svg>
                                 </div>
@@ -353,7 +353,7 @@ const Header = () => {
 
             {/* MOBILE HEADER */}
             <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#292929]">
-                <div className="flex justify-start items-center w-full h-14 py-1 px-3.5 space-x-2">
+                <div className="flex justify-start items-center w-full h-[3.65rem] py-1.5 px-3.5 space-x-2">
                     <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
                         <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-4">
                             <div className="flex justify-center items-center w-8 h-8">
@@ -367,12 +367,12 @@ const Header = () => {
                                 </button>
                             </div>
 
-                            <div className="flex justify-center items-center w-8 h-8 text-[#085b45]">
+                            <div className="flex justify-center items-center w-[2.8rem] h-[2.8rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
                                 <Link className="no-outline" href={"/"}>
-                                    <svg className="flex justify-center items-center w-7 h-7" width={128} height={128}>
+                                    <svg className="flex justify-center items-center w-[2.8rem] h-[2.8rem]" width={95} height={106}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/logo.svg#logo_icon"
+                                            xlinkHref="/on/demandware/svg/logo.svg#logo_icon2"
                                         ></use>
                                     </svg>
                                 </Link>

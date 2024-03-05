@@ -1,8 +1,8 @@
 "use client"
 
-import { Onest } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
-const onest = Onest({ subsets: ["latin"] });
+const figtree = Figtree({ subsets: ["latin"] });
 // export const metadata = {
 //   title: "Flowerpur - Online Gift Delivery, Send Gifts Online",
 //   description: "Online Gift Delivery, Send Gifts Online",
@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={`${onest.className} overflow-x-hidden`}>
+      <body className={`${figtree.className} overflow-x-hidden`}>
         <Analytics />
 
         <GlobalProvider>

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -20,6 +21,7 @@
   outline-style: dashed;
   outline-width: 1px;
   outline-offset: 2px;
+  /* box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); */
 }
 
 .no-outline {
@@ -36,7 +38,7 @@ body {
 }
 @media (max-width: 768px) {
   body {
-    margin-top: 164px !important;
+    margin-top: 176px !important;
   }
 }
 @media (min-width: 1024px) {
@@ -58,6 +60,9 @@ body {
 
 .font_figtree {
   font-family: "Figtree", sans-serif !important;
+}
+.font_libre {
+  font-family: "Libre Baskerville", serif !important;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
