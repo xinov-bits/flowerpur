@@ -1973,28 +1973,31 @@ export default function Page({ params }) {
                                                 let hourOfDay = parsedDate.hour();
                                                 let minOfDay = parsedDate.minutes();
 
-                                                console.log(minOfDay);
-
                                                 let id = timeOfDelivery.filter((k) => {
                                                     if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
                                                         return k;
                                                     }
                                                 }).map((k) => k)[0].id;
 
-                                                if (id === 'fixed_time_delivery') {
-                                                    if (minOfDay < 30) {
-                                                        if (parseInt(u.slice(0, 2)) >= hourOfDay + 2) {
-                                                            return u
+
+                                                if (moment(finalDate).format('DD MM YYYY') === moment(currentDate).format('DD MM YYYY')) {
+                                                    if (id === 'fixed_time_delivery') {
+                                                        if (minOfDay < 30) {
+                                                            if (parseInt(u.slice(0, 2)) >= hourOfDay + 2) {
+                                                                return u
+                                                            }
+                                                        } else {
+                                                            if (parseInt(u.slice(0, 2)) >= hourOfDay + 3) {
+                                                                return u
+                                                            }
                                                         }
                                                     } else {
-                                                        if (parseInt(u.slice(0, 2)) >= hourOfDay + 3) {
+                                                        if (parseInt(u.slice(0, 2)) >= hourOfDay) {
                                                             return u
                                                         }
                                                     }
                                                 } else {
-                                                    if (parseInt(u.slice(0, 2)) >= hourOfDay) {
-                                                        return u
-                                                    }
+                                                    return u
                                                 }
                                             }
                                             else {
