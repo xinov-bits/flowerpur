@@ -104,6 +104,8 @@ const Header = () => {
             if (filteredPins && filteredPins.length > 0) {
                 let uState = filteredPins[0][1];
                 addStateToCookie(uState);
+
+                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
             } else {
                 console.log('No matching pins found.');
             }
@@ -282,7 +284,7 @@ const Header = () => {
                                         {generateGreetings()}, {!(user === undefined || user === null || user === '') ? JSON.parse(user)[0] : ''}
                                     </div>
                                 </li>
-                            </Link> : <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-200 space-x-1">
+                            </Link> : <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-75 space-x-1">
                                 <svg className="text-[#797979]" width={26} height={26}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -306,7 +308,7 @@ const Header = () => {
                             </li>}
 
                             <li className="flex justify-center items-center w-[4.5rem] h-10 cursor-pointer">
-                                <button className="relative flex justify-center items-center w-full h-full bg-[#24543e] rounded-full cursor-pointer space-x-2 hover:bg-[#1C4632] overflow-hidden duration-200" onClick={() => setIsCartOpen(true)}>
+                                <button className="relative flex justify-center items-center w-full h-full bg-[#085b45] rounded-full cursor-pointer space-x-2 hover:bg-[#09674d] active:bg-[#064434] overflow-hidden duration-75" onClick={() => setIsCartOpen(true)}>
                                     <svg className="text-white" width={22} height={22}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -365,7 +367,7 @@ const Header = () => {
                                 </button>
                             </div>
 
-                            <div className="flex justify-center items-center w-8 h-8 text-[#24543e]">
+                            <div className="flex justify-center items-center w-8 h-8 text-[#085b45]">
                                 <Link className="no-outline" href={"/"}>
                                     <svg className="flex justify-center items-center w-7 h-7" width={128} height={128}>
                                         <use
@@ -390,7 +392,7 @@ const Header = () => {
                             </div>
 
                             <div className="relative flex justify-center items-center w-8 h-8">
-                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-[15px] h-[15px] leading-none text-[10px] bg-[#24543e] rounded-full font-semibold text-white text-ellipsis overflow-hidden">
+                                <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-[15px] h-[15px] leading-none text-[10px] bg-[#085b45] rounded-full font-semibold text-white text-ellipsis overflow-hidden">
                                     {numTotal}
                                 </div>
 
@@ -524,11 +526,11 @@ const Header = () => {
                                         />
                                     </label>
 
-                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200" onClick={handleAddressSubmit}>
+                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75" onClick={handleAddressSubmit}>
                                         Confirm Address
                                     </button>
                                         :
-                                        <div className="flex justify-center items-center w-full h-9 bg-[#24543e] text-white font-semibold rounded-md duration-200 saturate-0 opacity-40">
+                                        <div className="flex justify-center items-center w-full h-9 bg-[#085b45] text-white font-semibold rounded-md saturate-0 opacity-40 cursor-default">
                                             Confirm Address
                                         </div>
                                     }

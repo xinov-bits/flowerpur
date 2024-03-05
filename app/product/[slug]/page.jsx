@@ -20,7 +20,10 @@ import { motion, AnimatePresence } from "framer-motion";
 // CONTEXT
 import CartContext from '@/context/CartContext';
 
-// SWIPER
+// SWIPER & SPLIDE
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 
@@ -92,6 +95,14 @@ export default function Page({ params }) {
         splideRef.current.go(slideIndex);
     };
 
+    const [swiper, setSwiper] = useState(null);
+
+    const handleRadioButtonClickSWIPER = (slideIndex) => {
+        if (swiper) {
+            swiper.slideTo(slideIndex);
+        }
+    };
+
     useEffect(() => {
         if (splideRef.current) {
             splideRef.current.go(0);
@@ -115,47 +126,6 @@ export default function Page({ params }) {
     const [imgSuccess, setImgSuccess] = useState(false);
     const [uploadError, setUploadError] = useState(null);
 
-    // --> REVIEW IMAGE
-    const API_KEY = '031494b4ce79047904f947c745421438';
-    const API_URL = 'https://api.imgbb.com/1/upload';
-
-    // const handleImageUpload = useCallback(async () => {
-    //     try {
-    //         if (!selectedImage) {
-    //             console.warn('Please select an image before uploading.');
-    //             return;
-    //         }
-
-    //         setLoading(true);
-    //         setImgSuccess(false);
-    //         setUploadError(null);
-
-    //         const formData = new FormData();
-    //         formData.append('image', selectedImage);
-
-    //         const response = await axios.post(API_URL, formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //             },
-    //             params: {
-    //                 key: API_KEY,
-    //             },
-    //         });
-
-    //         if (response.data.data) {
-    //             setRImg(response.data.data.url);
-    //         } else {
-    //             setUploadError('Failed to upload image. Please try again.');
-    //         }
-    //     } catch (error) {
-    //         setImgSuccess(false);
-    //         setUploadError('Error uploading image. Please try again.');
-    //     } finally {
-    //         setLoading(false);
-    //         setImgSuccess(true);
-    //     }
-    // }, [selectedImage]);
-
     const handleImageUpload = useCallback(async () => {
         const formData = new FormData();
         formData.append('image', selectedImage);
@@ -170,37 +140,28 @@ export default function Page({ params }) {
             if (response.status === 200) {
                 const data = response.data;
                 setRImg(data.data.url);
-                // console.log('Image uploaded successfully:', data);
+                setImgSuccess(true);
             } else {
                 setUploadError('Failed to upload image. Please try again.');
                 setImgSuccess(false);
-                // console.error('Failed to upload image:', response.statusText);
             }
         } catch (error) {
             setImgSuccess(false);
-            // console.error('Error occurred while uploading image:', error);
+            setUploadError('Error uploading image. Please try again.');
         } finally {
             setLoading(false);
-            setImgSuccess(true);
         }
     }, [selectedImage]);
 
-    const onDrop = (acceptedFiles) => {
-        setSelectedImage(acceptedFiles[0]);
+    const onFileChange = (e) => {
+        setSelectedImage(e.target.files[0]);
     };
 
-    const { getRootProps, getInputProps } = useDropzone({ onDrop });
-
     useEffect(() => {
-        if (!(
-            selectedImage === undefined
-            || selectedImage === null
-            || selectedImage === ''
-        )) {
+        if (selectedImage !== '') {
             handleImageUpload();
         }
-    }, [selectedImage]);
-
+    }, [selectedImage, handleImageUpload]);
 
     const addReview = async (e) => {
         e.preventDefault();
@@ -742,155 +703,122 @@ export default function Page({ params }) {
                             transition={{ delay: 0.2 }}
                             className="relative flex justify-start items-center w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none"
                         >
-                            <Splide className="flex justify-center items-center w-full h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
-                                hasTrack={false}
-                                options={{
-                                    rewind: true,
-                                    width: 550,
-                                    height: 550,
-                                    gap: '0rem',
-                                    pagination: false,
-                                    arrows: false,
-                                    loop: true,
-                                }}
-                                ref={splideRef}
+                            <Swiper
+                                className="flex justify-center items-center w-full h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
+                                slidesPerView={1}
+                                pagination={{ clickable: true }}
+                                onSwiper={setSwiper}
                             >
-                                <SplideTrack className="rounded-md overflow-hidden">
-                                    <SplideSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <Image className="flex justify-center items-center w-auto h-auto"
-                                            src={product?.img1}
-                                            width={1080}
-                                            height={1080}
-                                            alt={product?.title}
+                                {product.img1 && (
+                                    <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
+                                        <img
+                                            className="flex justify-center items-center w-auto h-auto"
+                                            src={product.img1}
+                                            alt={product.title}
                                         />
-                                    </SplideSlide>
+                                    </SwiperSlide>
+                                )}
 
-                                    <SplideSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <Image className="flex justify-center items-center w-auto h-auto"
-                                            src={product?.img2}
-                                            width={1080}
-                                            height={1080}
-                                            alt={product?.title}
+                                {product.img2 && (
+                                    <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
+                                        <img
+                                            className="flex justify-center items-center w-auto h-auto"
+                                            src={product.img2}
+                                            alt={product.title}
                                         />
-                                    </SplideSlide>
+                                    </SwiperSlide>
+                                )}
 
-                                    <SplideSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <Image className="flex justify-center items-center w-auto h-auto"
-                                            src={product?.img3}
-                                            width={1080}
-                                            height={1080}
-                                            alt={product?.title}
+                                {product.img3 && (
+                                    <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
+                                        <img
+                                            className="flex justify-center items-center w-auto h-auto"
+                                            src={product.img3}
+                                            alt={product.title}
                                         />
-                                    </SplideSlide>
-                                </SplideTrack>
-                            </Splide>
+                                    </SwiperSlide>
+                                )}
+                            </Swiper>
 
                             {/* Custom pagination */}
                             <div className="absolute z-[1] bottom-0 left-0 -m-0.5 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
-                                {(product?.img1 != '' || product?.img1 != undefined) && <div className="flex justify-center items-center">
-                                    <input
-                                        className="absolute w-10 h-10 z-50 hidden cursor-pointer"
-                                        type="radio"
-                                        value="product_image_selector-img1"
-                                        name="product_image_selector"
-                                        id="product_image_selector-img1"
-                                        onClick={() => handleRadioButtonClick(0)}
-                                    />
+                                {product.img1 && (
+                                    <div className="flex justify-center items-center">
+                                        <input
+                                            className="absolute w-10 h-10 z-50 hidden cursor-pointer"
+                                            type="radio"
+                                            value="product_image_selector-img1"
+                                            name="product_image_selector"
+                                            id="product_image_selector-img1"
+                                            onClick={() => handleRadioButtonClickSWIPER(0)}
+                                        />
 
-                                    <label
-                                        htmlFor="product_image_selector-img1"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img1"
-                                    >
-                                        {slug !== undefined && product?.img1 !== undefined ? (
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ delay: 0.8 }}
-                                            >
-                                                <Image
-                                                    className="flex justify-start items-center rounded-md"
-                                                    src={product?.img1}
-                                                    width={60}
-                                                    height={60}
-                                                    alt={product?.title}
-                                                />
-                                            </motion.div>
-                                        ) : (
-                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
-                                        )}
-                                    </label>
-                                </div>}
+                                        <label
+                                            htmlFor="product_image_selector-img1"
+                                            className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
+                                        >
+                                            <img
+                                                className="flex justify-start items-center rounded-md"
+                                                src={product.img1}
+                                                width={60}
+                                                height={60}
+                                                alt={product.title}
+                                            />
+                                        </label>
+                                    </div>
+                                )}
 
-                                {(product?.img2 != '' || product?.img2 != undefined) && <div className="flex justify-center items-center">
-                                    <input
-                                        className="absolute w-10 h-10 z-50 hidden cursor-pointer"
-                                        type="radio"
-                                        value="product_image_selector-img2"
-                                        name="product_image_selector"
-                                        id="product_image_selector-img2"
-                                        onClick={() => handleRadioButtonClick(1)}
-                                    />
+                                {product.img2 && (
+                                    <div className="flex justify-center items-center">
+                                        <input
+                                            className="absolute w-10 h-10 z-50 hidden cursor-pointer"
+                                            type="radio"
+                                            value="product_image_selector-img2"
+                                            name="product_image_selector"
+                                            id="product_image_selector-img2"
+                                            onClick={() => handleRadioButtonClickSWIPER(1)}
+                                        />
 
-                                    <label
-                                        htmlFor="product_image_selector-img2"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img2"
-                                    >
-                                        {slug !== undefined && product?.img2 !== undefined ? (
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ delay: 0.8 }}
-                                            >
-                                                <Image
-                                                    className="flex justify-start items-center rounded-md"
-                                                    src={product?.img2}
-                                                    width={60}
-                                                    height={60}
-                                                    alt={product?.title}
-                                                />
-                                            </motion.div>
-                                        ) : (
-                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
-                                        )}
-                                    </label>
-                                </div>}
+                                        <label
+                                            htmlFor="product_image_selector-img2"
+                                            className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
+                                        >
+                                            <img
+                                                className="flex justify-start items-center rounded-md"
+                                                src={product.img2}
+                                                width={60}
+                                                height={60}
+                                                alt={product.title}
+                                            />
+                                        </label>
+                                    </div>
+                                )}
 
-                                {(product?.img3 != '' || product?.img3 != undefined) && <div className="flex justify-center items-center">
-                                    <input
-                                        className="absolute w-10 h-10 z-50 hidden cursor-pointer"
-                                        type="radio"
-                                        value="product_image_selector-img3"
-                                        name="product_image_selector"
-                                        id="product_image_selector-img3"
-                                        onClick={() => handleRadioButtonClick(2)}
-                                    />
+                                {product.img3 && (
+                                    <div className="flex justify-center items-center">
+                                        <input
+                                            className="absolute w-10 h-10 z-50 hidden cursor-pointer"
+                                            type="radio"
+                                            value="product_image_selector-img3"
+                                            name="product_image_selector"
+                                            id="product_image_selector-img3"
+                                            onClick={() => handleRadioButtonClickSWIPER(2)}
+                                        />
 
-                                    <label
-                                        htmlFor="product_image_selector-img3"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img3"
-                                    >
-                                        {slug !== undefined && product?.img3 !== undefined ? (
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ delay: 0.8 }}
-                                            >
-                                                <Image
-                                                    className="flex justify-start items-center rounded-md"
-                                                    src={product?.img3}
-                                                    width={60}
-                                                    height={60}
-                                                    alt={product?.title}
-                                                />
-                                            </motion.div>
-                                        ) : (
-                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
-                                        )}
-                                    </label>
-                                </div>}
+                                        <label
+                                            htmlFor="product_image_selector-img3"
+                                            className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
+                                        >
+                                            <img
+                                                className="flex justify-start items-center rounded-md"
+                                                src={product.img3}
+                                                width={60}
+                                                height={60}
+                                                alt={product.title}
+                                            />
+                                        </label>
+                                    </div>
+                                )}
                             </div>
                         </motion.div>}
 
@@ -1020,7 +948,7 @@ export default function Page({ params }) {
 
                                     <label
                                         htmlFor="product_image_selector-img1"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img1"
+                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
                                     >
                                         {slug !== undefined && product?.img1 !== undefined ? (
                                             <motion.div
@@ -1055,7 +983,7 @@ export default function Page({ params }) {
 
                                     <label
                                         htmlFor="product_image_selector-img2"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img2"
+                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
                                     >
                                         {slug !== undefined && product?.img2 !== undefined ? (
                                             <motion.div
@@ -1090,7 +1018,7 @@ export default function Page({ params }) {
 
                                     <label
                                         htmlFor="product_image_selector-img3"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-200 focus:!outline-[0px]  product_image_selector-img3"
+                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
                                     >
                                         {slug !== undefined && product?.img3 !== undefined ? (
                                             <motion.div
@@ -1126,7 +1054,7 @@ export default function Page({ params }) {
                             className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]"
                         >
                             <div className="relative flex flex-col justify-start items-start w-full h-full border-0 sm:border-0 md:border-l lg:border-l xl:border-l border-[#e5e5e5]">
-                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
+                                <div className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
                                     {product?.category}
                                 </div>
 
@@ -1283,11 +1211,11 @@ export default function Page({ params }) {
                                                                     value={address}
                                                                 />
 
-                                                                {address !== '' ? <button className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white text-xs font-semibold rounded-full duration-200" type="submit">
+                                                                {address !== '' ? <button className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white text-xs font-semibold rounded-full duration-75" type="submit">
                                                                     Confirm
                                                                 </button>
                                                                     :
-                                                                    <div className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#24543e] text-white text-xs font-semibold rounded-full duration-200 saturate-0 opacity-40">
+                                                                    <div className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#085b45] text-white text-xs font-semibold rounded-full saturate-0 opacity-40">
                                                                         Confirm
                                                                     </div>
                                                                 }
@@ -1389,7 +1317,7 @@ export default function Page({ params }) {
                                         </div>
 
                                         <div className="flex justify-start items-center w-[72%] sm:w-[72%] md:w-[80%] lg:w-[80%] xl:w-[80%] h-full">
-                                            {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200"
+                                            {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75"
                                                 onClick={() => addProductToCart(
                                                     product.slug,
                                                     product.slug,
@@ -1409,7 +1337,7 @@ export default function Page({ params }) {
                                                 <div>
                                                     Add to cart
                                                 </div>
-                                            </button> : <button className="flex justify-center items-center w-full h-full bg-[#24543e] text-white font-semibold rounded-md duration-200">
+                                            </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-md duration-75">
                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                     <use
                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1467,7 +1395,7 @@ export default function Page({ params }) {
                                                 </div>
 
                                                 <div className="flex justify-center items-center w-[72%] h-full">
-                                                    {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200"
+                                                    {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75"
                                                         onClick={() => addProductToCart(
                                                             product.slug,
                                                             product.slug,
@@ -1487,7 +1415,7 @@ export default function Page({ params }) {
                                                         <div>
                                                             Add to cart
                                                         </div>
-                                                    </button> : <button className="flex justify-center items-center w-full h-full bg-[#24543e] text-white font-semibold rounded-md duration-200">
+                                                    </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-md duration-75">
                                                         <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                             <use
                                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1595,66 +1523,56 @@ export default function Page({ params }) {
                             </div>
 
                             {/* POST REVIEW */}
-                            <div className="hidden flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
+                            {false && <div className="flex flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
                                 <div className="flex justify-start items-center w-full p-2 border-b border-[#e5e5e5] text-base font-semibold text-[#191919] select-none">
                                     Post Review
                                 </div>
 
                                 <form className="block justify-start items-center w-full h-full space-y-5 p-2" onSubmit={addReview}>
                                     <div className="flex justify-between items-center w-full h-auto leading-none text-base font-medium text-[#191919]">
+                                        {/* IMAGE UPLOAD */}
                                         <div className="flex justify-start items-center w-full h-auto">
-                                            <div {...getRootProps({ className: 'flex justify-start items-center w-auto h-full no-outline' })}>
-                                                {loading && (
-                                                    <div>Loading...</div>
+                                            <div className="flex justify-start items-center w-auto h-full no-outline">
+                                                {loading && <div>Loading...</div>}
+
+                                                {selectedImage === '' && (
+                                                    <>
+                                                        <label htmlFor="r_image" className="flex justify-center items-center w-auto h-full px-3 py-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-full space-x-1 cursor-pointer select-none no-outline">
+                                                            <svg className="flex justify-center items-center w-4 h-4" strokeWidth={1.5} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                            </svg>
+                                                            <div> Upload Image </div>
+                                                        </label>
+                                                        <input id="r_image" type="file" accept="image/*" onChange={onFileChange} className="absolute opacity-0 pointer-events-none outline-none" />
+                                                    </>
                                                 )}
 
-                                                {selectedImage === '' && <>
-                                                    <label htmlFor="r_image" className="flex justify-center items-center w-auto h-full px-3 py-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-full space-x-1 cursor-pointer select-none no-outline">
-                                                        <svg className="flex justify-center items-center w-4 h-4" strokeWidth={1.5}
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                                        </svg>
-
-                                                        <div> Upload Image </div>
-                                                    </label>
-                                                    <input {...getInputProps({ className: 'absolute opacity-0 pointer-events-none outline-none' })} />
-                                                </>}
-
-                                                {(imgSuccess && selectedImage !== '') && <>
+                                                {imgSuccess && selectedImage !== '' && (
                                                     <div className="flex justify-center items-center w-auto h-full p-1 pr-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-full space-x-1 cursor-pointer select-none overflow-hidden">
                                                         <div className="flex justify-center items-center w-8 h-8 rounded-l-full rounded-lg overflow-hidden">
                                                             <Image className="flex justify-center items-center w-full h-full rounded-l-full rounded-lg overflow-hidden"
                                                                 src={rImg}
-                                                                width={20}
-                                                                height={20}
-                                                                alt={product.title}
+                                                                width={100}
+                                                                height={100}
+                                                                alt=""
                                                             />
                                                         </div>
-
                                                         <div className="flex justify-center items-center w-auto h-full">
                                                             Image uploaded.
                                                         </div>
-
-
-                                                        <div className="flex justify-center items-center w-6 h-6" onClick={() => {
-                                                            setRImg('')
-                                                            setSelectedImage('')
-                                                        }}>
+                                                        <div className="flex justify-center items-center w-6 h-6" onClick={() => { setRImg(''); setSelectedImage(''); }}>
                                                             <svg className="flex justify-center items-center w-4 h-4 fill-none">
                                                                 <use xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
                                                             </svg>
                                                         </div>
                                                     </div>
-                                                </>}
-
-                                                {uploadError && (
-                                                    <div>
-                                                        {uploadError}
-                                                    </div>
                                                 )}
+
+                                                {uploadError && <div>{uploadError}</div>}
                                             </div>
                                         </div>
 
+                                        {/* STARTS */}
                                         <div className="flex justify-end items-center w-full h-auto">
                                             <div className="flex justify-end items-center w-full">
                                                 <div className="flex justify-center items-center w-auto no-outline" onClick={() => setRStars(1)}>
@@ -1748,19 +1666,19 @@ export default function Page({ params }) {
                                             !rEmail.includes('@')
                                         )
                                         ) ? <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" type="submit">
+                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="submit">
                                                 Post your review
                                             </button>
                                         </div>
                                             :
                                             <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                                <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] rounded-full text-white font-bold saturate-0 opacity-40" type="button">
+                                                <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] rounded-full text-white font-bold saturate-0 opacity-40" type="button">
                                                     Post your review
                                                 </button>
                                             </div>}
                                     </div>
                                 </form>
-                            </div>
+                            </div>}
 
                             {/* DESCRIPTION */}
                             <div className="flex flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
@@ -1818,7 +1736,7 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
                                         setDateStepsDone([true, false]);
                                         setFinalDate(selectedDate)
                                     }}>
@@ -2010,14 +1928,14 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    {(selectedDeliveryType.length !== 0) ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                    {(selectedDeliveryType.length !== 0) ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
                                         setDateStepsDone([true, true]);
                                         setFinalDeliveryType(selectedDeliveryType);
                                     }}>
                                         Continue to delivery time
                                     </button>
                                         :
-                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] saturate-0 opacity-40 rounded-full text-white font-bold">
+                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] saturate-0 opacity-40 rounded-full text-white font-bold">
                                             Continue to delivery time
                                         </div>
                                     }
@@ -2130,7 +2048,7 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    {selectedDeliveryTime !== '' ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                    {selectedDeliveryTime !== '' ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
                                         setFinalDeliveryTime(selectedDeliveryTime);
                                         setFinalDeliveryPrice(
                                             timeOfDelivery.filter((k) => {
@@ -2145,7 +2063,7 @@ export default function Page({ params }) {
                                         Continue
                                     </button>
                                         :
-                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] saturate-0 opacity-40 rounded-full text-white font-bold">
+                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] saturate-0 opacity-40 rounded-full text-white font-bold">
                                             Continue to delivery time
                                         </div>
                                     }
@@ -2198,11 +2116,11 @@ export default function Page({ params }) {
                                         />
                                     </label>
 
-                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white font-semibold rounded-md duration-200" onClick={handleAddressSubmit}>
+                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75" onClick={handleAddressSubmit}>
                                         Confirm Address
                                     </button>
                                         :
-                                        <div className="flex justify-center items-center w-full h-9 bg-[#24543e] text-white font-semibold rounded-md duration-200 saturate-0 opacity-40">
+                                        <div className="flex justify-center items-center w-full h-9 bg-[#085b45] text-white font-semibold rounded-md duration-75 saturate-0 opacity-40">
                                             Confirm Address
                                         </div>
                                     }

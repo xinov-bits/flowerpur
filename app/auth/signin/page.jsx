@@ -169,11 +169,11 @@ const Page = () => {
                                             userPhone.length === 10
                                         )
                                     ) ? <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                        {!signinLoading ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" type="submit">
+                                        {!signinLoading ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="submit">
                                             Continue to Sign in
                                         </button>
                                             :
-                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" type="button">
+                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="button">
                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                     <use
                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -184,7 +184,7 @@ const Page = () => {
                                     </div>
                                         :
                                         <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] rounded-full text-white font-bold saturate-0 opacity-40" type="button">
+                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] rounded-full text-white font-bold saturate-0 opacity-40" type="button">
                                                 Continue to Sign in
                                             </button>
                                         </div>}
