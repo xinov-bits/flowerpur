@@ -17,7 +17,7 @@ export default function Home() {
                 </div>
                 <div className="flex justify-end items-center w-full mt-2 text-lg font-semibold leading-none">
                   <div className="flex justify-end items-center w-[40%]">
-                    Commend the sun's voyage with euphoric, mood-enhancing floral masterpieces.
+                    Commend the sun&#39;s voyage with euphoric, mood-enhancing floral masterpieces.
                   </div>
                 </div>
 
@@ -64,7 +64,7 @@ export default function Home() {
                 </div>
                 <div className="flex justify-center items-center w-full mt-1 text-lg font-semibold leading-tight">
                   <div className="flex justify-center items-center w-full">
-                    Commend the sun's voyage with euphoric, mood-enhancing floral masterpieces.
+                    Commend the sun&#39;s voyage with euphoric, mood-enhancing floral masterpieces.
                   </div>
                 </div>
 
