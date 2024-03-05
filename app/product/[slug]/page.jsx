@@ -371,30 +371,42 @@ export default function Page({ params }) {
     const [addExtraToCart, setAddExtraToCart] = useState(false);
     const [addExtrasToCart, setAddExtrasToCart] = useState(false);
 
+    const [buzzDateInput, setBuzzDateInput] = useState(false);
+
     const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer, deliveryOptions) => {
-        setCartLoading(true);
+        if ((
+            finalDate === ''
+            || finalDeliveryType == []
+            || finalDeliveryTime === ''
+            || finalDeliveryPrice === ''
+        )) {
+            setBuzzDateInput(true);
+        }
+        else {
+            setCartLoading(true);
 
-        setTimeout(() => {
-            setCartLoading(false);
+            setTimeout(() => {
+                setCartLoading(false);
 
-            addToCart(
-                itemCode,
-                url,
-                productQty,
-                availableQty,
-                price,
-                img,
-                name,
-                offer,
-                deliveryOptions
-            );
+                addToCart(
+                    itemCode,
+                    url,
+                    productQty,
+                    availableQty,
+                    price,
+                    img,
+                    name,
+                    offer,
+                    deliveryOptions
+                );
 
-            if (extrasToAdd != ['', ''] && (extrasToAdd[0] !== '' || extrasToAdd[1] !== '') && (extrasToAdd[0] === '' || extrasToAdd[1] === '')) {
-                setAddExtraToCart(true);
-            } else if (extrasToAdd != ['', ''] && extrasToAdd[0] !== '' && extrasToAdd[1] !== '') {
-                setAddExtrasToCart(true);
-            }
-        }, 1000);
+                if (extrasToAdd != ['', ''] && (extrasToAdd[0] !== '' || extrasToAdd[1] !== '') && (extrasToAdd[0] === '' || extrasToAdd[1] === '')) {
+                    setAddExtraToCart(true);
+                } else if (extrasToAdd != ['', ''] && extrasToAdd[0] !== '' && extrasToAdd[1] !== '') {
+                    setAddExtrasToCart(true);
+                }
+            }, 1000);
+        }
     }
 
     useEffect(() => {
@@ -533,6 +545,8 @@ export default function Page({ params }) {
             if (filteredPins && filteredPins.length > 0) {
                 let uState = filteredPins[0][1];
                 addStateToCookie(uState);
+
+                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
             } else {
                 console.log('No matching pins found.');
             }
@@ -548,7 +562,7 @@ export default function Page({ params }) {
     const [selectedDeliveryType, setSelectedDeliveryType] = useState([]);
     const [finalDeliveryType, setFinalDeliveryType] = useState([]);
 
-    const [selectedDeliveryTime, setSelectedDeliveryTime] = useState(new Date());
+    const [selectedDeliveryTime, setSelectedDeliveryTime] = useState('');
     const [finalDeliveryTime, setFinalDeliveryTime] = useState('');
 
     const [finalDeliveryPrice, setFinalDeliveryPrice] = useState('');
@@ -669,6 +683,21 @@ export default function Page({ params }) {
             setSelectedTomorrow(tomorrow);
         }
     }, [finalDate, currentHour])
+
+    useEffect(() => {
+        if (
+            finalDate === ''
+            || finalDeliveryType == []
+            || finalDeliveryTime === ''
+            || finalDeliveryPrice === ''
+        ) {
+            setDateStepsDone([false, false]);
+            setFinalDate('');
+            setFinalDeliveryType([]);
+            setFinalDeliveryTime('');
+            setFinalDeliveryPrice('');
+        }
+    }, [isSelectDateOpen])
 
 
     return (
@@ -1206,7 +1235,7 @@ export default function Page({ params }) {
                                             </ul>
                                         </div>
 
-                                        <div className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-md leading-none cursor-pointer">
+                                        <div className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-md leading-none">
                                             <div className="flex justify-start items-center w-full h-full">
                                                 <ul className="flex flex-col justify-start items-center w-full h-full p-1 text-base font-semibold divide-y divide-[#e5e5e5]">
                                                     {!(
@@ -1216,7 +1245,7 @@ export default function Page({ params }) {
                                                         getCookie('user_pincode') === '' ||
                                                         getCookie('user_pincode') === undefined ||
                                                         getCookie('user_pincode') === null
-                                                    ) ? <li className="flex justify-between items-center w-full h-auto leading-none">
+                                                    ) ? <li className="flex justify-between items-center w-full h-9 leading-none">
                                                         <button className="relative flex justify-center items-center w-full h-full px-3 py-2 bg-white border border-[#e5e5e5] rounded-full cursor-pointer no-outline">
                                                             <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
                                                                 {getCookie('user_pincode')}, {getCookie('user_state')}
@@ -1227,16 +1256,16 @@ export default function Page({ params }) {
                                                                 deleteCookie('user_state');
                                                                 setAddress('');
 
-                                                                router.push(`?rmd=${Math.random()}`);
+                                                                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`);
                                                             }}>
                                                                 change
                                                             </div>
                                                         </button>
                                                     </li>
                                                         :
-                                                        <li className="flex justify-between items-center w-full h-auto leading-none" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
-                                                            <label className="relative flex justify-center items-center w-full h-auto" htmlFor="address_input">
-                                                                <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
+                                                        <li className="flex justify-between items-center w-full h-9 leading-none">
+                                                            <form className="relative flex justify-center items-center w-full h-full" htmlFor="address_input" onSubmit={handleAddressSubmit}>
+                                                                <div className="absolute left-1.5 flex justify-center items-center w-5 h-5 pointer-events-none">
                                                                     <svg className="text-[#494949]" width={24} height={24}>
                                                                         <use
                                                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1253,35 +1282,65 @@ export default function Page({ params }) {
                                                                     onChange={handleAddressChange}
                                                                     value={address}
                                                                 />
-                                                            </label>
+
+                                                                {address !== '' ? <button className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] text-white text-xs font-semibold rounded-full duration-200" type="submit">
+                                                                    Confirm
+                                                                </button>
+                                                                    :
+                                                                    <div className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#24543e] text-white text-xs font-semibold rounded-full duration-200 saturate-0 opacity-40">
+                                                                        Confirm
+                                                                    </div>
+                                                                }
+                                                            </form>
                                                         </li>
                                                     }
 
-                                                    <li className="flex justify-between items-center w-full h-auto mt-1.5 pt-1.5 leading-none">
-                                                        <div className="relative flex justify-center items-center w-full h-auto">
-                                                            <div className="absolute left-2 flex justify-center items-center w-5 h-5">
-                                                                <svg className="text-[#494949]" width={24} height={24}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
-                                                                    ></use>
-                                                                </svg>
-                                                            </div>
+                                                    <li className="block justify-start items-center w-full h-auto mt-2 pt-2 leading-none">
+                                                        {buzzDateInput && <div className="flex justify-start items-center w-full mb-1 text-xs leading-none text-[#ad2314]">
+                                                            required *
+                                                        </div>}
 
-                                                            {finalDate === '' ? <div className="flex justify-start items-center w-full h-full pl-8 px-3 py-2.5 rounded-full bg-[#f7f7f7] text-[#797979] font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
-                                                                Date & Time
-                                                            </div>
-                                                                :
-                                                                <div className="flex justify-start items-center w-full h-full pl-8 px-3 py-2.5 rounded-full bg-[#f7f7f7] text-[#797979] font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
-                                                                    <span className="block space-y-1">
-                                                                        <p>
+                                                        <div className="flex justify-between items-center w-full h-auto leading-none">
+                                                            <div className={`relative flex justify-center items-center w-full h-auto px-2 py-2 border ${buzzDateInput ? 'border-[#ad2314] ring-2.5 ring-[#ad231433]' : 'border-[#f7f7f7]'} rounded-full bg-[#f7f7f7] text-[#797979] overflow-hidden`}>
+                                                                <div className="flex justify-center items-center w-5 h-5 pointer-events-none">
+                                                                    <svg className="text-[#494949]" width={24} height={24}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </div>
+
+                                                                {(
+                                                                    finalDate === ''
+                                                                    || finalDeliveryType == []
+                                                                    || finalDeliveryTime === ''
+                                                                    || finalDeliveryPrice === ''
+                                                                ) ? <div className="flex justify-start items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                    Date & Time
+                                                                </div> : <div className="flex justify-between items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                    <div className="block space-y-1">
+                                                                        <p className="text-sm text-[#767676] leading-none">
                                                                             {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
                                                                         </p>
-                                                                        <p>
+                                                                        <p className="text-[#191919] leading-none">
                                                                             {moment(finalDate).format('ddd')} {finalDeliveryTime}
                                                                         </p>
-                                                                    </span>
+                                                                    </div>
+
+                                                                    <div className="flex justify-center items-center w-5 h-5" onClick={() => {
+                                                                        setDateStepsDone([false, false]);
+                                                                        setFinalDate('');
+                                                                        setFinalDeliveryType([]);
+                                                                        setFinalDeliveryTime('');
+                                                                        setFinalDeliveryPrice('');
+                                                                    }}>
+                                                                        <svg className="text-[#767676]" width={20} height={20}>
+                                                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                                                                        </svg>
+                                                                    </div>
                                                                 </div>}
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1292,6 +1351,8 @@ export default function Page({ params }) {
 
                                 <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
 
+
+                                {/* ADD TO CART */}
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -1359,6 +1420,8 @@ export default function Page({ params }) {
                                         </div>
                                     </div>
                                 </motion.div>
+
+                                {/* ADD TO CART - MOBILE */}
                                 <AnimatePresence>
                                     {(scrollY >= 200) && <motion.div
                                         initial={{ opacity: 0 }}
@@ -1720,7 +1783,7 @@ export default function Page({ params }) {
 
 
 
-            {/* SELECT LOCATION */}
+            {/* SELECT DATE */}
             <AnimatePresence>
                 {isSelectDateOpen && (
                     <motion.div className="fixed top-0 left-0 flex justify-center items-center w-full h-full px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0 z-[600] text-[#292929] select-none"
@@ -1732,9 +1795,18 @@ export default function Page({ params }) {
 
                         <div className="relative z-[200] flex justify-center items-center w-full h-auto max-w-md p-4 bg-white rounded-lg border-[1.5px] border-[#e5e5e5]">
                             {dateStepsDone[0] === false && <div className="flex flex-col justify-center items-center w-full h-full">
-                                <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
-                                    Choose delivery date
+                                <div className="flex justify-between items-center w-full">
+                                    <div className="flex justify-start items-center w-auto leading-none text-lg font-semibold">
+                                        Choose delivery date
+                                    </div>
+
+                                    <button className="flex justify-end items-center w-5 h-5 cursor-pointer no-outline" onClick={() => setIsSelectDateOpen(false)}>
+                                        <svg className="text-[#191919]" width={20} height={20}>
+                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                                        </svg>
+                                    </button>
                                 </div>
+
 
                                 <div className="flex justify-center items-center w-full h-full mt-4 border border-[#e5e5e5] rounded-lg overflow-hidden">
                                     <Calendar
@@ -1756,20 +1828,32 @@ export default function Page({ params }) {
                             </div>}
 
                             {(dateStepsDone[0] === true && dateStepsDone[1] !== true) && <div className="flex flex-col justify-center items-center w-full h-full">
-                                <div className="flex justify-start items-center w-full h-full">
-                                    <div className="flex justify-center items-center w-auto h-full">
-                                        <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => setDateStepsDone([false, false])}>
-                                            <svg className="flex justify-start items-center w-5 h-8" width={24} height={24} strokeWidth={2}
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                                            </svg>
-                                        </button>
+                                <div className="flex justify-between items-center w-full">
+                                    <div className="flex justify-start items-center w-auto">
+                                        <div className="flex justify-center items-center w-auto h-full">
+                                            <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => {
+                                                setDateStepsDone([false, false]);
+                                                setSelectedDeliveryType([]);
+                                            }}>
+                                                <svg className="flex justify-start items-center w-5 h-8" width={24} height={24} strokeWidth={2}
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
+                                            Choose delivery type
+                                        </div>
                                     </div>
 
-                                    <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
-                                        Choose delivery type
-                                    </div>
+                                    <button className="flex justify-end items-center w-5 h-5 cursor-pointer no-outline" onClick={() => setIsSelectDateOpen(false)}>
+                                        <svg className="text-[#191919]" width={20} height={20}>
+                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                                        </svg>
+                                    </button>
                                 </div>
+
 
                                 <div className="flex justify-center items-center w-full h-full mt-4">
                                     <ul className="flex flex-col justify-center items-start w-full h-auto space-y-4">
@@ -1781,6 +1865,7 @@ export default function Page({ params }) {
                                                         name="type_option"
                                                         id={'express_delivery_1'}
                                                         value={['express_delivery_1', 'Express Delivery']}
+                                                        checked={selectedDeliveryType == ['express_delivery_1', 'Express Delivery']}
                                                         onChange={(e) => {
                                                             setSelectedDeliveryType(e.target.value)
                                                         }}
@@ -1810,6 +1895,7 @@ export default function Page({ params }) {
                                                         name="type_option"
                                                         id={'morning_delivery'}
                                                         value={['morning_delivery', 'Morning Delivery']}
+                                                        checked={selectedDeliveryType == ['morning_delivery', 'Morning Delivery']}
                                                         onChange={(e) => {
                                                             setSelectedDeliveryType(e.target.value)
                                                         }}
@@ -1839,6 +1925,7 @@ export default function Page({ params }) {
                                                         name="type_option"
                                                         id={'express_delivery_2'}
                                                         value={['express_delivery_2', 'Express Delivery']}
+                                                        checked={selectedDeliveryType == ['express_delivery_2', 'Express Delivery']}
                                                         onChange={(e) => {
                                                             setSelectedDeliveryType(e.target.value)
                                                         }}
@@ -1868,6 +1955,7 @@ export default function Page({ params }) {
                                                         name="type_option"
                                                         id={'fixed_time_delivery'}
                                                         value={['fixed_time_delivery', 'Fixed Time Delivery']}
+                                                        checked={selectedDeliveryType == ['fixed_time_delivery', 'Fixed Time Delivery']}
                                                         onChange={(e) => {
                                                             setSelectedDeliveryType(e.target.value)
                                                         }}
@@ -1897,6 +1985,7 @@ export default function Page({ params }) {
                                                         name="type_option"
                                                         id={'pre_midnight_delivery'}
                                                         value={['pre_midnight_delivery', 'Pre-Midnight Delivery']}
+                                                        checked={selectedDeliveryType == ['pre_midnight_delivery', 'Pre-Midnight Delivery']}
                                                         onChange={(e) => {
                                                             setSelectedDeliveryType(e.target.value)
                                                         }}
@@ -1921,44 +2010,60 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                    {(selectedDeliveryType.length !== 0) ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
                                         setDateStepsDone([true, true]);
                                         setFinalDeliveryType(selectedDeliveryType);
                                     }}>
                                         Continue to delivery time
                                     </button>
+                                        :
+                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] saturate-0 opacity-40 rounded-full text-white font-bold">
+                                            Continue to delivery time
+                                        </div>
+                                    }
                                 </div>
                             </div>}
 
                             {dateStepsDone[1] === true && <div className="flex flex-col justify-center w-full h-full">
-                                <div className="flex justify-start items-center w-full h-full">
-                                    <div className="flex justify-center items-center w-auto h-full">
-                                        <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => setDateStepsDone([true, false])}>
-                                            <svg className="flex justify-start items-center w-5 h-8" width={24} height={24} strokeWidth={2}
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                <div className="flex justify-between items-center w-full">
+                                    <div className="flex justify-start items-center w-auto">
+                                        <div className="flex justify-start items-center w-auto h-full">
+                                            <button className="flex justify-start items-center w-8 h-8 text-[#494949] bg-white no-outline" onClick={() => {
+                                                setDateStepsDone([true, false]);
+                                                setSelectedDeliveryTime('');
+                                            }}>
+                                                <svg className="flex justify-start items-center w-5 h-8" width={24} height={24} strokeWidth={2}
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                                </svg>
+                                            </button>
+                                        </div>
 
-                                    <div className="flex flex-col justify-start items-center w-full leading-none text-lg font-semibold">
-                                        <div className="flex justify-start items-center w-full"> Choose delivery time </div>
+                                        <div className="flex flex-col justify-start items-center w-full leading-none text-lg font-semibold">
+                                            <div className="flex justify-start items-center w-full leading-none"> Choose delivery time </div>
 
-                                        <div className="flex justify-start items-center w-full text-sm text-[#767676]">
-                                            {
-                                                timeOfDelivery.filter((k) => {
-                                                    if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
-                                                        return k
-                                                    }
-                                                }).map((k) => k)[0]['name']} — ₹{
-                                                timeOfDelivery.filter((k) => {
-                                                    if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
-                                                        return k
-                                                    }
-                                                }).map((k) => k)[0]['price']
-                                            }
+                                            <div className="flex justify-start items-center w-full text-sm text-[#767676] leading-none">
+                                                {
+                                                    timeOfDelivery.filter((k) => {
+                                                        if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
+                                                            return k
+                                                        }
+                                                    }).map((k) => k)[0]['name']} — ₹{
+                                                    timeOfDelivery.filter((k) => {
+                                                        if (k.id === JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[0]) {
+                                                            return k
+                                                        }
+                                                    }).map((k) => k)[0]['price']
+                                                }
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <button className="flex justify-end items-center w-5 h-5 cursor-pointer no-outline" onClick={() => setIsSelectDateOpen(false)}>
+                                        <svg className="text-[#191919]" width={20} height={20}>
+                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                                        </svg>
+                                    </button>
                                 </div>
 
                                 <div className="flex justify-center items-start w-full h-auto mt-4">
@@ -2011,6 +2116,7 @@ export default function Page({ params }) {
                                                         name="time_option"
                                                         id={item}
                                                         value={item}
+                                                        checked={selectedDeliveryTime === item}
                                                         onChange={(e) => setSelectedDeliveryTime(e.target.value)}
                                                     />
 
@@ -2024,7 +2130,7 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
+                                    {selectedDeliveryTime !== '' ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] hover:bg-[#1C4632] active:bg-[#163C2B] rounded-full text-white font-bold duration-200" onClick={() => {
                                         setFinalDeliveryTime(selectedDeliveryTime);
                                         setFinalDeliveryPrice(
                                             timeOfDelivery.filter((k) => {
@@ -2038,6 +2144,11 @@ export default function Page({ params }) {
                                     }}>
                                         Continue
                                     </button>
+                                        :
+                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#24543e] saturate-0 opacity-40 rounded-full text-white font-bold">
+                                            Continue to delivery time
+                                        </div>
+                                    }
                                 </div>
                             </div>}
                         </div>
@@ -2046,9 +2157,9 @@ export default function Page({ params }) {
             </AnimatePresence>
 
             {/* SELECT LOCATION */}
-            <AnimatePresence>
+            {/* <AnimatePresence>
                 {isSelectLocationMenuOpen && (
-                    <motion.div className="fixed bottom-56 right-10 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
+                    <motion.div className="fixed bottom-[8.75rem] right-10 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
@@ -2056,7 +2167,7 @@ export default function Page({ params }) {
                         onClick={() => setIsSelectLocationMenuOpen(true)}
                         onFocus={() => setIsSelectLocationMenuOpen(true)}
                     >
-                        <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
+                        <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md border border-[#e5e5e5]"
                             onBlur={() => setIsSelectLocationMenuOpen(false)}
                             onClick={() => setIsSelectLocationMenuOpen(true)}
                             onFocus={() => setIsSelectLocationMenuOpen(true)}
@@ -2100,7 +2211,7 @@ export default function Page({ params }) {
                         </div>
                     </motion.div>
                 )}
-            </AnimatePresence>
+            </AnimatePresence> */}
         </>
     )
 }
