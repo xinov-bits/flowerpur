@@ -38,17 +38,17 @@ body {
 }
 @media (max-width: 768px) {
   body {
-    margin-top: 176px !important;
+    margin-top: 216px !important;
   }
 }
 @media (min-width: 1024px) {
   body {
-    margin-top: 130px !important;
+    margin-top: 146px !important;
   }
 }
 @media (min-width: 1280px) {
   body {
-    margin-top: 130px !important;
+    margin-top: 146px !important;
   }
 }
 

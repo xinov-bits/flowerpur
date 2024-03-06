@@ -134,7 +134,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                             <div className="flex justify-start items-center w-[70%] h-[85%] text-[#191919]">
                                                 <div className="flex flex-col justify-start items-center w-[58%] h-full text-start font-semibold">
                                                     <Link className="flex justify-center items-start w-full h-full no-outline" href={`/product/${item.url}`}>
-                                                        <div className="flex justify-start items-start w-full h-auto capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer">
+                                                        <div className="flex justify-start items-start w-full h-auto capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer" onClick={() => {
+                                                            setIsCartOpen(false);
+                                                            setIsCartOpenATC(false);
+                                                        }}>
                                                             {item.name}
                                                         </div>
                                                     </Link>

@@ -16,6 +16,7 @@ import Link from "next/link";
 
 // COMPONENTS
 import Header from "../components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 // CRYPTO JS
 import CryptoJS from "crypto-js";
@@ -35,6 +36,8 @@ export default function RootLayout({ children }) {
           <Header />
 
           {children}
+
+          <Footer />
         </GlobalProvider>
       </body>
     </html>

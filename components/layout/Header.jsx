@@ -26,7 +26,7 @@ import CartContext from '@/context/CartContext';
 import UserContext from '@/context/UserContext';
 
 // COMPONENTS
-import Cart from './Cart';
+import Cart from '../function/Cart';
 
 // MOMENT JS
 import moment from 'moment';
@@ -162,7 +162,8 @@ const Header = () => {
 
 
     // SEARCH
-    const [searchKey, setSearchKey] = useState('')
+    const [searchKey, setSearchKey] = useState('');
+    const [isSearchMenu, setIsSearchMenu] = useState(false);
 
     const handleChangeSearch = (e) => {
         setSearchKey(e.target.value);
@@ -173,6 +174,29 @@ const Header = () => {
 
         router.push(`/search?keyword=${searchKey}`)
     }
+
+    const trendingSearches = [
+        {
+            name: 'Birthday bouquets',
+            url: '/'
+        },
+        {
+            name: 'Flowers',
+            url: '/flowers'
+        },
+        {
+            name: 'Anniversary',
+            url: '/'
+        },
+        {
+            name: 'Birthday cakes',
+            url: '/flowers'
+        },
+        {
+            name: 'Occasional Gifts',
+            url: '/'
+        },
+    ]
 
 
     // USER
@@ -191,9 +215,21 @@ const Header = () => {
     return (
         <>
             <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
-                <div className="flex justify-center items-center w-full h-16 py-2 px-8 space-x-2 border-b border-[#e5e5e5] select-none">
-                    <div className="flex justify-start items-center w-[16%] h-full cursor-pointer">
-                        <div className="flex justify-start items-center w-full h-full cursor-pointer rounded-md overflow-hidden">
+                {/* THING */}
+                <div className="flex justify-center items-center w-full h-8 space-x-2 bg-[#f48196] text-sm text-white font-semibold capitalize select-none">
+                    <div className="flex justify-center items-center w-auto">
+                        Lorem ipsum dolor sit amet elit. - ₹499
+                    </div>
+
+                    <div className="flex justify-center items-center w-auto p-1.5 leading-none bg-[#d34c65] hover:bg-[#d9576f] active:bg-[#c04159] rounded cursor-pointer">
+                        Shop now
+                    </div>
+                </div>
+
+                {/* LOGO & THINGS */}
+                <div className="flex justify-center items-center w-full h-12 px-8 py-1.5 space-x-2 border-b border-[#e5e5e5] select-none">
+                    <div className="flex justify-start items-center w-[20%] h-full cursor-pointer">
+                        <div className="flex justify-start items-center w-[94%] h-full cursor-pointer rounded-md overflow-hidden">
                             <Link className="flex justify-start items-center w-full h-full no-outline" href={'/'}>
                                 <div className="flex justify-start items-center w-full h-full">
                                     <svg className="flex justify-start items-center w-[95%] h-full" width={760} height={120}>
@@ -207,35 +243,9 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-center items-center w-[47%] h-10 space-x-2">
-                        <div className="relative flex justify-center items-center w-[32%] h-full rounded-full overflow-hidden">
-                            <button className="relative flex justify-center items-center w-full h-full cursor-pointer" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
-                                {(
-                                    getCookie('user_state') === '' ||
-                                    getCookie('user_state') === undefined ||
-                                    getCookie('user_state') === null ||
-                                    getCookie('user_pincode') === '' ||
-                                    getCookie('user_pincode') === undefined ||
-                                    getCookie('user_pincode') === null
-                                ) ? <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
-                                    Select Address
-                                </div>
-                                    :
-                                    <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
-                                        {getCookie('user_pincode')}, {getCookie('user_state')}
-                                    </div>
-                                }
-
-                                <div className="absolute right-0 flex justify-center items-center w-5 h-5 pointer-events-none">
-                                    <svg className="text-[#494949]" width={20} height={20}>
-                                        <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"></use>
-                                    </svg>
-                                </div>
-                            </button>
-                        </div>
-
-                        <div className="relative flex justify-center items-center w-[68%] h-full rounded-full overflow-hidden">
-                            <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
+                    <div className="flex justify-center items-center w-[40%] h-full">
+                        <div className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden">
+                            <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" onClick={() => setIsSearchMenu(true)}>
                                 <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                                     <svg className="text-[#494949]" width={24} height={24}>
                                         <use
@@ -246,33 +256,79 @@ const Header = () => {
                                 </div>
 
                                 <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
-                                    onChange={handleChangeSearch}
                                     value={searchKey}
                                     placeholder="Search for flowers, cakes, gifts, etc."
                                     name="search"
                                     type="text"
                                 />
-                            </form>
+                            </button>
                         </div>
                     </div>
 
-                    <div className="flex justify-end items-center w-[37%] h-full">
+                    <div className="flex justify-end items-center w-[40%] h-full">
                         <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
-                            <li className="relative flex flex-col justify-center items-center w-auto h-12 px-3 bg-white hover:bg-[#f7f7f7] border-[1.5px] border-[#e5e5e5] rounded-full cursor-pointer">
-                                <svg className="w-5 h-5 text-[#797979]" width={20} height={20}>
+                            <li className="relative flex justify-center items-center w-auto h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
+                                <button className="relative flex justify-center items-center w-auto h-full cursor-pointer" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
+                                    {(
+                                        getCookie('user_state') === '' ||
+                                        getCookie('user_state') === undefined ||
+                                        getCookie('user_state') === null ||
+                                        getCookie('user_pincode') === '' ||
+                                        getCookie('user_pincode') === undefined ||
+                                        getCookie('user_pincode') === null
+                                    ) ? <div className="flex justify-start items-center w-48 h-full px-2 space-x-1 font-semibold cursor-pointer">
+                                        <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                            ></use>
+                                        </svg>
+
+                                        <div> Select Address </div>
+                                    </div>
+                                        :
+                                        <div className="flex justify-start items-center w-48 h-full px-2 font-semibold cursor-pointer">
+                                            <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                ></use>
+                                            </svg>
+
+                                            {getCookie('user_pincode')}, {getCookie('user_state')}
+                                        </div>
+                                    }
+
+                                    <div className="absolute right-2 flex justify-center items-center w-5 h-5 pointer-events-none">
+                                        <svg className="text-[#494949]" width={20} height={20}>
+                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"></use>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </li>
+
+                            <li className="relative flex flex-col justify-center items-center w-9 h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer overflow-hidden duration-75">
+                                <svg className="w-5 h-5" width={20} height={20}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                         xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
                                     ></use>
                                 </svg>
+                            </li>
 
-                                <div className="flex justify-center items-center w-full text-sm">
-                                    Track order
-                                </div>
+                            <li className="flex justify-center items-center w-9 h-full cursor-pointer">
+                                <button className="relative flex justify-center items-center w-full h-full space-x-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer overflow-hidden duration-75" onClick={() => setIsCartOpen(true)}>
+                                    <svg className="" width={20} height={20}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart2_dd"
+                                        ></use>
+                                    </svg>
+                                </button>
                             </li>
 
                             {isUserSignedIn ? <Link href="/user/orders" className="no-outline">
-                                <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full space-x-1 cursor-pointer hover:bg-[#f7f7f7]">
+                                <li className="relative flex justify-center items-center w-auto h-full px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full space-x-1 cursor-pointer hover:bg-[#f7f7f7]">
                                     <svg className="text-[#797979]" width={26} height={26}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -284,43 +340,21 @@ const Header = () => {
                                         {generateGreetings()}, {!(user === undefined || user === null || user === '') ? JSON.parse(user)[0] : ''}
                                     </div>
                                 </li>
-                            </Link> : <li className="relative flex justify-center items-center w-auto h-12 px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full duration-75 space-x-1">
-                                <svg className="text-[#797979]" width={26} height={26}>
-                                    <use
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
-                                    ></use>
-                                </svg>
-
-                                <div className="flex justify-center items-center w-full space-x-2">
-                                    <Link href="/auth/signin" className="flex justify-center items-center w-auto no-outline">
-                                        <button className="flex justify-center items-center w-full px-3 py-1 bg-white hover:bg-[#f7f7f7] border border-[#d6d6d6] rounded-full cursor-pointer">
+                            </Link> : <li className="relative flex justify-center items-center w-auto h-full rounded-full duration-75 space-x-1">
+                                <div className="flex justify-center items-center w-full h-full space-x-2">
+                                    <Link href="/auth/signin" className="flex justify-center items-center w-auto h-full no-outline">
+                                        <button className="flex justify-center items-center w-full h-full px-3 bg-[#e5e5e5] hover:bg-[#d6d6d6] font-semibold rounded-full cursor-pointer leading-none">
                                             Sign In
                                         </button>
                                     </Link>
 
-                                    <Link href="/auth/signup" className="flex justify-center items-center w-auto no-outline">
-                                        <button className="flex justify-center items-center w-full px-3 py-1 bg-[#d6d6d6] rounded-full cursor-pointer">
-                                            Sign Up
+                                    <Link href="/auth/signup" className="flex justify-center items-center w-auto h-full no-outline">
+                                        <button className="flex justify-center items-center w-full h-full px-3 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold leading-none rounded-full cursor-pointer">
+                                            <div> Sign Up </div>
                                         </button>
                                     </Link>
                                 </div>
                             </li>}
-
-                            <li className="flex justify-center items-center w-[4.5rem] h-10 cursor-pointer">
-                                <button className="relative flex justify-center items-center w-full h-full bg-[#085b45] rounded-full cursor-pointer space-x-2 hover:bg-[#09674d] active:bg-[#064434] overflow-hidden duration-75" onClick={() => setIsCartOpen(true)}>
-                                    <svg className="text-white" width={22} height={22}>
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
-                                        ></use>
-                                    </svg>
-
-                                    <div className="flex justify-center items-center text-white">
-                                        {numTotal}
-                                    </div>
-                                </button>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -353,6 +387,17 @@ const Header = () => {
 
             {/* MOBILE HEADER */}
             <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#292929]">
+                {/* THING */}
+                <div className="flex justify-center items-center w-full h-10 space-x-2.5 bg-[#f48196] text-sm text-white font-semibold capitalize select-none">
+                    <div className="flex justify-center items-center w-auto">
+                        Lorem ipsum dolor sit amet elit. - ₹499
+                    </div>
+
+                    <div className="flex justify-center items-center w-auto p-2 leading-none bg-[#d34c65] hover:bg-[#d9576f] active:bg-[#c04159] rounded cursor-pointer">
+                        Shop now
+                    </div>
+                </div>
+
                 <div className="flex justify-start items-center w-full h-[3.65rem] py-1.5 px-3.5 space-x-2">
                     <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
                         <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-4">
@@ -484,10 +529,81 @@ const Header = () => {
             <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
 
 
+            {/* SEARCH MENU */}
+            {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
+                <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
+
+                <div className="absolute z-[200] top-[1.8rem] left-14 sm:left-14 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[60%] sm:w-[60%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
+                    onBlur={() => setIsSearchMenu(false)}
+                    onClick={() => setIsSearchMenu(true)}
+                    onFocus={() => setIsSearchMenu(true)}>
+                    <div className="relative flex flex-col justify-start items-start w-full h-full pb-2 px-[0.6rem]">
+                        <div className="flex justify-start items-start w-full h-ful h-[3.25rem] py-2">
+                            <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
+                                <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
+                                    <svg className="text-[#494949]" width={24} height={24}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
+                                        ></use>
+                                    </svg>
+                                </div>
+
+                                <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee]"
+                                    onChange={handleChangeSearch}
+                                    value={searchKey}
+                                    placeholder="Search for flowers, cakes, gifts, etc."
+                                    name="search"
+                                    type="text"
+                                />
+                            </form>
+                        </div>
+
+                        <div className="block justify-start items-start w-full h-full mt-2 text-[#191919]">
+                            <div className="flex justify-start items-center w-full leading-none text-xl font-semibold">
+                                Trending searches
+                            </div>
+
+                            <div className="flex justify-start items-center w-full mt-2 leading-none text-base font-medium">
+                                <ul className="flex flex-col justify-start items-center w-full h-full space-y-2">
+                                    {trendingSearches.map((search, index) => <li key={index} className="flex justify-center items-center w-full h-auto">
+                                        <Link href={search.url} className="flex justify-center items-center w-full">
+                                            <button className="flex justify-between items-center w-full h-10 px-2 leading-none bg-white hover:bg-[#f7f7f7] border border-[#f7f7f7] active:border-[#e5e5e5] rounded-md">
+                                                <div className="flex justify-start items-center w-auto space-x-1">
+                                                    <div className="flex justify-start items-center w-auto">
+                                                        <svg className="flex justify-center items-center w-5 h-5" strokeWidth={1.5}
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                                                        </svg>
+                                                    </div>
+
+                                                    <div className="flex justify-start items-center w-auto">
+                                                        {search.name}
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex justify-start items-center w-auto">
+                                                    <svg className="flex justify-center items-center w-4 h-4" strokeWidth={1.8}
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </Link>
+                                    </li>)}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>)}
+
+
             {/* SELECT LOCATION */}
             <AnimatePresence>
                 {isSelectLocationMenuOpen && (
-                    <motion.div className="fixed top-14 left-14 sm:left-14 md:left-52 lg:left-52 xl:left-52 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
+                    <motion.div className="fixed top-[4.8rem] right-14 sm:right-14 md:right-[11.2rem] lg:right-[11.2rem] xl:right-[11.2rem] flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
@@ -496,7 +612,7 @@ const Header = () => {
                         onFocus={() => setIsSelectLocationMenuOpen(true)}
                     >
                         <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md
-                        after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl after:border-l-[1.5px] after:border-t-[1.5px] after:border-[#e5e5e5] border-[1.5px] border-[#e5e5e5]"
+                        after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl shadow-[0px_8px_24px] shadow-black/20"
                             onBlur={() => setIsSelectLocationMenuOpen(false)}
                             onClick={() => setIsSelectLocationMenuOpen(true)}
                             onFocus={() => setIsSelectLocationMenuOpen(true)}>

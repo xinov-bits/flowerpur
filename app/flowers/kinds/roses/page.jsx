@@ -18,6 +18,9 @@ import { motion, AnimatePresence } from "framer-motion"
 // CONTEXT
 import CartContext from '@/context/CartContext';
 
+// COMPONENTS
+import ProductCard from '@/components/function/ProductCard'
+
 const Page = () => {
   const {
     cart,
@@ -145,7 +148,7 @@ const Page = () => {
             </div>
           </div>
 
-          {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-center w-full mt-6">
+          {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-4 lg:gap-4 xl:gap-4 justify-start items-center w-full mt-6">
             {Skeleton}
             {Skeleton}
             {Skeleton}
@@ -153,105 +156,22 @@ const Page = () => {
             {Skeleton}
           </div>
             :
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-4 lg:gap-4 xl:gap-4 justify-start items-start w-full mt-6">
               {Object.keys(products).filter((item) => {
                 if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
                   return products[item]
                 }
               }).map((item) => {
-                return <motion.div key={products[item]._id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="relative flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group overflow-hidden">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="relative flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
-                    <Link href={`/product/${products[item].slug}`}>
-                      <Image className="flex justify-center items-center w-full h-full"
-                        src={products[item].dimg}
-                        width={800}
-                        height={800}
-                        alt={products[item].title}
-                      />
-                    </Link>
-
-                    {JSON.stringify(products[item].offer)?.includes('buy-2-get-1-free') && (<motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.8 }}
-                      className="absolute bottom-0 -right-1 flex justify-center items-center w-auto h-7 px-2.5 rounded-tl-md bg-[#65CDE7] leading-none text-xs font-semibold text-[#010E36] -skew-x-12  anim__pulse-wave"
-                    >
-                      <span className="skew-x-12">
-                        Buy 2 Get 1 Free
-                      </span>
-                    </motion.div>)}
-                  </motion.div>
-
-                  <Link href={`/product/${products[item].slug}`}>
-                    <div className="flex justify-start items-start w-full h-10 mt-2 text-nd font-semibold text-[#191919] capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden group-hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2">
-                      {products[item].title}
-                    </div>
-                  </Link>
-
-                  <div className="flex justify-between items-center w-full h-auto mt-1">
-                    <div className="flex justify-start items-center w-auto text-lg font-bold text-[#7a7a7a]">
-                      ₹{products[item].price}.00
-                    </div>
-                    {(!cartLoading[0] || cartLoading[1] != products[item].slug) ? <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
-                      {(!addedAnim[0] || addedAnim[1] != products[item].slug) && <button
-                        onClick={() => addProductToCart(
-                          products[item].slug,
-                          products[item].slug,
-                          1,
-                          products[item].availableQty,
-                          products[item].price,
-                          products[item].dimg,
-                          products[item].title,
-                          products[item].offer,
-                        )}
-                        className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1">
-                        <svg className="text-[#191919]" width={18} height={18}>
-                          <use
-                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
-                          ></use>
-                        </svg>
-
-                        <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
-                      </button>}
-
-                      {(addedAnim[0] && addedAnim[1] === products[item].slug) && <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1">
-                        <svg className="" width={14} height={14}>
-                          <use
-                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                          ></use>
-                        </svg>
-
-                        <div className="hidden sm:hidden md:block lg:block xl:block"> Added </div>
-                      </button>}
-                    </div>
-                      :
-                      <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#767676] cursor-default">
-                        <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] space-x-1">
-                          <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
-                            <use
-                              xmlnsXlink="http://www.w3.org/1999/xlink"
-                              xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
-                            ></use>
-                          </svg>
-
-                          <div className="hidden sm:hidden md:block lg:block xl:block"> Adding </div>
-                        </button>
-                      </div>}
-                  </div>
-                </motion.div>
+                return <ProductCard
+                itemCode={products[item]._id}
+                slug={products[item].slug}
+                qty={products[item].qty}
+                availableQty={products[item].availableQty}
+                price={products[item].price}
+                dimg={products[item].dimg}
+                title={products[item].title}
+                offer={products[item].offer}
+              />
               })}
             </div>}
         </div>
