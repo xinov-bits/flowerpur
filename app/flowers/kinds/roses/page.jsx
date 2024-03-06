@@ -162,7 +162,7 @@ const Page = () => {
                   return products[item]
                 }
               }).map((item) => {
-                return <ProductCard
+                return <ProductCard key={products[item]._id}
                 itemCode={products[item]._id}
                 slug={products[item].slug}
                 qty={products[item].qty}

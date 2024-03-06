@@ -189,7 +189,7 @@ export default function Home() {
               <div className="flex justify-start items-center w-full">
                 <div className="hidden sm:hidden md:grid lg:grid xl:grid grid-cols-2 sm:grid-cols-5 gap-4 justify-start items-start w-full mt-6">
                   {Object.keys(products).map((item) => {
-                    return <ProductCard
+                    return <ProductCard key={products[item]._id}
                       itemCode={products[item]._id}
                       slug={products[item].slug}
                       qty={products[item].qty}
