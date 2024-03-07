@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, Suspense } from 'react'
 
 // NEXT JS
 import Link from 'next/link'
@@ -139,39 +139,40 @@ const Page = () => {
 
   return (
     <>
-      <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
-        <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
-          <div className="flex flex-col justify-start items-center w-full select-none">
-            <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
-              Roses
-            </div>
+      <Suspense>
+        <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
+          <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
+            <div className="flex flex-col justify-start items-center w-full select-none">
+              <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
+                Roses
+              </div>
 
-            <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-normal text-[#797979]">
-              Select from different bouquets
-            </div>
+              <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-normal text-[#797979]">
+                Select from different bouquets
+              </div>
 
 
-            <div className="flex justify-between items-center w-full h-8 mt-2">
-              <div className="flex justify-start items-center w-full h-full space-x-2">
-                <button className={
-                  `
+              <div className="flex justify-between items-center w-full h-8 mt-2">
+                <div className="flex justify-start items-center w-full h-full space-x-2">
+                  <button className={
+                    `
                   flex justify-center items-center w-auto h-full px-2.5 text-[#191919] text-base bg-[#e7e7e7] hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : ''} rounded-full font-bold overflow-hidden no-outline duration-100
                   `
-                } onClick={() => router.push('?filter=offers')}>
-                  <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
-                    <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
-                      <use
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
-                      ></use>
-                    </svg>
-                  </div>
+                  } onClick={() => router.push('?filter=offers')}>
+                    <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
+                      <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
+                        <use
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                          xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
+                        ></use>
+                      </svg>
+                    </div>
 
-                  <div className="flex justify-start items-center">
-                    Offers
-                  </div>
+                    <div className="flex justify-start items-center">
+                      Offers
+                    </div>
 
-                  {/* <div className="relative flex justify-end items-center w-6 h-5 ml-1 after:absolute after:left-0 after:w-0.5 after:h-4 after:bg-[#d6d6d6] after:rounded-full">
+                    {/* <div className="relative flex justify-end items-center w-6 h-5 ml-1 after:absolute after:left-0 after:w-0.5 after:h-4 after:bg-[#d6d6d6] after:rounded-full">
                     <svg className="flex justify-end items-center w-5 h-5"
                       width={24} height={24}>
                       <use
@@ -180,106 +181,107 @@ const Page = () => {
                       ></use>
                     </svg>
                   </div> */}
-                </button>
+                  </button>
 
-                <button className={
-                  `
+                  <button className={
+                    `
                   flex justify-center items-center w-auto h-full px-2.5 text-base  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${qFilter === 'over_4.5' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7]'} rounded-full font-bold overflow-hidden no-outline duration-100
                   `
-                } onClick={() => router.push('?filter=over_4.5')}>
-                  <div className="flex justify-start items-center">
-                    Over 4.5
-                  </div>
+                  } onClick={() => router.push('?filter=over_4.5')}>
+                    <div className="flex justify-start items-center">
+                      Over 4.5
+                    </div>
 
-                  <div className="flex justify-center items-center w-5 h-5 pr-1 ml-0.5">
-                    <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
-                      <use
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-star_dd"
-                      ></use>
-                    </svg>
-                  </div>
-                </button>
+                    <div className="flex justify-center items-center w-5 h-5 pr-1 ml-0.5">
+                      <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
+                        <use
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                          xlinkHref="/on/demandware/svg/non-critical.svg#icon-star_dd"
+                        ></use>
+                      </svg>
+                    </div>
+                  </button>
 
 
-                {qFilter !== '' && qFilter !== 'none' && <button className="flex justify-center items-center w-auto h-full px-2.5 text-base text-[#191919] bg-[#e7e7e7]  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] rounded-full font-bold overflow-hidden no-outline duration-100" onClick={() => router.push('?filter=none')}>
-                  <div className="flex justify-start items-center">
-                    Clear all
-                  </div>
+                  {qFilter !== '' && qFilter !== 'none' && <button className="flex justify-center items-center w-auto h-full px-2.5 text-base text-[#191919] bg-[#e7e7e7]  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] rounded-full font-bold overflow-hidden no-outline duration-100" onClick={() => router.push('?filter=none')}>
+                    <div className="flex justify-start items-center">
+                      Clear all
+                    </div>
 
-                  <div className="flex justify-center items-center w-5 h-5 pr-1 ml-0.5">
-                    <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
-                      <use
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
-                      ></use>
-                    </svg>
-                  </div>
-                </button>}
-              </div>
+                    <div className="flex justify-center items-center w-5 h-5 pr-1 ml-0.5">
+                      <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
+                        <use
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                          xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
+                        ></use>
+                      </svg>
+                    </div>
+                  </button>}
+                </div>
 
-              <div className="flex justify-end items-center w-full text-md font-medium text-[#797979]">
-                {filterProducts.length} results
+                <div className="flex justify-end items-center w-full text-md font-medium text-[#797979]">
+                  {filterProducts.length} results
+                </div>
               </div>
             </div>
-          </div>
 
-          {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full mt-6">
-            {Skeleton}
-            {Skeleton}
-            {Skeleton}
-            {Skeleton}
-            {Skeleton}
-          </div>
-            :
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-start w-full mt-6">
-              {Object.keys(filterProducts).filter((item) => {
-                if (qFilter !== '' && qFilter !== 'none') {
-                  if (qFilter === 'offers') {
-                    if (filterProducts[item].offer !== '' && filterProducts[item] !== 'none') {
-                      return filterProducts[item];
+            {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full mt-6">
+              {Skeleton}
+              {Skeleton}
+              {Skeleton}
+              {Skeleton}
+              {Skeleton}
+            </div>
+              :
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-start w-full mt-6">
+                {Object.keys(filterProducts).filter((item) => {
+                  if (qFilter !== '' && qFilter !== 'none') {
+                    if (qFilter === 'offers') {
+                      if (filterProducts[item].offer !== '' && filterProducts[item] !== 'none') {
+                        return filterProducts[item];
+                      }
                     }
-                  }
-                  else if (qFilter === 'over_4.5') {
-                    let reviewNames = reviewMean.map((s) => s.name);
+                    else if (qFilter === 'over_4.5') {
+                      let reviewNames = reviewMean.map((s) => s.name);
 
-                    for (let i = 0; i < reviewNames.length; i++) {
-                      const element = reviewNames[i];
-                      
-                      if (filterProducts[item].slug === element) {
-                        let reviewStarNames = reviewMean.filter((s) => {
-                          if (s.stars > 4) {
-                            return s
-                          }
-                        }).map((s) => s.name);
+                      for (let i = 0; i < reviewNames.length; i++) {
+                        const element = reviewNames[i];
 
-                        if (!(reviewStarNames == [] || reviewStarNames === undefined || reviewStarNames === null)) {
-                          if (reviewStarNames.includes(filterProducts[item].slug)) {
-                            return filterProducts[item]
+                        if (filterProducts[item].slug === element) {
+                          let reviewStarNames = reviewMean.filter((s) => {
+                            if (s.stars > 4) {
+                              return s
+                            }
+                          }).map((s) => s.name);
+
+                          if (!(reviewStarNames == [] || reviewStarNames === undefined || reviewStarNames === null)) {
+                            if (reviewStarNames.includes(filterProducts[item].slug)) {
+                              return filterProducts[item]
+                            }
                           }
                         }
                       }
                     }
                   }
-                }
-                else {
-                  return filterProducts[item]
-                }
-              }).map((item) => {
-                return <ProductCard key={filterProducts[item]._id}
-                  itemCode={filterProducts[item]._id}
-                  slug={filterProducts[item].slug}
-                  qty={filterProducts[item].qty}
-                  availableQty={filterProducts[item].availableQty}
-                  price={filterProducts[item].price}
-                  dimg={filterProducts[item].dimg}
-                  title={filterProducts[item].title}
-                  offer={filterProducts[item].offer}
-                />
-              })}
-            </div>}
+                  else {
+                    return filterProducts[item]
+                  }
+                }).map((item) => {
+                  return <ProductCard key={filterProducts[item]._id}
+                    itemCode={filterProducts[item]._id}
+                    slug={filterProducts[item].slug}
+                    qty={filterProducts[item].qty}
+                    availableQty={filterProducts[item].availableQty}
+                    price={filterProducts[item].price}
+                    dimg={filterProducts[item].dimg}
+                    title={filterProducts[item].title}
+                    offer={filterProducts[item].offer}
+                  />
+                })}
+              </div>}
+          </div>
         </div>
-      </div>
+      </Suspense>
 
       {/* <AnimatePresence>
         {isSortBy && (
