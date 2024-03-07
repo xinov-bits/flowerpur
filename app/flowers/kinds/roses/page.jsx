@@ -139,7 +139,7 @@ const Page = () => {
 
   return (
     <>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
           <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
             <div className="flex flex-col justify-start items-center w-full select-none">
