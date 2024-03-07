@@ -117,9 +117,6 @@ const Page = () => {
 
 
   // FILTER & RATINGS
-  const params = new URLSearchParams(window.location.search);
-  const qFilter = params.get("filter");
-
   const [reviewMean, setReviewMean] = useState([]);
 
   const fetchReviews = async () => {
