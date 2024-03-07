@@ -115,9 +115,6 @@ const Page = () => {
 
 
   // FILTER & RATINGS
-  const query = useSearchParams();
-  const qFilter = query.get('filter');
-
   const [reviewMean, setReviewMean] = useState([]);
 
   const fetchReviews = async () => {
@@ -139,7 +136,7 @@ const Page = () => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense>
         <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
           <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
             <div className="flex flex-col justify-start items-center w-full select-none">
@@ -156,7 +153,7 @@ const Page = () => {
                 <div className="flex justify-start items-center w-full h-full space-x-2">
                   <button className={
                     `
-                  flex justify-center items-center w-auto h-full px-2.5 text-[#191919] text-base bg-[#e7e7e7] hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : ''} rounded-full font-bold overflow-hidden no-outline duration-100
+                  flex justify-center items-center w-auto h-full px-2.5 text-[#191919] text-base bg-[#e7e7e7] hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${useSearchParams().get('filter') === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : ''} rounded-full font-bold overflow-hidden no-outline duration-100
                   `
                   } onClick={() => router.push('?filter=offers')}>
                     <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
@@ -185,7 +182,7 @@ const Page = () => {
 
                   <button className={
                     `
-                  flex justify-center items-center w-auto h-full px-2.5 text-base  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${qFilter === 'over_4.5' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7]'} rounded-full font-bold overflow-hidden no-outline duration-100
+                  flex justify-center items-center w-auto h-full px-2.5 text-base  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${useSearchParams().get('filter') === 'over_4.5' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7]'} rounded-full font-bold overflow-hidden no-outline duration-100
                   `
                   } onClick={() => router.push('?filter=over_4.5')}>
                     <div className="flex justify-start items-center">
@@ -203,7 +200,7 @@ const Page = () => {
                   </button>
 
 
-                  {qFilter !== '' && qFilter !== 'none' && <button className="flex justify-center items-center w-auto h-full px-2.5 text-base text-[#191919] bg-[#e7e7e7]  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] rounded-full font-bold overflow-hidden no-outline duration-100" onClick={() => router.push('?filter=none')}>
+                  {useSearchParams().get('filter') !== '' && useSearchParams().get('filter') !== 'none' && <button className="flex justify-center items-center w-auto h-full px-2.5 text-base text-[#191919] bg-[#e7e7e7]  hover:bg-[#f7f7f7] active:bg-[#d6d6d6] rounded-full font-bold overflow-hidden no-outline duration-100" onClick={() => router.push('?filter=none')}>
                     <div className="flex justify-start items-center">
                       Clear all
                     </div>
@@ -235,13 +232,13 @@ const Page = () => {
               :
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-start w-full mt-6">
                 {Object.keys(filterProducts).filter((item) => {
-                  if (qFilter !== '' && qFilter !== 'none') {
-                    if (qFilter === 'offers') {
+                  if (useSearchParams().get('filter') !== '' && useSearchParams().get('filter') !== 'none') {
+                    if (useSearchParams().get('filter') === 'offers') {
                       if (filterProducts[item].offer !== '' && filterProducts[item] !== 'none') {
                         return filterProducts[item];
                       }
                     }
-                    else if (qFilter === 'over_4.5') {
+                    else if (useSearchParams().get('filter') === 'over_4.5') {
                       let reviewNames = reviewMean.map((s) => s.name);
 
                       for (let i = 0; i < reviewNames.length; i++) {
