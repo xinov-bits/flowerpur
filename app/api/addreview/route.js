@@ -1,6 +1,7 @@
 import Review from '@/models/Review';
 import connectDb from '@/middleware/mongoose';
 import { NextResponse } from 'next/server';
+import Product from '@/models/Product';
 
 // Establish MongoDB connection
 connectDb();
@@ -22,8 +23,10 @@ export async function POST(req) {
 
                 approved: res[i].approved,
             })
-            await r.save()
+
+            await r.save();
         }
+
         return NextResponse.json({ success: 'success' });
     } catch (error) {
         console.error('Error saving review:', error);
