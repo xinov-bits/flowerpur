@@ -156,22 +156,22 @@ const Page = () => {
             {Skeleton}
           </div>
             :
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-4 lg:gap-4 xl:gap-4 justify-start items-start w-full mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-2 md:gap-4 lg:gap-4 xl:gap-4 justify-start items-start w-full mt-6">
               {Object.keys(products).filter((item) => {
                 if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
                   return products[item]
                 }
               }).map((item) => {
                 return <ProductCard key={products[item]._id}
-                itemCode={products[item]._id}
-                slug={products[item].slug}
-                qty={products[item].qty}
-                availableQty={products[item].availableQty}
-                price={products[item].price}
-                dimg={products[item].dimg}
-                title={products[item].title}
-                offer={products[item].offer}
-              />
+                  itemCode={products[item]._id}
+                  slug={products[item].slug}
+                  qty={products[item].qty}
+                  availableQty={products[item].availableQty}
+                  price={products[item].price}
+                  dimg={products[item].dimg}
+                  title={products[item].title}
+                  offer={products[item].offer}
+                />
               })}
             </div>}
         </div>
@@ -179,16 +179,29 @@ const Page = () => {
 
       <AnimatePresence>
         {isSortBy && (
-          <motion.div className="fixed top-1/2 left-1/2 flex justify-center items-center w-[50%] h-[50%] bg-white text-[#292929] rounded-md shadow-md shadow-black/10"
+          <motion.div className="fixed z-[500] top-0 left-0 flex justify-center items-center w-full h-full"
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
-            onBlur={() => setIsSortBy(false)}
-            onClick={() => setIsSortBy(true)}
-            onFocus={() => setIsSortBy(true)}
           >
-            <div className="flex justify-center items-center w-full h-auto">
-              Sort flowers by
+            <div className="absolute top-0 left-0 z-[500] flex justify-center items-center w-full h-full bg-black/20"
+              onClick={() => setIsSortBy(false)}
+            />
+
+            <div className="relative z-[550] flex justify-start items-start w-1/2 h-1/2 bg-white text-[#191919] rounded-md">
+              <div className="flex justify-between items-center w-full p-4 leading-none text-xl font-bold border-b border-[#e5e5e5]">
+                <div className="flex justify-start items-center w-auto select-none">
+                  Sort flowers by
+                </div>
+
+                <div className="flex justify-end items-center w-auto">
+                  <button className="flex justify-end items-center w-5 h-5 cursor-pointer no-outline" onClick={() => setIsSortBy(false)}>
+                    <svg className="flex justify-center items-center w-5 h-5" width={20} height={20}>
+                      <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

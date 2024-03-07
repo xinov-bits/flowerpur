@@ -73,13 +73,13 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.2 }}
-                className="relative flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group overflow-hidden">
-                <motion.div
+                className="relative flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
+                <motion.div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="relative flex justify-start items-center w-full border border-[#e5e5e5] rounded-md overflow-hidden">
+                >
                     <Link href={`/product/${slug}`}>
                         <Image className="flex justify-center items-center w-full h-full"
                             src={dimg}
@@ -102,16 +102,23 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                     </motion.div>)}
                 </motion.div>
 
-                <Link href={`/product/${slug}`}>
-                    <div className="flex justify-start items-start w-full h-10 mt-2 text-nd font-semibold text-[#191919] capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden group-hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2">
+                <Link href={`/product/${slug}`} className="flex justify-start items-center w-full">
+                    <div className="flex justify-start items-start w-full h-12 mt-2 font-bold text-[#191919] capitalize line-clamp-3 text-lg text-ellipsis leading-tight overflow-y group-hover:underline text-left">
                         {title}
                     </div>
                 </Link>
 
-                <div className="flex justify-between items-center w-full h-auto mt-1">
-                    <div className="flex justify-start items-center w-auto text-lg font-bold text-[#7a7a7a]">
-                        ₹{price}.00
+                <div className="flex justify-between items-center w-full h-auto">
+                    <div className="flex justify-start items-center w-auto space-x-1 text-lg font-bold">
+                        <div className="flex justify-start items-center w-auto text-[#c6222b]">
+                            ₹{price}.00
+                        </div>
+
+                        <div className="flex justify-start items-center w-auto text-[#767676] font-medium line-through">
+                            ₹{price}.00
+                        </div>
                     </div>
+
                     {(!cartLoading[0] || cartLoading[1] != slug) ? <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
                         {(!addedAnim[0] || addedAnim[1] != slug) && <button
                             onClick={() => addProductToCart(

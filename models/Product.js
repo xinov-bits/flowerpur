@@ -19,7 +19,7 @@ const ProductSchema = new mongoose.Schema({
 
     price: { type: Number, required: true },
 
-    sku: { type: Number, required: true, unique: true },
+    sku: { type: String, required: true, unique: true },
 
     offer: { type: String, required: false, unique: false, default: ' ' },
 

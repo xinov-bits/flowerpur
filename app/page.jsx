@@ -187,19 +187,34 @@ export default function Home() {
               </div>
 
               <div className="flex justify-start items-center w-full">
-                <div className="hidden sm:hidden md:grid lg:grid xl:grid grid-cols-2 sm:grid-cols-5 gap-4 justify-start items-start w-full mt-6">
-                  {Object.keys(products).map((item) => {
-                    return <ProductCard key={products[item]._id}
-                      itemCode={products[item]._id}
-                      slug={products[item].slug}
-                      qty={products[item].qty}
-                      availableQty={products[item].availableQty}
-                      price={products[item].price}
-                      dimg={products[item].dimg}
-                      title={products[item].title}
-                      offer={products[item].offer}
-                    />
-                  })}
+                <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
+                  <Swiper
+                    className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
+                    slidesPerView={3.8}
+                    spaceBetween={12}
+                    pagination={{ clickable: true }}
+                    resistanceRatio={0.2}
+                  >
+                    {Object.keys(products).filter((item) => {
+                      if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
+                        return products[item]
+                      }
+                    }).map((item) => {
+                      return (<SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                        <ProductCard key={products[item]._id}
+                          itemCode={products[item]._id}
+                          slug={products[item].slug}
+                          qty={products[item].qty}
+                          availableQty={products[item].availableQty}
+                          price={products[item].price}
+                          dimg={products[item].dimg}
+                          title={products[item].title}
+                          offer={products[item].offer}
+                        />
+                      </SwiperSlide>
+                      )
+                    })}
+                  </Swiper>
                 </div>
 
                 <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-6">
@@ -208,6 +223,7 @@ export default function Home() {
                     slidesPerView={1.75}
                     spaceBetween={12}
                     pagination={{ clickable: true }}
+                    resistanceRatio={0.2}
                   >
                     {Object.keys(products).filter((item) => {
                       if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
