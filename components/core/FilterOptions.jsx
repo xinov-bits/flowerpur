@@ -131,7 +131,7 @@ export const FilterOptions = () => {
 
     return (
         <>
-            <div className="flex justify-start items-center w-full h-full space-x-2">
+            <div className="flex justify-start items-center w-auto h-full space-x-2">
                 <button className={
                     `
                   flex justify-center items-center w-auto h-full px-2.5 text-[#191919] text-base bg-[#e7e7e7] hover:bg-[#f7f7f7] active:bg-[#d6d6d6] ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : ''} rounded-full font-bold overflow-hidden no-outline duration-100
