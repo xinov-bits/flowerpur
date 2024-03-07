@@ -256,7 +256,6 @@ const Header = () => {
                                 </div>
 
                                 <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
-                                    value={searchKey}
                                     placeholder="Search for flowers, cakes, gifts, etc."
                                     name="search"
                                     type="text"
