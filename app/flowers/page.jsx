@@ -136,7 +136,7 @@ const Page = () => {
                                                 />
                                             </div>
 
-                                            <div className="flex justify-center items-center w-auto mt-1 text-center text-lg font-medium text-[#292929]">
+                                            <div className="flex justify-center items-center w-auto mt-1 text-center text-base font-medium text-[#292929]">
                                                 {flowerCategories[item].name}
                                             </div>
                                         </Link>
@@ -202,7 +202,7 @@ const Page = () => {
                                             />
                                         </div>
 
-                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-lg font-medium text-[#292929]">
+                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-base font-medium text-[#292929]">
                                             {flowerKinds[item].name}
                                         </div>
                                     </Link>
