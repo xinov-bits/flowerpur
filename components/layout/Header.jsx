@@ -30,6 +30,7 @@ import Cart from '../function/Cart';
 
 // MOMENT JS
 import moment from 'moment';
+import MobileMenu from '../function/MobileMenu';
 
 const Header = () => {
     // USE CONTEXT
@@ -213,6 +214,10 @@ const Header = () => {
 
         return 'morning';
     }
+
+
+    // MOBILE MENU
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
         <>
@@ -408,7 +413,9 @@ const Header = () => {
                     <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
                         <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-4">
                             <div className="flex justify-center items-center w-8 h-8">
-                                <button className="z-[1] flex justify-center items-center  no-outline">
+                                <button className="z-[1] flex justify-center items-center no-outline" onClick={() => {
+                                    setIsMobileMenuOpen(!isMobileMenuOpen)
+                                }}>
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -534,6 +541,9 @@ const Header = () => {
 
             {/* CART SIDEMENU */}
             <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+
+            {/* MOBILE SIDEMENU */}
+            <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
 
             {/* SEARCH MENU */}
