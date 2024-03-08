@@ -181,3 +181,9 @@ input[type="number"]::-webkit-outer-spin-button {
 .react-calendar__navigation__prev2-button {
   display: none !important;
 }
+
+
+/* SWIPER SLIDER */
+.swiper-wrapper {
+  display: flex;
+}

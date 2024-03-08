@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 // SWIPER & SPLIDE
 import { Swiper, SwiperSlide } from 'swiper/react';
- 
+
 // CONTEXT
 import CartContext from '@/context/CartContext';
 
@@ -25,7 +25,7 @@ const Page = () => {
     const flowerCategories = [
         {
             name: 'flower in vase',
-            image: 'https://i.ibb.co/LprwGLP/img-to-enhance-ED-sqr.png',
+            image: 'https://i.ibb.co/ZgbRxJ9/img-to-enhance-ED-sqr-min.webp',
             url: '/flowers'
         },
         {
@@ -73,36 +73,6 @@ const Page = () => {
         },
     ]
 
-
-    // END REACHED
-    const [endReached, setEndReached] = useState(false);
-    const flowerCategoriesSWIPER = useRef();
-    
-    const [endReached2, setEndReached2] = useState(false);
-    const flowerKindsSWIPER = useRef();
-
-    useEffect(() => {
-        if (flowerCategoriesSWIPER.current && flowerCategoriesSWIPER.current.swiper) {
-            const swiper = flowerCategoriesSWIPER.current.swiper;
-            swiper.on('reachEnd', function () {
-                setEndReached(true);
-            });
-            swiper.on('reachBeginning', function () {
-                setEndReached(false);
-            });
-        }
-
-        if (flowerKindsSWIPER.current && flowerKindsSWIPER.current.swiper) {
-            const swiper = flowerKindsSWIPER.current.swiper;
-            swiper.on('reachEnd', function () {
-                setEndReached2(true);
-            });
-            swiper.on('reachBeginning', function () {
-                setEndReached2(false);
-            });
-        }
-    }, []);
-
     return (
         <>
             <div className="block justify-start items-start w-screen h-auto bg-white py-6 sm:py-6 md:py-8 lg:py-8 xl:py-8 space-y-6 sm:space-y-6 md:space-y-8 lg:space-y-8 xl:space-y-8 text-[#494949] overflow-x-hidden">
@@ -116,17 +86,16 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4">
+                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4 overflow-x-hidden">
                         <Swiper
-                            className="relative flex justify-center items-center w-full h-auto"
-                            ref={flowerCategoriesSWIPER}
+                            className="relative flex justify-start items-center w-full h-auto"
                             slidesPerView={4.8}
                             spaceBetween={20}
                             pagination={{ clickable: true }}
                             resistanceRatio={0}
                         >
                             {Object.keys(flowerCategories).map((item) => {
-                                return <SwiperSlide key={flowerCategories[item].name} className="flex justify-center items-center w-full h-auto">
+                                return <SwiperSlide key={flowerCategories[item].name} className="flex justify-start items-center w-full h-auto">
                                     <Link href={flowerCategories[item].url} className="rounded-lg">
                                         <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
                                             <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
@@ -143,60 +112,37 @@ const Page = () => {
                                     </Link>
                                 </SwiperSlide>
                             })}
-
-                            <AnimatePresence>
-                                {!endReached && (
-                                    <motion.div className="absolute z-[1] top-0 right-0 flex justify-center items-center w-16 h-full bg-gradient-to-l from-white to-transparent pointer-events-none"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
                         </Swiper>
                     </div>
 
-                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4">
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4 overflow-x-hidden">
                         <Swiper
-                            className="relative flex justify-center items-center w-full h-auto"
-                            ref={flowerCategoriesSWIPER}
+                            className="relative flex justify-start items-center w-full"
                             slidesPerView={2.4}
                             spaceBetween={16}
-                            pagination={{ clickable: true }}
                             resistanceRatio={0}
                         >
                             {Object.keys(flowerCategories).map((item) => {
-                                return <SwiperSlide key={flowerCategories[item].name} className="flex justify-center items-center w-full h-auto">
-                                    <Link href={flowerCategories[item].url} className="rounded-lg">
-                                        <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
-                                            <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
-                                                src={flowerCategories[item].image}
-                                                width={719}
-                                                height={719}
-                                                alt={flowerCategories[item].name}
-                                            />
-                                        </div>
+                                return (
+                                    <SwiperSlide key={flowerCategories[item].name} className="flex justify-start items-center w-full">
+                                        <Link href={flowerCategories[item].url} className="rounded-lg">
+                                            <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
+                                                <Image
+                                                    className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
+                                                    src={flowerCategories[item].image}
+                                                    width={719}
+                                                    height={719}
+                                                    alt={flowerCategories[item].name}
+                                                />
+                                            </div>
 
-                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-lg font-medium text-[#292929]">
-                                            {flowerCategories[item].name}
-                                        </div>
-                                    </Link>
-                                </SwiperSlide>
+                                            <div className="flex justify-center items-center w-auto mt-1 text-center text-lg font-medium text-[#292929]">
+                                                {flowerCategories[item].name}
+                                            </div>
+                                        </Link>
+                                    </SwiperSlide>
+                                );
                             })}
-
-                            <AnimatePresence>
-                                {!endReached && (
-                                    <motion.div className="absolute z-[1] top-0 right-0 flex justify-center items-center w-16 h-full bg-gradient-to-l from-white to-transparent pointer-events-none"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
                         </Swiper>
                     </div>
                 </div>
@@ -213,7 +159,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4">
+                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4 overflow-x-hidden">
                         <div className="flex justify-center items-center w-full h-auto select-none space-x-10">
                             {Object.keys(flowerKinds).map((item) => {
                                 return <div key={flowerKinds[item].name} className="flex justify-center items-center w-full h-full">
@@ -236,17 +182,16 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4">
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4 overflow-x-hidden">
                         <Swiper
-                            className="relative flex justify-center items-center w-full h-auto"
-                            ref={flowerKindsSWIPER}
+                            className="relative flex justify-start items-center w-full h-auto"
                             slidesPerView={2.4}
                             spaceBetween={16}
                             pagination={{ clickable: true }}
                             resistanceRatio={0}
                         >
                             {Object.keys(flowerKinds).map((item) => {
-                                return <SwiperSlide key={flowerKinds[item].name} className="flex justify-center items-center w-full h-auto">
+                                return <SwiperSlide key={flowerKinds[item].name} className="flex justify-start items-center w-full h-auto">
                                     <Link href={flowerKinds[item].url} className="rounded-lg">
                                         <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
                                             <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
@@ -263,18 +208,6 @@ const Page = () => {
                                     </Link>
                                 </SwiperSlide>
                             })}
-
-                            <AnimatePresence>
-                                {!endReached2 && (
-                                    <motion.div className="absolute z-[1] top-0 right-0 flex justify-center items-center w-16 h-full bg-gradient-to-l from-white to-transparent pointer-events-none"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
                         </Swiper>
                     </div>
                 </div>
