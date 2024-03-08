@@ -172,7 +172,9 @@ const Header = () => {
     const handleSubmitSearch = (e) => {
         e.preventDefault();
 
-        router.push(`/search?keyword=${searchKey}`)
+        setIsSearchMenu(false);
+
+        router.push(`/search?keyword=${searchKey}`);
     }
 
     const trendingSearches = [
@@ -445,7 +447,9 @@ const Header = () => {
                                     {numTotal}
                                 </div>
 
-                                <button className="z-[1] flex justify-center items-center  no-outline" onClick={() => setIsCartOpen(true)}>
+                                <button className="z-[1] flex justify-center items-center  no-outline" onClick={() => {
+                                    setIsCartOpen(!isCartOpen);
+                                }}>
                                     <svg className="flex justify-center items-center" width={28} height={28}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"

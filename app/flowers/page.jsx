@@ -115,9 +115,9 @@ const Page = () => {
                         </Swiper>
                     </div>
 
-                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-2.5 overflow-x-hidden">
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-start w-full mt-2.5 overflow-x-hidden">
                         <Swiper
-                            className="relative flex justify-start items-center w-full"
+                            className="relative flex justify-start items-start w-full"
                             slidesPerView={2.4}
                             spaceBetween={16}
                             resistanceRatio={0}

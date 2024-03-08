@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 // SUB COMPONENTS
 
 // FRAMER
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 
 // CONTEXT
 import CartContext from '@/context/CartContext';
@@ -78,18 +78,55 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         }, 800);
     }
 
+
+    // SWIPE TO CLOSE
+    const [dragStartX, setDragStartX] = useState(0);
+    const dragX = useMotionValue(0);
+
+    const handleTouchStart = (e) => {
+        setDragStartX(e.touches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+        const offsetX = e.touches[0].clientX - dragStartX;
+
+        if (offsetX >= 0) {
+            dragX.set(offsetX);
+        } else {
+            dragX.set(0);
+        }
+    };
+
+    const handleTouchEnd = (e) => {
+        const offsetX = e.changedTouches[0].clientX - dragStartX;
+
+        if (offsetX <= 200) {
+            dragX.set(0, { duration: 0.2 });
+        }
+        else if (offsetX > 200) {
+            dragX.set(400, { duration: 0.2 });
+
+            setIsCartOpen(false);
+            setIsCartOpenATC(false);
+        }
+    };
+
     return (
         <>
             <AnimatePresence>
                 {(isCartOpen || isCartOpenATC) && (
-                    <motion.div className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none"
-                        initial={{ x: 400, opacity: 0.6 }}
+                    <motion.div
+                        id="cart"
+                        className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-100"
+                        style={{ x: dragX }}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+
+                        initial={{ x: 400, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: 400, opacity: 0.6 }}
-                        transition={{
-                            ease: "linear",
-                            delay: 0.2
-                        }}
+                        exit={{ x: 400, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
                     >
                         <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => {
                             setIsCartOpen(false);
