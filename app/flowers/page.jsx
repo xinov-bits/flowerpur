@@ -81,7 +81,7 @@ const Page = () => {
                         <div className="flex justify-start items-center w-full !leading-none text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-medium text-[#292929]  font_nib italic">
+                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#292929]  font_garmond">
                             shop from categories
                         </div>
                     </div>
@@ -115,7 +115,7 @@ const Page = () => {
                         </Swiper>
                     </div>
 
-                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4 overflow-x-hidden">
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-2.5 overflow-x-hidden">
                         <Swiper
                             className="relative flex justify-start items-center w-full"
                             slidesPerView={2.4}
@@ -154,12 +154,12 @@ const Page = () => {
                         <div className="flex justify-start items-center w-full !leading-none text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-medium text-[#292929]  font_nib italic">
+                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#292929]  font_garmond">
                             popular spring flowers
                         </div>
                     </div>
 
-                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4 overflow-x-hidden">
+                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4">
                         <div className="flex justify-center items-center w-full h-auto select-none space-x-10">
                             {Object.keys(flowerKinds).map((item) => {
                                 return <div key={flowerKinds[item].name} className="flex justify-center items-center w-full h-full">
@@ -182,7 +182,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4 overflow-x-hidden">
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-2.5 overflow-x-hidden">
                         <Swiper
                             className="relative flex justify-start items-center w-full h-auto"
                             slidesPerView={2.4}
