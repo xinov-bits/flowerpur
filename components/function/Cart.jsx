@@ -143,8 +143,19 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                     </Link>
 
                                                     {item.offer === 'buy-2-get-1-free' && <div className="flex justify-start items-start w-full h-auto">
-                                                        <div className="relative flex justify-center items-center w-auto h-full px-2 py-1 leading-none bg-[#65CDE7] text-[#010E36] rounded-full text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
-                                                            Buy 2 Get 1 Free
+                                                        <div className="relative flex justify-center items-center w-auto h-6 px-2 leading-none bg-[#ffcc29] text-[#292929] rounded text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
+                                                            <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
+                                                                <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                                                    <use
+                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
+                                                                    ></use>
+                                                                </svg>
+                                                            </div>
+
+                                                            <div className="flex justify-start items-center">
+                                                                Buy 2 Get 1 Free
+                                                            </div>
                                                         </div>
                                                     </div>}
 
@@ -155,8 +166,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
                                                 <div className="flex justify-end items-center w-[42%] h-full">
                                                     <div className="flex justify-center items-center w-full h-full">
-                                                        <button className="flex justify-between items-center w-full h-[2.75rem] sm:h-[2.75rem] md:h-10 lg:h-10 xl:h-10 px-1 bg-[#f7f7f7] rounded-full border border-[#e5e5e5] text-[#292929] overflow-hidden">
-                                                            {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5]" onClick={() =>
+                                                        <div className="flex justify-between items-center w-full h-[2.75rem] sm:h-[2.75rem] md:h-10 lg:h-10 xl:h-10 px-1 bg-[#f7f7f7] rounded-full border border-[#e5e5e5] text-[#292929] overflow-hidden no-outline">
+                                                            {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] no-outline" onClick={() =>
                                                                 removeProductToCart(
                                                                     item.url,
                                                                     item.url,
@@ -174,7 +185,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                     ></use>
                                                                 </svg>
                                                             </button>}
-                                                            {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden">
+                                                            {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden no-outline">
                                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -187,7 +198,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                 {item.qty}×
                                                             </div>
 
-                                                            {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5]" onClick={() =>
+                                                            {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] no-outline" onClick={() =>
                                                                 addProductToCart(
                                                                     item.url,
                                                                     item.url,
@@ -205,7 +216,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                     ></use>
                                                                 </svg>
                                                             </button>}
-                                                            {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden">
+                                                            {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden no-outline">
                                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -213,7 +224,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                     ></use>
                                                                 </svg>
                                                             </button>}
-                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

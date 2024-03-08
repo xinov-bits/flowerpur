@@ -4,6 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://db.onlinewebfonts.com/c/0e676cf720025c02ec22a545a57fbc86?family=Nib+Pro+Light");
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -43,12 +44,12 @@ body {
 }
 @media (min-width: 1024px) {
   body {
-    margin-top: 146px !important;
+    margin-top: 144px !important;
   }
 }
 @media (min-width: 1280px) {
   body {
-    margin-top: 146px !important;
+    margin-top: 144px !important;
   }
 }
 
@@ -63,6 +64,9 @@ body {
 }
 .font_libre {
   font-family: "Libre Baskerville", serif !important;
+}
+.font_nib {
+  font-family: "Nib Pro Light" !important;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

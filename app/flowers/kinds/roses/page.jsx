@@ -142,11 +142,11 @@ const Page = () => {
         <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
           <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
             <div className="flex flex-col justify-start items-center w-full select-none">
-              <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
+              <div className="flex justify-start items-center w-full !leading-none text-xl sm:text-xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                 Roses
               </div>
 
-              <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-normal text-[#797979]">
+              <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#767676]">
                 Select from different bouquets
               </div>
 

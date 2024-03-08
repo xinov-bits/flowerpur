@@ -55,13 +55,13 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full justify-center items-start bg-white overflow-x-hidden">
+      <div className="block w-full h-full justify-center items-start bg-white overflow-x-hidden">
         <div className="flex w-full h-full justify-center items-start select-none">
           <div className="relative hidden sm:hidden md:block lg:block xl:block justify-start items-start w-full text-[#333333]">
             <div className="relative flex justify-center items-start w-full">
               <Link href="/flowers" className="flex justify-center items-center w-full no-outline">
                 <div className="absolute right-8 flex justify-end items-center w-full">
-                  <div className="flex flex-col justify-end items-center w-full text-right">
+                  <div className="block justify-end items-center w-full text-right">
                     <div className="flex justify-end items-center w-full text-lg font-semibold leading-tight">
                       <div className="flex justify-end items-center w-[40%]">
                         IN FULL BLOOM:
@@ -83,17 +83,15 @@ export default function Home() {
 
                     <div className="flex justify-end items-center w-full mt-4 text-lg font-semibold leading-none">
                       <div className="flex justify-end items-center w-[40%]">
-                        <Link href="/flowers" className="flex justify-center items-center w-auto">
-                          <button className="flex justify-center items-center w-auto h-10 px-3.5 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded">
-                            <div> Shop Birthday </div>
-                          </button>
-                        </Link>
+                        <button className="flex justify-center items-center w-auto h-10 px-3.5 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded">
+                          <div> Shop Birthday </div>
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-center items-center w-full p-0 overflow-hidden">
+                <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] overflow-hidden">
                   <Image className="flex justify-center items-center w-full h-full overflow-hidden"
                     src={"https://i.ibb.co/CnLzvb3/banner-01.webp"}
                     width={1400}
@@ -153,11 +151,9 @@ export default function Home() {
 
                   <div className="flex justify-center items-center w-full mt-4 text-lg font-semibold leading-none">
                     <div className="flex justify-center items-center w-[40%]">
-                      <Link href="/flowers" className="flex justify-center items-center w-auto">
-                        <button className="flex justify-center items-center w-auto h-[2.75rem] px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md">
-                          <div> Shop Birthday </div>
-                        </button>
-                      </Link>
+                      <button className="flex justify-center items-center w-auto h-[2.75rem] px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md">
+                        <div> Shop Birthday </div>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -181,7 +177,7 @@ export default function Home() {
 
         <div className="block justify-start items-start w-full h-full bg-white py-6 sm:py-6 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
           <div className="block w-full h-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
-            <div className="flex flex-col justify-start items-center w-full h-full select-none">
+            {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex flex-col justify-start items-center w-full h-full select-none">
               <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
                 Best-Selling Bouquets
               </div>
@@ -191,9 +187,9 @@ export default function Home() {
                   <Swiper
                     className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
                     slidesPerView={3.8}
-                    spaceBetween={12}
+                    spaceBetween={16}
                     pagination={{ clickable: true }}
-                    resistanceRatio={0.2}
+                    resistanceRatio={0}
                   >
                     {Object.keys(products).filter((item) => {
                       if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
@@ -223,7 +219,7 @@ export default function Home() {
                     slidesPerView={1.75}
                     spaceBetween={12}
                     pagination={{ clickable: true }}
-                    resistanceRatio={0.2}
+                    resistanceRatio={0}
                   >
                     {Object.keys(products).filter((item) => {
                       if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
@@ -248,7 +244,7 @@ export default function Home() {
                   </Swiper>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </div>

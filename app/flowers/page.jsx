@@ -1,129 +1,281 @@
-import React from 'react'
+"use client"
+
+import React, { useState, useEffect, useContext, useRef } from 'react'
 
 // NEXT JS
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
+
+// CRYPTO JS
+import CryptoJS from 'crypto-js'
+
+// AXIOS
+import axios from 'axios';
+
+// FRAMER
+import { motion, AnimatePresence } from "framer-motion"
+
+// SWIPER & SPLIDE
+import { Swiper, SwiperSlide } from 'swiper/react';
+ 
+// CONTEXT
+import CartContext from '@/context/CartContext';
 
 const Page = () => {
     const flowerCategories = [
         {
-            name: 'Flower in Vase',
-            image: 'https://imgcdn.floweraura.com/vase_0_3.jpg',
+            name: 'flower in vase',
+            image: 'https://i.ibb.co/LprwGLP/img-to-enhance-ED-sqr.png',
             url: '/flowers'
         },
         {
-            name: 'Birthday',
-            image: 'https://imgcdn.floweraura.com/birthday_44.jpg',
+            name: 'birthday',
+            image: 'https://i.ibb.co/gP9Mbq1/BD2-D-LOL-preset-proflowers-mx-tile-wide-sv-new.jpg',
             url: '/flowers'
         },
         {
-            name: 'Anniversary',
-            image: 'https://imgcdn.floweraura.com/anniversary_38.jpg',
+            name: 'anniversary',
+            image: 'https://i.ibb.co/mJKwq3Y/P2168-LOL-preset-proflowers-mx-tile-wide-sv-new.jpg',
             url: '/flowers'
         },
         {
-            name: 'Love & Affection',
-            image: 'https://imgcdn.floweraura.com/love_and_romance_6.jpg',
+            name: 'love & affection',
+            image: 'https://i.ibb.co/Yd5BMfg/B59-D-LOL-preset-proflowers-mx-tile-wide-sv-new.jpg',
             url: '/flowers'
         },
         {
-            name: 'Flower Hampers',
-            image: 'https://imgcdn.floweraura.com/hampers_36.jpg',
-            url: '/flowers'
-        },
-        {
-            name: 'Flower Gift Boxes',
-            image: 'https://imgcdn.floweraura.com/box_0.jpg',
+            name: 'flower gift boxes',
+            image: 'https://i.ibb.co/4M6dcGp/gift-box.jpg',
             url: '/flowers'
         },
     ]
 
     const flowerKinds = [
         {
-            name: 'Roses',
-            image: 'https://imgcdn.floweraura.com/rose_12.jpg',
+            name: 'roses',
+            image: 'https://i.ibb.co/fvKtkHt/0349-PF-Spring24-Site-Shop-By-Roses-Cat-Tile.webp',
             url: '/flowers/kinds/roses'
         },
         {
-            name: 'Lilies',
-            image: 'https://imgcdn.floweraura.com/lilies_14.jpg',
+            name: 'sunflowers',
+            image: 'https://i.ibb.co/T4jSfjw/0349-PF-Spring24-Site-Shop-By-Sunflowers-Cat-Tile.webp',
             url: '/flowers/kinds/roses'
         },
         {
-            name: 'Orchids',
-            image: 'https://imgcdn.floweraura.com/orchids_5.jpg',
+            name: 'tulips',
+            image: 'https://i.ibb.co/b6DmCnD/0349-PF-Spring24-Site-Shop-By-Tulips-Cat-Tile.webp',
             url: '/flowers/kinds/roses'
         },
         {
-            name: 'Carnations',
-            image: 'https://imgcdn.floweraura.com/carnations_15.jpg',
-            url: '/flowers/kinds/roses'
-        },
-        {
-            name: 'Gerberas',
-            image: 'https://imgcdn.floweraura.com/gerberas_5.jpg',
+            name: 'peonies',
+            image: 'https://i.ibb.co/ZhnFQjb/0349-PF-Spring24-Site-Shop-By-Peonies-Cat-Tile.webp',
             url: '/flowers/kinds/roses'
         },
     ]
+
+
+    // END REACHED
+    const [endReached, setEndReached] = useState(false);
+    const flowerCategoriesSWIPER = useRef();
     
+    const [endReached2, setEndReached2] = useState(false);
+    const flowerKindsSWIPER = useRef();
+
+    useEffect(() => {
+        if (flowerCategoriesSWIPER.current && flowerCategoriesSWIPER.current.swiper) {
+            const swiper = flowerCategoriesSWIPER.current.swiper;
+            swiper.on('reachEnd', function () {
+                setEndReached(true);
+            });
+            swiper.on('reachBeginning', function () {
+                setEndReached(false);
+            });
+        }
+
+        if (flowerKindsSWIPER.current && flowerKindsSWIPER.current.swiper) {
+            const swiper = flowerKindsSWIPER.current.swiper;
+            swiper.on('reachEnd', function () {
+                setEndReached2(true);
+            });
+            swiper.on('reachBeginning', function () {
+                setEndReached2(false);
+            });
+        }
+    }, []);
+
     return (
         <>
-            <div className="block justify-start items-start w-screen h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949] overflow-x-hidden">
+            <div className="block justify-start items-start w-screen h-auto bg-white py-6 sm:py-6 md:py-8 lg:py-8 xl:py-8 space-y-6 sm:space-y-6 md:space-y-8 lg:space-y-8 xl:space-y-8 text-[#494949] overflow-x-hidden">
                 <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
                     <div className="flex flex-col justify-start items-center w-full">
-                        <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
+                        <div className="flex justify-start items-center w-full !leading-none text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-medium text-[#797979]">
-                            Select from categories
+                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-medium text-[#292929]  font_nib italic">
+                            shop from categories
                         </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-auto h-auto mt-1 sm:mt-1 md:mt-4 lg:mt-4 xl:mt-4 pb-4 px-1 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto overflow-y-hidden">
-                        {flowerCategories.map((item) => (<Link className="flex justify-start items-center w-auto h-full  no-outline" href={item.url} key={item.name}>
-                            <div className="flex flex-col justify-center items-center w-full h-full hover:text-[#191919]">
-                                <div className="flex justify-center items-center w-32 sm:w-32 md:w-44 lg:w-44 xl:w-44">
-                                    <Image className="flex justify-center items-center w-full h-full rounded-full hover:ring-2 hover:ring-[#e5e5e5] ring-offset-2 duration-100"
-                                        src={item.image}
-                                        alt={item.name}
-                                        width={1080}
-                                        height={1080}
-                                    />
-                                </div>
-                                <div className="flex justify-center items-center w-full mt-1 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg text-center font-semibold leading-none">
-                                    {item.name}
-                                </div>
-                            </div>
-                        </Link>))}
+                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4">
+                        <Swiper
+                            className="relative flex justify-center items-center w-full h-auto"
+                            ref={flowerCategoriesSWIPER}
+                            slidesPerView={4.8}
+                            spaceBetween={20}
+                            pagination={{ clickable: true }}
+                            resistanceRatio={0}
+                        >
+                            {Object.keys(flowerCategories).map((item) => {
+                                return <SwiperSlide key={flowerCategories[item].name} className="flex justify-center items-center w-full h-auto">
+                                    <Link href={flowerCategories[item].url} className="rounded-lg">
+                                        <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
+                                            <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
+                                                src={flowerCategories[item].image}
+                                                width={800}
+                                                height={800}
+                                                alt={flowerCategories[item].name}
+                                            />
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-xl font-medium text-[#292929]">
+                                            {flowerCategories[item].name}
+                                        </div>
+                                    </Link>
+                                </SwiperSlide>
+                            })}
+
+                            <AnimatePresence>
+                                {!endReached && (
+                                    <motion.div className="absolute z-[1] top-0 right-0 flex justify-center items-center w-16 h-full bg-gradient-to-l from-white to-transparent pointer-events-none"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </Swiper>
+                    </div>
+
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4">
+                        <Swiper
+                            className="relative flex justify-center items-center w-full h-auto"
+                            ref={flowerCategoriesSWIPER}
+                            slidesPerView={2.4}
+                            spaceBetween={16}
+                            pagination={{ clickable: true }}
+                            resistanceRatio={0}
+                        >
+                            {Object.keys(flowerCategories).map((item) => {
+                                return <SwiperSlide key={flowerCategories[item].name} className="flex justify-center items-center w-full h-auto">
+                                    <Link href={flowerCategories[item].url} className="rounded-lg">
+                                        <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
+                                            <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
+                                                src={flowerCategories[item].image}
+                                                width={719}
+                                                height={719}
+                                                alt={flowerCategories[item].name}
+                                            />
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-lg font-medium text-[#292929]">
+                                            {flowerCategories[item].name}
+                                        </div>
+                                    </Link>
+                                </SwiperSlide>
+                            })}
+
+                            <AnimatePresence>
+                                {!endReached && (
+                                    <motion.div className="absolute z-[1] top-0 right-0 flex justify-center items-center w-16 h-full bg-gradient-to-l from-white to-transparent pointer-events-none"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </Swiper>
                     </div>
                 </div>
 
-                <div className="block w-full h-auto my-2 sm:my-2 md:my-10 lg:my-10 xl:my-10 py-6 sm:py-6 md:py-10 lg:py-10 xl:py-10 px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 border-y-[1.5px] border-[#e5e5e5]">
+                <div className="flex justify-center items-center w-full h-2 sm:h-2 md:h-1 lg:h-1 xl:h-1 bg-[#f7f7f7] border-y border-[#e5e5e5]" />
+
+                <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
                     <div className="flex flex-col justify-start items-center w-full">
-                        <div className="flex justify-start items-center w-full text-2xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-[#191919]">
+                        <div className="flex justify-start items-center w-full !leading-none text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-medium text-[#797979]">
-                            Select from different kinds
+                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-medium text-[#292929]  font_nib italic">
+                            popular spring flowers
                         </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-auto h-auto mt-2 pb-4 px-1 select-none space-x-6 overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto overflow-y-hidden">
-                        {flowerKinds.map((item) => (<Link className="flex justify-start items-center w-auto h-full pt-2  no-outline" href={item.url} key={item.name}>
-                            <div className="flex flex-col justify-center items-center w-full h-full hover:text-[#191919]">
-                                <div className="flex justify-center items-center w-32 sm:w-32 md:w-44 lg:w-44 xl:w-44">
-                                    <Image className="flex justify-center items-center w-full h-full rounded-full hover:ring-2 hover:ring-[#e5e5e5] ring-offset-2 duration-100"
-                                        src={item.image}
-                                        alt={item.name}
-                                        width={1080}
-                                        height={1080}
-                                    />
+                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full mt-4">
+                        <div className="flex justify-center items-center w-full h-auto select-none space-x-10">
+                            {Object.keys(flowerKinds).map((item) => {
+                                return <div key={flowerKinds[item].name} className="flex justify-center items-center w-full h-full">
+                                    <Link href={flowerKinds[item].url} className="rounded-lg">
+                                        <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
+                                            <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
+                                                src={flowerKinds[item].image}
+                                                width={800}
+                                                height={800}
+                                                alt={flowerKinds[item].name}
+                                            />
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-xl font-medium text-[#292929]">
+                                            {flowerKinds[item].name}
+                                        </div>
+                                    </Link>
                                 </div>
-                                <div className="flex justify-center items-center w-full mt-1 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg text-center font-semibold leading-none">
-                                    {item.name}
-                                </div>
-                            </div>
-                        </Link>))}
+                            })}
+                        </div>
+                    </div>
+
+                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full mt-4">
+                        <Swiper
+                            className="relative flex justify-center items-center w-full h-auto"
+                            ref={flowerKindsSWIPER}
+                            slidesPerView={2.4}
+                            spaceBetween={16}
+                            pagination={{ clickable: true }}
+                            resistanceRatio={0}
+                        >
+                            {Object.keys(flowerKinds).map((item) => {
+                                return <SwiperSlide key={flowerKinds[item].name} className="flex justify-center items-center w-full h-auto">
+                                    <Link href={flowerKinds[item].url} className="rounded-lg">
+                                        <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-t-lg rounded-b">
+                                            <Image className="flex justify-center items-center w-full h-full rounded-t-lg rounded-b"
+                                                src={flowerKinds[item].image}
+                                                width={800}
+                                                height={800}
+                                                alt={flowerKinds[item].name}
+                                            />
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-auto mt-1 text-center text-lg font-medium text-[#292929]">
+                                            {flowerKinds[item].name}
+                                        </div>
+                                    </Link>
+                                </SwiperSlide>
+                            })}
+
+                            <AnimatePresence>
+                                {!endReached2 && (
+                                    <motion.div className="absolute z-[1] top-0 right-0 flex justify-center items-center w-16 h-full bg-gradient-to-l from-white to-transparent pointer-events-none"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </Swiper>
                     </div>
                 </div>
             </div>

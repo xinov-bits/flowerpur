@@ -82,7 +82,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                         transition={{ delay: 0.4 }}
                     >
                         <Link href={`/product/${slug}`}>
-                            <Image className="flex justify-center items-center w-full h-full"
+                            <Image className="flex justify-center items-center w-full h-full no-outline"
                                 src={dimg}
                                 width={800}
                                 height={800}
@@ -90,21 +90,24 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                             />
                         </Link>
 
-                        {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ delay: 0.8 }}
-                            className="absolute bottom-0 -right-1 flex justify-center items-center w-auto h-7 px-2.5 rounded-tl-md bg-[#65CDE7] leading-none text-xs font-semibold text-[#010E36] -skew-x-12  anim__pulse-wave"
-                        >
-                            <span className="skew-x-12">
+                        {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="absolute top-1 left-1 flex justify-center items-center w-auto h-6 px-2 rounded bg-[#ffcc29] leading-none text-xs font-bold text-[#292929]  anim__pulse-wave">
+                            <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
+                                <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                    <use
+                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
+                                    ></use>
+                                </svg>
+                            </div>
+
+                            <div className="flex justify-start items-center">
                                 Buy 2 Get 1 Free
-                            </span>
-                        </motion.div>)}
+                            </div>
+                        </div>)}
                     </motion.div>
                 </div>
 
-                <Link href={`/product/${slug}`} className="flex justify-start items-center w-full">
+                <Link href={`/product/${slug}`} className="flex justify-start items-center w-full no-outline">
                     <div className="flex justify-start items-start w-full h-12 mt-2 font-bold text-[#191919] capitalize line-clamp-3 text-lg text-ellipsis leading-tight overflow-y group-hover:underline text-left">
                         {title}
                     </div>
@@ -133,7 +136,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                                 title,
                                 offer,
                             )}
-                            className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1">
+                            className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1 no-outline">
                             <svg className="text-[#191919]" width={18} height={18}>
                                 <use
                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -144,7 +147,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                             <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
                         </button>}
 
-                        {(addedAnim[0] && addedAnim[1] === slug) && <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1">
+                        {(addedAnim[0] && addedAnim[1] === slug) && <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1 no-outline">
                             <svg className="" width={14} height={14}>
                                 <use
                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -157,7 +160,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                     </div>
                         :
                         <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#767676] cursor-default">
-                            <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] space-x-1">
+                            <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] space-x-1 no-outline">
                                 <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"

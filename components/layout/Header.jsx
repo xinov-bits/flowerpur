@@ -259,6 +259,7 @@ const Header = () => {
                                     placeholder="Search for flowers, cakes, gifts, etc."
                                     name="search"
                                     type="text"
+                                    autoComplete='off'
                                 />
                             </button>
                         </div>
@@ -267,7 +268,7 @@ const Header = () => {
                     <div className="flex justify-end items-center w-[40%] h-full">
                         <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
                             <li className="relative flex justify-center items-center w-auto h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
-                                <button className="relative flex justify-center items-center w-auto h-full cursor-pointer" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
+                                <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
                                     {(
                                         getCookie('user_state') === '' ||
                                         getCookie('user_state') === undefined ||
@@ -316,13 +317,17 @@ const Header = () => {
                             </li>
 
                             <li className="flex justify-center items-center w-9 h-full cursor-pointer">
-                                <button className="relative flex justify-center items-center w-full h-full space-x-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer overflow-hidden duration-75" onClick={() => setIsCartOpen(true)}>
+                                <button className="relative flex justify-center items-center w-full h-full space-x-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer no-outline duration-75" onClick={() => setIsCartOpen(true)}>
                                     <svg className="" width={20} height={20}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart2_dd"
                                         ></use>
                                     </svg>
+
+                                    {numTotal > 0 && <div className="absolute top-[3px] right-[3px] flex justify-center items-center w-[13px] h-[13px] rounded-full bg-[#085b45] text-white text-[9.5px] font-semibold leading-none">
+                                        {numTotal}
+                                    </div>}
                                 </button>
                             </li>
 
@@ -342,13 +347,13 @@ const Header = () => {
                             </Link> : <li className="relative flex justify-center items-center w-auto h-full rounded-full duration-75 space-x-1">
                                 <div className="flex justify-center items-center w-full h-full space-x-2">
                                     <Link href="/auth/signin" className="flex justify-center items-center w-auto h-full no-outline">
-                                        <button className="flex justify-center items-center w-full h-full px-3 bg-[#e5e5e5] hover:bg-[#d6d6d6] font-semibold rounded-full cursor-pointer leading-none">
+                                        <button className="flex justify-center items-center w-full h-full px-3 bg-[#e5e5e5] hover:bg-[#d6d6d6] font-semibold rounded-full cursor-pointer no-outline leading-none">
                                             Sign In
                                         </button>
                                     </Link>
 
                                     <Link href="/auth/signup" className="flex justify-center items-center w-auto h-full no-outline">
-                                        <button className="flex justify-center items-center w-full h-full px-3 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold leading-none rounded-full cursor-pointer">
+                                        <button className="flex justify-center items-center w-full h-full px-3 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold leading-none rounded-full no-outline cursor-pointer">
                                             <div> Sign Up </div>
                                         </button>
                                     </Link>
@@ -359,13 +364,13 @@ const Header = () => {
                 </div>
 
                 {/* MENU */}
-                <div className="flex justify-center items-center w-full h-18 py-2 px-6 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5] select-none">
-                    <ul className="flex justify-center items-center w-full h-full space-x-4">
+                <div className="flex justify-center items-center w-full h-16 py-2 px-6 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5] select-none">
+                    <ul className="flex justify-center items-center w-full h-full space-x-2.5">
                         {menuItems.map((item, index) => (
-                            <Link className="flex justify-center items-center w-auto h-full rounded-full" key={index} href={item.link}>
+                            <Link className="flex justify-center items-center w-auto h-full rounded-full no-outline" key={index} href={item.link}>
                                 <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">
                                     <div className="flex justify-center items-center w-auto h-full">
-                                        <Image
+                                        <Image className="flex justify-center items-center w-8 h-8"
                                             src={`/assets/icons/${item.img}`}
                                             alt={item.name}
                                             width={38}
@@ -477,7 +482,7 @@ const Header = () => {
                 </div>
 
                 <div className="flex justify-start items-center w-full h-14 py-2 px-3.5 space-x-2 border-y border-[#e5e5e5]">
-                    <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
+                    <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden no-outline" onClick={() => setIsSearchMenu(true)}>
                         <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                             <svg className="text-[#494949]" width={24} height={24}>
                                 <use
@@ -488,13 +493,12 @@ const Header = () => {
                         </div>
 
                         <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
-                            onChange={handleChangeSearch}
-                            value={searchKey}
                             placeholder="Search for flowers, cakes, gifts, etc."
                             name="search"
                             type="text"
+                            autoComplete='off'
                         />
-                    </form>
+                    </button>
                 </div>
 
                 {/* MENU (104px) */}
@@ -532,12 +536,12 @@ const Header = () => {
             {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
                 <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
 
-                <div className="absolute z-[200] top-[1.8rem] left-14 sm:left-14 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[60%] sm:w-[60%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
+                <div className="absolute z-[200] top-[6.2rem] sm:top-[6.2rem] md:top-[1.8rem] lg:top-[1.8rem] xl:top-[1.8rem] left-1 sm:left-1 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[98%] sm:w-[98%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
                     onBlur={() => setIsSearchMenu(false)}
                     onClick={() => setIsSearchMenu(true)}
                     onFocus={() => setIsSearchMenu(true)}>
                     <div className="relative flex flex-col justify-start items-start w-full h-full pb-2 px-[0.6rem]">
-                        <div className="flex justify-start items-start w-full h-ful h-[3.25rem] py-2">
+                        <div className="flex justify-start items-start w-full h-ful h-[3.4rem] sm:h-[3.4rem] md:h-[3.25rem] lg:h-[3.25rem] xl:h-[3.25rem] py-2">
                             <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
                                 <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                                     <svg className="text-[#494949]" width={24} height={24}>
@@ -554,6 +558,8 @@ const Header = () => {
                                     placeholder="Search for flowers, cakes, gifts, etc."
                                     name="search"
                                     type="text"
+                                    autoComplete='off'
+                                    autoFocus
                                 />
                             </form>
                         </div>
