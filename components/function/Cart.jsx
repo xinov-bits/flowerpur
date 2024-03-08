@@ -101,10 +101,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         const offsetX = e.changedTouches[0].clientX - dragStartX;
 
         if (offsetX <= 200) {
-            dragX.set(0, { duration: 0.2 });
+            dragX.set(0, { duration: 0.15 });
         }
         else if (offsetX > 200) {
-            dragX.set(400, { duration: 0.2 });
+            dragX.set(450, { duration: 0.15 });
 
             setIsCartOpen(false);
             setIsCartOpenATC(false);
@@ -117,7 +117,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                 {(isCartOpen || isCartOpenATC) && (
                     <motion.div
                         id="cart"
-                        className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-100"
+                        className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-75"
                         style={{ x: dragX }}
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
