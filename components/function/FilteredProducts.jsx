@@ -132,7 +132,7 @@ export const FilteredProducts = () => {
     return (
         <>
             {Object.keys(filterProducts).filter((item) => {
-                if (qFilter !== '' && qFilter !== 'none') {
+                if (!(qFilter === undefined || qFilter === null || qFilter === '' || qFilter === 'none')) {
                     if (qFilter === 'offers') {
                         if (filterProducts[item].offer !== '' && filterProducts[item] !== 'none') {
                             return filterProducts[item];

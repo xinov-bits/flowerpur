@@ -153,10 +153,6 @@ const Page = () => {
 
               <div className="flex justify-between items-center w-full h-8 mt-2">
                 <FilterOptions />
-
-                <div className="flex justify-end items-center w-auto text-md font-medium text-[#797979]">
-                  {filterProducts.length} results
-                </div>
               </div>
             </div>
 

@@ -72,35 +72,37 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.1 }}
                 className="relative flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
-                <motion.div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 0.8 }}
-                >
-                    <Link href={`/product/${slug}`}>
-                        <Image className="flex justify-center items-center w-full h-full"
-                            src={dimg}
-                            width={800}
-                            height={800}
-                            alt={title}
-                        />
-                    </Link>
-
-                    {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<motion.div
+                <div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden bg-[#fafafa]">
+                    <motion.div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ delay: 0.8 }}
-                        className="absolute bottom-0 -right-1 flex justify-center items-center w-auto h-7 px-2.5 rounded-tl-md bg-[#65CDE7] leading-none text-xs font-semibold text-[#010E36] -skew-x-12  anim__pulse-wave"
+                        transition={{ delay: 0.4 }}
                     >
-                        <span className="skew-x-12">
-                            Buy 2 Get 1 Free
-                        </span>
-                    </motion.div>)}
-                </motion.div>
+                        <Link href={`/product/${slug}`}>
+                            <Image className="flex justify-center items-center w-full h-full"
+                                src={dimg}
+                                width={800}
+                                height={800}
+                                alt={title}
+                            />
+                        </Link>
+
+                        {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ delay: 0.8 }}
+                            className="absolute bottom-0 -right-1 flex justify-center items-center w-auto h-7 px-2.5 rounded-tl-md bg-[#65CDE7] leading-none text-xs font-semibold text-[#010E36] -skew-x-12  anim__pulse-wave"
+                        >
+                            <span className="skew-x-12">
+                                Buy 2 Get 1 Free
+                            </span>
+                        </motion.div>)}
+                    </motion.div>
+                </div>
 
                 <Link href={`/product/${slug}`} className="flex justify-start items-center w-full">
                     <div className="flex justify-start items-start w-full h-12 mt-2 font-bold text-[#191919] capitalize line-clamp-3 text-lg text-ellipsis leading-tight overflow-y group-hover:underline text-left">
