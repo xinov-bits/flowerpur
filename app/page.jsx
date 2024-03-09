@@ -140,17 +140,17 @@ export default function Home() {
     fetchReviews();
   }, [products]);
 
-  let reviewNames = reviewMean.map((s) => s.name);
-
-  let reviewStarNames = reviewMean.filter((s) => {
-    if (s.stars >= 4) {
-      return s
-    }
-  }).map((s) => s.name);
-
   useEffect(() => {
+    let reviewNames = reviewMean.map((s) => s.name);
+
+    let reviewStarNames = reviewMean.filter((s) => {
+      if (s.stars >= 4) {
+        return s
+      }
+    }).map((s) => s.name);
+
     setReviewNamesToSend(reviewStarNames);
-  }, [reviewStarNames])
+  }, [])
 
   return (
     <>
