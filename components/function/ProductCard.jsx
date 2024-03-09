@@ -18,7 +18,7 @@ import { motion, AnimatePresence } from "framer-motion"
 // CONTEXT
 import CartContext from '@/context/CartContext';
 
-const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, offer }) => {
+const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, offer, ratings }) => {
     const {
         cart,
         subTotal,
@@ -90,20 +90,33 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                             />
                         </Link>
 
-                        {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="absolute top-1 left-1 flex justify-center items-center w-auto h-6 px-2 rounded bg-[#ffcc29] leading-none text-xs font-bold text-[#292929]  anim__pulse-wave">
-                            <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
-                                <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
-                                    <use
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
-                                    ></use>
-                                </svg>
-                            </div>
+                        <div className="absolute top-1 left-1 flex justify-center items-center space-x-1 overflow-hidden">
+                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-2 rounded bg-[#ffcc29] leading-none text-xs font-bold text-[#292929] overflow-hidden  anim__pulse-wave">
+                                <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
+                                    <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
+                                        ></use>
+                                    </svg>
+                                </div>
 
-                            <div className="flex justify-start items-center">
-                                Buy 2 Get 1 Free
-                            </div>
-                        </div>)}
+                                <div className="flex justify-start items-center">
+                                    Buy 2 Get 1 Free
+                                </div>
+                            </div>)}
+
+                            {(ratings !== undefined && ratings !== null && ratings.includes(slug)) && (<div className="flex justify-center items-center w-auto h-6 px-1 rounded bg-[#00838a] leading-none text-xs font-bold text-white overflow-hidden">
+                                <div className="flex justify-center items-center w-4 h-4">
+                                    <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-star_dd"
+                                        ></use>
+                                    </svg>
+                                </div>
+                            </div>)}
+                        </div>
                     </motion.div>
                 </div>
 

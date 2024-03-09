@@ -185,5 +185,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* SWIPER SLIDER */
 .swiper-wrapper {
-  display: flex;
+  display: flex !important;
+}
+
+.swiper-initialized {
+  display: flex !important;
 }
