@@ -121,6 +121,7 @@ export default function Home() {
 
   // FILTER & RATINGS
   const [reviewMean, setReviewMean] = useState([]);
+  const [reviewStarNames, setReviewStarNames] = useState([]);
   const [reviewNamesToSend, setReviewNamesToSend] = useState([]);
 
   const fetchReviews = async () => {
@@ -143,14 +144,16 @@ export default function Home() {
   useEffect(() => {
     let reviewNames = reviewMean.map((s) => s.name);
 
-    let reviewStarNames = reviewMean.filter((s) => {
+    setReviewStarNames(reviewMean.filter((s) => {
       if (s.stars >= 4) {
         return s
       }
-    }).map((s) => s.name);
+    }).map((s) => s.name))
+  }, [reviewMean])
 
+  useEffect(() => {
     setReviewNamesToSend(reviewStarNames);
-  }, [])
+  }, [reviewStarNames])
 
   return (
     <>
