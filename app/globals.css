@@ -37,7 +37,7 @@ body {
   width: 100% !important;
   scroll-behavior: smooth !important;
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   body {
     margin-top: 216px !important;
   }
@@ -51,7 +51,7 @@ body {
   body {
     margin-top: 144px !important;
   }
-}
+} */
 
 @layer utilities {
   .text-balance {

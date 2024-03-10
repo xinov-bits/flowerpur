@@ -36,7 +36,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         setIsCartOpenATC,
     } = useContext(CartContext);
 
-    const mappedCart = Object.keys(cart).map((k) => cart[k])
+    const router = useRouter();
+
+
+    const mappedCart = Object.keys(cart).map((k) => cart[k]);
 
     // ADD TO CART
     const [cartLoading, setCartLoading] = useState([false, '', '']);
@@ -155,8 +158,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
                             <div className="block justify-start items-start w-full h-full pb-4 bg-white">
                                 <ul className="flex flex-col justify-start items-center w-full h-full text-[#191919] overflow-y-auto">
-                                    {mappedCart.map((item) => {
-                                        return (<li className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer last:border-b last:border-[#e5e5e5]" key={item.slug}>
+                                    {mappedCart.map((item, index) => {
+                                        return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer last:border-b last:border-[#e5e5e5]">
                                             <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
                                                     <Image className="flex justify-center items-center w-[5.5rem] h-[5.5rem] rounded-md overflow-hidden no-outline"
@@ -171,11 +174,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                             <div className="flex justify-start items-center w-[70%] h-[85%] text-[#191919]">
                                                 <div className="flex flex-col justify-start items-center w-[58%] h-full text-start font-semibold">
                                                     <Link className="flex justify-center items-start w-full h-full no-outline" href={`/product/${item.url}`}>
-                                                        <div className="flex justify-start items-start w-full h-auto capitalize line-clamp-3 text-ellipsis leading-tight overflow-y-hidden hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer" onClick={() => {
+                                                        <div className="flex justify-start items-start w-full h-auto capitalize leading-tight hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer" onClick={() => {
                                                             setIsCartOpen(false);
                                                             setIsCartOpenATC(false);
                                                         }}>
-                                                            {item.name}
+                                                            <p className="line-clamp-2 text-ellipsis overflow-y-hidden"> {item.name} </p>
                                                         </div>
                                                     </Link>
 
@@ -270,18 +273,24 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 </ul>
 
                                 <div className="absolute z-[650] bottom-0 flex justify-center items-center w-full h-20 p-4 border-t border-[#e5e5e5]">
-                                    {subTotal > 0 ? <Link href="/cart/checkout" className="flex justify-center items-center w-full h-full">
-                                        <button className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75">
-                                            <div className="flex justify-start items-center w-auto h-full">
-                                                Checkout
-                                            </div>
+                                    {subTotal > 0 ? (
+                                        <div className="flex justify-center items-center w-full h-full">
+                                            <button className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
+                                                setIsCartOpen(false);
+                                                setIsCartOpenATC(false);
 
-                                            <div className="flex justify-start items-center w-auto h-full">
-                                                ₹{subTotal}.00
-                                            </div>
-                                        </button>
-                                    </Link>
-                                        :
+                                                router.push('/cart/checkout');
+                                            }}>
+                                                <div className="flex justify-start items-center w-auto h-full">
+                                                    Checkout
+                                                </div>
+
+                                                <div className="flex justify-start items-center w-auto h-full">
+                                                    ₹{subTotal}.00
+                                                </div>
+                                            </button>
+                                        </div>
+                                    ) : (
                                         <div className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] rounded-full text-white font-bold saturate-0 opacity-40">
                                             <div className="flex justify-start items-center w-auto h-full">
                                                 Checkout
@@ -291,7 +300,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                 ₹{subTotal}.00
                                             </div>
                                         </div>
-                                    }
+                                    )}
                                 </div>
                             </div>
                         </div>

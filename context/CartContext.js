@@ -2,7 +2,7 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext, createContext } from 'react'
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -202,6 +202,15 @@ export const CartProvider = ({ children }) => {
         saveCart(newCart);
     };
 
+
+    // SHOW HEADER
+    const [isHeader, setIsHeader] = useState(true);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        setIsHeader(!(pathname?.includes('checkout')));
+    }, [pathname]);
+
     return (
         <CartContext.Provider
             value={{
@@ -219,6 +228,9 @@ export const CartProvider = ({ children }) => {
                 removeAtOnce,
                 isCartOpenATC,
                 setIsCartOpenATC,
+
+                isHeader,
+                setIsHeader,
             }}
         >
             {children}

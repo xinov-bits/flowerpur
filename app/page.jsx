@@ -195,7 +195,7 @@ export default function Home() {
 
                 <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] overflow-hidden">
                   <Image className="flex justify-center items-center w-full h-full overflow-hidden"
-                    src={"https://i.ibb.co/CnLzvb3/banner-01.webp"}
+                    src={"https://i.ibb.co/LYNP60X/banner-01-min.webp"}
                     width={1400}
                     height={535}
                     alt="banner_01"

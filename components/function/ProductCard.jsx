@@ -42,30 +42,6 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
         }
     }, [addedAnim])
 
-
-    // ADD TO CART
-    const [cartLoading, setCartLoading] = useState([false, '']);
-
-    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
-        setCartLoading([true, url]);
-
-        setTimeout(() => {
-            setCartLoading([false, '']);
-
-            addToCart(
-                itemCode,
-                url,
-                qty,
-                availableQty,
-                price,
-                img,
-                name,
-                offer,
-            );
-            setAddedAnim([true, url]);
-        }, 1000);
-    }
-
     return (
         <>
             <motion.div key={itemCode}
@@ -106,9 +82,9 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                                 </div>
                             </div>)}
 
-                            {(ratings !== undefined && ratings !== null && ratings.includes(slug)) && (<div className="flex justify-center items-center w-auto h-6 px-1 rounded bg-[#00838a] leading-none text-xs font-bold text-white overflow-hidden">
+                            {(ratings !== undefined && ratings !== null && ratings.includes(slug)) && (<div className="flex justify-center items-center w-auto h-6 px-1 rounded bg-[#085b45] leading-none text-xs font-bold text-white overflow-hidden">
                                 <div className="flex justify-center items-center w-4 h-4">
-                                    <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                    <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-star_dd"
@@ -127,7 +103,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 </Link>
 
                 <div className="flex justify-between items-center w-full h-auto">
-                    <div className="flex justify-start items-center w-auto space-x-1 text-lg font-bold">
+                    <div className="flex justify-start items-center w-auto space-x-1 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold">
                         <div className="flex justify-start items-center w-auto text-[#c6222b]">
                             ₹{price}.00
                         </div>
@@ -137,53 +113,20 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                         </div>
                     </div>
 
-                    {(!cartLoading[0] || cartLoading[1] != slug) ? <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
-                        {(!addedAnim[0] || addedAnim[1] != slug) && <button
-                            onClick={() => addProductToCart(
-                                slug,
-                                slug,
-                                1,
-                                availableQty,
-                                price,
-                                dimg,
-                                title,
-                                offer,
-                            )}
-                            className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1 no-outline">
-                            <svg className="text-[#191919]" width={18} height={18}>
-                                <use
-                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
-                                ></use>
-                            </svg>
-
-                            <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
-                        </button>}
-
-                        {(addedAnim[0] && addedAnim[1] === slug) && <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e] space-x-1 no-outline">
-                            <svg className="" width={14} height={14}>
-                                <use
-                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                                ></use>
-                            </svg>
-
-                            <div className="hidden sm:hidden md:block lg:block xl:block"> Added </div>
-                        </button>}
-                    </div>
-                        :
-                        <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#767676] cursor-default">
-                            <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] space-x-1 no-outline">
-                                <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
+                    <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
+                        <Link href={`/product/${slug}`} className="no-outline">
+                            <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1 no-outline">
+                                <svg className="text-[#191919]" width={18} height={18}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
                                     ></use>
                                 </svg>
 
-                                <div className="hidden sm:hidden md:block lg:block xl:block"> Adding </div>
+                                <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
                             </button>
-                        </div>}
+                        </Link>
+                    </div>
                 </div>
             </motion.div>
         </>
