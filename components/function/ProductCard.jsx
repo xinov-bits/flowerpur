@@ -67,7 +67,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                         </Link>
 
                         <div className="absolute top-1 left-1 flex justify-center items-center space-x-1 overflow-hidden">
-                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-2 rounded bg-[#ffcc29] leading-none text-xs font-bold text-[#292929] overflow-hidden  anim__pulse-wave">
+                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-1.5 rounded bg-[#ffcc29] leading-none text-xs font-bold text-[#191919] overflow-hidden  anim__pulse-wave">
                                 <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
                                     <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
                                         <use

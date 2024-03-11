@@ -455,7 +455,6 @@ export default function Page({ params }) {
     }, []);
 
 
-
     // ADDRESS
     const [address, setAddress] = useState('');
     const [pincodes, setPincodes] = useState([]);
@@ -1214,9 +1213,10 @@ export default function Page({ params }) {
                                                                     id="address_input"
                                                                     onChange={handleAddressChange}
                                                                     value={address}
+                                                                    autoComplete='off'
                                                                 />
 
-                                                                {address !== '' ? <button className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white text-xs font-semibold rounded-full duration-75" type="submit">
+                                                                {address !== '' ? <button className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white text-xs font-semibold rounded-full no-outline duration-75" type="submit">
                                                                     Confirm
                                                                 </button>
                                                                     :
