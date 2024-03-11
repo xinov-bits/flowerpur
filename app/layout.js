@@ -42,11 +42,13 @@ export default function RootLayout({ children }) {
         <Analytics />
 
         <GlobalProvider>
-          <Header />
+          <Suspense>
+            <Header />
 
-          {children}
+            {children}
 
-          {/* <Footer /> */}
+            <Footer />
+          </Suspense>
         </GlobalProvider>
       </body>
     </html>
