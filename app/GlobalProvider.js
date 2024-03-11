@@ -3,11 +3,11 @@ import { UserProvider } from "@/context/UserContext";
 import { Suspense } from "react";
 
 export function GlobalProvider({ children }) {
-    return <CartProvider>
-        <UserProvider>
-            <Suspense>
+    return <Suspense>
+        <CartProvider>
+            <UserProvider>
                 {children}
-            </Suspense>
-        </UserProvider>
-    </CartProvider>;
+            </UserProvider>
+        </CartProvider>
+    </Suspense>
 }

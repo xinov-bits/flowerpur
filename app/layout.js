@@ -41,15 +41,15 @@ export default function RootLayout({ children }) {
       <body className={`${figtree.className} overflow-x-hidden mt-[216px] sm:mt-[216px] md:mt-[144px] lg:mt-[144px] xl:mt-[144px] ${additionalMargin}`}>
         <Analytics />
 
-        <GlobalProvider>
-          <Suspense>
+        <Suspense>
+          <GlobalProvider>
             <Header />
 
             {children}
 
             <Footer />
-          </Suspense>
-        </GlobalProvider>
+          </GlobalProvider>
+        </Suspense>
       </body>
     </html>
   );
