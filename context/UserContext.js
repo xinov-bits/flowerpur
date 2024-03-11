@@ -2,7 +2,7 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext, createContext } from 'react'
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -12,6 +12,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const router = useRouter();
+    const query = useSearchParams();
 
     const [user, setUser] = useState('');
     const [isUserSignedIn, setIsUserSignedIn] = useState(false);
@@ -24,7 +25,7 @@ export const UserProvider = ({ children }) => {
         ) {
             setIsUserSignedIn(true);
         }
-    }, [router])
+    }, [query, router])
 
     useEffect(() => {
         if (isUserSignedIn) {
@@ -37,7 +38,7 @@ export const UserProvider = ({ children }) => {
 
             setUser(JSON.stringify(decryptedData));
         }
-    }, [isUserSignedIn])
+    }, [query, isUserSignedIn])
 
     return (
         <UserContext.Provider

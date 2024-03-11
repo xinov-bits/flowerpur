@@ -203,11 +203,7 @@ const Page = () => {
 
                     localStorage.setItem('user', encUserData);
 
-
-                    setTimeout(() => {
-                        router.push('/');
-                        router.refresh();
-                    }, 2500);
+                    router.push(`/cart/checkout?rmd=${(Math.random() * 1000).toFixed(0)}`);
                 }
             } catch (error) {
                 if (error.response?.data?.details?.includes('Invalid Credentials.')) {
