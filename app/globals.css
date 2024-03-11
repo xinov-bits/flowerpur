@@ -144,9 +144,13 @@ input[type="number"]::-webkit-outer-spin-button {
   );
   opacity: 30%;
 
+  pointer-events: none;
+
   animation: pulse_wave__cc 3000ms linear infinite;
 }
 .anim__pulse-wave::after {
+  pointer-events: none;
+
   z-index: 1;
 }
 
@@ -183,9 +187,13 @@ input[type="number"]::-webkit-outer-spin-button {
   );
   opacity: 30%;
 
+  pointer-events: none;
+
   animation: pulse_wave__cc2 3000ms linear infinite;
 }
 .anim__pulse-wave2::after {
+  pointer-events: none;
+
   z-index: 1;
 }
 

@@ -2,12 +2,12 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext } from 'react'
-import { getCookie, getCookies, hasCookie, setCookie, deleteCookie } from 'cookies-next'
 
 // NEXT JS
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { getCookie, getCookies, hasCookie, setCookie, deleteCookie } from 'cookies-next'
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -84,6 +84,7 @@ const Page = () => {
         removeAtOnce,
         isCartOpenATC,
         setIsCartOpenATC,
+        checkoutLoading,
     } = useContext(CartContext);
     const {
         user,
@@ -299,27 +300,62 @@ const Page = () => {
 
     // COUPON
     const [isCouponOpen, setIsCouponOpen] = useState(false);
+    const [isCouponApplied, setIsCouponApplied] = useState([false, {}]);
+    const [isCouponLoading, setIsCouponLoading] = useState(false);
 
+    useEffect(() => {
+        if (getCookie('coupon') !== undefined && getCookie('coupon') !== null && getCookie('coupon') !== '') {
+            let bytes = CryptoJS.AES.decrypt(getCookie('coupon'), 'fvnmsdf');
+            const decCoupon = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+            if (decCoupon !== undefined && decCoupon !== null && decCoupon !== '') {
+                setIsCouponApplied([true, decCoupon[0]])
+            }
+        }
+    }, [getCookie('coupon')])
+
+    const clearCoupon = () => {
+        setIsCouponLoading(true)
+
+        setTimeout(() => {
+            setIsCouponLoading(false)
+
+            deleteCookie('coupon')
+            setIsCouponApplied([false, {}])
+
+            router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
+        }, 1000);
+    }
+
+
+    // REDIRECT TO SIGNUP/SIGNIN
+    useEffect(() => {
+        if (!isUserSignedIn) {
+            if (window.innerWidth <= 640) {
+                router.push('/auth/signin')
+            }
+        }
+    }, [user, isUserSignedIn, window])
 
     return (
         <>
             <div className="block justify-center items-start w-full h-screen bg-white text-[#494949]">
-                <div className="flex justify-center items-center w-full h-14 px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 bg-white border-b border-[#e5e5e5] select-none">
-                    <div className="flex justify-start items-center w-36 h-full">
-                        <button className="flex justify-center items-center w-auto h-full no-outline" onClick={() => {
-                            router.back();
-                        }}>
-                            <div className="flex justify-between items-center w-full h-full font-medium text-[#767676]">
-                                <svg className="flex justify-start items-center w-5 h-5" width={24} height={24}>
-                                    <use
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-arrow_dd"
-                                    ></use>
-                                </svg>
+                <div className="flex justify-center items-center w-full h-14 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 bg-white border-b border-[#e5e5e5] select-none">
+                    <div className="flex justify-start items-center w-auto sm:w-auto md:w-36 lg:w-36 xl:w-36 h-full">
+                        <Link href="/">
+                            <button className="flex justify-center items-center w-auto h-full no-outline">
+                                <div className="flex justify-between items-center w-full h-full font-medium text-[#767676] space-x-1">
+                                    <svg className="flex justify-start items-center size-8 sm:size-8 md:size-5 lg:size-5 xl:size-5" width={24} height={24}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-arrow_dd"
+                                        ></use>
+                                    </svg>
 
-                                <div className="flex justify-end items-center w-auto"> Back to Store </div>
-                            </div>
-                        </button>
+                                    <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-end items-center w-auto"> Back to Store </div>
+                                </div>
+                            </button>
+                        </Link>
                     </div>
 
                     <Link className="flex justify-center items-center w-full h-full no-outline" href={'/'}>
@@ -335,10 +371,10 @@ const Page = () => {
                 </div>
 
 
-                <div className="flex justify-between items-start w-full h-full">
-                    <div className="flex flex-col justify-center items-start w-2/3 h-auto p-2 sm:p-2 md:p-10 lg:p-10 xl:p-10 space-y-4 select-none overflow-hidden">
+                <div className="block sm:block md:flex lg:flex xl:flex justify-between items-start w-full h-full">
+                    <div className="flex flex-col justify-center items-start w-full sm:w-full md:w-2/3 lg:w-2/3 xl:w-2/3 h-auto p-4 sm:p-4 md:p-10 lg:p-10 xl:p-10 space-y-4 select-none overflow-hidden">
                         <div className="flex justify-center items-start w-full h-auto">
-                            <div className="block items-start w-3/4 h-auto p-2 sm:p-2 md:p-4 lg:p-4 xl:p-4 bg-white border border-[#e5e5e5] rounded-lg">
+                            <div className="block items-start w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 h-auto p-4 bg-white border border-[#e5e5e5] rounded-lg">
                                 <div className="flex justify-between items-center w-full !leading-none text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold text-[#191919]">
                                     <div className="flex justify-start items-center w-auto">
                                         1. Account details
@@ -453,7 +489,7 @@ const Page = () => {
                         </div>
 
                         <div className="flex justify-center items-start w-full h-auto">
-                            <div className="block items-start w-3/4 h-full p-2 sm:p-2 md:p-4 lg:p-4 xl:p-4 bg-white border border-[#e5e5e5] rounded-lg">
+                            <div className="block items-start w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 h-full p-4 bg-white border border-[#e5e5e5] rounded-lg">
                                 <div className="flex justify-between items-center w-full !leading-none text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold text-[#191919]">
                                     <div className="flex justify-start items-center w-auto">
                                         2. Shipping details
@@ -531,7 +567,7 @@ const Page = () => {
                         </div>
 
                         <div className="flex justify-center items-start w-full h-auto">
-                            <div className="block items-start w-3/4 h-full p-2 sm:p-2 md:p-4 lg:p-4 xl:p-4 bg-white border border-[#e5e5e5] rounded-lg">
+                            <div className="block items-start w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 h-full p-4 bg-white border border-[#e5e5e5] rounded-lg">
                                 <div className="flex justify-start items-center w-full !leading-none text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold text-[#191919]">
                                     3. Payment details
                                 </div>
@@ -539,9 +575,9 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-end items-start w-1/3 h-full py-2 sm:py-2 md:py-4 lg:py-4 xl:py-4 bg-white border-l border-[#e5e5e5] text-[#191919]">
+                    <div className="flex justify-end items-start w-full sm:w-full md:w-1/3 lg:w-1/3 xl:w-1/3 h-full py-2 sm:py-2 md:py-4 lg:py-4 xl:py-4 bg-white border-t sm:border-t md:border-l lg:border-l xl:border-l border-[#e5e5e5] text-[#191919]">
                         <div className="block justify-start items-start w-full h-auto select-none">
-                            <div className="flex justify-between items-start w-full h-auto px-2 sm:px-2 md:px-4 lg:px-4 xl:px-4 pb-2 sm:pb-2 md:pb-4 lg:pb-4 xl:pb-4 select-none">
+                            <div className="flex justify-between items-center sm:items-center md:items-start lg:items-start xl:items-start w-full h-auto px-4 pb-2 sm:pb-2 md:pb-4 lg:pb-4 xl:pb-4 select-none">
                                 <div className="flex justify-start items-center w-full !leading-none text-lg sm:text-lg md:text-2xl lg:text-2xl xl:text-2xl font-bold">
                                     Items
                                 </div>
@@ -563,7 +599,7 @@ const Page = () => {
                             <div className="flex justify-start items-start w-full h-[14rem] border-y border-[#e5e5e5] overflow-y-auto">
                                 <ul className="flex flex-col justify-start items-start w-full h-auto text-[#191919]">
                                     {mappedCart.map((item, index) => {
-                                        return (<li key={index} className="flex justify-between items-center w-full h-20 px-2 sm:px-2 md:px-4 lg:px-4 xl:px-4 bg-white hover:bg-[#f7f7f7] cursor-pointer">
+                                        return (<li key={index} className="flex justify-between items-center w-full h-20 px-4 bg-white hover:bg-[#f7f7f7] cursor-pointer">
                                             <Link className="flex justify-center items-center w-[20%] h-full no-outline" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
                                                     <Image className="flex justify-center items-center size-16 rounded-md overflow-hidden no-outline"
@@ -658,7 +694,7 @@ const Page = () => {
                             </div>
 
                             <div className="flex justify-start items-start w-full h-auto p-4 overflow-y-auto">
-                                <button className="flex justify-between items-center w-full h-auto p-2.5 font-medium leading-none bg-[#f7f7f7] rounded-md text-[#191919] hover:bg-[#eeeeee] active:bg-[#e8e8e8] no-outline" onClick={() => setIsCouponOpen(!isCouponOpen)}>
+                                {isCouponApplied[0] === false && <button className="flex justify-between items-center w-full h-auto p-2.5 font-medium leading-none bg-[#f7f7f7] rounded-md text-[#191919] hover:bg-[#eeeeee] active:bg-[#e8e8e8] no-outline" onClick={() => setIsCouponOpen(!isCouponOpen)}>
                                     <div className="flex justify-start items-center w-auto space-x-1.5">
                                         <svg className="flex justify-center items-center w-5 h-5" width={24} height={24}>
                                             <use
@@ -678,7 +714,56 @@ const Page = () => {
                                             ></use>
                                         </svg>
                                     </div>
-                                </button>
+                                </button>}
+
+                                {isCouponApplied[0] === true && <div className="relative flex justify-between items-center w-full h-14 px-4 font-bold bg-[#e7e7e7] text-[#292929] rounded select-auto
+                                after:absolute after:-ml-[1px] after:left-0 after:w-3 after:h-5 after:bg-white after:rounded-r-full after:pointer-events-none
+                                before:absolute before:-mr-[1px] before:right-0 before:w-3 before:h-5 before:bg-white before:rounded-l-full before:pointer-events-none overflow-hidden"
+                                >
+                                    <div className="flex justify-start items-center w-auto space-x-1.5">
+                                        <div className="flex justify-start items-center w-5 h-5">
+                                            <svg className="flex justify-center items-center w-5 h-5" width={24} height={24}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd2"
+                                                ></use>
+                                            </svg>
+                                        </div>
+
+                                        {isCouponApplied[1].map((c, index) => {
+                                            return <div key={index} className="flex justify-start items-center w-full">
+                                                <div className="flex justify-center items-center w-full h-full anim__pulse-wave2">
+                                                    <div className="block justify-center items-center w-full h-auto space-y-0.5">
+                                                        <div className="flex justify-start items-center w-auto leading-none text-base">
+                                                            {c.code}
+                                                        </div>
+
+                                                        <div className="flex justify-start items-center w-auto leading-none text-sm font-medium">
+                                                            {c.type === 'fixed' && `Get a discount of ₹${c.discount} on your purchase`}
+                                                            {c.type === 'percent' && `${c.discount}% OFF on your purchase`}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })}
+                                    </div>
+
+                                    {!isCouponLoading ? <div className="flex justify-end items-center w-5 h-5 cursor-pointer" onClick={clearCoupon}>
+                                        <svg className="flex justify-center items-center w-5 h-5" width={24} height={24}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
+                                            ></use>
+                                        </svg>
+                                    </div> : <div className="flex justify-end items-center w-5 h-5 cursor-default" onClick={clearCoupon}>
+                                        <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                            ></use>
+                                        </svg>
+                                    </div>}
+                                </div>}
                             </div>
 
                             <div className="flex justify-start items-start w-full h-[4.75rem] p-4 border-y border-[#e5e5e5]">
@@ -688,7 +773,14 @@ const Page = () => {
                                     </div>
 
                                     <div className="flex justify-start items-center w-auto h-full">
-                                        ₹{subTotal}.00
+                                        {!checkoutLoading ? <div> ₹{subTotal.toFixed(2)} </div>
+                                            :
+                                            <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                                ></use>
+                                            </svg>}
                                     </div>
                                 </div>
                             </div>

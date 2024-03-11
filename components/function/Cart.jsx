@@ -297,7 +297,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                             </div>
 
                                             <div className="flex justify-start items-center w-auto h-full">
-                                                ₹{subTotal}.00
+                                                ₹{subTotal.toFixed(2)}
                                             </div>
                                         </div>
                                     )}

@@ -2,7 +2,10 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext, createContext } from 'react'
-import { usePathname, useRouter } from "next/navigation"
+
+// NEXT JS
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { getCookie, getCookies, hasCookie, setCookie, deleteCookie } from 'cookies-next'
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -12,6 +15,8 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const router = useRouter();
+    const query = useSearchParams();
+    const pathname = usePathname();
 
     // State variables for cart, favorites, and recent views
     const [cart, setCart] = useState({}); // Object to store cart items
@@ -23,37 +28,93 @@ export const CartProvider = ({ children }) => {
 
     const [isCartOpenATC, setIsCartOpenATC] = useState(false);
 
+    // COOKIE (COUPON)
+    const [coupon, setCoupon] = useState([]);
+    const [checkoutLoading, setCheckoutLoading] = useState(false);
+
     // Key used for re-renders
     const [key, setKey] = useState(Math.random());
 
     // Load data from local storage on component mount
     useEffect(() => {
-        try {
-            const cartData = localStorage.getItem("cart");
-            if (cartData) {
-                let bytes = CryptoJS.AES.decrypt(cartData, 'cart');
-                let decCart = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        const loadCartData = () => {
+            try {
+                const cartData = localStorage.getItem('cart');
+                if (cartData) {
+                    const bytes = CryptoJS.AES.decrypt(cartData, 'cart');
+                    const decCart = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                    setCart(decCart);
+                    calculateCartTotals(decCart);
+                }
 
-                setCart(decCart);
-                calculateCartTotals(decCart); // Update totals based on loaded cart data
+                const favListData = localStorage.getItem('favList');
+                if (favListData) {
+                    setFavList(JSON.parse(favListData));
+                }
+
+                const recentViewData = localStorage.getItem('recentView');
+                if (recentViewData) {
+                    setRecentView(JSON.parse(recentViewData));
+                }
+
+                const storedCoupon = getCookie('coupon');
+                if (storedCoupon) {
+                    const bytes = CryptoJS.AES.decrypt(storedCoupon, 'fvnmsdf');
+                    const decCoupon = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                    if (decCoupon && decCoupon[0] && decCoupon[0][0]) {
+                        setCoupon(decCoupon[0][0]);
+                    } else {
+                        setCoupon(null);
+                    }
+                } else {
+                    setCoupon(null);
+                }
+            } catch (error) {
+                console.error('Error loading cart data:', error);
             }
 
-            const favListData = localStorage.getItem("favList");
-            if (favListData) {
-                setFavList(JSON.parse(favListData));
-            }
+            setKey(Math.random());
+        };
 
-            const recentViewData = localStorage.getItem("recentView");
-            if (recentViewData) {
-                setRecentView(JSON.parse(recentViewData));
-            }
-        } catch (error) {
-            console.error(error);
-        }
-
-        setKey(Math.random()); // Generate new key for re-renders
+        loadCartData();
     }, []);
 
+
+    // GET COUPON
+    useEffect(() => {
+        const storedCoupon = getCookie('coupon');
+        if (storedCoupon) {
+            try {
+                const bytes = CryptoJS.AES.decrypt(storedCoupon, 'fvnmsdf');
+                const decCoupon = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                if (decCoupon && decCoupon[0] && decCoupon[0][0]) {
+                    setCoupon(decCoupon[0][0]);
+                } else {
+                    setCoupon(null);
+                }
+            } catch (error) {
+                console.error('Error parsing coupon:', error);
+                setCoupon(null);
+            }
+        } else {
+            setCoupon(null);
+        }
+    }, [query]);
+
+    useEffect(() => {
+        calculateCartTotals(cart);
+
+        if (coupon === null) {
+            setCheckoutLoading(false);
+        }
+        else {
+            setCheckoutLoading(true);
+
+            setTimeout(() => {
+                setCheckoutLoading(false);
+            }, 1000);
+        }
+    }, [query, coupon]);
 
     // Function to calculate cart totals
     const calculateCartTotals = (cartData) => {
@@ -68,6 +129,7 @@ export const CartProvider = ({ children }) => {
         }).map((k) => cartData[k]);
 
         for (const item of Object.values(cartData)) {
+            // BUY 2 GET 1 FREE
             let b2g1freeDiscount = 0;
 
             for (let i = 0; i < b2g1freeProducts.length; i++) {
@@ -81,13 +143,40 @@ export const CartProvider = ({ children }) => {
                 }
             }
 
-            subTotal += (item.price * item.qty) - (b2g1freeDiscount);
+            subTotal += ((item.price * item.qty) - (b2g1freeDiscount));
 
             numTotal += item.qty;
-            mrptTotal += ((item.price * item.qty) * 100) / 40; // Assuming MRP calculation logic
+            mrptTotal += ((item.price * item.qty) * 100) / 40;
         }
 
-        setSubTotal(subTotal);
+        // COUPON
+        let couponDiscount = 0;
+        let couponType = '';
+
+        if (coupon && coupon.type) {
+            if (coupon.type === 'fixed') {
+                couponDiscount = parseInt(coupon.discount);
+            }
+
+            if (coupon.type === 'percent') {
+                couponDiscount = parseInt(coupon.discount);
+            }
+
+            couponType = coupon.type;
+
+            if (couponDiscount !== 0) {
+                if (couponType === 'fixed') {
+                    setSubTotal(subTotal - couponDiscount);
+                } else {
+                    setSubTotal(subTotal - (subTotal * (couponDiscount / 100)));
+                }
+            } else {
+                setSubTotal(subTotal);
+            }
+        } else {
+            setSubTotal(subTotal);
+        }
+
         setNumTotal(numTotal);
         setMrpTotal(mrptTotal);
     };
@@ -167,6 +256,7 @@ export const CartProvider = ({ children }) => {
         calculateCartTotals(myCart); // Recalculate totals after saving
     };
 
+
     // Function to clear cart
     const clearCart = () => {
         setCart({});
@@ -205,7 +295,6 @@ export const CartProvider = ({ children }) => {
 
     // SHOW HEADER
     const [isHeader, setIsHeader] = useState(true);
-    const pathname = usePathname();
 
     useEffect(() => {
         setIsHeader(!(pathname?.includes('checkout')));
@@ -231,6 +320,8 @@ export const CartProvider = ({ children }) => {
 
                 isHeader,
                 setIsHeader,
+
+                checkoutLoading,
             }}
         >
             {children}
