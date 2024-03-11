@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={`${figtree.className} overflow-x-hidden mt-[216px] sm:mt-[216px] md:mt-[144px] lg:mt-[144px] xl:mt-[144px] ${additionalMargin}`}>
+      <body className={`${figtree.className} overflow-x-hidden mt-[176px] sm:mt-[176px] md:mt-[112px] lg:mt-[112px] xl:mt-[112px] ${additionalMargin}`}>
         <Analytics />
 
         <Suspense>

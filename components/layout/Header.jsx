@@ -226,17 +226,6 @@ const Header = () => {
         <>
             {isHeader && <header>
                 <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
-                    {/* THING */}
-                    <div className="flex justify-center items-center w-full h-8 space-x-2 bg-[#f48196] text-sm text-white font-semibold capitalize select-none">
-                        <div className="flex justify-center items-center w-auto">
-                            Lorem ipsum dolor sit amet elit. - ₹499
-                        </div>
-
-                        <div className="flex justify-center items-center w-auto p-1.5 leading-none bg-[#ec788d] hover:bg-[#ef7f93] active:bg-[#e06e83] rounded cursor-pointer">
-                            Shop now
-                        </div>
-                    </div>
-
                     {/* LOGO & THINGS */}
                     <div className="flex justify-center items-center w-full h-12 px-8 py-1.5 space-x-2 border-b border-[#e5e5e5] select-none">
                         <div className="flex justify-start items-center w-[20%] h-full cursor-pointer">
@@ -402,17 +391,6 @@ const Header = () => {
 
                 {/* MOBILE HEADER */}
                 <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#292929]">
-                    {/* THING */}
-                    <div className="flex justify-center items-center w-full h-10 space-x-2.5 bg-[#f48196] text-sm text-white font-semibold capitalize select-none">
-                        <div className="flex justify-center items-center w-auto">
-                            Lorem ipsum dolor sit amet elit. - ₹499
-                        </div>
-
-                        <div className="flex justify-center items-center w-auto p-2 leading-none bg-[#d34c65] hover:bg-[#d9576f] active:bg-[#c04159] rounded cursor-pointer">
-                            Shop now
-                        </div>
-                    </div>
-
                     <div className="flex justify-start items-center w-full h-[3.65rem] py-1.5 px-3.5 space-x-2">
                         <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
                             <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-4">
@@ -429,9 +407,9 @@ const Header = () => {
                                     </button>
                                 </div>
 
-                                <div className="flex justify-center items-center w-[2.8rem] h-[2.8rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
+                                <div className="flex justify-center items-center size-[2.28rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
                                     <Link className="no-outline" href={"/"}>
-                                        <svg className="flex justify-center items-center w-[2.8rem] h-[2.8rem]" width={95} height={106}>
+                                        <svg className="flex justify-center items-center size-[2.28rem]" width={95} height={106}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
                                                 xlinkHref="/on/demandware/svg/logo.svg#logo_icon2"
