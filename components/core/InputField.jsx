@@ -37,7 +37,7 @@ export const InputField = ({ name, type, placeholder, change }) => {
                 <input
                     className={
                         `
-                        flex justify-center items-center w-full h-full p-3 rounded-md ${inputError ? 'bg-[#fff0ed] hover:bg-[#fff0ed] ring-2 ring-[#b71000]' : 'bg-[#f7f7f7] ring-0'} placeholder:text-[#494949] text-[#494949] font-medium ${name === 'promo_code' ? '' : 'hover:bg-[#eeeeee]'} outline-none
+                        flex justify-center items-center w-full h-full p-3 mt-2 rounded-md ${inputError ? 'bg-[#fff0ed] hover:bg-[#fff0ed] ring-2 ring-[#b71000]' : 'bg-[#f7f7f7] ring-0'} placeholder:text-[#494949] text-[#494949] font-medium ${name === 'promo_code' ? '' : 'hover:bg-[#eeeeee]'} outline-none
                         `
                     }
                     id={name}

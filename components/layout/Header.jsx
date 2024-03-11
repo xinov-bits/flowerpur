@@ -530,7 +530,7 @@ const Header = () => {
                 {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
                     <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
 
-                    <div className="absolute z-[200] top-[6.2rem] sm:top-[6.2rem] md:top-[1.8rem] lg:top-[1.8rem] xl:top-[1.8rem] left-1 sm:left-1 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[98%] sm:w-[98%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
+                    <div className="absolute z-[200] top-[3.7rem] sm:top-[3.7rem] md:top-[1.8rem] lg:top-[1.8rem] xl:top-[1.8rem] left-1 sm:left-1 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[98%] sm:w-[98%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
                         onBlur={() => setIsSearchMenu(false)}
                         onClick={() => setIsSearchMenu(true)}
                         onFocus={() => setIsSearchMenu(true)}>
@@ -567,7 +567,7 @@ const Header = () => {
                                     <ul className="flex flex-col justify-start items-center w-full h-full space-y-2">
                                         {trendingSearches.map((search, index) => <li key={index} className="flex justify-center items-center w-full h-auto">
                                             <Link href={search.url} className="flex justify-center items-center w-full">
-                                                <button className="flex justify-between items-center w-full h-10 px-2 leading-none bg-white hover:bg-[#f7f7f7] border border-[#f7f7f7] active:border-[#e5e5e5] rounded-md">
+                                                <button className="flex justify-between items-center w-full h-10 px-2 leading-none bg-white hover:bg-[#f7f7f7] border border-[#e5e5e5] active:border-[#e0e0e0] rounded-md">
                                                     <div className="flex justify-start items-center w-auto space-x-1">
                                                         <div className="flex justify-start items-center w-auto">
                                                             <svg className="flex justify-center items-center w-5 h-5" strokeWidth={1.5}

@@ -328,14 +328,6 @@ const Page = () => {
     }
 
 
-    // REDIRECT TO SIGNUP/SIGNIN
-    useEffect(() => {
-        if (!isUserSignedIn) {
-            if (window.innerWidth <= 640) {
-                router.push('/auth/signin')
-            }
-        }
-    }, [user, isUserSignedIn, window])
 
     return (
         <>
@@ -718,8 +710,8 @@ const Page = () => {
                                     </button>}
 
                                     {isCouponApplied[0] === true && <div className="relative flex justify-between items-center w-full h-14 px-4 font-bold bg-[#e7e7e7] text-[#292929] rounded select-auto
-                                after:absolute after:-ml-[1px] after:left-0 after:w-3 after:h-5 after:bg-white after:rounded-r-full after:pointer-events-none
-                                before:absolute before:-mr-[1px] before:right-0 before:w-3 before:h-5 before:bg-white before:rounded-l-full before:pointer-events-none overflow-hidden"
+                                    after:absolute after:-ml-[1px] after:left-0 after:w-3 after:h-5 after:bg-white after:rounded-r-full after:pointer-events-none
+                                    before:absolute before:-mr-[1px] before:right-0 before:w-3 before:h-5 before:bg-white before:rounded-l-full before:pointer-events-none overflow-hidden"
                                     >
                                         <div className="flex justify-start items-center w-auto space-x-1.5">
                                             <div className="flex justify-start items-center w-5 h-5">

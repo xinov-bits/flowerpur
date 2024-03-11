@@ -109,7 +109,7 @@ export const Coupon = ({ isCouponOpen, setIsCouponOpen }) => {
             <AnimatePresence>
                 {isCouponOpen && (
                     <motion.div
-                        className="fixed z-[600] top-0 right-0 flex justify-center items-end sm:items-end md:items-center lg:items-center xl:items-center w-full h-screen p-4 sm:p-4 md:p-0 lg:p-0 xl:p-0 select-none duration-75"
+                        className="fixed z-[600] top-0 right-0 flex justify-center items-center w-full h-screen p-4 sm:p-4 md:p-0 lg:p-0 xl:p-0 select-none duration-75"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -141,7 +141,7 @@ export const Coupon = ({ isCouponOpen, setIsCouponOpen }) => {
 
                                     <form className="relative flex flex-col justify-center items-center w-full h-auto mt-1" onSubmit={handleCouponSubmit}>
                                         <input
-                                            className="flex justify-center items-center w-full h-full p-3 bg-[#f7f7f7] rounded-md text-[#191919] font-medium outline-none"
+                                            className="flex justify-center items-center w-full h-full p-3 bg-[#f7f7f7] rounded-md text-[#191919] font-medium outline-none no-outline"
                                             id="promo_code"
                                             name="promo_code"
                                             onChange={(e) => setCoupon(e.target.value)}
