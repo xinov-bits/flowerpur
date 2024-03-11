@@ -10,7 +10,7 @@ const figtree = Figtree({ subsets: ["latin"] });
 // };
 
 // REACT & NEXT JS "" VERCEL
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Analytics } from "@vercel/analytics/react";
 import { usePathname } from "next/navigation";
 

@@ -715,9 +715,11 @@ export default function Page({ params }) {
                             >
                                 {product.img1 && (
                                     <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <img
+                                        <Image
                                             className="flex justify-center items-center w-auto h-auto"
                                             src={product.img1}
+                                            width={800}
+                                            height={800}
                                             alt={product.title}
                                         />
                                     </SwiperSlide>
@@ -725,9 +727,11 @@ export default function Page({ params }) {
 
                                 {product.img2 && (
                                     <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <img
+                                        <Image
                                             className="flex justify-center items-center w-auto h-auto"
                                             src={product.img2}
+                                            width={800}
+                                            height={800}
                                             alt={product.title}
                                         />
                                     </SwiperSlide>
@@ -735,9 +739,11 @@ export default function Page({ params }) {
 
                                 {product.img3 && (
                                     <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <img
+                                        <Image
                                             className="flex justify-center items-center w-auto h-auto"
                                             src={product.img3}
+                                            width={800}
+                                            height={800}
                                             alt={product.title}
                                         />
                                     </SwiperSlide>
@@ -761,7 +767,7 @@ export default function Page({ params }) {
                                             htmlFor="product_image_selector-img1"
                                             className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
                                         >
-                                            <img
+                                            <Image
                                                 className="flex justify-start items-center rounded-md"
                                                 src={product.img1}
                                                 width={60}
@@ -787,7 +793,7 @@ export default function Page({ params }) {
                                             htmlFor="product_image_selector-img2"
                                             className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
                                         >
-                                            <img
+                                            <Image
                                                 className="flex justify-start items-center rounded-md"
                                                 src={product.img2}
                                                 width={60}
@@ -813,7 +819,7 @@ export default function Page({ params }) {
                                             htmlFor="product_image_selector-img3"
                                             className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
                                         >
-                                            <img
+                                            <Image
                                                 className="flex justify-start items-center rounded-md"
                                                 src={product.img3}
                                                 width={60}
