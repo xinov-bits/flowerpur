@@ -48,38 +48,16 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 
 
     // MENU
+    const [showCategories, setShowCategories] = useState(false)
+
     const menuItems = [
         {
-            name: 'All Flowers',
+            name: 'Home',
             url: '/',
-        },
-        {
-            name: 'Occasions',
-            url: '/',
-        },
-        {
-            name: 'Birthday',
-            url: '/',
-        },
-        {
-            name: 'Anniversary',
-            url: '/',
-        },
-        {
-            name: 'Love & Affection',
-            url: '/',
-        },
-        {
-            name: 'Flower in Vase',
-            url: '/',
-        },
-        {
-            name: 'Flower gift boxes',
-            url: '/',
+            icon: 'icon-home_dd',
         },
     ]
-
-    const sideItems = [
+    const sideMenuItems = [
         {
             name: 'Account',
             url: '/',
@@ -94,6 +72,28 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
             name: 'Track Order',
             url: '/',
             icon: 'icon-pin_dd2',
+        },
+    ]
+    const flowerCategories = [
+        {
+            name: '🌻 flower in vase',
+            url: '/flowers'
+        },
+        {
+            name: '🎂 birthday',
+            url: '/flowers'
+        },
+        {
+            name: '🕯️ anniversary',
+            url: '/flowers'
+        },
+        {
+            name: '🌹 love & affection',
+            url: '/flowers'
+        },
+        {
+            name: '🎁 flower gift boxes',
+            url: '/flowers'
         },
     ]
 
@@ -124,55 +124,90 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
                                     <button className="flex justify-start items-center w-auto h-auto no-outline" onClick={() => {
                                         setIsMobileMenuOpen(false);
                                     }}>
-                                        <div className="flex justify-start items-center w-auto h-auto">
-                                            <svg className="flex justify-center items-center w-5 h-5 rotate-90" width={24} height={24}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"
-                                                ></use>
-                                            </svg>
-
-                                            <div> Back </div>
-                                        </div>
+                                        <svg className="flex justify-center items-center w-6 h-6 text-[#494949]" width={24} height={24}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
+                                            ></use>
+                                        </svg>
                                     </button>
                                 </div>
-
-                                {/* <button className="flex justify-center items-center w-14 h-full cursor-pointer bg-white no-outline" onClick={() => {
-                                    setIsMobileMenuOpen(false);
-                                }}>
-                                    <svg className="flex justify-center items-center w-6 h-6 text-[#292929]" width={28} height={28}>
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
-                                        ></use>
-                                    </svg>
-                                </button> */}
                             </div>
 
-                            <div className="block justify-start items-start w-full h-auto py-1 my-1 bg-white text-[#191919]">
-                                <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-normal">
-                                    {menuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2">
-                                        <Link href={item.url} className="flex justify-start items-center w-full no-outline">
-                                            {item.name}
-                                        </Link>
-                                    </li>)}
-                                </ul>
-                            </div>
-
-                            <div className="absolute bottom-0 justify-start items-start w-full h-auto pt-2 bg-white text-[#191919] border-t border-[#e5e5e5]">
-                                <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-normal">
-                                    {sideItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2">
-                                        <Link href={item.url} className="flex justify-start items-center w-full no-outline space-x-2">
-                                            <svg className="flex justify-center items-cener w-6 h-6" width={20} height={20}>
+                            <div className="block justify-start items-start w-full h-auto bg-white text-[#191919]">
+                                <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-semibold">
+                                    {menuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7] last:border-0">
+                                        <Link href={item.url} className="flex justify-start items-center w-full space-x-1.5 no-outline">
+                                            <svg className="flex justify-center items-cener w-6 h-6 text-[#494949]" width={20} height={20}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
                                                     xlinkHref={`/on/demandware/svg/non-critical.svg#${item.icon}`}
                                                 ></use>
                                             </svg>
 
-                                            <div>
-                                                {item.name}
+                                            <div> {item.name} </div>
+                                        </Link>
+                                    </li>)}
+
+                                    <li className="block justify-start items-center w-full bg-white leading-none">
+                                        <div className="flex justify-start items-center w-full p-4 no-outline" onClick={() => setShowCategories(!showCategories)}>
+                                            <div className="flex justify-between items-center w-full">
+                                                <div className="flex justify-start items-center w-full space-x-1.5">
+                                                    <svg className="flex justify-center items-cener w-6 h-6 text-[#494949]" width={20} height={20}>
+                                                        <use
+                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-e-star_dd"
+                                                        ></use>
+                                                    </svg>
+
+                                                    <div> Categories </div>
+                                                </div>
+
+                                                <div className="flex justify-end items-center w-full">
+                                                    <svg className={`flex justify-center items-cener w-6 h-6 text-[#494949] ${showCategories && 'rotate-180'} transition-transform duration-200`} width={20} height={20}>
+                                                        <use
+                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"
+                                                        ></use>
+                                                    </svg>
+                                                </div>
                                             </div>
+                                        </div>
+
+                                        <AnimatePresence>
+                                            {showCategories && <motion.div className="block justify-start items-center w-full"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ duration: 0.1 }}
+                                            >
+                                                {flowerCategories.map((k, index) => <Link key={index} href={k.url} className="flex justify-start items-center w-full p-4 px-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 no-outline border-t border-[#e7e7e7]">
+                                                    <div className="flex justify-start items-center w-full space-x-1.5">
+                                                        <div className="flex justify-start items-center w-full capitalize text-[#494949]">
+                                                            {k.name}
+                                                        </div>
+                                                    </div>
+                                                </Link>)}
+                                            </motion.div>}
+                                        </AnimatePresence>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div className="flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
+
+                            <div className="block justify-start items-start w-full h-auto bg-white text-[#191919]">
+                                <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-semibold">
+                                    {sideMenuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7] pt-1 mt-1">
+                                        <Link href={item.url} className="flex justify-start items-center w-full space-x-1.5 no-outline">
+                                            <svg className="flex justify-center items-cener w-6 h-6 text-[#494949]" width={20} height={20}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref={`/on/demandware/svg/non-critical.svg#${item.icon}`}
+                                                ></use>
+                                            </svg>
+
+                                            <div> {item.name} </div>
                                         </Link>
                                     </li>)}
                                 </ul>

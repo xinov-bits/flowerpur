@@ -131,12 +131,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                         exit={{ x: 400, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => {
+                        <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-0" onClick={() => {
                             setIsCartOpen(false);
                             setIsCartOpenATC(false);
                         }} />
 
-                        <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full bg-white border-l border-[#e5e5e5] shadow-lg shadow-black/10">
+                        <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full bg-white border-l border-[#e5e5e5]">
                             <div className="flex justify-between items-center w-full h-14 bg-white border-b border-[#e5e5e5]">
                                 <div className="flex justify-start items-center w-auto px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 py-4 sm:py-4 md:py-6 lg:py-6 xl:py-6 text-lg font-bold text-[#191919] leading-none cursor-pointer">
                                     Your Cart
@@ -156,10 +156,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 </button>
                             </div>
 
-                            <div className="block justify-start items-start w-full h-screen pb-4 bg-white overflow-y-auto">
-                                <ul className="flex flex-col justify-start items-center w-full text-[#191919] overflow-y-auto">
+                            <div className="block justify-start items-start w-full h-screen pb-4 bg-whites">
+                                <ul className="flex flex-col justify-start items-center w-full h-[32rem] text-[#191919] overflow-y-auto">
                                     {mappedCart.map((item, index) => {
-                                        return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer">
+                                        return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] last:border-b-0 bg-white hover:bg-[#f7f7f7] cursor-pointer">
                                             <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
                                                     <Image className="flex justify-center items-center w-[5.5rem] h-[5.5rem] rounded-md overflow-hidden no-outline"
@@ -272,7 +272,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                     })}
                                 </ul>
 
-                                <div className="flex justify-center items-center w-full h-16 p-4 pb-0">
+                                <div className="flex justify-center items-center w-full h-16 p-4 pb-0 border-t border-[#e5e5e5]">
                                     {subTotal > 0 ? (
                                         <div className="flex justify-center items-center w-full h-full">
                                             <button className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {

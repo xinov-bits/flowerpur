@@ -1486,10 +1486,10 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className={`
-                                    flex flex-col justify-start items-start w-full ${approvedReviews.length > 0 ? 'h-[24.7rem]' : 'h-auto'} overflow-y-scroll select-none space-y-2 sm:space-y-2 md:space-y-0 lg:space-y-0 xl:space-y-2
+                                    flex flex-col justify-start items-start w-full ${approvedReviews.length > 0 ? 'h-full max-h-[24.7rem]' : 'h-auto'} overflow-y-auto select-none space-y-2 sm:space-y-2 md:space-y-0 lg:space-y-0 xl:space-y-2
                                 `}>
                                     {approvedReviews.map((review) => {
-                                        return <div key={review._id} className="flex justify-start items-start w-full h-full p-2 bg-white hover:bg-[#f7f7f7] no-outline space-x-2">
+                                        return <div key={review._id} className="flex justify-start items-start w-full h-auto p-2 bg-white hover:bg-[#f7f7f7] no-outline space-x-2">
                                             <div className="flex justify-start items-start w-20 h-full rounded-md overflow-hidden">
                                                 <Image className="flex justify-center items-start w-16 h-16 rounded-md overflow-hidden"
                                                     src={review.img}

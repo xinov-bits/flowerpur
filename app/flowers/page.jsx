@@ -81,7 +81,7 @@ const Page = () => {
                         <div className="flex justify-start items-center w-full !leading-none text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#292929]  font_garmond">
+                        <div className="flex justify-start items-center w-full text-sm sm:text-sm md:text-base lg:text-base xl:text-base font-normal text-[#292929]  font_libre">
                             shop from categories
                         </div>
                     </div>
@@ -154,7 +154,7 @@ const Page = () => {
                         <div className="flex justify-start items-center w-full !leading-none text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Flowers
                         </div>
-                        <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#292929]  font_garmond">
+                        <div className="flex justify-start items-center w-full text-sm sm:text-sm md:text-base lg:text-base xl:text-base font-normal text-[#292929]  font_libre">
                             popular spring flowers
                         </div>
                     </div>

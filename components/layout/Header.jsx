@@ -9,8 +9,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 
-// SUB COMPONENTS
-
 // FRAMER
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -228,17 +226,15 @@ const Header = () => {
                 <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
                     {/* LOGO & THINGS */}
                     <div className="flex justify-center items-center w-full h-12 px-8 py-1.5 space-x-2 border-b border-[#e5e5e5] select-none">
-                        <div className="flex justify-start items-center w-[20%] h-full cursor-pointer">
+                        <div className="flex justify-start items-center w-[18%] h-full cursor-pointer">
                             <div className="flex justify-start items-center w-[94%] h-full cursor-pointer rounded-md overflow-hidden">
                                 <Link className="flex justify-start items-center w-full h-full no-outline" href={'/'}>
-                                    <div className="flex justify-start items-center w-full h-full">
-                                        <svg className="flex justify-start items-center w-[95%] h-full" width={760} height={120}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/logo.svg#logo2"
-                                            ></use>
-                                        </svg>
-                                    </div>
+                                    <svg className="flex justify-start items-center w-[90%] h-full" width={760} height={120}>
+                                        <use
+                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                            xlinkHref="/on/demandware/svg/logo.svg#logo2"
+                                        ></use>
+                                    </svg>
                                 </Link>
                             </div>
                         </div>
@@ -265,7 +261,7 @@ const Header = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end items-center w-[40%] h-full">
+                        <div className="flex justify-end items-center w-[42%] h-full">
                             <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
                                 <li className="relative flex justify-center items-center w-auto h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
                                     <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
@@ -331,9 +327,9 @@ const Header = () => {
                                     </button>
                                 </li>
 
-                                {isUserSignedIn ? <Link href="/user/orders" className="no-outline">
-                                    <li className="relative flex justify-center items-center w-auto h-full px-2 bg-white border-[1.5px] border-[#e5e5e5] rounded-full space-x-1 cursor-pointer hover:bg-[#f7f7f7]">
-                                        <svg className="text-[#797979]" width={26} height={26}>
+                                {isUserSignedIn ? <Link href="/user/orders" className="relative flex justify-center items-center w-auto h-full rounded-full no-outline">
+                                    <li className="relative flex justify-center items-center w-auto h-full px-1.5 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full space-x-1 cursor-pointer">
+                                        <svg className="" width={26} height={26}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
                                                 xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
@@ -408,7 +404,7 @@ const Header = () => {
                                 </div>
 
                                 <div className="flex justify-center items-center size-[2.28rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
-                                    <Link className="no-outline" href={"/"}>
+                                    <Link className="no-outline" href="/">
                                         <svg className="flex justify-center items-center size-[2.28rem]" width={95} height={106}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -449,7 +445,7 @@ const Header = () => {
                                 </div>
 
                                 <div className="flex justify-center items-center w-8 h-8">
-                                    {isUserSignedIn && <Link href="/">
+                                    {isUserSignedIn && <Link href="/user/orders">
                                         <button className="z-[1] flex justify-center items-center  no-outline">
                                             <svg className="flex justify-center items-center" width={28} height={28}>
                                                 <use
@@ -530,7 +526,7 @@ const Header = () => {
                 {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
                     <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
 
-                    <div className="absolute z-[200] top-[3.7rem] sm:top-[3.7rem] md:top-[1.8rem] lg:top-[1.8rem] xl:top-[1.8rem] left-1 sm:left-1 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[98%] sm:w-[98%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
+                    <div className="absolute z-[200] top-[3.7rem] sm:top-[3.7rem] md:-top-[0.18rem] lg:-top-[0.18rem] xl:-top-[0.18rem] left-1 sm:left-1 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[98%] sm:w-[98%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
                         onBlur={() => setIsSearchMenu(false)}
                         onClick={() => setIsSearchMenu(true)}
                         onFocus={() => setIsSearchMenu(true)}>
@@ -603,57 +599,57 @@ const Header = () => {
             {/* SELECT LOCATION */}
             <AnimatePresence>
                 {isSelectLocationMenuOpen && (
-                    <motion.div className="fixed top-[4.8rem] right-14 sm:right-14 md:right-[11.2rem] lg:right-[11.2rem] xl:right-[11.2rem] flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
-                        initial={{ y: -10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -10, opacity: 0 }}
-                        onBlur={() => setIsSelectLocationMenuOpen(false)}
-                        onClick={() => setIsSelectLocationMenuOpen(true)}
-                        onFocus={() => setIsSelectLocationMenuOpen(true)}
-                    >
-                        <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md
-                        after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl shadow-[0px_8px_24px] shadow-black/20"
-                            onBlur={() => setIsSelectLocationMenuOpen(false)}
-                            onClick={() => setIsSelectLocationMenuOpen(true)}
-                            onFocus={() => setIsSelectLocationMenuOpen(true)}>
-                            <div className="flex flex-col justify-start items-center w-full py-2.5">
-                                <div className="flex justify-start items-center w-full px-2.5 font-bold">
-                                    Enter Your Address
-                                </div>
+                    <div className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-75">
+                        <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-0"
+                            onClick={() => setIsSelectLocationMenuOpen(false)}
+                        />
 
-                                <div className="flex flex-col justify-start items-center w-full px-2.5 mt-1 space-y-2">
-                                    <label className="relative flex justify-center items-center w-full" htmlFor="address_input">
-                                        <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
-                                            <svg className="text-[#494949]" width={24} height={24}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
-                                                ></use>
-                                            </svg>
-                                        </div>
+                        <motion.div className="fixed z-[620] top-[2.8rem] right-14 sm:right-14 md:right-[11.2rem] lg:right-[11.2rem] xl:right-[11.2rem] flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto text-[#292929]"
+                            initial={{ y: -10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -10, opacity: 0 }}
+                        >
+                            <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md
+                            after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl shadow-[0px_8px_24px] shadow-black/20">
+                                <div className="flex flex-col justify-start items-center w-full py-2.5">
+                                    <div className="flex justify-start items-center w-full px-2.5 font-bold">
+                                        Enter Your Address
+                                    </div>
 
-                                        <input className="flex justify-center items-center w-full h-full pl-8 p-2 rounded-md bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none"
-                                            type="number"
-                                            placeholder="Pincode"
-                                            name="address_input"
-                                            id="address_input"
-                                            onChange={handleAddressChange}
-                                            value={address}
-                                        />
-                                    </label>
+                                    <div className="flex flex-col justify-start items-center w-full px-2.5 mt-1 space-y-2">
+                                        <label className="relative flex justify-center items-center w-full" htmlFor="address_input">
+                                            <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
+                                                <svg className="text-[#494949]" width={24} height={24}>
+                                                    <use
+                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
+                                                    ></use>
+                                                </svg>
+                                            </div>
 
-                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75" onClick={handleAddressSubmit}>
-                                        Confirm Address
-                                    </button>
-                                        :
-                                        <div className="flex justify-center items-center w-full h-9 bg-[#085b45] text-white font-semibold rounded-md saturate-0 opacity-40 cursor-default">
+                                            <input className="flex justify-center items-center w-full h-full pl-8 p-2 rounded-md bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none"
+                                                type="number"
+                                                placeholder="Pincode"
+                                                name="address_input"
+                                                id="address_input"
+                                                onChange={handleAddressChange}
+                                                value={address}
+                                            />
+                                        </label>
+
+                                        {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75" onClick={handleAddressSubmit}>
                                             Confirm Address
-                                        </div>
-                                    }
+                                        </button>
+                                            :
+                                            <div className="flex justify-center items-center w-full h-9 bg-[#085b45] text-white font-semibold rounded-md saturate-0 opacity-40 cursor-default">
+                                                Confirm Address
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    </div>
                 )}
             </AnimatePresence>
         </>
