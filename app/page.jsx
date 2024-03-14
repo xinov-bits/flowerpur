@@ -223,10 +223,10 @@ export default function Home() {
             <Link href="/flowers" className="block justify-center items-start w-full no-outline">
               <div className="flex justify-center items-center w-full p-0 overflow-hidden">
                 <Image className="flex justify-center items-center w-full h-full overflow-hidden"
-                  src={"https://i.ibb.co/vsrVHwW/0215-HPUpdate-For-Every-Ocasssion-HPPods-Subs-Mobile.jpg"}
+                  src={"https://i.ibb.co/FBWdxkp/0215-HPUpdate-For-Every-Ocasssion-HPPods-Subs-Mobile.webp"}
                   width={480}
                   height={426}
-                  alt="banner_01__mobile"
+                  alt="order flowers online from flowerpur in minutes for birthday"
                 />
               </div>
 
@@ -252,7 +252,7 @@ export default function Home() {
 
 
                   <div className="flex justify-center items-center w-full mt-4 text-lg font-semibold leading-none">
-                    <div className="flex justify-center items-center w-[40%]">
+                    <div className="flex justify-center items-center w-[60%]">
                       <button className="flex justify-center items-center w-auto h-[2.75rem] px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md">
                         <div> Shop Birthday </div>
                       </button>
