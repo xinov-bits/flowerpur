@@ -11,8 +11,9 @@ const figtree = Figtree({ subsets: ["latin"] });
 
 // REACT & NEXT JS "" VERCEL
 import React, { useState, useEffect, Suspense } from 'react';
-import { Analytics } from "@vercel/analytics/react";
 import { usePathname } from "next/navigation";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // COMPONENTS
 import Header from "../components/layout/Header";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${figtree.className} overflow-x-hidden mt-[176px] sm:mt-[176px] md:mt-[112px] lg:mt-[112px] xl:mt-[112px] ${additionalMargin}`}>
         <Analytics />
+        <SpeedInsights />
 
         <Suspense>
           <GlobalProvider>
