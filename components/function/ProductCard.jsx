@@ -18,7 +18,7 @@ import { motion, AnimatePresence } from "framer-motion"
 // CONTEXT
 import CartContext from '@/context/CartContext';
 
-const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, offer, ratings }) => {
+const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, offer }) => {
     const {
         cart,
         subTotal,
@@ -81,17 +81,6 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                                     Buy 2 Get 1 Free
                                 </div>
                             </div>)}
-
-                            {(ratings !== undefined && ratings !== null && ratings.includes(slug)) && (<div className="flex justify-center items-center w-auto h-6 px-1 rounded bg-[#085b45] leading-none text-xs font-bold text-white overflow-hidden">
-                                <div className="flex justify-center items-center w-4 h-4">
-                                    <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-star_dd"
-                                        ></use>
-                                    </svg>
-                                </div>
-                            </div>)}
                         </div>
                     </motion.div>
                 </div>
@@ -103,12 +92,12 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 </Link>
 
                 <div className="flex justify-between items-center w-full h-auto">
-                    <div className="flex justify-start items-center w-auto space-x-1 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold">
-                        <div className="flex justify-start items-center w-auto text-[#c6222b]">
+                    <div className="block justify-start items-center w-auto space-y-0.5 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold">
+                        <div className="flex justify-start items-center w-auto !leading-none text-[#00838a]">
                             ₹{price}.00
                         </div>
 
-                        <div className="flex justify-start items-center w-auto text-[#767676] font-medium line-through">
+                        <div className="flex justify-start items-center w-auto !leading-none text-[#767676] font-medium line-through text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm">
                             ₹{price}.00
                         </div>
                     </div>

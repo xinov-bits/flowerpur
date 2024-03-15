@@ -121,8 +121,6 @@ export default function Home() {
 
   // FILTER & RATINGS
   const [reviewMean, setReviewMean] = useState([]);
-  const [reviewStarNames, setReviewStarNames] = useState([]);
-  const [reviewNamesToSend, setReviewNamesToSend] = useState([]);
 
   const fetchReviews = async () => {
     try {
@@ -140,20 +138,6 @@ export default function Home() {
   useEffect(() => {
     fetchReviews();
   }, [products]);
-
-  useEffect(() => {
-    let reviewNames = reviewMean.map((s) => s.name);
-
-    setReviewStarNames(reviewMean.filter((s) => {
-      if (s.stars >= 4) {
-        return s
-      }
-    }).map((s) => s.name))
-  }, [reviewMean])
-
-  useEffect(() => {
-    setReviewNamesToSend(reviewStarNames);
-  }, [reviewStarNames])
 
   return (
     <>
@@ -332,16 +316,16 @@ export default function Home() {
 
         <div className="block justify-start items-start w-full h-full bg-white py-6 sm:py-6 md:py-8 lg:py-8 xl:py-8 space-y-10 text-[#494949]">
           <div className="block w-full h-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
-            {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex flex-col justify-start items-center w-full h-full select-none">
+            <div className="flex flex-col justify-start items-center w-full h-full select-none">
               <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
                 Best-Selling Bouquets
               </div>
 
-              <div className="flex justify-start items-center w-full">
+              {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
                 <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
                   <Swiper
                     className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
-                    slidesPerView={3.8}
+                    slidesPerView={4.2}
                     spaceBetween={16}
                     pagination={{ clickable: true }}
                     resistanceRatio={0}
@@ -398,23 +382,23 @@ export default function Home() {
                     })}
                   </Swiper>
                 </div>
-              </div>
-            </div>}
+              </div>}
+            </div>
           </div>
 
           <div className="flex justify-center items-center w-full h-2 sm:h-2 md:h-1 lg:h-1 xl:h-1 bg-[#f7f7f7] border-y border-[#e5e5e5]" />
 
           <div className="block w-full h-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
-            {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex flex-col justify-start items-center w-full h-full select-none">
+            <div className="flex flex-col justify-start items-center w-full h-full select-none">
               <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
                 Top-Rated Bouquets
               </div>
 
-              <div className="flex justify-start items-center w-full">
+              {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
                 <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
                   <Swiper
                     className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
-                    slidesPerView={3.8}
+                    slidesPerView={4.2}
                     spaceBetween={16}
                     pagination={{ clickable: true }}
                     resistanceRatio={0}
@@ -451,8 +435,6 @@ export default function Home() {
                             dimg={filterProducts[item].dimg}
                             title={filterProducts[item].title}
                             offer={filterProducts[item].offer}
-
-                            ratings={reviewNamesToSend}
                           />
                         </SwiperSlide>
                       )
@@ -500,16 +482,14 @@ export default function Home() {
                             dimg={filterProducts[item].dimg}
                             title={filterProducts[item].title}
                             offer={filterProducts[item].offer}
-
-                            ratings={reviewNamesToSend}
                           />
                         </SwiperSlide>
                       )
                     })}
                   </Swiper>
                 </div>
-              </div>
-            </div>}
+              </div>}
+            </div>
           </div>
         </div>
       </div>

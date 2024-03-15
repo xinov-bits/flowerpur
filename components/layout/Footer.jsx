@@ -18,21 +18,21 @@ import CartContext from '@/context/CartContext';
 const Footer = () => {
   // USE CONTEXT
   const {
-      cart,
-      subTotal,
-      numTotal,
-      mrpTotal,
-      favList,
-      recentView,
-      addToCart,
-      clearCart,
-      removeFromCart,
-      removeAtOnce,
-      isCartOpenATC,
-      setIsCartOpenATC,
+    cart,
+    subTotal,
+    numTotal,
+    mrpTotal,
+    favList,
+    recentView,
+    addToCart,
+    clearCart,
+    removeFromCart,
+    removeAtOnce,
+    isCartOpenATC,
+    setIsCartOpenATC,
 
-      isHeader,
-      setIsHeader,
+    isHeader,
+    setIsHeader,
   } = useContext(CartContext);
 
 
@@ -111,56 +111,48 @@ const Footer = () => {
             <div className="flex justify-center items-center w-full">
               <ul className="hidden sm:hidden md:block lg:block xl:block justify-start items-center w-full space-y-2">
                 <li className="flex justify-end items-center w-full">
-                  <Link href="/">
-                    <button className="flex justify-center items-center w-full p-1.5 bg-[#7f7f7f] hover:bg-[#494949] rounded-md cursor-pointer no-outline duration-100">
-                      <svg className="text-white w-36" width={139} height={44}>
-                        <use
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          xlinkHref="/on/demandware/svg/footer.svg#icon-app_store"
-                        ></use>
-                      </svg>
-                    </button>
+                  <Link href="/" className="flex justify-center items-center w-auto cursor-pointer no-outline duration-100">
+                    <Image className="flex justify-center items-center w-full h-12"
+                      width={120}
+                      height={40}
+                      src="/assets/footer/app-store-badge.svg"
+                      alt="app store icon"
+                    />
                   </Link>
                 </li>
 
                 <li className="flex justify-end items-center w-full">
-                  <Link href="/">
-                    <button className="flex justify-center items-center w-full p-1.5 bg-[#7f7f7f] hover:bg-[#494949] rounded-md cursor-pointer no-outline duration-100">
-                      <svg className="text-white w-36" width={131} height={44}>
-                        <use
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          xlinkHref="/on/demandware/svg/footer.svg#icon-google_play"
-                        ></use>
-                      </svg>
-                    </button>
+                  <Link href="/" className="flex justify-center items-center w-auto cursor-pointer no-outline duration-100">
+                    <Image className="flex justify-center items-center w-full h-12"
+                      width={120}
+                      height={40}
+                      src="/assets/footer/google-play-badge.svg"
+                      alt="google play icon"
+                    />
                   </Link>
                 </li>
               </ul>
 
               <ul className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full space-x-2">
                 <li className="flex justify-center items-center w-full">
-                  <Link href="/">
-                    <button className="flex justify-center items-center w-full p-1.5 bg-[#7f7f7f] hover:bg-[#494949] rounded-md cursor-pointer no-outline duration-100">
-                      <svg className="text-white w-36" width={139} height={44}>
-                        <use
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          xlinkHref="/on/demandware/svg/footer.svg#icon-app_store"
-                        ></use>
-                      </svg>
-                    </button>
+                  <Link href="/" className="flex justify-center items-center w-auto cursor-pointer no-outline duration-100">
+                    <Image className="flex justify-center items-center w-full h-12"
+                      width={120}
+                      height={40}
+                      src="/assets/footer/app-store-badge.svg"
+                      alt="app store icon"
+                    />
                   </Link>
                 </li>
 
                 <li className="flex justify-center items-center w-full">
-                  <Link href="/">
-                    <button className="flex justify-center items-center w-full p-1.5 bg-[#7f7f7f] hover:bg-[#494949] rounded-md cursor-pointer no-outline duration-100">
-                      <svg className="text-white w-36" width={131} height={44}>
-                        <use
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          xlinkHref="/on/demandware/svg/footer.svg#icon-google_play"
-                        ></use>
-                      </svg>
-                    </button>
+                  <Link href="/" className="flex justify-center items-center w-auto cursor-pointer no-outline duration-100">
+                    <Image className="flex justify-center items-center w-full h-12"
+                      width={120}
+                      height={40}
+                      src="/assets/footer/google-play-badge.svg"
+                      alt="google play icon"
+                    />
                   </Link>
                 </li>
               </ul>

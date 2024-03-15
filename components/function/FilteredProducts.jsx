@@ -82,30 +82,6 @@ export const FilteredProducts = () => {
     }, []);
 
 
-    // ADD TO CART
-    const [cartLoading, setCartLoading] = useState([false, '']);
-
-    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
-        setCartLoading([true, url]);
-
-        setTimeout(() => {
-            setCartLoading([false, '']);
-
-            addToCart(
-                itemCode,
-                url,
-                qty,
-                availableQty,
-                price,
-                img,
-                name,
-                offer,
-            );
-            setAddedAnim([true, url]);
-        }, 1000);
-    }
-
-
     // FILTER & RATINGS
     const query = useSearchParams();
     const qFilter = query.get("filter");
@@ -157,6 +133,11 @@ export const FilteredProducts = () => {
                                     }
                                 }
                             }
+                        }
+                    }
+                    else if (qFilter === 'under_999') {
+                        if (parseInt(filterProducts[item].price) < 999) {
+                            return filterProducts[item]
                         }
                     }
                 }

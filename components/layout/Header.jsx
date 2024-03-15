@@ -118,42 +118,42 @@ const Header = () => {
     const menuItems = [
         {
             name: 'Home',
-            img: 'home.png',
+            img: 'home_.png',
             link: '/'
         },
         {
             name: 'Flowers',
-            img: 'flower.png',
+            img: 'flowers.svg',
             link: '/flowers'
         },
         {
             name: 'Combos',
-            img: 'combo.png',
+            img: 'combo_.png',
             link: '/'
         },
         {
             name: 'Plants',
-            img: 'plant.png',
+            img: 'plants.png',
             link: '/'
         },
         {
             name: 'Gifts',
-            img: 'gift.png',
+            img: 'gifts.svg',
             link: '/'
         },
         {
             name: 'Birthday',
-            img: 'cake.png',
+            img: 'cakes.svg',
             link: '/'
         },
         {
             name: 'Anniversary',
-            img: 'rose.png',
+            img: 'anniversary.png',
             link: '/'
         },
         {
             name: 'Occasions',
-            img: 'sunflower.png',
+            img: 'diya.png',
             link: '/'
         }
     ]

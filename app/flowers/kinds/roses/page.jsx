@@ -92,50 +92,6 @@ const Page = () => {
   )
 
 
-  // ADD TO CART
-  const [cartLoading, setCartLoading] = useState([false, '']);
-
-  const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
-    setCartLoading([true, url]);
-
-    setTimeout(() => {
-      setCartLoading([false, '']);
-
-      addToCart(
-        itemCode,
-        url,
-        qty,
-        availableQty,
-        price,
-        img,
-        name,
-        offer,
-      );
-      setAddedAnim([true, url]);
-    }, 1000);
-  }
-
-
-  // FILTER & RATINGS
-  const [reviewMean, setReviewMean] = useState([]);
-
-  const fetchReviews = async () => {
-    try {
-      const apiUrl = `${process.env.NEXT_PUBLIC_HOST}/api/getmeanreviews`;
-      const response = await axios.get(apiUrl);
-
-      if (response.status === 200) {
-        setReviewMean(response.data);
-      }
-    } catch (error) {
-      console.log("Error: " + error.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchReviews();
-  }, [products])
-
   return (
     <>
       <Suspense>
