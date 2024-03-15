@@ -352,7 +352,7 @@ export default function Home() {
                   </Swiper>
                 </div>
 
-                <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-6">
+                <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
                   <Swiper
                     className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
                     slidesPerView={1.75}
@@ -442,7 +442,7 @@ export default function Home() {
                   </Swiper>
                 </div>
 
-                <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-6">
+                <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
                   <Swiper
                     className="flex justify-start items-center w-full h-auto rounded-md overflow-hidden"
                     slidesPerView={1.75}

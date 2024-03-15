@@ -434,12 +434,12 @@ const Header = () => {
 
                                 <div className="flex justify-center items-center size-[2.28rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
                                     <Link className="no-outline" href="/">
-                                        <svg className="flex justify-center items-center size-[2.28rem]" width={95} height={106}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/logo.svg#logo_icon2"
-                                            ></use>
-                                        </svg>
+                                        <Image className="flex justify-center  items-center  size-[2.28rem]"
+                                            src="/assets/Logo/logo_icon__svg.svg"
+                                            width={117}
+                                            height={124}
+                                            alt="flowerpur logo mobile"
+                                        />
                                     </Link>
                                 </div>
                             </div>
@@ -521,7 +521,7 @@ const Header = () => {
 
                     {/* MENU (104px) */}
                     <div className="relative flex justify-start items-center w-full h-18 py-2 px-3.5 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5]">
-                        <ul id="menuElement" ref={menuRef} className="flex justify-start items-center w-full h-full space-x-4 overflow-x-scroll no-scrollbar">
+                        <ul id="menuElement" ref={menuRef} className="flex justify-start items-center w-full h-full space-x-2.5 overflow-x-scroll no-scrollbar">
                             {menuItems.map((item, index) => (
                                 <Link className="flex justify-center items-center w-auto h-full  no-outline" key={index} href={item.link}>
                                     <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">

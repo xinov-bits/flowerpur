@@ -229,19 +229,19 @@ const Footer = () => {
               <div className="flex justify-center items-center w-full">
                 <div className="flex justify-center items-center w-10 h-10 text-[#085b45] bg-[#f4fbeb] rounded-full">
                   <Link className="no-outline" href={"/"}>
-                    <svg className="flex justify-center items-center w-10 h-10" width={95} height={106}>
-                      <use
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        xlinkHref="/on/demandware/svg/logo.svg#logo_icon2"
-                      ></use>
-                    </svg>
+                    <Image className="flex justify-center  items-center  size-[2.28rem]"
+                      src="/assets/Logo/logo_icon__svg.svg"
+                      width={117}
+                      height={124}
+                      alt="flowerpur logo mobile"
+                    />
                   </Link>
                 </div>
               </div>
 
 
               <div className="flex flex-col justify-center items-center w-full mt-2">
-                <ul className="flex justify-start items-center w-full space-x-4 text-base">
+                <ul className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start items-center w-full space-x-4 text-base">
                   {lowerFooterMenu.map((k, index) => <li key={index} className="flex justify-center items-center w-auto leading-none text-medium">
                     <Link href={k.url}>
                       {k.name}
