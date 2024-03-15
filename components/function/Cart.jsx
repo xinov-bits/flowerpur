@@ -114,6 +114,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         }
     };
 
+
     return (
         <>
             <AnimatePresence>
@@ -135,6 +136,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                             setIsCartOpen(false);
                             setIsCartOpenATC(false);
                         }} />
+                        
 
                         <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full bg-white border-l border-[#e5e5e5]">
                             <div className="flex justify-between items-center w-full h-14 bg-white border-b border-[#e5e5e5]">
@@ -156,8 +158,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                 </button>
                             </div>
 
-                            <div className="block justify-start items-start w-full h-screen pb-4 bg-whites">
-                                <ul className="flex flex-col justify-start items-center w-full h-[32rem] text-[#191919] overflow-y-auto">
+                            <div className="block justify-start items-start w-full h-screen pb-4">
+                                <ul className="flex flex-col justify-start items-center w-full h-[48.8rem] text-[#191919] overflow-y-auto">
                                     {mappedCart.map((item, index) => {
                                         return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] last:border-b-0 bg-white hover:bg-[#f7f7f7] cursor-pointer">
                                             <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
@@ -272,7 +274,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                     })}
                                 </ul>
 
-                                <div className="flex justify-center items-center w-full h-16 p-4 pb-0 border-t border-[#e5e5e5]">
+                                <div className="flex justify-center items-center w-full h-[5.25rem] p-4 border-t border-[#e5e5e5]">
                                     {subTotal > 0 ? (
                                         <div className="flex justify-center items-center w-full h-full">
                                             <button className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {

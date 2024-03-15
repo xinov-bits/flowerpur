@@ -198,7 +198,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 
                             <div className="block justify-start items-start w-full h-auto bg-white text-[#191919]">
                                 <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-semibold">
-                                    {sideMenuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7] pt-1 mt-1">
+                                    {sideMenuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7]">
                                         <Link href={item.url} className="flex justify-start items-center w-full space-x-1.5 no-outline">
                                             <svg className="flex justify-center items-cener w-6 h-6 text-[#494949]" width={20} height={20}>
                                                 <use

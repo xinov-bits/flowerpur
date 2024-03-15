@@ -207,7 +207,7 @@ export default function Home() {
             <Link href="/flowers" className="block justify-center items-start w-full no-outline">
               <div className="flex justify-center items-center w-full p-0 overflow-hidden">
                 <Image className="flex justify-center items-center w-full h-full overflow-hidden"
-                  src={"https://i.ibb.co/FBWdxkp/0215-HPUpdate-For-Every-Ocasssion-HPPods-Subs-Mobile.webp"}
+                  src={"https://i.ibb.co/xCjXCFs/0215-HPUpdate-For-Every-Ocasssion-HPPods-Subs-Mobile.webp"}
                   width={480}
                   height={426}
                   alt="order flowers online from flowerpur in minutes for birthday"
@@ -355,7 +355,7 @@ export default function Home() {
                 <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
                   <Swiper
                     className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
-                    slidesPerView={1.75}
+                    slidesPerView={2.2}
                     spaceBetween={12}
                     pagination={{ clickable: true }}
                     resistanceRatio={0}
@@ -445,7 +445,7 @@ export default function Home() {
                 <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
                   <Swiper
                     className="flex justify-start items-center w-full h-auto rounded-md overflow-hidden"
-                    slidesPerView={1.75}
+                    slidesPerView={2.2}
                     spaceBetween={12}
                     pagination={{ clickable: true }}
                     resistanceRatio={0}
