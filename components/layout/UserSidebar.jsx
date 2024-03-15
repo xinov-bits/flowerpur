@@ -117,7 +117,7 @@ export const UserSidebar = () => {
 
     return (
         <>
-            <div className="hidden sm:hidden md:block lg:block xl:block items-start w-[20%] h-auto bg-[#f7f7f7] border-r-[1.5px] border-[#e5e5e5] text-[#191919] select-none">
+            <div className="hidden sm:hidden md:block lg:block xl:block items-start w-[20%] h-full bg-[#f7f7f7] border-r-[1.5px] border-[#e5e5e5] text-[#191919] select-none">
                 <div className="block justify-start items-center w-full h-auto p-4 border-b-[1.5px] border-[#e5e5e5]">
                     <div className="flex justify-start items-center w-full text-xl font-bold !leading-none capitalize">
                         🌻 Hello {userName}

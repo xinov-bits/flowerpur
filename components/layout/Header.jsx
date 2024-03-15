@@ -1,7 +1,7 @@
 'use client';
 
 // REACT JS
-import React, { useState, useEffect, useContext, createContext } from 'react'
+import React, { useState, useEffect, useContext, createContext, useRef } from 'react'
 import { getCookie, getCookies, hasCookie, setCookie } from 'cookies-next'
 
 // NEXT JS
@@ -219,6 +219,35 @@ const Header = () => {
 
     // MOBILE MENU
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const menuRef = useRef(null);
+    const [menuReachedEnd, setMenuReachedEnd] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const menuElement = menuRef.current;
+            if (!menuElement) return;
+
+            const isAtEnd = Math.round(menuElement.scrollLeft + menuElement.clientWidth) >= menuElement.scrollWidth;
+            if (isAtEnd) {
+                setMenuReachedEnd(true);
+            }
+            else {
+                setMenuReachedEnd(false)
+            }
+        };
+
+        const menuElement = menuRef.current;
+        if (menuElement) {
+            menuElement.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (menuElement) {
+                menuElement.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
 
     return (
         <>
@@ -492,7 +521,7 @@ const Header = () => {
 
                     {/* MENU (104px) */}
                     <div className="relative flex justify-start items-center w-full h-18 py-2 px-3.5 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5]">
-                        <ul className="flex justify-start items-center w-full h-full space-x-4 overflow-x-scroll  no-scrollbar">
+                        <ul id="menuElement" ref={menuRef} className="flex justify-start items-center w-full h-full space-x-4 overflow-x-scroll no-scrollbar">
                             {menuItems.map((item, index) => (
                                 <Link className="flex justify-center items-center w-auto h-full  no-outline" key={index} href={item.link}>
                                     <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">
@@ -512,6 +541,8 @@ const Header = () => {
                                 </Link>
                             ))}
                         </ul>
+
+                        {!menuReachedEnd && <div className="absolute right-0 flex justify-center items-center w-20 h-full bg-gradient-to-l from-[#f7f7f7] to-transparent pointer-events-none" />}
                     </div>
                 </div>
 

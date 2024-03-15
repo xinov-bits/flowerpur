@@ -107,12 +107,12 @@ const Page = () => {
               </div>
 
 
-              <div className="flex justify-between items-center w-full h-8 mt-2">
+              <div className="flex justify-between items-center w-full h-24 sm:h-24 md:h-9 lg:h-9 xl:h-9 mt-2">
                 <FilterOptions />
               </div>
             </div>
 
-            {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full mt-6">
+            {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full mt-10">
               {Skeleton}
               {Skeleton}
               {Skeleton}
