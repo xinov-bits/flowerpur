@@ -228,9 +228,9 @@ const Footer = () => {
             <div className="block sm:block md:hidden lg:hidden xl:hidden justify-center items-start w-full space-y-2">
               <div className="flex justify-center items-center w-full">
                 <div className="flex justify-center items-center w-10 h-10 text-[#085b45] bg-[#f4fbeb] rounded-full">
-                  <Link className="no-outline" href={"/"}>
+                  <Link className="no-outline" href="/">
                     <Image className="flex justify-center  items-center  size-[2.28rem]"
-                      src="/assets/Logo/logo_icon__svg.svg"
+                      src="/assets/Logo/logo_icon-dark__svg.svg"
                       width={117}
                       height={124}
                       alt="flowerpur logo mobile"

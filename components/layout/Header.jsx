@@ -258,12 +258,12 @@ const Header = () => {
                         <div className="flex justify-start items-center w-[18%] h-full cursor-pointer">
                             <div className="flex justify-start items-center w-[94%] h-full cursor-pointer rounded-md overflow-hidden">
                                 <Link className="flex justify-start items-center w-full h-full no-outline" href={'/'}>
-                                    <svg className="flex justify-start items-center w-[90%] h-full" width={760} height={120}>
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/logo.svg#logo2"
-                                        ></use>
-                                    </svg>
+                                    <Image className="flex justify-center items-center w-full"
+                                        src="/assets/Logo/logo.svg"
+                                        width={489}
+                                        height={78}
+                                        alt="flowerpur logo"
+                                    />
                                 </Link>
                             </div>
                         </div>
@@ -435,9 +435,9 @@ const Header = () => {
                                 <div className="flex justify-center items-center size-[2.28rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
                                     <Link className="no-outline" href="/">
                                         <Image className="flex justify-center  items-center  size-[2.28rem]"
-                                            src="/assets/Logo/logo_icon__svg.svg"
-                                            width={117}
-                                            height={124}
+                                            src="/assets/Logo/logo_icon-dark__svg.svg"
+                                            width={288}
+                                            height={288}
                                             alt="flowerpur logo mobile"
                                         />
                                     </Link>
