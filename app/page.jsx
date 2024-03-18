@@ -18,10 +18,8 @@ import { motion, AnimatePresence } from "framer-motion"
 
 // SWIPER & SPLIDE
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Pagination } from 'swiper';
+import { FreeMode } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/splide.min.css';
 
 // CONTEXT
 import CartContext from '@/context/CartContext';
@@ -96,6 +94,31 @@ export default function Home() {
   ]
 
 
+  // MAIN SLIDES
+  const mainSlides = [
+    {
+      name: "a",
+      img: "https://img.cdn4dd.com/p/fit=cover,width=800,format=auto,quality=50/media/photosV2/31e2bac2-1d72-47de-a2d7-6529dbbc0d88-retina-large.jpg"
+    },
+    {
+      name: "b",
+      img: "https://img.cdn4dd.com/p/fit=cover,width=800,format=auto,quality=50/media/photosV2/31e2bac2-1d72-47de-a2d7-6529dbbc0d88-retina-large.jpg"
+    },
+    {
+      name: "c",
+      img: "https://img.cdn4dd.com/p/fit=cover,width=800,format=auto,quality=50/media/photosV2/31e2bac2-1d72-47de-a2d7-6529dbbc0d88-retina-large.jpg"
+    },
+    {
+      name: "d",
+      img: "https://img.cdn4dd.com/p/fit=cover,width=800,format=auto,quality=50/media/photosV2/31e2bac2-1d72-47de-a2d7-6529dbbc0d88-retina-large.jpg"
+    },
+    {
+      name: "e",
+      img: "https://img.cdn4dd.com/p/fit=cover,width=800,format=auto,quality=50/media/photosV2/31e2bac2-1d72-47de-a2d7-6529dbbc0d88-retina-large.jpg"
+    },
+  ]
+
+
   // RATINGS
   const [addedAnim, setAddedAnim] = useState([false, '']);
 
@@ -142,7 +165,7 @@ export default function Home() {
   return (
     <>
       <div className="block w-full h-full justify-center items-start bg-white overflow-x-hidden">
-        <div className="flex w-full h-full justify-center items-start select-none">
+        {/* <div className="flex w-full h-full justify-center items-start select-none">
           <div className="relative hidden sm:hidden md:block lg:block xl:block justify-start items-start w-full text-[#333333]">
             <div className="relative flex justify-center items-start w-full">
               <Link href="/flowers" className="flex justify-center items-center w-full no-outline">
@@ -208,8 +231,8 @@ export default function Home() {
               <div className="flex justify-center items-center w-full p-0 overflow-hidden">
                 <Image className="flex justify-center items-center w-full h-full overflow-hidden"
                   src={"https://i.ibb.co/xCjXCFs/0215-HPUpdate-For-Every-Ocasssion-HPPods-Subs-Mobile.webp"}
-                  width={480}
-                  height={426}
+                  width={412}
+                  height={412}
                   alt="order flowers online from flowerpur in minutes for birthday"
                 />
               </div>
@@ -258,7 +281,89 @@ export default function Home() {
               </div>
             </Link>
           </div>
+        </div> */}
+        {/* NEW */}
+        <div className="flex w-full h-full justify-start items-start select-none py-4">
+          <div className="hidden sm:hidden md:flex lg:flex xl:flex w-full h-full justify-start items-start select-none">
+            <Swiper
+              className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
+              slidesPerView={1}
+              spaceBetween={16}
+              pagination={{ clickable: true }}
+              resistanceRatio={0}
+            >
+              {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="flex justify-center items-center w-full h-full overflow-hidden rounded-lg">
+                <div className="flex justify-center items-center w-full h-full overflow-hidden">
+                  <Image className="flex justify-center items-center w-full h-full"
+                    src={slide.img}
+                    width={800}
+                    height={600}
+                    alt={slide.name}
+                  />
+                </div>
+
+                <div className="block justify-center items-center w-full h-full overflow-hidden text-white">
+                  <div className="flex justify-start items-center w-full text-lg font-bold">
+                    Get $2 off $20+ with Pepsi-Cola® beverages
+                  </div>
+
+                  <div className="flex justify-start items-center w-full text-sm font-normal">
+                    Luck is on your side this St. Patrick’s Day
+                  </div>
+
+                  <div className="flex justify-start items-center w-full">
+                    <button className="flex justify-center items-center w-auto h-10 px-4 font-semibold leading-none bg-[#191919] rounded-full">
+                      Order Now
+                    </button>
+                  </div>
+                </div>
+              </SwiperSlide>)}
+            </Swiper>
+          </div>
+
+          <div className="flex sm:flex md:hidden lg:hidden xl:hidden w-full h-full justify-start items-start select-none">
+            <Swiper
+              className="flex justify-center items-center w-full h-auto !px-4 overflow-hidden"
+              slidesPerView={1.02}
+              spaceBetween={10}
+              resistanceRatio={0.4}
+              freeMode={true}
+              minimumVelocity={0.01}
+              momentumVelocityRatio={0.05}
+              modules={[FreeMode]}
+            >
+              {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
+                <div className="flex justify-end items-start w-[23.7rem] h-[17rem] bg-[#2b7549] rounded-lg overflow-hidden">
+                  <div className="flex justify-end items-start w-full h-[10.4rem] overflow-hidden">
+                    <Image className="flex justify-center items-center w-full h-full"
+                      src={slide.img}
+                      width={800}
+                      height={450}
+                      alt={slide.name}
+                    />
+                  </div>
+
+                  <div className="absolute bottom-4 left-0 flex flex-col justify-start px-4 items-center w-auto overflow-hidden text-white">
+                    <div className="flex justify-start items-center w-full text-lg font-bold">
+                      Birthday Flowers
+                    </div>
+
+                    <div className="flex justify-start items-center w-full text-[0.82rem] leading-4 font-medium">
+                      Celebrate their special day with a gorgeous bouquet.
+                    </div>
+
+                    <div className="flex justify-start items-center w-full mt-1.5 text-sm">
+                      <button className="flex justify-center items-center w-auto h-[1.85rem] px-3 font-semibold leading-none bg-[#054820] rounded-full">
+                        Shop now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>)}
+            </Swiper>
+          </div>
         </div>
+
 
         <div className="flex justify-center items-start w-full h-full bg-white py-6 text-[#494949] border-b border-[#e5e5e5] select-none">
           <ul className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full h-full space-x-6">

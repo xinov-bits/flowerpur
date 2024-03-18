@@ -28,7 +28,6 @@ import Cart from '../function/Cart';
 
 // MOMENT JS
 import moment from 'moment';
-import MobileMenu from '../function/MobileMenu';
 
 const Header = () => {
     // USE CONTEXT
@@ -216,39 +215,6 @@ const Header = () => {
         return 'morning';
     }
 
-
-    // MOBILE MENU
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    const menuRef = useRef(null);
-    const [menuReachedEnd, setMenuReachedEnd] = useState(false)
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const menuElement = menuRef.current;
-            if (!menuElement) return;
-
-            const isAtEnd = Math.round(menuElement.scrollLeft + menuElement.clientWidth) >= menuElement.scrollWidth;
-            if (isAtEnd) {
-                setMenuReachedEnd(true);
-            }
-            else {
-                setMenuReachedEnd(false)
-            }
-        };
-
-        const menuElement = menuRef.current;
-        if (menuElement) {
-            menuElement.addEventListener('scroll', handleScroll);
-        }
-
-        return () => {
-            if (menuElement) {
-                menuElement.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, []);
-
     return (
         <>
             {isHeader && <header>
@@ -413,145 +379,8 @@ const Header = () => {
                     </div>
                 </div>
 
-
-                {/* MOBILE HEADER */}
-                <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#292929]">
-                    <div className="flex justify-start items-center w-full h-[3.65rem] py-1.5 px-3.5 space-x-2">
-                        <div className="flex justify-between items-center w-full h-full cursor-pointer space-x-2 text-[#292929]">
-                            <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-4">
-                                <div className="flex justify-center items-center w-8 h-8">
-                                    <button className="z-[1] flex justify-center items-center no-outline" onClick={() => {
-                                        setIsMobileMenuOpen(!isMobileMenuOpen)
-                                    }}>
-                                        <svg className="flex justify-center items-center" width={28} height={28}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-menu_dd"
-                                            ></use>
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className="flex justify-center items-center size-[2.28rem] text-[#085b45] bg-[#f4fbeb] rounded-full">
-                                    <Link className="no-outline" href="/">
-                                        <Image className="flex justify-center  items-center  size-[2.28rem]"
-                                            src="/assets/Logo/logo_icon-dark__svg.svg"
-                                            width={288}
-                                            height={288}
-                                            alt="flowerpur logo mobile"
-                                        />
-                                    </Link>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end items-center w-auto h-full cursor-pointer rounded-md space-x-4">
-                                <div className="flex justify-center items-center w-8 h-8">
-                                    <button className="z-[1] flex justify-center items-center no-outline">
-                                        <svg className="flex justify-center items-center" width={28} height={28}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
-                                            ></use>
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className="relative flex justify-center items-center w-8 h-8">
-                                    <div className="absolute z-[2] top-0 right-0 flex justify-center items-center w-[15px] h-[15px] leading-none text-[10px] bg-[#085b45] rounded-full font-semibold text-white text-ellipsis overflow-hidden">
-                                        {numTotal}
-                                    </div>
-
-                                    <button className="z-[1] flex justify-center items-center  no-outline" onClick={() => {
-                                        setIsCartOpen(!isCartOpen);
-                                    }}>
-                                        <svg className="flex justify-center items-center" width={28} height={28}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart2_dd"
-                                            ></use>
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className="flex justify-center items-center w-8 h-8">
-                                    {isUserSignedIn && <Link href="/user/orders">
-                                        <button className="z-[1] flex justify-center items-center  no-outline">
-                                            <svg className="flex justify-center items-center" width={28} height={28}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
-                                                ></use>
-                                            </svg>
-                                        </button>
-                                    </Link>}
-                                    {!isUserSignedIn && <Link href="/auth/signup">
-                                        <button className="z-[1] flex justify-center items-center  no-outline">
-                                            <svg className="flex justify-center items-center" width={28} height={28}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
-                                                ></use>
-                                            </svg>
-                                        </button>
-                                    </Link>}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full h-14 py-2 px-3.5 space-x-2 border-y border-[#e5e5e5]">
-                        <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden no-outline" onClick={() => setIsSearchMenu(true)}>
-                            <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
-                                <svg className="text-[#494949]" width={24} height={24}>
-                                    <use
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
-                                    ></use>
-                                </svg>
-                            </div>
-
-                            <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
-                                placeholder="Search for flowers, cakes, gifts, etc."
-                                name="search"
-                                type="text"
-                                autoComplete='off'
-                            />
-                        </button>
-                    </div>
-
-                    {/* MENU (104px) */}
-                    <div className="relative flex justify-start items-center w-full h-18 py-2 px-3.5 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5]">
-                        <ul id="menuElement" ref={menuRef} className="flex justify-start items-center w-full h-full space-x-2.5 overflow-x-scroll no-scrollbar">
-                            {menuItems.map((item, index) => (
-                                <Link className="flex justify-center items-center w-auto h-full  no-outline" key={index} href={item.link}>
-                                    <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">
-                                        <div className="flex justify-center items-center w-8 h-8">
-                                            <Image
-                                                src={`/assets/icons/${item.img}`}
-                                                alt={item.name}
-                                                width={38}
-                                                height={38}
-                                            />
-                                        </div>
-
-                                        <div className="flex justify-center items-center w-auto h-full">
-                                            {item.name}
-                                        </div>
-                                    </li>
-                                </Link>
-                            ))}
-                        </ul>
-
-                        {!menuReachedEnd && <div className="absolute right-0 flex justify-center items-center w-20 h-full bg-gradient-to-l from-[#f7f7f7] to-transparent pointer-events-none" />}
-                    </div>
-                </div>
-
                 {/* CART SIDEMENU */}
                 <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
-
-                {/* MOBILE SIDEMENU */}
-                <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
-
 
                 {/* SEARCH MENU */}
                 {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
