@@ -272,8 +272,8 @@ const MobileHeader = () => {
     return (
         <>
             {isHeader && <header>
-                <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full select-none bg-white text-[#191919]">
-                    <div className="flex justify-start items-center w-full h-[3.65rem] py-1 px-4 space-x-2">
+                <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full py-1.5 select-none bg-white text-[#191919]">
+                    <div className="flex justify-start items-center w-full h-[3.65rem] pb-1 px-4 space-x-2">
                         <div className="flex justify-between items-center w-full h-full space-x-1 cursor-pointer text-[#191919]">
                             <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-2">
                                 <div className="flex justify-center items-center size-9 p-1.5">
@@ -374,7 +374,7 @@ const MobileHeader = () => {
                         </button>
                     </div>
 
-                    <div className="flex justify-start items-center w-full h-auto py-2.5">
+                    <div className="flex justify-start items-center w-full h-auto pb-2">
                         <Swiper
                             className="flex justify-center items-center w-full h-full !px-4 overflow-hidden"
                             slidesPerView={5.2}
@@ -388,7 +388,7 @@ const MobileHeader = () => {
                             {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">
                                 <div className="flex flex-col justify-center items-center w-full h-full">
                                     <div className="flex justify-center items-center w-auto h-auto">
-                                        <Image className="flex justify-center items-center size-auto"
+                                        <Image className="flex justify-center items-center w-auto h-14"
                                             src={slide.img}
                                             width={192}
                                             height={192}
@@ -396,7 +396,7 @@ const MobileHeader = () => {
                                         />
                                     </div>
 
-                                    <div className="flex justify-center items-center w-auto leading-none font-bold text-sm">
+                                    <div className="flex justify-center items-center w-auto leading-none font-bold text-xs">
                                         {slide.name}
                                     </div>
                                 </div>
