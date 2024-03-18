@@ -244,28 +244,32 @@ const MobileHeader = () => {
     // MENU
     const menu = [
         {
-            name: "Grocery",
-            img: "https://ubr.to/3vgJg08",
+            name: "Bouquets",
+            img: "assets/icons/svg/flowers.svg",
         },
         {
-            name: "Fast Food",
-            img: "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/FastFood.png",
+            name: "Vases",
+            img: "assets/icons/svg/vase.svg",
         },
         {
-            name: "Pizza",
-            img: "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Pizza.png",
+            name: "Birthday",
+            img: "assets/icons/svg/cake.svg",
         },
         {
-            name: "Sushi",
-            img: "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Sushi.png",
+            name: "Plants",
+            img: "assets/icons/svg/plant.svg",
         },
         {
-            name: "Desserts",
-            img: "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Dessert.png",
+            name: "Gifts",
+            img: "assets/icons/svg/gifts_flat.svg",
         },
         {
-            name: "Mexican",
-            img: "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Mexican.png",
+            name: "Anniversary",
+            img: "assets/icons/svg/anniversary.svg",
+        },
+        {
+            name: "Occasions",
+            img: "assets/icons/svg/occasions.svg",
         },
     ]
 
