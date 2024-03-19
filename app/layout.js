@@ -15,14 +15,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
+// CONTEXT
+import { GlobalProvider } from "./GlobalProvider";
+
 // COMPONENTS
 import Header from "@/components/layout/Header";
 import MobileHeader from "@/components/layout/MobileHeader";
 import Footer from "@/components/layout/Footer";
 import SplashScreen from "@/components/layout/SplashScreen";
-
-// CONTEXT
-import { GlobalProvider } from "./GlobalProvider";
+import MobileBar from "@/components/layout/MobileBar";
 
 export default function RootLayout({ children }) {
   const router = useRouter();
@@ -53,6 +54,8 @@ export default function RootLayout({ children }) {
 
             <Header />
             <MobileHeader />
+            
+            <MobileBar />
 
             {children}
 
