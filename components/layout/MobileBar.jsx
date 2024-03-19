@@ -11,6 +11,9 @@ import { usePathname } from 'next/navigation';
 import CartContext from '@/context/CartContext';
 import UserContext from '@/context/UserContext';
 
+// FRAMER
+import { motion, AnimatePresence } from "framer-motion";
+
 const MobileBar = () => {
     // USE CONTEXT
     const {
@@ -80,8 +83,8 @@ const MobileBar = () => {
                         return (
                             <li key={index} className={`flex justify-center items-center w-full h-full py-2.5 ${pathname === item.link ? 'text-[#085b45]' : 'text-[#848484]'} duration-200`}>
                                 <Link href={item.link} className="no-outline">
-                                    <div className="block justify-center items-center w-full h-full">
-                                        <div className="flex justify-center items-center w-full h-full">
+                                    <div className="relative flex flex-col justify-center items-center w-full h-full">
+                                        <div className="relative z-[2] flex justify-center items-center w-full h-full">
                                             <svg className={`size-8 ${item.padding}`} width={24} height={24}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -89,6 +92,18 @@ const MobileBar = () => {
                                                 ></use>
                                             </svg>
                                         </div>
+
+                                        <AnimatePresence>
+                                            {pathname === item.link && (
+                                                <div className="absolute z-[1] bottom-5 flex justify-center items-center duration-200">
+                                                    <motion.div className="flex justify-center items-center w-10 h-5 rounded-b-sm rounded-t-full bg-[#eaf9e4] duration-200"
+                                                        initial={{ space: 0 }}
+                                                        animate={{ space: 1 }}
+                                                        exit={{ space: 0 }}
+                                                    />
+                                                </div>
+                                            )}
+                                        </AnimatePresence>
 
                                         <div className="flex justify-center items-center w-auto text-sm font-semibold">
                                             {item.name}
