@@ -98,23 +98,28 @@ export default function Home() {
   const mainSlides = [
     {
       name: "a",
-      img: "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMmM0NTgxYTM4NzAyNTU1Zjk2MmYxY2QxMDNjYTU5ZmYvNzkxNWM0YTc4YTlmOTRlZDU2MzE2YzdjNGRjMGVjODkuanBlZw==",
+      img: "https://i.ibb.co/fG9YtD7/image.png",
+      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
     },
     {
       name: "b",
-      img: "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMmM0NTgxYTM4NzAyNTU1Zjk2MmYxY2QxMDNjYTU5ZmYvNzkxNWM0YTc4YTlmOTRlZDU2MzE2YzdjNGRjMGVjODkuanBlZw==",
+      img: "https://i.ibb.co/fG9YtD7/image.png",
+      color: ['bg-[#ffd688]', 'text-[#191919]', 'bg-[#ffb749]']
     },
     {
       name: "c",
-      img: "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMmM0NTgxYTM4NzAyNTU1Zjk2MmYxY2QxMDNjYTU5ZmYvNzkxNWM0YTc4YTlmOTRlZDU2MzE2YzdjNGRjMGVjODkuanBlZw==",
+      img: "https://i.ibb.co/fG9YtD7/image.png",
+      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
     },
     {
       name: "d",
-      img: "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMmM0NTgxYTM4NzAyNTU1Zjk2MmYxY2QxMDNjYTU5ZmYvNzkxNWM0YTc4YTlmOTRlZDU2MzE2YzdjNGRjMGVjODkuanBlZw==",
+      img: "https://i.ibb.co/fG9YtD7/image.png",
+      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
     },
     {
       name: "e",
-      img: "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMmM0NTgxYTM4NzAyNTU1Zjk2MmYxY2QxMDNjYTU5ZmYvNzkxNWM0YTc4YTlmOTRlZDU2MzE2YzdjNGRjMGVjODkuanBlZw==",
+      img: "https://i.ibb.co/fG9YtD7/image.png",
+      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
     },
   ]
 
@@ -324,39 +329,46 @@ export default function Home() {
           <div className="flex sm:flex md:hidden lg:hidden xl:hidden w-full h-full justify-start items-start select-none">
             <Swiper
               className="flex justify-center items-center w-full h-auto !px-4 overflow-hidden"
-              slidesPerView={1.02}
+              slidesPerView={1.0}
               spaceBetween={10}
               resistanceRatio={0.4}
-              freeMode={true}
-              minimumVelocity={0.01}
-              momentumVelocityRatio={0.05}
               modules={[FreeMode]}
-            >
-              {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-end w-[22.8rem] h-auto rounded-lg overflow-hidden">
-                <div className="block justify-start items-end w-[23.7rem] h-[17rem] bg-[#06c169] rounded-lg overflow-hidden">
-                  <div className="flex justify-center items-center w-full h-auto overflow-hidden" id="home_slide_banner_item">
-                    <Image className="flex justify-center items-center w-full h-full"
-                      src={slide.img}
-                      width={800}
-                      height={450}
-                      alt={slide.name}
-                    />
-                  </div>
 
-                  <div className="absolute bottom-0 left-0 flex flex-col justify-start items-center w-full h-auto px-3.5 py-4 text-[#191919] overflow-hidden">
-                    <div className="flex justify-start items-center w-full text-[1.4rem] font-bold !leading-none">
+              freeMode={false}
+              momentum={false}
+              momentumBounce={false}
+              momentumRatio={0}
+              momentumBounceRatio={0}
+              momentumVelocityRatio={0}
+              stiky={false}
+            >
+              {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
+                <div className={`flex justify-start items-start w-[23.7rem] h-[17rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
+                  <div className={`flex flex-col justify-start items-start w-[72%] h-full p-6 ${slide.color[1]} overflow-hidden`}>
+                    <div className="flex justify-start items-center w-full text-2xl font-bold !leading-none">
                       Birthday Bouquets
                     </div>
-                    
+
                     <div className="flex justify-start items-center w-full mt-1 text-base font-semibold !leading-none">
                       Offers, coupons and discounts available.
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-2 text-base">
-                      <button className="flex justify-center items-center w-auto h-[1.85rem] px-3 font-semibold !leading-none bg-[#191919] text-white rounded-full">
+                    <div className="flex justify-start items-center w-full mt-2.5 text-base">
+                      <button className="flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none bg-[#191919] text-white rounded-full">
                         Shop now
                       </button>
                     </div>
+                  </div>
+
+                  <div className={`absolute bottom-0 right-0 flex justify-center items-center w-[70%] h-[9rem] ${slide.color[2]} rounded-tl-full`} />
+
+                  <div className="absolute bottom-1 right-1 flex justify-end items-center w-[10rem] h-[11.5rem]">
+                    <Image className="flex justify-center items-center w-full h-full"
+                      width={262}
+                      height={192}
+                      src={slide.img}
+                      alt=""
+                    />
                   </div>
                 </div>
               </SwiperSlide>)}

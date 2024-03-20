@@ -250,5 +250,5 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* HOME BANNERS */
 #home_slide_banner_item {
-  clip-path: polygon(0 0, 100% 0%, 100% 68%, 0 52%);
+  clip-path: polygon(84% 28%, 100% 0, 100% 25%, 100% 100%, 0 100%, 22% 78%, 39% 53%, 59% 52%);
 }
