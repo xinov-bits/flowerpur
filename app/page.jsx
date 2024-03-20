@@ -334,13 +334,7 @@ export default function Home() {
               resistanceRatio={0.4}
               modules={[FreeMode]}
 
-              freeMode={false}
-              momentum={false}
-              momentumBounce={false}
-              momentumRatio={0}
-              momentumBounceRatio={0}
-              momentumVelocityRatio={0}
-              stiky={false}
+              freeMode={true}
             >
               {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
                 <div className={`flex justify-start items-start w-[23.7rem] h-[17rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
