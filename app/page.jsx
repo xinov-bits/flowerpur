@@ -344,14 +344,12 @@ export default function Home() {
                   </div>
 
                   <div className="absolute bottom-0 left-0 flex flex-col justify-start items-center w-full h-auto px-3.5 py-4 text-[#191919] overflow-hidden">
-                    <div className="flex justify-start items-center w-full">
-                      <div className="flex justify-center items-center w-auto px-2 py-1.5 text-sm font-semibold !leading-none text bg-[#7fd99a] rounded-full">
-                        offers available
-                      </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full mt-2 text-[1.65rem] font-bold !leading-none">
+                    <div className="flex justify-start items-center w-full text-[1.4rem] font-bold !leading-none">
                       Birthday Bouquets
+                    </div>
+                    
+                    <div className="flex justify-start items-center w-full mt-1 text-base font-semibold !leading-none">
+                      Offers, coupons and discounts available.
                     </div>
 
                     <div className="flex justify-start items-center w-full mt-2 text-base">
