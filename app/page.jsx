@@ -97,29 +97,32 @@ export default function Home() {
   // MAIN SLIDES
   const mainSlides = [
     {
-      name: "a",
+      name: "Birthday Bouquets",
+      desc: "Offers, coupons and discounts <br /> available",
       img: "https://i.ibb.co/9yX5PS1/flower-1.png",
-      color: ['bg-[#06C167]', 'text-[#fff]', 'bg-[#142328]']
+      pattern: "/assets/banners/pattern.png",
+      color: ['bg-[#06C167]', 'text-[#FFFFFF]', 'bg-[#142328]']
     },
     {
-      name: "b",
-      img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#ffd688]', 'text-[#191919]', 'bg-[#FFC043]']
+      name: "Anniversary Bouquets",
+      desc: "Offers, coupons and discounts <br /> available",
+      img: "https://i.ibb.co/zPNNs49/flower-2.png",
+      pattern: "/assets/banners/pattern3.png",
+      color: ['bg-[#FFD7D2]', 'text-[#DB3D33]', 'bg-[#C1291F]']
     },
     {
-      name: "c",
-      img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#F6F0EA]', 'text-[#191919]', 'bg-[#FFC043]']
+      name: "With Vase",
+      desc: "Offers, coupons and discounts <br /> available",
+      img: "https://i.ibb.co/30Z7Psy/flower-3.png",
+      pattern: "/assets/banners/pattern4.png",
+      color: ['bg-[#FFC043]', 'text-[#191919]', 'bg-[#142328]']
     },
     {
-      name: "d",
-      img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#F6F0EA]', 'text-[#191919]', 'bg-[#FFC043]']
-    },
-    {
-      name: "e",
-      img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#F6F0EA]', 'text-[#191919]', 'bg-[#FFC043]']
+      name: "Revitalizing Plants",
+      desc: "Offers, coupons and discounts <br /> available",
+      img: "https://i.ibb.co/yqhpx79/flower-4.png",
+      pattern: "/assets/banners/pattern5.png",
+      color: ['bg-[#0F462D]', 'text-[#FFFFFF]', 'bg-[#06C167]']
     },
   ]
 
@@ -338,14 +341,14 @@ export default function Home() {
             >
               {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
                 <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
-                  <div className={`flex flex-col justify-center items-center w-auto h-full pl-4 ${slide.color[1]} overflow-hidden`}>
+                  <div className={`z-[2] flex flex-col justify-center items-center w-auto h-full pl-4 ${slide.color[1]} overflow-hidden`}>
                     <div className="flex justify-start items-center w-full text-[1.15rem] min-[412px]:text-2xl font-bold !leading-none">
-                      Birthday Bouquets
+                      {slide.name}
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-semibold !leading-none">
-                      Offers, coupons and discounts <br /> available
-                    </div>
+                    <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-semibold !leading-none"
+                      dangerouslySetInnerHTML={{ __html: slide.desc }}
+                    />
 
                     <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem] min-[412px]:text-[0.85rem]">
                       <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
@@ -354,16 +357,16 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="absolute top-0 right-0 flex justify-end items-center w-[10rem] h-full bg-[#f6f0ea] overflow-hidden">
+                  <div className="absolute z-[1] top-0 right-0 flex justify-end items-center w-[10rem] h-full bg-[#f6f0ea] overflow-hidden">
                     <Image className="flex justify-center items-center w-auto h-auto"
                       width={180}
                       height={250}
-                      src="/assets/banners/pattern.png"
+                      src={slide.pattern}
                       alt=""
                     />
                   </div>
 
-                  <div className="absolute top-6 right-0.5 flex justify-end items-center w-[14rem] h-full">
+                  <div className="absolute z-[2] top-6 right-0.5 flex justify-end items-center w-[14rem] h-full">
                     <Image className="flex justify-center items-center w-auto h-auto"
                       width={262}
                       height={192}
