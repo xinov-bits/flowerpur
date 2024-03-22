@@ -354,7 +354,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="absolute top-0 right-0 flex justify-end items-center w-[9rem] h-full bg-[#f6f0ea] overflow-hidden">
+                  <div className="absolute top-0 right-0 flex justify-end items-center w-[10rem] h-full bg-[#f6f0ea] overflow-hidden">
                     <Image className="flex justify-center items-center w-auto h-auto"
                       width={180}
                       height={250}
@@ -363,7 +363,7 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="absolute top-6 right-0.5 flex justify-end items-center w-[12rem] h-full">
+                  <div className="absolute top-6 right-0.5 flex justify-end items-center w-[14rem] h-full">
                     <Image className="flex justify-center items-center w-auto h-auto"
                       width={262}
                       height={192}
