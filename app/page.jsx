@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, Suspense } from 'react'
 
 // NEXT JS
 import Link from 'next/link'
@@ -126,6 +126,16 @@ export default function Home() {
     },
   ]
 
+  const [showHero, setShowHero] = useState(false)
+
+  useEffect(() => {
+    if (!showHero) {
+      setTimeout(() => {
+        setShowHero(true);
+      }, 1000);
+    }
+  }, [showHero])
+
 
   // RATINGS
   const [addedAnim, setAddedAnim] = useState([false, '']);
@@ -134,7 +144,7 @@ export default function Home() {
     if (addedAnim[0] === true) {
       setTimeout(() => {
         setAddedAnim([false, '']);
-      }, 2000);
+      }, 1000);
     }
   }, [addedAnim])
 
@@ -172,7 +182,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="block w-full h-full justify-center items-start bg-white overflow-x-hidden">
+      <div className="block w-full h-full justify-center items-start bg-white">
         {/* <div className="flex w-full h-full justify-center items-start select-none">
           <div className="relative hidden sm:hidden md:block lg:block xl:block justify-start items-start w-full text-[#333333]">
             <div className="relative flex justify-center items-start w-full">
@@ -292,91 +302,120 @@ export default function Home() {
         </div> */}
         {/* NEW */}
         <div className="flex w-full h-full justify-start items-start select-none py-4">
-          <div className="hidden sm:hidden md:flex lg:flex xl:flex w-full h-full justify-start items-start select-none">
-            <Swiper
-              className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
-              slidesPerView={1}
-              spaceBetween={16}
-              pagination={{ clickable: true }}
-              resistanceRatio={0}
-            >
-              {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="flex justify-center items-center w-full h-full overflow-hidden rounded-lg">
-                <div className="flex justify-center items-center w-full h-full overflow-hidden">
-                  <Image className="flex justify-center items-center w-full h-full"
-                    src={slide.img}
-                    width={800}
-                    height={600}
-                    alt={slide.name}
-                  />
-                </div>
+          <div className="relative hidden sm:hidden md:flex lg:flex xl:flex w-full h-full justify-start items-start select-none">
+            {showHero > 0 ? (
+              <Swiper
+                className="flex justify-center items-center w-auto h-auto !px-4 overflow-hidden"
+                slidesPerView={3.04}
+                spaceBetween={16}
+                resistanceRatio={0.4}
+                modules={[FreeMode]}
+                freeMode={true}
+                observer
+                rebuildOnUpdate
+              >
+                {mainSlides.map((slide, index) => <SwiperSlide key={index} className="relative flex justify-start items-start w-[23rem] h-auto rounded-lg overflow-hidden">
+                  <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
+                    <div className={`z-[2] flex flex-col justify-center items-center w-auto h-full pl-4 ${slide.color[1]} overflow-hidden`}>
+                      <div className="flex justify-start items-center w-full text-[1.2rem] font-bold !leading-none">
+                        {slide.name}
+                      </div>
 
-                <div className="block justify-center items-center w-full h-full overflow-hidden text-white">
-                  <div className="flex justify-start items-center w-full text-lg font-bold">
-                    Get $2 off $20+ with Pepsi-Cola® beverages
-                  </div>
+                      <div className="flex justify-start items-center w-full mt-1 text-[0.82rem] font-semibold !leading-none"
+                        dangerouslySetInnerHTML={{ __html: slide.desc }}
+                      />
 
-                  <div className="flex justify-start items-center w-full text-sm font-normal">
-                    Luck is on your side this St. Patrick’s Day
-                  </div>
+                      <div className="flex justify-start items-center w-full mt-2.5 text-sm">
+                        <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
+                          Shop now
+                        </button>
+                      </div>
+                    </div>
 
-                  <div className="flex justify-start items-center w-full">
-                    <button className="flex justify-center items-center w-auto h-10 px-4 font-semibold leading-none bg-[#191919] rounded-full">
-                      Order Now
-                    </button>
+                    <div className="absolute z-[1] top-0 right-0 flex justify-end items-center w-[10rem] h-full bg-[#f6f0ea] overflow-hidden">
+                      <Image className="flex justify-center items-center w-auto h-auto"
+                        width={180}
+                        height={250}
+                        src={slide.pattern}
+                        alt={slide.name}
+                      />
+                    </div>
+
+                    <div className="absolute z-[2] top-6 right-0.5 flex justify-end items-center w-[14rem] h-full">
+                      <Image className="flex justify-center items-center w-auto h-auto"
+                        width={262}
+                        height={192}
+                        src={slide.img}
+                        alt={slide.name}
+                      />
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>)}
-            </Swiper>
+                </SwiperSlide>)}
+              </Swiper>
+            ) : (
+              <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
+                <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
+              </div>
+            )}
           </div>
 
           <div className="flex sm:flex md:hidden lg:hidden xl:hidden w-full h-full justify-start items-start select-none">
-            <Swiper
-              className="flex justify-center items-center w-full h-auto !px-4 overflow-hidden"
-              slidesPerView={1.0}
-              spaceBetween={10}
-              resistanceRatio={0.4}
-              modules={[FreeMode]}
+            {showHero > 0 ? (
+              <Swiper
+                className="flex justify-center items-center w-auto h-auto !px-4 overflow-hidden"
+                slidesPerView={1.02}
+                spaceBetween={10}
+                resistanceRatio={0.4}
+                modules={[FreeMode]}
+                freeMode={true}
+                observer
+                rebuildOnUpdate
+              >
+                {mainSlides.map((slide, index) => <SwiperSlide key={index} className="relative flex justify-start items-start w-[23rem] h-auto rounded-lg overflow-hidden">
+                  <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
+                    <div className={`z-[2] flex flex-col justify-center items-center w-auto h-full pl-4 ${slide.color[1]} overflow-hidden`}>
+                      <div className="flex justify-start items-center w-full text-[1.15rem] min-[412px]:text-2xl font-bold !leading-none">
+                        {slide.name}
+                      </div>
 
-              freeMode={true}
-            >
-              {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
-                <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
-                  <div className={`z-[2] flex flex-col justify-center items-center w-auto h-full pl-4 ${slide.color[1]} overflow-hidden`}>
-                    <div className="flex justify-start items-center w-full text-[1.15rem] min-[412px]:text-2xl font-bold !leading-none">
-                      {slide.name}
+                      <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-semibold !leading-none"
+                        dangerouslySetInnerHTML={{ __html: slide.desc }}
+                      />
+
+                      <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem] min-[412px]:text-[0.85rem]">
+                        <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
+                          Shop now
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-semibold !leading-none"
-                      dangerouslySetInnerHTML={{ __html: slide.desc }}
-                    />
+                    <div className="absolute z-[1] top-0 right-0 flex justify-end items-center w-[10rem] h-full bg-[#f6f0ea] overflow-hidden">
+                      <Image className="flex justify-center items-center w-auto h-auto"
+                        width={180}
+                        height={250}
+                        src={slide.pattern}
+                        alt=""
+                      />
+                    </div>
 
-                    <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem] min-[412px]:text-[0.85rem]">
-                      <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
-                        Shop now
-                      </button>
+                    <div className="absolute z-[2] top-6 right-0.5 flex justify-end items-center w-[14rem] h-full">
+                      <Image className="flex justify-center items-center w-auto h-auto"
+                        width={262}
+                        height={192}
+                        src={slide.img}
+                        alt=""
+                      />
                     </div>
                   </div>
-
-                  <div className="absolute z-[1] top-0 right-0 flex justify-end items-center w-[10rem] h-full bg-[#f6f0ea] overflow-hidden">
-                    <Image className="flex justify-center items-center w-auto h-auto"
-                      width={180}
-                      height={250}
-                      src={slide.pattern}
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="absolute z-[2] top-6 right-0.5 flex justify-end items-center w-[14rem] h-full">
-                    <Image className="flex justify-center items-center w-auto h-auto"
-                      width={262}
-                      height={192}
-                      src={slide.img}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </SwiperSlide>)}
-            </Swiper>
+                </SwiperSlide>)}
+              </Swiper>
+            ) : (
+              <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
+                <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
+              </div>
+            )}
           </div>
         </div>
 

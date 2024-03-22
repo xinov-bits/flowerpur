@@ -102,7 +102,6 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
             <AnimatePresence>
                 {(isMobileMenuOpen) && (
                     <motion.div
-                        id="cart"
                         className="fixed z-[600] top-0 left-0 flex justify-start items-center w-full h-screen select-none duration-75"
                         style={{ x: dragX }}
                         onTouchStart={handleTouchStart}
@@ -118,7 +117,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
                             setIsMobileMenuOpen(false);
                         }} />
 
-                        <div className="relative z-[620] flex flex-col justify-start items-start w-full h-full bg-white border-r border-[#e5e5e5] shadow-lg shadow-black/10">
+                        <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full bg-white border-r border-[#e5e5e5] shadow-lg shadow-black/10">
                             <div className="relative flex justify-between items-center w-full h-14 bg-white border-b border-[#e5e5e5] overflow-hidden">
                                 <div className="flex justify-start items-center w-full px-4 text-lg font-bold text-[#191919] leading-none cursor-pointer overflow-hidden">
                                     <button className="flex justify-start items-center w-auto h-auto no-outline" onClick={() => {
@@ -136,7 +135,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 
                             <div className="block justify-start items-start w-full h-auto bg-white text-[#191919]">
                                 <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-semibold">
-                                    {menuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7] last:border-0">
+                                    {menuItems.map((item, index) => <li key={index} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7] last:border-0">
                                         <Link href={item.url} className="flex justify-start items-center w-full space-x-1.5 no-outline">
                                             <svg className="flex justify-center items-cener w-6 h-6 text-[#494949]" width={20} height={20}>
                                                 <use
@@ -198,7 +197,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 
                             <div className="block justify-start items-start w-full h-auto bg-white text-[#191919]">
                                 <ul className="flex flex-col justify-start items-center w-full h-auto text-lg font-semibold">
-                                    {sideMenuItems.map((item) => <li key={item.name} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7]">
+                                    {sideMenuItems.map((item, index) => <li key={index} className="flex justify-start items-center w-full p-4 bg-white hover:bg-[#f7f7f7] leading-none hover:underline decoration-[0.5px] underline-offset-2 border-b-[1.5px] border-[#e7e7e7]">
                                         <Link href={item.url} className="flex justify-start items-center w-full space-x-1.5 no-outline">
                                             <svg className="flex justify-center items-cener w-6 h-6 text-[#494949]" width={20} height={20}>
                                                 <use

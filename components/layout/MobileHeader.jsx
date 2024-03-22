@@ -22,10 +22,10 @@ import IconButton from '@mui/material/IconButton';
 // CONTEXT
 import CartContext from '@/context/CartContext';
 import UserContext from '@/context/UserContext';
-import MobileMenu from '../function/MobileMenu';
 
 // COMPONENTS
 import Cart from '../function/Cart';
+import MobileMenu from '../function/MobileMenu';
 
 // MOMENT JS
 import moment from 'moment';
@@ -385,8 +385,6 @@ const MobileHeader = () => {
                             spaceBetween={10}
                             resistanceRatio={0.4}
                             freeMode={true}
-                            minimumVelocity={0.01}
-                            momentumVelocityRatio={0.05}
                             modules={[FreeMode]}
                         >
                             {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">

@@ -708,7 +708,7 @@ export default function Page({ params }) {
                             className="relative flex justify-start items-center w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none"
                         >
                             <Swiper
-                                className="flex justify-center items-center w-full h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
+                                className="flex justify-center items-center w-full h-auto bg-[#f7f7f7] rounded-md overflow-hidden"
                                 slidesPerView={1}
                                 pagination={{ clickable: true }}
                                 onSwiper={setSwiper}
@@ -834,8 +834,8 @@ export default function Page({ params }) {
 
                         {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-[30rem] h-[30rem] py-2 cursor-pointer rounded-md overflow-hidden select-none">
                             <div className="relative flex justify-start items-center w-full h-full rounded-md overflow-hidden select-none">
-                                <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                    <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                                <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                                 </div>
                             </div>
                         </div>}
@@ -843,51 +843,51 @@ export default function Page({ params }) {
 
                     {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] py-2 sm:py-2 md:py-0 lg:py-0 xl:py-0 pr-0 sm:pr-0 md:pr-32 lg:pr-32 xl:pr-32">
                         <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>
 
                         <div className="relative flex justify-start items-center w-1/4 h-8 sm:h-8 md:h-8 lg:h-8 xl:h-8 mt-4 sm:mt-4 md:mt-2 lg:mt-2 xl:mt-2 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>
 
                         <div className="relative flex justify-start items-center w-full h-24 sm:h-24 md:h-20 lg:h-20 xl:h-20 mt-2 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>
 
                         <div className="relative flex justify-start items-center w-1/2 h-14 mt-2 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>
 
                         <div className="relative flex justify-start items-center w-full h-12 mt-4 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>
 
                         <div className="relative flex justify-start items-center w-full h-24 mt-4 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full" id="skeleton_gradient" />
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>
 
                         <div className="flex justify-start items-center w-full h-14 mt-2 rounded-md overflow-hidden space-x-2 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-3">
                             <div className="relative flex justify-center items-center w-1/3 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/4 h-full rounded-md overflow-hidden select-none">
-                                <div className="relative flex justify-center items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                    <div className="absolute flex justify-center items-center w-full h-full" id="skeleton_gradient" />
+                                <div className="relative flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-center items-center w-full h-full  c-skeleton" />
                                 </div>
                             </div>
 
                             <div className="relative flex justify-center items-center w-2/3 sm:w-2/3 md:w-3/4 lg:w-3/4 xl:w-3/4 h-full rounded-md overflow-hidden select-none">
-                                <div className="relative flex justify-center items-center w-full h-full bg-[#f6f6f6] rounded-md overflow-hidden">
-                                    <div className="absolute flex justify-center items-center w-full h-full" id="skeleton_gradient" />
+                                <div className="relative flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-center items-center w-full h-full  c-skeleton" />
                                 </div>
                             </div>
                         </div>
@@ -901,7 +901,7 @@ export default function Page({ params }) {
                             transition={{ delay: 0.2 }}
                             className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none"
                         >
-                            <Splide className="flex justify-center items-center w-auto h-auto bg-[#f6f6f6] rounded-md overflow-hidden"
+                            <Splide className="flex justify-center items-center w-auto h-auto bg-[#f7f7f7] rounded-md overflow-hidden"
                                 hasTrack={false}
                                 options={{
                                     rewind: true,
@@ -976,7 +976,7 @@ export default function Page({ params }) {
                                                 />
                                             </motion.div>
                                         ) : (
-                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
+                                            <div className="w-[60px] h-[60px] bg-[#f7f7f7] rounded-md" />
                                         )}
                                     </label>
                                 </div>}
@@ -1011,7 +1011,7 @@ export default function Page({ params }) {
                                                 />
                                             </motion.div>
                                         ) : (
-                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
+                                            <div className="w-[60px] h-[60px] bg-[#f7f7f7] rounded-md" />
                                         )}
                                     </label>
                                 </div>}
@@ -1046,7 +1046,7 @@ export default function Page({ params }) {
                                                 />
                                             </motion.div>
                                         ) : (
-                                            <div className="w-[60px] h-[60px] bg-[#f6f6f6] rounded-md" />
+                                            <div className="w-[60px] h-[60px] bg-[#f7f7f7] rounded-md" />
                                         )}
                                     </label>
                                 </div>}

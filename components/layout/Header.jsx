@@ -25,9 +25,16 @@ import UserContext from '@/context/UserContext';
 
 // COMPONENTS
 import Cart from '../function/Cart';
+import MobileMenu from '../function/MobileMenu';
 
 // MOMENT JS
 import moment from 'moment';
+
+// SWIPER & SPLIDE
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper/modules';
+import 'swiper/swiper-bundle.css';
+
 
 const Header = () => {
     // USE CONTEXT
@@ -215,14 +222,69 @@ const Header = () => {
         return 'morning';
     }
 
+
+    // SIDE MENU
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const menuRef = useRef(null);
+    const [menuReachedEnd, setMenuReachedEnd] = useState(false)
+
+
+    // MENU
+    const menu = [
+        {
+            name: "Bouquets",
+            url: "/",
+            img: "assets/icons/svg/flowers.svg",
+        },
+        {
+            name: "Vases",
+            url: "/",
+            img: "assets/icons/svg/vase.svg",
+        },
+        {
+            name: "Birthday",
+            url: "/",
+            img: "assets/icons/svg/cake.svg",
+        },
+        {
+            name: "Plants",
+            url: "/",
+            img: "assets/icons/svg/plant.svg",
+        },
+        {
+            name: "Gifts",
+            url: "/",
+            img: "assets/icons/svg/gifts.svg",
+        },
+        {
+            name: "Anniversary",
+            url: "/",
+            img: "assets/icons/svg/anniversary.svg",
+        },
+        {
+            name: "Occasions",
+            url: "/",
+            img: "assets/icons/svg/occasions.svg",
+        },
+    ]
+
     return (
         <>
             {isHeader && <header>
                 <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
-                    {/* LOGO & THINGS */}
-                    <div className="flex justify-center items-center w-full h-12 px-8 py-1.5 space-x-2 border-b border-[#e5e5e5] select-none">
-                        <div className="flex justify-start items-center w-[18%] h-full cursor-pointer">
-                            <div className="flex justify-start items-center w-[94%] h-full cursor-pointer rounded-md overflow-hidden">
+                    <div className="flex justify-center items-center w-full h-16 px-6 py-3 space-x-2 select-none">
+                        <div className="flex justify-start items-center w-[22%] h-full space-x-2 cursor-pointer">
+                            <button className="relative flex justify-center items-center w-9 h-full cursor-pointer overflow-hidden duration-75 no-outline" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                                <svg className="size-5" width={20} height={20}>
+                                    <use
+                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-menu_dd"
+                                    ></use>
+                                </svg>
+                            </button>
+
+                            <div className="flex justify-start items-center w-[12rem] h-full cursor-pointer rounded-md overflow-hidden">
                                 <Link className="flex justify-start items-center w-full h-full no-outline" href={'/'}>
                                     <Image className="flex justify-center items-center w-full"
                                         src="/assets/Logo/logo.svg"
@@ -234,8 +296,48 @@ const Header = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center w-[40%] h-full">
-                            <div className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden">
+                        <div className="flex justify-center items-center w-[48%] h-full space-x-2">
+                            <li className="relative flex justify-center items-center w-[35%] h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
+                                <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
+                                    {(
+                                        getCookie('user_state') === '' ||
+                                        getCookie('user_state') === undefined ||
+                                        getCookie('user_state') === null ||
+                                        getCookie('user_pincode') === '' ||
+                                        getCookie('user_pincode') === undefined ||
+                                        getCookie('user_pincode') === null
+                                    ) ? <div className="flex justify-start items-center w-48 h-full px-2 space-x-1 font-semibold cursor-pointer">
+                                        <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                            ></use>
+                                        </svg>
+
+                                        <div> Select Address </div>
+                                    </div>
+                                        :
+                                        <div className="flex justify-start items-center w-48 h-full px-2 font-semibold cursor-pointer">
+                                            <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                ></use>
+                                            </svg>
+
+                                            {getCookie('user_pincode')}, {getCookie('user_state')}
+                                        </div>
+                                    }
+
+                                    <div className="absolute right-2 flex justify-center items-center w-5 h-5 pointer-events-none">
+                                        <svg className="text-[#494949]" width={20} height={20}>
+                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"></use>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </li>
+
+                            <div className="relative flex justify-center items-center w-[65%] h-full rounded-full overflow-hidden">
                                 <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" onClick={() => setIsSearchMenu(true)}>
                                     <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                                         <svg className="text-[#494949]" width={24} height={24}>
@@ -246,7 +348,7 @@ const Header = () => {
                                         </svg>
                                     </div>
 
-                                    <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
+                                    <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#e5e5e5] placeholder:text-[#191919] text-[#191919] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
                                         placeholder="Search for flowers, cakes, gifts, etc."
                                         name="search"
                                         type="text"
@@ -256,50 +358,10 @@ const Header = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end items-center w-[42%] h-full">
+                        <div className="flex justify-end items-center w-[30%] h-full">
                             <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
-                                <li className="relative flex justify-center items-center w-auto h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
-                                    <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
-                                        {(
-                                            getCookie('user_state') === '' ||
-                                            getCookie('user_state') === undefined ||
-                                            getCookie('user_state') === null ||
-                                            getCookie('user_pincode') === '' ||
-                                            getCookie('user_pincode') === undefined ||
-                                            getCookie('user_pincode') === null
-                                        ) ? <div className="flex justify-start items-center w-48 h-full px-2 space-x-1 font-semibold cursor-pointer">
-                                            <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
-                                                ></use>
-                                            </svg>
-
-                                            <div> Select Address </div>
-                                        </div>
-                                            :
-                                            <div className="flex justify-start items-center w-48 h-full px-2 font-semibold cursor-pointer">
-                                                <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
-                                                    <use
-                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
-                                                    ></use>
-                                                </svg>
-
-                                                {getCookie('user_pincode')}, {getCookie('user_state')}
-                                            </div>
-                                        }
-
-                                        <div className="absolute right-2 flex justify-center items-center w-5 h-5 pointer-events-none">
-                                            <svg className="text-[#494949]" width={20} height={20}>
-                                                <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"></use>
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </li>
-
-                                <li className="relative flex flex-col justify-center items-center w-9 h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer overflow-hidden duration-75">
-                                    <svg className="w-5 h-5" width={20} height={20}>
+                                <li className="relative flex flex-col justify-center items-center w-10 h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer overflow-hidden duration-75">
+                                    <svg className="size-5" width={20} height={20}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd3"
@@ -307,18 +369,18 @@ const Header = () => {
                                     </svg>
                                 </li>
 
-                                <li className="flex justify-center items-center w-9 h-full cursor-pointer">
-                                    <button className="relative flex justify-center items-center w-full h-full space-x-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer no-outline duration-75" onClick={() => setIsCartOpen(true)}>
-                                        <svg className="" width={20} height={20}>
+                                <li className="flex justify-center items-center w-auto h-full cursor-pointer">
+                                    <button className="relative flex justify-center items-center w-full h-full px-2.5 space-x-2 text-white bg-[#191919] hover:bg-[#292929] rounded-full cursor-pointer no-outline duration-75" onClick={() => setIsCartOpen(true)}>
+                                        <svg className="size-5" width={20} height={20}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart2_dd"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
                                             ></use>
                                         </svg>
 
-                                        {numTotal > 0 && <div className="absolute top-[3px] right-[3px] flex justify-center items-center w-[13px] h-[13px] rounded-full bg-[#085b45] text-white text-[9.5px] font-semibold leading-none">
-                                            {numTotal}
-                                        </div>}
+                                        <div className="flex justify-center items-center w-auto">
+                                            Cart • {numTotal ? numTotal : 0}
+                                        </div>
                                     </button>
                                 </li>
 
@@ -354,35 +416,36 @@ const Header = () => {
                         </div>
                     </div>
 
-                    {/* MENU */}
-                    <div className="flex justify-center items-center w-full h-16 py-2 px-6 bg-[#f7f7f7] border-b-[1.5px] border-[#e5e5e5] select-none">
-                        <ul className="flex justify-center items-center w-full h-full space-x-2.5">
-                            {menuItems.map((item, index) => (
-                                <Link className="flex justify-center items-center w-auto h-full rounded-full no-outline" key={index} href={item.link}>
-                                    <li className="flex justify-center items-center w-full h-full px-2.5 py-1.5 bg-white rounded-full capitalize font-medium text-[#494949] cursor-pointer space-x-1 ring-[0.5px] ring-white hover:ring-[#e5e5e5]">
-                                        <div className="flex justify-center items-center w-auto h-full">
-                                            <Image className="flex justify-center items-center w-8 h-8"
-                                                src={`/assets/icons/${item.img}`}
-                                                alt={item.name}
-                                                width={38}
-                                                height={38}
+                    {/* Menu */}
+                    <div className="flex justify-center items-center w-full h-16 py-2 space-x-4 bg-[#f7f7f7] overflow-hidden">
+                        {menu.map((slide, index) => {
+                            return (
+                                <Link key={index} href={slide.url} className="relative flex justify-center items-start !w-auto h-full px-2 rounded-full bg-white space-x-1.5 overflow-hidden">
+                                    <button className="flex justify-center items-center w-auto h-full no-outline">
+                                        <div className="flex justify-start items-center w-auto h-auto">
+                                            <Image className="flex justify-center items-center w-auto h-10"
+                                                src={slide.img}
+                                                width={192}
+                                                height={192}
+                                                alt={slide.name}
                                             />
                                         </div>
 
-                                        <div className="flex justify-center items-center w-auto h-full">
-                                            {item.name}
+                                        <div className="flex justify-center items-center w-auto leading-none font-semibold text-base">
+                                            {slide.name}
                                         </div>
-                                    </li>
+                                    </button>
                                 </Link>
-                            ))}
-                        </ul>
+                            )
+                        })}
                     </div>
                 </div>
 
-                {/* CART SIDEMENU */}
-                <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
 
-                {/* SEARCH MENU */}
+                <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+                <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
+
+
                 {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
                     <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
 
@@ -459,12 +522,12 @@ const Header = () => {
             {/* SELECT LOCATION */}
             <AnimatePresence>
                 {isSelectLocationMenuOpen && (
-                    <div className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-75">
+                    <div className="fixed z-[600] top-0 left-0 flex justify-end items-center w-full h-screen select-none duration-75">
                         <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-0"
                             onClick={() => setIsSelectLocationMenuOpen(false)}
                         />
 
-                        <motion.div className="fixed z-[620] top-[2.8rem] right-14 sm:right-14 md:right-[11.2rem] lg:right-[11.2rem] xl:right-[11.2rem] flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto text-[#292929]"
+                        <motion.div className="fixed z-[620] top-14 left-14 sm:left-14 md:left-[17.8rem] lg:left-[17.8rem] xl:left-[17.8rem] flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto text-[#292929]"
                             initial={{ y: -10, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -10, opacity: 0 }}
