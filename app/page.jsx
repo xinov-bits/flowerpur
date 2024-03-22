@@ -339,11 +339,11 @@ export default function Home() {
               {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
                 <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
                   <div className={`flex flex-col justify-center items-center w-[66%] h-full pl-4 ${slide.color[1]} overflow-hidden`}>
-                    <div className="flex justify-start items-center w-full text-[1.2rem] font-bold !leading-none">
+                    <div className="flex justify-start items-center w-full text-[1rem] font-bold !leading-none">
                       Birthday Bouquets
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-1 text-[0.75rem] font-semibold !leading-none">
+                    <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] font-semibold !leading-none">
                       Offers, coupons and discounts <br /> available
                     </div>
 
