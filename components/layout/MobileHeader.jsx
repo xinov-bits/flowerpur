@@ -245,31 +245,38 @@ const MobileHeader = () => {
     const menu = [
         {
             name: "Bouquets",
-            img: "assets/icons/svg/flowers.svg",
+            url: "/flowers",
+            img: "/assets/icons/svg/flowers.svg",
         },
         {
             name: "Vases",
-            img: "assets/icons/svg/vase.svg",
+            url: "/",
+            img: "/assets/icons/svg/vase.svg",
         },
         {
             name: "Birthday",
-            img: "assets/icons/svg/cake.svg",
+            url: "/",
+            img: "/assets/icons/svg/cake.svg",
         },
         {
             name: "Plants",
-            img: "assets/icons/svg/plant.svg",
+            url: "/",
+            img: "/assets/icons/svg/plant.svg",
         },
         {
             name: "Gifts",
-            img: "assets/icons/svg/gifts.svg",
+            url: "/",
+            img: "/assets/icons/svg/gifts.svg",
         },
         {
             name: "Anniversary",
-            img: "assets/icons/svg/anniversary.svg",
+            url: "/",
+            img: "/assets/icons/svg/anniversary.svg",
         },
         {
             name: "Occasions",
-            img: "assets/icons/svg/occasions.svg",
+            url: "/",
+            img: "/assets/icons/svg/occasions.svg",
         },
     ]
 
@@ -388,7 +395,7 @@ const MobileHeader = () => {
                             modules={[FreeMode]}
                         >
                             {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">
-                                <div className="flex flex-col justify-center items-center w-full h-full">
+                                <Link href={slide.url} className="flex flex-col justify-center items-center w-full h-full">
                                     <div className="flex justify-center items-center w-auto h-auto">
                                         <Image className="flex justify-center items-center w-auto h-14"
                                             src={slide.img}
@@ -401,7 +408,7 @@ const MobileHeader = () => {
                                     <div className="flex justify-center items-center w-auto leading-none font-bold text-xs">
                                         {slide.name}
                                     </div>
-                                </div>
+                                </Link>
                             </SwiperSlide>)}
                         </Swiper>
                     </div>

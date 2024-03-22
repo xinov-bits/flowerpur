@@ -234,38 +234,38 @@ const Header = () => {
     const menu = [
         {
             name: "Bouquets",
-            url: "/",
-            img: "assets/icons/svg/flowers.svg",
+            url: "/flowers",
+            img: "/assets/icons/svg/flowers.svg",
         },
         {
             name: "Vases",
             url: "/",
-            img: "assets/icons/svg/vase.svg",
+            img: "/assets/icons/svg/vase.svg",
         },
         {
             name: "Birthday",
             url: "/",
-            img: "assets/icons/svg/cake.svg",
+            img: "/assets/icons/svg/cake.svg",
         },
         {
             name: "Plants",
             url: "/",
-            img: "assets/icons/svg/plant.svg",
+            img: "/assets/icons/svg/plant.svg",
         },
         {
             name: "Gifts",
             url: "/",
-            img: "assets/icons/svg/gifts.svg",
+            img: "/assets/icons/svg/gifts.svg",
         },
         {
             name: "Anniversary",
             url: "/",
-            img: "assets/icons/svg/anniversary.svg",
+            img: "/assets/icons/svg/anniversary.svg",
         },
         {
             name: "Occasions",
             url: "/",
-            img: "assets/icons/svg/occasions.svg",
+            img: "/assets/icons/svg/occasions.svg",
         },
     ]
 

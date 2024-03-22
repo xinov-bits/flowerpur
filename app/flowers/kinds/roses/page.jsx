@@ -96,23 +96,23 @@ const Page = () => {
     <>
       <Suspense>
         <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
-          <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
+          <div className="block w-full h-auto">
             <div className="flex flex-col justify-start items-center w-full select-none">
-              <div className="flex justify-start items-center w-full !leading-none text-xl sm:text-xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
+              <div className="flex justify-start items-center w-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 !leading-none text-xl sm:text-xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                 Roses
               </div>
 
-              <div className="flex justify-start items-center w-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#767676]">
+              <div className="flex justify-start items-center w-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-normal text-[#767676]">
                 Select from different bouquets
               </div>
 
 
-              <div className="flex justify-between items-center w-full h-24 sm:h-24 md:h-9 lg:h-9 xl:h-9 mt-2">
+              <div className="flex justify-between items-center w-full h-12 mt-2">
                 <FilterOptions />
               </div>
             </div>
 
-            {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full mt-10">
+            {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 mt-10">
               {Skeleton}
               {Skeleton}
               {Skeleton}
@@ -120,7 +120,7 @@ const Page = () => {
               {Skeleton}
             </div>
               :
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-start w-full mt-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-start w-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10 mt-6">
                 <FilteredProducts />
               </div>}
           </div>

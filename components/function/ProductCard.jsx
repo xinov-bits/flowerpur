@@ -49,7 +49,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.1 }}
-                className="relative flex flex-col justify-start items-center w-full bg-white rounded-md cursor-pointer select-none group">
+                className="relative flex flex-col justify-start items-center w-full bg-white text-[#191919] rounded-md cursor-pointer select-none group">
                 <div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden bg-[#fafafa]">
                     <motion.div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden"
                         initial={{ opacity: 0 }}
@@ -66,10 +66,10 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                             />
                         </Link>
 
-                        <div className="absolute top-1 left-1 flex justify-center items-center space-x-1 overflow-hidden">
-                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-1.5 rounded bg-[#ffcc29] leading-none text-xs font-bold text-[#191919] overflow-hidden  anim__pulse-wave">
+                        <div className="absolute top-2 left-0 flex justify-center items-center space-x-1 overflow-hidden">
+                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-2 rounded-r-full bg-[#0e8345] leading-none text-xs font-semibold text-white overflow-hidden">
                                 <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
-                                    <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                    <svg className="flex justify-center items-center size-2.5" width={24} height={24}>
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
@@ -86,36 +86,13 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 </div>
 
                 <Link href={`/product/${slug}`} className="flex justify-start items-center w-full no-outline">
-                    <div className="flex justify-start items-start w-full h-12 mt-2 font-bold text-[#191919] capitalize line-clamp-3 text-lg text-ellipsis leading-tight overflow-y group-hover:underline text-left">
+                    <div className="flex justify-start items-start w-full h-9 mt-2 font-bold capitalize line-clamp-2 text-base text-ellipsis !leading-none overflow-y group-hover:underline decoration-[0.9px] underline-offset-1 text-left">
                         {title}
                     </div>
                 </Link>
 
-                <div className="flex justify-between items-center w-full h-auto">
-                    <div className="block justify-start items-center w-auto space-y-0.5 text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold">
-                        <div className="flex justify-start items-center w-auto !leading-none text-[#00838a]">
-                            ₹{price}.00
-                        </div>
-
-                        <div className="flex justify-start items-center w-auto !leading-none text-[#767676] font-medium line-through text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm">
-                            ₹{price}.00
-                        </div>
-                    </div>
-
-                    <div className="flex justify-end items-center w-auto text-sm font-semibold text-[#191919]">
-                        <Link href={`/product/${slug}`} className="no-outline">
-                            <button className="flex justify-center items-center w-auto py-1.5 px-1.5 sm:px-1.5 md:px-2.5 lg:px-2.5 xl:px-2.5 bg-white rounded-full border-[1.5px] border-[#e5e5e5] hover:bg-[#f7f7f7] space-x-1 no-outline">
-                                <svg className="text-[#191919]" width={18} height={18}>
-                                    <use
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-cart_dd"
-                                    ></use>
-                                </svg>
-
-                                <div className="hidden sm:hidden md:block lg:block xl:block"> Add to cart </div>
-                            </button>
-                        </Link>
-                    </div>
+                <div className="flex justify-between items-center w-full h-auto text-base font-semibold text-[#0e8345] !leading-none">
+                    ₹{price?.toFixed(2)}
                 </div>
             </motion.div>
         </>
