@@ -338,23 +338,23 @@ export default function Home() {
             >
               {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
                 <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
-                  <div className={`flex flex-col justify-center items-center w-[66%] h-full pl-4 ${slide.color[1]} overflow-hidden`}>
-                    <div className="flex justify-start items-center w-full text-[1.2rem] font-bold !leading-none">
+                  <div className={`flex flex-col justify-center items-center w-auto h-full pl-4 ${slide.color[1]} overflow-hidden`}>
+                    <div className="flex justify-start items-center w-full text-[1.15rem] min-[412px]:text-2xl font-bold !leading-none">
                       Birthday Bouquets
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] font-semibold !leading-none">
+                    <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-semibold !leading-none">
                       Offers, coupons and discounts <br /> available
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem]">
+                    <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem] min-[412px]:text-[0.85rem]">
                       <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
                         Shop now
                       </button>
                     </div>
                   </div>
 
-                  <div className="absolute top-0 right-0 flex justify-end items-center h-full bg-[tomato] overflow-hidden">
+                  <div className="absolute top-0 right-0 flex justify-end items-center w-[9rem] h-full bg-[#f6f0ea] overflow-hidden">
                     <Image className="flex justify-center items-center w-auto h-auto"
                       width={180}
                       height={250}
@@ -363,7 +363,7 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="absolute top-6 right-0.5 flex justify-end items-center w-[58%] h-full">
+                  <div className="absolute top-6 right-0.5 flex justify-end items-center w-[12rem] h-full">
                     <Image className="flex justify-center items-center w-auto h-auto"
                       width={262}
                       height={192}
