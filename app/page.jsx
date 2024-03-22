@@ -98,28 +98,28 @@ export default function Home() {
   const mainSlides = [
     {
       name: "a",
-      img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
+      img: "https://i.ibb.co/9yX5PS1/flower-1.png",
+      color: ['bg-[#06C167]', 'text-[#fff]', 'bg-[#142328]']
     },
     {
       name: "b",
       img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#ffd688]', 'text-[#191919]', 'bg-[#ffb749]']
+      color: ['bg-[#ffd688]', 'text-[#191919]', 'bg-[#FFC043]']
     },
     {
       name: "c",
       img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
+      color: ['bg-[#F6F0EA]', 'text-[#191919]', 'bg-[#FFC043]']
     },
     {
       name: "d",
       img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
+      color: ['bg-[#F6F0EA]', 'text-[#191919]', 'bg-[#FFC043]']
     },
     {
       name: "e",
       img: "https://i.ibb.co/fG9YtD7/image.png",
-      color: ['bg-[#eee7de]', 'text-[#191919]', 'bg-[#ffb749]']
+      color: ['bg-[#F6F0EA]', 'text-[#191919]', 'bg-[#FFC043]']
     },
   ]
 
@@ -337,27 +337,34 @@ export default function Home() {
               freeMode={true}
             >
               {mainSlides.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-start items-start w-[22.8rem] h-auto rounded-lg overflow-hidden">
-                <div className={`flex justify-start items-start w-[23.7rem] h-[17rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
-                  <div className={`flex flex-col justify-start items-start w-[72%] h-full p-6 ${slide.color[1]} overflow-hidden`}>
-                    <div className="flex justify-start items-center w-full text-2xl font-bold !leading-none">
+                <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
+                  <div className={`flex flex-col justify-center items-center w-[66%] h-full pl-4 ${slide.color[1]} overflow-hidden`}>
+                    <div className="flex justify-start items-center w-full text-[1.2rem] font-bold !leading-none">
                       Birthday Bouquets
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-1 text-base font-semibold !leading-none">
-                      Offers, coupons and discounts available.
+                    <div className="flex justify-start items-center w-full mt-1 text-[0.75rem] font-semibold !leading-none">
+                      Offers, coupons and discounts <br /> available
                     </div>
 
-                    <div className="flex justify-start items-center w-full mt-2.5 text-base">
-                      <button className="flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none bg-[#191919] text-white rounded-full">
+                    <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem]">
+                      <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
                         Shop now
                       </button>
                     </div>
                   </div>
 
-                  <div className={`absolute bottom-0 right-0 flex justify-center items-center w-[70%] h-[9rem] ${slide.color[2]} rounded-tl-full`} />
+                  <div className="absolute top-0 right-0 flex justify-end items-center h-full bg-[tomato] overflow-hidden">
+                    <Image className="flex justify-center items-center w-auto h-auto"
+                      width={180}
+                      height={250}
+                      src="/assets/banners/pattern.png"
+                      alt=""
+                    />
+                  </div>
 
-                  <div className="absolute bottom-1 right-1 flex justify-end items-center w-[10rem] h-[11.5rem]">
-                    <Image className="flex justify-center items-center w-full h-full"
+                  <div className="absolute top-6 right-0.5 flex justify-end items-center w-[58%] h-full">
+                    <Image className="flex justify-center items-center w-auto h-auto"
                       width={262}
                       height={192}
                       src={slide.img}

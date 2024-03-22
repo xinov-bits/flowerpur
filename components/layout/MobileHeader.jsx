@@ -261,7 +261,7 @@ const MobileHeader = () => {
         },
         {
             name: "Gifts",
-            img: "assets/icons/svg/gifts_flat.svg",
+            img: "assets/icons/svg/gifts.svg",
         },
         {
             name: "Anniversary",
