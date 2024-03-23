@@ -2,7 +2,7 @@
 
 // REACT JS
 import React, { useState, useEffect, useContext, createContext, useRef } from 'react'
-import { getCookie, getCookies, hasCookie, setCookie } from 'cookies-next'
+import { deleteCookie, getCookie, getCookies, hasCookie, setCookie } from 'cookies-next'
 
 // NEXT JS
 import Image from 'next/image';
@@ -129,11 +129,14 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
             setResultsLoading(true)
 
             setTimeout(() => {
-                addAddressToCookie(selectedAddress);
+                addAddressToCookie(selectedAddress)
+                setQuery('')
+                setSelectedAddress('')
+                
                 router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
 
                 setResultsLoading(false)
-
+                setIsAddressChooser(false)
             }, 1000);
         }
     }, [selectedAddress])
@@ -143,7 +146,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
         <>
             <AnimatePresence>
                 {isAddressChooser && (
-                    <div className="fixed z-[600] top-0 left-0 flex justify-center items-center w-full h-screen select-none duration-75">
+                    <div className="fixed z-[600] top-0 left-0 flex justify-center items-end sm:items-end md:items-center lg:items-center xl:items-center w-full h-screen select-none duration-75">
                         <button className="absolute z-[600] top-0 left-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-80" onClick={() => setIsAddressChooser(false)}>
                         </button>
 
@@ -152,147 +155,201 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -10, opacity: 0 }}
                         >
-                            <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto py-4 bg-white rounded-lg">
-                                <div className="flex justify-start items-center w-full h-6 px-4">
-                                    <svg
-                                        className="flex justify-center items-center size-6 cursor-pointer"
-                                        onClick={() => setIsAddressChooser(false)}
-                                        width={24} height={24}
-                                    >
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
-                                        ></use>
-                                    </svg>
-                                </div>
-
-                                <div className="block justify-start items-center w-full mt-2 space-y-2">
-                                    <div className="flex justify-start items-center w-full px-4 text-2xl font-bold leading-none">
-                                        Deliver to
+                            {(
+                                getCookie('user_address') === '' ||
+                                getCookie('user_address') === undefined ||
+                                getCookie('user_address') === null
+                            ) ? (
+                                <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto py-4 bg-white rounded-lg">
+                                    <div className="flex justify-start items-center w-full h-6 px-4">
+                                        <svg
+                                            className="flex justify-center items-center size-6 cursor-pointer"
+                                            onClick={() => setIsAddressChooser(false)}
+                                            width={24} height={24}
+                                        >
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
+                                            ></use>
+                                        </svg>
                                     </div>
 
-                                    <div className="flex justify-start items-center w-full leading-none">
-                                        <div className="relative flex flex-col justify-center items-center w-full h-auto rounded-md select-none">
-                                            <div className="flex justify-center items-center w-full h-full px-4">
-                                                <label htmlFor="delivery-postcode" className="relative block justify-center items-center w-full h-full rounded-md select-none">
-                                                    <div className="absolute left-0 flex justify-center items-center w-8 h-full">
-                                                        {!resultsLoading ? (
-                                                            <svg className="flex justify-center items-center size-4" width={16} height={16}>
-                                                                <use
-                                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
-                                                                ></use>
-                                                            </svg>
-                                                        ) : (
-                                                            <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
-                                                                <use
-                                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
-                                                                ></use>
-                                                            </svg>
-                                                        )}
-                                                    </div>
+                                    <div className="block justify-start items-center w-full mt-2 space-y-2">
+                                        <div className="flex justify-start items-center w-full px-4 text-2xl font-bold leading-none">
+                                            Deliver to
+                                        </div>
 
-                                                    <input
-                                                        className={`flex justify-center items-center w-full h-full p-3 pl-8 rounded-md ${inputError ? 'bg-[#fff0ed] hover:bg-[#fff0ed] ring-2 ring-[#b71000]' : 'bg-[#eeeeee] ring-0'} placeholder:text-[#191919] text-[#191919] font-medium hover:bg-[#e5e5e5] no-outline outline-none`}
-                                                        type="text"
-                                                        value={query}
-                                                        onChange={handleInputChange}
-                                                        placeholder="Enter delivery address"
-                                                        id="delivery-postcode"
-                                                        name="delivery-postcode"
-                                                    />
-
-                                                    {inputError && <div className="flex justify-start items-center w-auto mt-1.5 space-x-1 leading-none">
-                                                        <svg className="flex justify-center items-center w-3.5 h-3.5" width={16} height={16}>
-                                                            <use
-                                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-error_dd"
-                                                            ></use>
-                                                        </svg>
-
-                                                        <div> Delivery address is required </div>
-                                                    </div>}
-                                                </label>
-                                            </div>
-
-                                            {(!resultsLoading && query !== '' && results.length > 0) && <div className="flex justify-center items-center w-full h-full mt-2">
-                                                <ul className="block items-center w-full h-[14rem] space-y-1 overflow-y-auto">
-                                                    {results.filter((result) => {
-                                                        if (result?.address?.municipalitySubdivision?.includes(',')) {
-                                                            return result
-                                                        }
-                                                    }).map((result) => (
-                                                        <ul key={result.id} className="flex flex-col justify-end items-center w-full">
-                                                            {additionalResults.filter((k) => {
-                                                                if (k.id === result.id) {
-                                                                    return k
-                                                                }
-                                                            }).map((k) => (
-                                                                <div key={k.id} className="flex flex-col justify-end items-center w-full">
-                                                                    {k.address.map((item, index) => <li key={index} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(`${item}, ${k.ffa}`)}>
-                                                                        <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
-                                                                            <svg className="flex justify-center items-center size-4" width={16} height={16}>
-                                                                                <use
-                                                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
-                                                                                ></use>
-                                                                            </svg>
-                                                                        </div>
-
-                                                                        <div className="flex flex-col justify-end items-center w-full">
-                                                                            <div className="flex justify-end items-center w-full text-base font-semibold text-right">
-                                                                                {item}
-                                                                            </div>
-
-                                                                            <div className="flex justify-end items-center w-full pl-4 text-xs text-[#494949] text-right">
-                                                                                {k.ffa}
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>)}
-                                                                </div>
-                                                            ))}
-                                                        </ul>
-                                                    ))}
-
-                                                    {results.filter((result) => {
-                                                        if (!result?.address?.municipalitySubdivision?.includes(',')) {
-                                                            return result
-                                                        }
-                                                    }).map((result) => (
-                                                        <li key={result.id} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(result.address)}>
-                                                            <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
+                                        <div className="flex justify-start items-center w-full leading-none">
+                                            <div className="relative flex flex-col justify-center items-center w-full h-auto rounded-md select-none">
+                                                <div className="flex justify-center items-center w-full h-full px-4">
+                                                    <label htmlFor="delivery-postcode" className="relative block justify-center items-center w-full h-full rounded-md select-none">
+                                                        <div className="absolute left-0 flex justify-center items-center w-8 h-full">
+                                                            {!resultsLoading ? (
                                                                 <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                                                         xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
                                                                     ></use>
                                                                 </svg>
-                                                            </div>
+                                                            ) : (
+                                                                <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
+                                                                    <use
+                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                                                    ></use>
+                                                                </svg>
+                                                            )}
+                                                        </div>
 
-                                                            <div className="flex flex-col justify-end items-center w-full">
-                                                                {!(result.poi && result.address.municipalitySubdivision) ? (
-                                                                    <div className="flex justify-end items-center w-full text-base font-semibold text-right">
-                                                                        {result.poi && result.poi.name}&nbsp;{result.address.municipalitySubdivision && result.address.municipalitySubdivision}
-                                                                    </div>
-                                                                ) : (
-                                                                    <div className="flex justify-end items-center w-full text-base font-semibold text-right">
-                                                                        {`${result.poi.name}, ${result.address.municipalitySubdivision && result.address.municipalitySubdivision}`}
-                                                                    </div>
-                                                                )}
+                                                        <input
+                                                            className={`flex justify-center items-center w-full h-full p-3 pl-8 rounded-md ${inputError ? 'bg-[#fff0ed] hover:bg-[#fff0ed] ring-2 ring-[#b71000]' : 'bg-[#eeeeee] ring-0'} placeholder:text-[#191919] text-[#191919] font-medium hover:bg-[#e5e5e5] no-outline outline-none`}
+                                                            type="text"
+                                                            value={query}
+                                                            onChange={handleInputChange}
+                                                            placeholder="Enter delivery address"
+                                                            id="delivery-postcode"
+                                                            name="delivery-postcode"
+                                                        />
 
-                                                                <div className="flex justify-end items-center w-full pl-4 text-xs text-[#494949] text-right">
-                                                                    {`${result?.address?.freeformAddress}, ${result?.address?.countrySecondarySubdivision}`}
+                                                        {inputError && <div className="flex justify-start items-center w-auto mt-1.5 space-x-1 leading-none">
+                                                            <svg className="flex justify-center items-center w-3.5 h-3.5" width={16} height={16}>
+                                                                <use
+                                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-error_dd"
+                                                                ></use>
+                                                            </svg>
+
+                                                            <div> Delivery address is required </div>
+                                                        </div>}
+                                                    </label>
+                                                </div>
+
+                                                {(!resultsLoading && query !== '' && results.length > 0) && <div className="flex justify-center items-center w-full h-full mt-2">
+                                                    <ul className="block items-center w-full h-[14rem] space-y-1 overflow-y-auto">
+                                                        {results.filter((result) => {
+                                                            if (result?.address?.municipalitySubdivision?.includes(',')) {
+                                                                return result
+                                                            }
+                                                        }).map((result) => (
+                                                            <ul key={result.id} className="flex flex-col justify-end items-center w-full">
+                                                                {additionalResults.filter((k) => {
+                                                                    if (k.id === result.id) {
+                                                                        return k
+                                                                    }
+                                                                }).map((k) => (
+                                                                    <div key={k.id} className="flex flex-col justify-end items-center w-full">
+                                                                        {k.address.map((item, index) => <li key={index} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(`${item}, ${k.ffa}`)}>
+                                                                            <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
+                                                                                <svg className="flex justify-center items-center size-4" width={16} height={16}>
+                                                                                    <use
+                                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                                                    ></use>
+                                                                                </svg>
+                                                                            </div>
+
+                                                                            <div className="flex flex-col justify-end items-center w-full">
+                                                                                <div className="flex justify-end items-center w-full text-base font-semibold text-right">
+                                                                                    {item}
+                                                                                </div>
+
+                                                                                <div className="flex justify-end items-center w-full pl-4 text-xs text-[#494949] text-right">
+                                                                                    {k.ffa}
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>)}
+                                                                    </div>
+                                                                ))}
+                                                            </ul>
+                                                        ))}
+
+                                                        {results.filter((result) => {
+                                                            if (!result?.address?.municipalitySubdivision?.includes(',')) {
+                                                                return result
+                                                            }
+                                                        }).map((result) => (
+                                                            <li key={result.id} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(result.address.freeformAddress)}>
+                                                                <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
+                                                                    <svg className="flex justify-center items-center size-4" width={16} height={16}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                                        ></use>
+                                                                    </svg>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>}
+
+                                                                <div className="flex flex-col justify-end items-center w-full">
+                                                                    {!(result.poi && result.address.municipalitySubdivision) ? (
+                                                                        <div className="flex justify-end items-center w-full text-base font-semibold text-right">
+                                                                            {result.poi && result.poi.name}&nbsp;{result.address.municipalitySubdivision && result.address.municipalitySubdivision}
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div className="flex justify-end items-center w-full text-base font-semibold text-right">
+                                                                            {`${result.poi.name}, ${result.address.municipalitySubdivision && result.address.municipalitySubdivision}`}
+                                                                        </div>
+                                                                    )}
+
+                                                                    <div className="flex justify-end items-center w-full pl-4 text-xs text-[#494949] text-right">
+                                                                        {`${result?.address?.freeformAddress}, ${result?.address?.countrySecondarySubdivision}`}
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto py-4 bg-white rounded-lg">
+                                    <div className="flex justify-start items-center w-full h-6 px-4">
+                                        <svg
+                                            className="flex justify-center items-center size-6 cursor-pointer"
+                                            onClick={() => setIsAddressChooser(false)}
+                                            width={24} height={24}
+                                        >
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
+                                            ></use>
+                                        </svg>
+                                    </div>
+
+                                    <div className="block justify-start items-center w-full mt-2 space-y-2">
+                                        <div className="flex justify-start items-center w-full px-4">
+                                            <button className="flex justify-center items-center w-full py-2 rounded-lg bg-[#eeeeee] hover:bg-[#e5e5e5] no-outline"
+                                                onClick={() => {
+                                                    deleteCookie('user_address')
+                                                    setIsAddressChooser(true)
+                                                    setQuery('')
+                                                    setSelectedAddress('')
+                                                    router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
+                                                }}
+                                            >
+                                                <div className="flex justify-start items-center w-8 h-4">
+                                                    <svg className="flex justify-center items-center size-full" width={16} height={16}>
+                                                        <use
+                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                        ></use>
+                                                    </svg>
+                                                </div>
+
+                                                <div className="flex flex-col justify-start items-center w-full text-left">
+                                                    <div className="flex justify-start items-center w-full font-bold text-base !leading-none">
+                                                        {getCookie('user_address')}
+                                                    </div>
+
+                                                    <div className="flex justify-start items-center w-full mt-1 text-sm font-medium underline text-[#494949] !leading-none cursor-pointer">
+                                                        Change your delivery address
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </motion.div>
                     </div>
                 )}
