@@ -1,23 +1,13 @@
 'use client';
 
 // REACT JS
-import React, { useState, useEffect, useContext, createContext, useRef } from 'react'
-import { getCookie, getCookies, hasCookie, setCookie } from 'cookies-next'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import { getCookie } from 'cookies-next'
 
 // NEXT JS
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
-
-// FRAMER
-import { motion, AnimatePresence } from "framer-motion";
-
-// AXIOS
-import axios from 'axios';
-
-// MATERIAL UI
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import { useRouter } from 'next/navigation';
 
 // CONTEXT
 import CartContext from '@/context/CartContext';
@@ -26,14 +16,10 @@ import UserContext from '@/context/UserContext';
 // COMPONENTS
 import Cart from '../function/Cart';
 import MobileMenu from '../function/MobileMenu';
+import SelectLocation from '../models/SelectLocation'
 
 // MOMENT JS
 import moment from 'moment';
-
-// SWIPER & SPLIDE
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-import 'swiper/swiper-bundle.css';
 
 
 const Header = () => {
@@ -62,63 +48,6 @@ const Header = () => {
 
     const router = useRouter();
 
-
-    // ADDRESS
-    const [address, setAddress] = useState('');
-    const [pincodes, setPincodes] = useState([]);
-    const [userAddressState, setUserAddressState] = useState('');
-    const [isSelectLocationMenuOpen, setIsSelectLocationMenuOpen] = useState(false);
-
-    const addAddressToCookie = () => {
-        setCookie('user_pincode', address)
-    };
-
-    const addStateToCookie = (data) => {
-        setCookie('user_state', data)
-
-        setUserAddressState(data);
-    };
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincodes`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            setPincodes(response.data);
-        } catch (error) {
-            console.error('There was a problem with your fetch operation:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-    const handleAddressChange = (e) => {
-        setAddress(e.target.value);
-    };
-
-    const handleAddressSubmit = (e) => {
-        e.preventDefault();
-
-        const pinArr = pincodes;
-
-        if (JSON.stringify(pinArr)?.includes(address)) {
-            addAddressToCookie();
-
-            const filteredPins = pincodes?.filter((k) => k[0].includes(getCookie('user_pincode')));
-
-            if (filteredPins && filteredPins.length > 0) {
-                let uState = filteredPins[0][1];
-                addStateToCookie(uState);
-
-                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
-            } else {
-                console.log('No matching pins found.');
-            }
-        }
-    };
 
     // MENU ITEMS
     const menuItems = [
@@ -269,6 +198,10 @@ const Header = () => {
         },
     ]
 
+
+    // ADDRESS
+    const [isAddressChooser, setIsAddressChooser] = useState(false)
+
     return (
         <>
             {isHeader && <header>
@@ -298,7 +231,7 @@ const Header = () => {
 
                         <div className="flex justify-center items-center w-[48%] h-full space-x-2">
                             <li className="relative flex justify-center items-center w-[35%] h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
-                                <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsSelectLocationMenuOpen(!isSelectLocationMenuOpen)}>
+                                <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                     {(
                                         getCookie('user_state') === '' ||
                                         getCookie('user_state') === undefined ||
@@ -417,7 +350,7 @@ const Header = () => {
                     </div>
 
                     {/* Menu */}
-                    <div className="flex justify-center items-center w-full h-16 py-2 space-x-4 bg-[#f7f7f7] overflow-hidden">
+                    <div className="flex justify-center items-center w-full h-16 py-2 space-x-4 bg-[#f7f7f7] select-none overflow-hidden">
                         {menu.map((slide, index) => {
                             return (
                                 <Link key={index} href={slide.url} className="relative flex justify-center items-start !w-auto h-full px-2 rounded-full bg-white space-x-1.5 overflow-hidden">
@@ -519,62 +452,7 @@ const Header = () => {
             </header>}
 
 
-            {/* SELECT LOCATION */}
-            <AnimatePresence>
-                {isSelectLocationMenuOpen && (
-                    <div className="fixed z-[600] top-0 left-0 flex justify-end items-center w-full h-screen select-none duration-75">
-                        <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-0"
-                            onClick={() => setIsSelectLocationMenuOpen(false)}
-                        />
-
-                        <motion.div className="fixed z-[620] top-14 left-14 sm:left-14 md:left-[17.8rem] lg:left-[17.8rem] xl:left-[17.8rem] flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto text-[#292929]"
-                            initial={{ y: -10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -10, opacity: 0 }}
-                        >
-                            <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md
-                            after:hidden sm:after:hidden md:after:block lg:after:block xl:after:block after:absolute after:-top-[7px] after:right-7 after:left-8 after:z-10 after:w-3 after:h-3 after:bg-white after:rotate-45 after:rounded-tl shadow-[0px_8px_24px] shadow-black/20">
-                                <div className="flex flex-col justify-start items-center w-full py-2.5">
-                                    <div className="flex justify-start items-center w-full px-2.5 font-bold">
-                                        Enter Your Address
-                                    </div>
-
-                                    <div className="flex flex-col justify-start items-center w-full px-2.5 mt-1 space-y-2">
-                                        <label className="relative flex justify-center items-center w-full" htmlFor="address_input">
-                                            <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
-                                                <svg className="text-[#494949]" width={24} height={24}>
-                                                    <use
-                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
-                                                    ></use>
-                                                </svg>
-                                            </div>
-
-                                            <input className="flex justify-center items-center w-full h-full pl-8 p-2 rounded-md bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none"
-                                                type="number"
-                                                placeholder="Pincode"
-                                                name="address_input"
-                                                id="address_input"
-                                                onChange={handleAddressChange}
-                                                value={address}
-                                            />
-                                        </label>
-
-                                        {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75" onClick={handleAddressSubmit}>
-                                            Confirm Address
-                                        </button>
-                                            :
-                                            <div className="flex justify-center items-center w-full h-9 bg-[#085b45] text-white font-semibold rounded-md saturate-0 opacity-40 cursor-default">
-                                                Confirm Address
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
+            <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
         </>
     )
 }

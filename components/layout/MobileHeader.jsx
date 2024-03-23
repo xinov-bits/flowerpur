@@ -1,39 +1,28 @@
 'use client';
 
 // REACT JS
-import React, { useState, useEffect, useContext, createContext, useRef } from 'react'
-import { getCookie, getCookies, hasCookie, setCookie } from 'cookies-next'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import { getCookie } from 'cookies-next'
 
 // NEXT JS
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
-
-// FRAMER
-import { motion, AnimatePresence } from "framer-motion";
-
-// AXIOS
-import axios from 'axios';
-
-// MATERIAL UI
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 // CONTEXT
-import CartContext from '@/context/CartContext';
-import UserContext from '@/context/UserContext';
+import CartContext from '@/context/CartContext'
+import UserContext from '@/context/UserContext'
 
 // COMPONENTS
-import Cart from '../function/Cart';
-import MobileMenu from '../function/MobileMenu';
-
-// MOMENT JS
-import moment from 'moment';
+import Cart from '../function/Cart'
+import MobileMenu from '../function/MobileMenu'
+import SelectLocation from '../models/SelectLocation'
 
 // SWIPER & SPLIDE
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-import 'swiper/swiper-bundle.css';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { FreeMode } from 'swiper/modules'
+import 'swiper/swiper-bundle.css'
+
 
 const MobileHeader = () => {
     // USE CONTEXT
@@ -60,108 +49,6 @@ const MobileHeader = () => {
     } = useContext(UserContext);
 
     const router = useRouter();
-
-
-    // ADDRESS
-    const [address, setAddress] = useState('');
-    const [pincodes, setPincodes] = useState([]);
-    const [userAddressState, setUserAddressState] = useState('');
-    const [isSelectLocationMenuOpen, setIsSelectLocationMenuOpen] = useState(false);
-
-    const addAddressToCookie = () => {
-        setCookie('user_pincode', address)
-    };
-
-    const addStateToCookie = (data) => {
-        setCookie('user_state', data)
-
-        setUserAddressState(data);
-    };
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincodes`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            setPincodes(response.data);
-        } catch (error) {
-            console.error('There was a problem with your fetch operation:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-    const handleAddressChange = (e) => {
-        setAddress(e.target.value);
-    };
-
-    const handleAddressSubmit = (e) => {
-        e.preventDefault();
-
-        const pinArr = pincodes;
-
-        if (JSON.stringify(pinArr)?.includes(address)) {
-            addAddressToCookie();
-
-            const filteredPins = pincodes?.filter((k) => k[0].includes(getCookie('user_pincode')));
-
-            if (filteredPins && filteredPins.length > 0) {
-                let uState = filteredPins[0][1];
-                addStateToCookie(uState);
-
-                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
-            } else {
-                console.log('No matching pins found.');
-            }
-        }
-    };
-
-    // MENU ITEMS
-    const menuItems = [
-        {
-            name: 'Home',
-            img: 'home_.png',
-            link: '/'
-        },
-        {
-            name: 'Flowers',
-            img: 'flowers.svg',
-            link: '/flowers'
-        },
-        {
-            name: 'Combos',
-            img: 'combo_.png',
-            link: '/'
-        },
-        {
-            name: 'Plants',
-            img: 'plants.png',
-            link: '/'
-        },
-        {
-            name: 'Gifts',
-            img: 'gifts.svg',
-            link: '/'
-        },
-        {
-            name: 'Birthday',
-            img: 'cakes.svg',
-            link: '/'
-        },
-        {
-            name: 'Anniversary',
-            img: 'anniversary.png',
-            link: '/'
-        },
-        {
-            name: 'Occasions',
-            img: 'diya.png',
-            link: '/'
-        }
-    ]
 
 
     // CART SIDEMENU
@@ -280,6 +167,10 @@ const MobileHeader = () => {
         },
     ]
 
+
+    // ADDRESS
+    const [isAddressChooser, setIsAddressChooser] = useState(false)
+
     return (
         <>
             {isHeader && <header>
@@ -335,7 +226,7 @@ const MobileHeader = () => {
                                 </div>
 
                                 <div className="flex justify-center items-center size-9 p-1.5">
-                                    <button className="z-[1] flex justify-center items-center size-full no-outline">
+                                    <button className="z-[1] flex justify-center items-center size-full no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                         <svg className="flex justify-center items-center size-full" width={24} height={24}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -488,6 +379,9 @@ const MobileHeader = () => {
                         </div>
                     </div>
                 </div>)}
+
+
+                <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
             </header>}
         </>
     )

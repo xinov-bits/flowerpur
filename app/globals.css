@@ -117,7 +117,12 @@ input[type="number"]::-webkit-outer-spin-button {
   left: -100rem;
   width: 100%;
   height: 100%;
-  background: linear-gradient(-50deg, rgba(255,255,255,0) 30%, rgb(255, 255, 255) 50%, rgba(255,255,255,0) 70%);
+  background: linear-gradient(
+    -50deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgb(255, 255, 255) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
   opacity: 50%;
 
   animation: skeleton_rotated_anim 2000ms linear infinite;

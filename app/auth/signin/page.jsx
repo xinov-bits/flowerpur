@@ -148,7 +148,7 @@ const Page = () => {
                                 </div>
 
 
-                                <div className="flex flex-col justify-start items-end w-full h-20 sm:h-20 md:h-20 lg:h-20 xl:h-20">
+                                <div className="flex flex-col justify-start items-end w-full h-20">
                                     <div className="flex justify-end items-center w-full h-auto mb-2.5 leading-none text-lg font-medium text-[#767676]">
                                         <div> or </div>
                                         &nbsp;
