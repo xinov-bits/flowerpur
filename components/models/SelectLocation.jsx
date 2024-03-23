@@ -132,7 +132,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                 addAddressToCookie(selectedAddress)
                 setQuery('')
                 setSelectedAddress('')
-                
+
                 router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
 
                 setResultsLoading(false)
@@ -147,8 +147,14 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
             <AnimatePresence>
                 {isAddressChooser && (
                     <div className="fixed z-[600] top-0 left-0 flex justify-center items-end sm:items-end md:items-center lg:items-center xl:items-center w-full h-screen select-none duration-75">
-                        <button className="absolute z-[600] top-0 left-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-80" onClick={() => setIsAddressChooser(false)}>
-                        </button>
+                        <motion.div
+                            className="absolute z-[600] top-0 left-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-80"
+                            onClick={() => setIsAddressChooser(false)}
+
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        />
 
                         <motion.div className="relative z-[601] flex justify-center items-center w-[96%] sm:w-[96%] md:w-full lg:w-full xl:w-full max-w-sm h-auto mb-2 sm:mb-2 md:mb-0 lg:mb-0 xl:mb-0 text-[#191919]"
                             initial={{ y: -10, opacity: 0 }}

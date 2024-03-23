@@ -153,124 +153,6 @@ export default function Home() {
   return (
     <>
       <div className="block w-full h-full justify-center items-start bg-white">
-        {/* <div className="flex w-full h-full justify-center items-start select-none">
-          <div className="relative hidden sm:hidden md:block lg:block xl:block justify-start items-start w-full text-[#333333]">
-            <div className="relative flex justify-center items-start w-full">
-              <Link href="/flowers" className="flex justify-center items-center w-full no-outline">
-                <div className="absolute right-8 flex justify-end items-center w-full">
-                  <div className="block justify-end items-center w-full text-right">
-                    <div className="flex justify-end items-center w-full text-lg font-semibold leading-tight">
-                      <div className="flex justify-end items-center w-[40%]">
-                        IN FULL BLOOM:
-                      </div>
-                    </div>
-
-                    <div className="flex justify-end items-center w-full my-2 text-4xl font-semibold leading-none font_libre">
-                      <div className="flex justify-end items-center w-[40%]">
-                        Exquisite Joy, Birthday Bouquets Await
-                      </div>
-                    </div>
-
-                    <div className="flex justify-end items-center w-full text-lg font-semibold leading-none">
-                      <div className="flex justify-end items-center w-[40%]">
-                        Commend the sun&#39;s voyage with euphoric, mood-enhancing floral masterpieces.
-                      </div>
-                    </div>
-
-
-                    <div className="flex justify-end items-center w-full mt-4 text-lg font-semibold leading-none">
-                      <div className="flex justify-end items-center w-[40%]">
-                        <button className="flex justify-center items-center w-auto h-10 px-3.5 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded">
-                          <div> Shop Birthday </div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] overflow-hidden">
-                  <Image className="flex justify-center items-center w-full h-full overflow-hidden"
-                    src={"https://i.ibb.co/LYNP60X/banner-01-min.webp"}
-                    width={1400}
-                    height={535}
-                    alt="banner_01"
-                  />
-                </div>
-              </Link>
-            </div>
-
-            <div className="flex justify-center items-start w-full">
-              <Link href="/flowers" className="flex justify-center items-start w-full no-outline">
-                <div className="flex justify-center items-center w-full py-4 px-1 bg-[#FFE69B] text-center space-x-2">
-                  <div className="text-base font-semibold leading-none">
-                    Send fresh, long-lasting flowers that won&#39;t wilt your wallet.
-                  </div>
-
-                  <div className="text-base font-bold underline">
-                    Shop under ₹899
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-start w-full text-[#191919]">
-            <Link href="/flowers" className="block justify-center items-start w-full no-outline">
-              <div className="flex justify-center items-center w-full p-0 overflow-hidden">
-                <Image className="flex justify-center items-center w-full h-full overflow-hidden"
-                  src={"https://i.ibb.co/xCjXCFs/0215-HPUpdate-For-Every-Ocasssion-HPPods-Subs-Mobile.webp"}
-                  width={412}
-                  height={412}
-                  alt="order flowers online from flowerpur in minutes for birthday"
-                />
-              </div>
-
-              <div className="flex justify-center items-center w-full py-6 px-2 bg-[#FFFCF9]">
-                <div className="block justify-center items-center w-full text-center">
-                  <div className="flex justify-center items-center w-full text-lg font-semibold leading-tight">
-                    <div className="flex justify-center items-center w-full">
-                      IN FULL BLOOM:
-                    </div>
-                  </div>
-
-                  <div className="flex justify-center items-center w-full my-1 text-2xl font-semibold leading-snug font_libre">
-                    <div className="flex justify-center items-center w-full">
-                      Exquisite Joy, Birthday Bouquets Await
-                    </div>
-                  </div>
-
-                  <div className="flex justify-center items-center w-full text-lg font-semibold leading-tight">
-                    <div className="flex justify-center items-center w-full">
-                      Commend the sun&#39;s voyage with euphoric, mood-enhancing floral masterpieces.
-                    </div>
-                  </div>
-
-
-                  <div className="flex justify-center items-center w-full mt-4 text-lg font-semibold leading-none">
-                    <div className="flex justify-center items-center w-[60%]">
-                      <button className="flex justify-center items-center w-auto h-[2.75rem] px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md">
-                        <div> Shop Birthday </div>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-center items-center w-full py-4 px-1 bg-[#FFE69B]">
-                <div className="block justify-center items-center w-full text-center">
-                  <div className="text-sm font-semibold leading-none">
-                    Send fresh, long-lasting flowers that won&#39;t wilt your wallet.
-                  </div>
-
-                  <div className="text-base font-bold underline">
-                    Shop under ₹899
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div> */}
-        {/* NEW */}
         <div className="flex w-full h-full justify-start items-start select-none py-4">
           <div className="relative hidden sm:hidden md:flex lg:flex xl:flex w-full h-full justify-start items-start select-none">
             {showHero > 0 ? (
@@ -388,16 +270,16 @@ export default function Home() {
         </div>
 
 
-        <div className="block justify-start items-start w-full h-full bg-white p-6 sm:p-6 md:p-8 lg:p-8 xl:p-8 space-y-10 text-[#494949]">
+        <div className="block justify-start items-start w-full h-full py-6 sm:py-6 md:py-8 lg:py-8 xl:py-8 bg-white space-y-10 text-[#494949]">
           <div className="block items-center w-full h-full select-none">
-            <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
+            <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 text-2xl font-bold text-[#191919]">
               Best-Selling Bouquets
             </div>
 
             {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
               <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
                 <Swiper
-                  className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
+                  className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                   slidesPerView={4.8}
                   spaceBetween={16}
                   pagination={{ clickable: true }}
@@ -427,8 +309,8 @@ export default function Home() {
 
               <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
                 <Swiper
-                  className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
-                  slidesPerView={2.2}
+                  className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
+                  slidesPerView={2.06}
                   spaceBetween={12}
                   pagination={{ clickable: true }}
                   resistanceRatio={0}
@@ -458,18 +340,18 @@ export default function Home() {
             </div>}
           </div>
 
-          <div className="flex justify-center items-center w-full h-2 sm:h-2 md:h-1 lg:h-1 xl:h-1 bg-[#f7f7f7] border-y border-[#e5e5e5]" />
+          <div className="flex justify-center items-center w-full h-1 bg-[#f7f7f7] border-y border-[#e5e5e5]" />
 
-          <div className="block w-full h-full px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
+          <div className="block items-center w-full h-full select-none">
             <div className="flex flex-col justify-start items-center w-full h-full select-none">
-              <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
+              <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 text-2xl font-bold text-[#191919]">
                 Top-Rated Bouquets
               </div>
 
               {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
                 <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
                   <Swiper
-                    className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden"
+                    className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                     slidesPerView={4.8}
                     spaceBetween={16}
                     pagination={{ clickable: true }}
@@ -516,8 +398,8 @@ export default function Home() {
 
                 <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
                   <Swiper
-                    className="flex justify-start items-center w-full h-auto rounded-md overflow-hidden"
-                    slidesPerView={2.2}
+                    className="flex justify-start items-center w-full h-auto !px-4 rounded-md overflow-hidden"
+                    slidesPerView={2.06}
                     spaceBetween={12}
                     pagination={{ clickable: true }}
                     resistanceRatio={0}
