@@ -86,7 +86,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 </div>
 
                 <Link href={`/product/${slug}`} className="flex justify-start items-center w-full no-outline">
-                    <div className="flex justify-start items-start w-full h-9 mt-2 font-bold capitalize line-clamp-2 text-base text-ellipsis !leading-none overflow-y group-hover:underline decoration-[0.9px] underline-offset-1 text-left">
+                    <div className="flex justify-start items-start w-full h-8 mt-2 font-bold capitalize line-clamp-1 text-base text-ellipsis !leading-none overflow-y-hidden group-hover:underline decoration-[0.9px] underline-offset-1 text-left">
                         {title}
                     </div>
                 </Link>
