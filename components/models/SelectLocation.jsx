@@ -214,6 +214,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                             placeholder="Enter delivery address"
                                                             id="delivery-postcode"
                                                             name="delivery-postcode"
+                                                            autoComplete='off'
                                                         />
 
                                                         {inputError && <div className="flex justify-start items-center w-auto mt-1.5 space-x-1 leading-none">

@@ -170,24 +170,11 @@ const Header = () => {
                             <li className="relative flex justify-center items-center w-[35%] h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
                                 <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                     {(
-                                        getCookie('user_state') === '' ||
-                                        getCookie('user_state') === undefined ||
-                                        getCookie('user_state') === null ||
-                                        getCookie('user_pincode') === '' ||
-                                        getCookie('user_pincode') === undefined ||
-                                        getCookie('user_pincode') === null
-                                    ) ? <div className="flex justify-start items-center w-48 h-full px-2 space-x-1 font-semibold cursor-pointer">
-                                        <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
-                                            ></use>
-                                        </svg>
-
-                                        <div> Select Address </div>
-                                    </div>
-                                        :
-                                        <div className="flex justify-start items-center w-48 h-full px-2 font-semibold cursor-pointer">
+                                        getCookie('user_address') === '' ||
+                                        getCookie('user_address') === undefined ||
+                                        getCookie('user_address') === null
+                                    ) ? (
+                                        <div className="flex justify-start items-center w-48 h-full px-2 space-x-1 font-semibold cursor-pointer">
                                             <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -195,9 +182,26 @@ const Header = () => {
                                                 ></use>
                                             </svg>
 
-                                            {getCookie('user_pincode')}, {getCookie('user_state')}
+                                            <div> Select Address </div>
                                         </div>
-                                    }
+                                    ) : (
+                                        <div className="flex justify-start items-center w-48 h-full px-2 font-semibold cursor-pointer" title={getCookie('user_address')}>
+                                            <svg className="flex justify-center items-center w-4 h-4" width={16} height={16}>
+                                                <use
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                ></use>
+                                            </svg>
+
+                                            <div className="flex justify-start items-center w-full text-left">
+                                                <div className="flex justify-start items-center w-full font-bold text-sm !leading-none">
+                                                    <p className="px-1 pr-3 line-clamp-1">
+                                                        {getCookie('user_address')}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
 
                                     <div className="absolute right-2 flex justify-center items-center w-5 h-5 pointer-events-none">
                                         <svg className="text-[#494949]" width={20} height={20}>
@@ -294,7 +298,7 @@ const Header = () => {
 
 
                 <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
-                
+
                 <Search isSearchMenu={isSearchMenu} setIsSearchMenu={setIsSearchMenu} />
             </header>}
         </>

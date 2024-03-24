@@ -195,7 +195,9 @@ export const CartProvider = ({ children }) => {
             newCart[itemCode] = { qty: qty, availableQty, url, price, img, name, offer, deliveryOptions }
         }
 
-        setIsCartOpenATC(true);
+        if (isCartOpenATC === false) {
+            setIsCartOpenATC(true);
+        }
 
         setCart(newCart);
         saveCart(newCart);

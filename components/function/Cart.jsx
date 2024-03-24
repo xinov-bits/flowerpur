@@ -118,7 +118,8 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
     return (
         <>
             <AnimatePresence>
-                {(isCartOpen || isCartOpenATC) && (
+                {/* isCartOpen || isCartOpenATC */}
+                {(isCartOpen) && (
                     <motion.div
                         id="cart"
                         className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-75"
@@ -132,36 +133,36 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                         exit={{ x: 400, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-0" onClick={() => {
+                        <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-[#292929] bg-opacity-0" onClick={() => {
                             setIsCartOpen(false);
                             setIsCartOpenATC(false);
                         }} />
-                        
 
-                        <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full bg-white border-l border-[#e5e5e5]">
-                            <div className="flex justify-between items-center w-full h-14 bg-white border-b border-[#e5e5e5]">
-                                <div className="flex justify-start items-center w-auto px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 py-4 sm:py-4 md:py-6 lg:py-6 xl:py-6 text-lg font-bold text-[#191919] leading-none cursor-pointer">
-                                    Your Cart
-                                    &#40;{numTotal}&#41;
-                                </div>
 
-                                <button className="flex justify-center items-center w-14 h-full cursor-pointer  no-outline" onClick={() => {
-                                    setIsCartOpen(false);
-                                    setIsCartOpenATC(false);
-                                }}>
-                                    <svg className="flex justify-center items-center w-6 h-6 text-[#292929]" width={28} height={28}>
+                        <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full py-4 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]">
+                            <div className="block justify-start items-center w-full px-4 space-y-2">
+                                <div className="flex justify-start items-center w-full h-6">
+                                    <svg
+                                        className="flex justify-center items-center size-6 cursor-pointer"
+                                        onClick={() => setIsAddressChooser(false)}
+                                        width={24} height={24}
+                                    >
                                         <use
                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
                                         ></use>
                                     </svg>
-                                </button>
+                                </div>
+
+                                <div className="flex justify-start items-center w-full mt-2 text-2xl font-bold leading-none">
+                                    Your cart
+                                </div>
                             </div>
 
-                            <div className="block justify-start items-start w-full h-screen pb-4">
-                                <ul className="flex flex-col justify-start items-center w-full h-[48.8rem] text-[#191919] overflow-y-auto">
+                            <div className="block justify-start items-start w-full h-screen mt-2 pb-4">
+                                <ul className="flex flex-col justify-start items-center w-full h-[31.2rem] text-[#191919] overflow-y-auto">
                                     {mappedCart.map((item, index) => {
-                                        return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 sm:px-4 md:px-6 lg:px-6 xl:px-6 border-b border-[#e5e5e5] last:border-b-0 bg-white hover:bg-[#f7f7f7] cursor-pointer">
+                                        return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 border-b border-[#e5e5e5] last:border-b-0 bg-white hover:bg-[#f7f7f7] cursor-pointer">
                                             <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
                                                 <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
                                                     <Image className="flex justify-center items-center w-[5.5rem] h-[5.5rem] rounded-md overflow-hidden no-outline"
@@ -185,7 +186,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                     </Link>
 
                                                     {item.offer === 'buy-2-get-1-free' && <div className="flex justify-start items-start w-full h-auto">
-                                                        <div className="relative flex justify-center items-center w-auto h-6 px-2 leading-none bg-[#ffcc29] text-[#292929] rounded text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
+                                                        <div className="relative flex justify-center items-center w-auto h-6 px-2 leading-none bg-[#0e8345] text-white rounded-md text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
                                                             <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
                                                                 <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
                                                                     <use
@@ -274,7 +275,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                     })}
                                 </ul>
 
-                                <div className="flex justify-center items-center w-full h-[5.25rem] p-4 border-t border-[#e5e5e5]">
+                                <div className="flex justify-center items-center w-full h-16 px-4 py-2 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]">
                                     {subTotal > 0 ? (
                                         <div className="flex justify-center items-center w-full h-full">
                                             <button className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {

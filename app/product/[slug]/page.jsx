@@ -35,10 +35,12 @@ import { useDropzone } from 'react-dropzone'
 
 // COMPONENTS
 import { InputField } from '@/components/core/InputField';
+import SelectLocation from '@/components/models/SelectLocation';
 
 // REACT CALENDAR
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+
 
 export default function Page({ params }) {
     const {
@@ -665,6 +667,10 @@ export default function Page({ params }) {
     }, [isSelectDateOpen])
 
 
+    // ADDRESS
+    const [isAddressChooser, setIsAddressChooser] = useState(false)
+
+
     return (
         <>
             <div className="block justify-center items-center w-full h-full bg-white">
@@ -1093,9 +1099,10 @@ export default function Page({ params }) {
                                     </div>
 
                                     <div className="block sm:block md:flex lg:flex xl:flex justify-start items-start w-full mt-2 space-x-0 sm:space-x-0 md:space-x-4 lg:space-x-4 xl:space-x-4 space-y-4 sm:space-y-4 md:space-y-0 lg:space-y-0 xl:space-y-0 select-none">
-                                        <div className="flex justify-start items-start w-full h-auto p-2 bg-white border border-[#e5e5e5] rounded-md cursor-pointer">
-                                            <ul className="flex flex-col justify-start items-center w-full p-1 text-base font-semibold divide-y divide-[#e5e5e5]">
-                                                <li className="flex justify-between items-center w-full pb-2 leading-none">
+                                        {/* ADDITIONS */}
+                                        <div className="flex justify-start items-start w-full h-auto py-2 bg-white border border-[#e5e5e5] rounded-lg cursor-pointer">
+                                            <ul className="flex flex-col justify-start items-center w-full text-base font-semibold divide-y divide-[#e5e5e5]">
+                                                <li className="flex justify-between items-center w-full px-2 pb-2 leading-none">
                                                     <div className="flex justify-start items-center w-full">
                                                         Vase
                                                     </div>
@@ -1105,35 +1112,39 @@ export default function Page({ params }) {
                                                             ₹199
                                                         </div>
 
-                                                        {!extrasToAdd.includes('vase') ? <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
-                                                            <button className="flex justify-center items-center w-full h-full border-[1.5px] border-[#e5e5e5] rounded-full text-sm hover:bg-[#f7f7f7] hover:border-[#c0c0c0] active:border-[#767676]" onClick={() => {
-                                                                setExtrasToAdd(prevArr => ['vase', prevArr[1]])
-                                                            }}>
-                                                                <svg className="" width={16} height={16}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
-                                                                    ></use>
-                                                                </svg>
+                                                        {!extrasToAdd.includes('vase') ? (
+                                                            <div className="flex justify-end items-center w-auto h-8">
+                                                                <button className="flex justify-center items-center w-auto h-full px-2 space-x-1 border border-[#e5e5e5] rounded-full text-sm hover:bg-[#f0f0f0] hover:border-[#f0f0f0] active:border-[#f0f0f0] no-outline" onClick={() => {
+                                                                    setExtrasToAdd(prevArr => ['vase', prevArr[1]])
+                                                                }}>
+                                                                    <svg className="" width={16} height={16}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
+                                                                        ></use>
+                                                                    </svg>
 
-                                                                Add
-                                                            </button>
-                                                        </div> : <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
-                                                            <button className="flex justify-center items-center w-full h-full text-sm bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e]">
-                                                                <svg className="" width={12} height={12}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                                                                    ></use>
-                                                                </svg>
+                                                                    <div> Add </div>
+                                                                </button>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex justify-end items-center w-auto h-8">
+                                                                <button className="flex justify-center items-center w-auto h-full space-x-1 px-2 bg-[#00838a20] rounded-full text-sm text-[#00838a] no-outline">
+                                                                    <svg width={12} height={12}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
+                                                                        ></use>
+                                                                    </svg>
 
-                                                                Added
-                                                            </button>
-                                                        </div>}
+                                                                    <div> Added </div>
+                                                                </button>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </li>
 
-                                                <li className="flex justify-between items-center w-full pt-2 leading-none">
+                                                <li className="flex justify-between items-center w-full px-2 pt-2 leading-none">
                                                     <div className="flex justify-start items-center w-full">
                                                         Double flower quantity
                                                     </div>
@@ -1143,106 +1154,102 @@ export default function Page({ params }) {
                                                             ₹349
                                                         </div>
 
-                                                        {!extrasToAdd.includes('double') ? <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
-                                                            <button className="flex justify-center items-center w-full h-full border-[1.5px] border-[#e5e5e5] rounded-full text-sm hover:bg-[#f7f7f7] hover:border-[#c0c0c0] active:border-[#767676]" onClick={() => {
-                                                                setExtrasToAdd(prevArr => [prevArr[0], 'double'])
-                                                            }}>
-                                                                <svg className="" width={16} height={16}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
-                                                                    ></use>
-                                                                </svg>
+                                                        {!extrasToAdd.includes('double') ? (
+                                                            <div className="flex justify-end items-center w-auto h-8">
+                                                                <button className="flex justify-center items-center w-full h-full space-x-1 px-2 border border-[#e5e5e5] rounded-full text-sm hover:bg-[#f0f0f0] hover:border-[#f0f0f0] active:border-[#f0f0f0] no-outline" onClick={() => {
+                                                                    setExtrasToAdd(prevArr => [prevArr[0], 'double'])
+                                                                }}>
+                                                                    <svg className="" width={16} height={16}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
+                                                                        ></use>
+                                                                    </svg>
 
-                                                                Add
-                                                            </button>
-                                                        </div> : <div className="flex justify-end items-center w-[4.25rem] h-8 sm:h-8 md:h-7 lg:h-7 xl:h-7">
-                                                            <button className="flex justify-center items-center w-full h-full text-sm bg-[#e0f2f7] rounded-full border-[1.5px] border-[#528c8e] text-[#528c8e]">
-                                                                <svg className="" width={12} height={12}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                                                                    ></use>
-                                                                </svg>
+                                                                    <div> Add </div>
+                                                                </button>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex justify-end items-center w-auto h-8">
+                                                                <button className="flex justify-center items-center w-full h-full space-x-1 px-2 bg-[#00838a20] rounded-full text-sm text-[#00838a] no-outline">
+                                                                    <svg width={12} height={12}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
+                                                                        ></use>
+                                                                    </svg>
 
-                                                                Added
-                                                            </button>
-                                                        </div>}
+                                                                    <div> Added </div>
+                                                                </button>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </li>
                                             </ul>
                                         </div>
 
-                                        <div className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-md leading-none">
+                                        {/* PINCODE & DATE TIME */}
+                                        <div className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-lg leading-none">
                                             <div className="flex justify-start items-center w-full h-full">
-                                                <ul className="flex flex-col justify-start items-center w-full h-full p-1 text-base font-semibold divide-y divide-[#e5e5e5]">
-                                                    {!(
-                                                        getCookie('user_state') === '' ||
-                                                        getCookie('user_state') === undefined ||
-                                                        getCookie('user_state') === null ||
-                                                        getCookie('user_pincode') === '' ||
-                                                        getCookie('user_pincode') === undefined ||
-                                                        getCookie('user_pincode') === null
-                                                    ) ? <li className="flex justify-between items-center w-full h-9 leading-none">
-                                                        <button className="relative flex justify-center items-center w-full h-full px-3 py-2 bg-white border border-[#e5e5e5] rounded-full cursor-pointer no-outline">
-                                                            <div className="flex justify-start items-center w-full h-full font-semibold cursor-pointer">
-                                                                {getCookie('user_pincode')}, {getCookie('user_state')}
-                                                            </div>
+                                                <ul className="flex flex-col justify-start items-center w-full h-full p-1 space-y-2 text-base font-semibold divide-y divide-[#e5e5e5]">
+                                                    <li className="relative flex justify-center items-center w-full h-auto p-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
+                                                        <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
+                                                            {(
+                                                                getCookie('user_address') === '' ||
+                                                                getCookie('user_address') === undefined ||
+                                                                getCookie('user_address') === null
+                                                            ) ? (
+                                                                <div className="flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer">
+                                                                    <div className="flex justify-start items-center size-4">
+                                                                        <svg className="flex justify-center items-center size-4" width={16} height={16}>
+                                                                            <use
+                                                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                                            ></use>
+                                                                        </svg>
+                                                                    </div>
 
-                                                            <div className="flex justify-end items-center w-auto text-sm font-medium underline text-[#767676]" onClick={() => {
-                                                                deleteCookie('user_pincode');
-                                                                deleteCookie('user_state');
-                                                                setAddress('');
-
-                                                                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`);
-                                                            }}>
-                                                                change
-                                                            </div>
-                                                        </button>
-                                                    </li>
-                                                        :
-                                                        <li className="flex justify-between items-center w-full h-9 leading-none">
-                                                            <form className="relative flex justify-center items-center w-full h-full" htmlFor="address_input" onSubmit={handleAddressSubmit}>
-                                                                <div className="absolute left-1.5 flex justify-center items-center w-5 h-5 pointer-events-none">
-                                                                    <svg className="text-[#494949]" width={24} height={24}>
+                                                                    <div className="flex justify-start items-center w-full">
+                                                                        Enter delivery address
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="flex justify-start items-center w-full h-full px-2 font-semibold space-x-1 cursor-pointer" title={getCookie('user_address')}>
+                                                                    <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                         <use
                                                                             xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
                                                                         ></use>
                                                                     </svg>
-                                                                </div>
 
-                                                                <input className="flex justify-center items-center w-full h-full pl-8 px-3 py-2 rounded-full bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none no-outline"
-                                                                    type="number"
-                                                                    placeholder="Pincode"
-                                                                    name="address_input"
-                                                                    id="address_input"
-                                                                    onChange={handleAddressChange}
-                                                                    value={address}
-                                                                    autoComplete='off'
-                                                                />
+                                                                    <div className="flex flex-col justify-start items-center w-full text-left">
+                                                                        <div className="flex justify-start items-center w-full font-bold text-sm !leading-none">
+                                                                            <p className="pr-3 line-clamp-1">
+                                                                                {getCookie('user_address')}
+                                                                            </p>
+                                                                        </div>
 
-                                                                {address !== '' ? <button className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white text-xs font-semibold rounded-full no-outline duration-75" type="submit">
-                                                                    Confirm
-                                                                </button>
-                                                                    :
-                                                                    <div className="absolute right-1 flex justify-center items-center w-auto h-7 px-2 bg-[#085b45] text-white text-xs font-semibold rounded-full saturate-0 opacity-40">
-                                                                        Confirm
+                                                                        <div className="flex justify-start items-center w-full mt-1 text-xs font-medium underline text-[#494949] !leading-none cursor-pointer">
+                                                                            Change your delivery address
+                                                                        </div>
                                                                     </div>
-                                                                }
-                                                            </form>
-                                                        </li>
-                                                    }
+                                                                </div>
+                                                            )}
+                                                        </button>
+                                                    </li>
 
-                                                    <li className="block justify-start items-center w-full h-auto mt-2 pt-2 leading-none">
+                                                    <li className="relative block items-center w-full h-auto p-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
                                                         {buzzDateInput && <div className="flex justify-start items-center w-full mb-1 text-xs leading-none text-[#ad2314]">
                                                             required *
                                                         </div>}
 
-                                                        <div className="flex justify-between items-center w-full h-auto leading-none">
-                                                            <div className={`relative flex justify-center items-center w-full h-auto px-2 py-2 border ${buzzDateInput ? 'border-[#ad2314] ring-2.5 ring-[#ad231433]' : 'border-[#f7f7f7]'} rounded-full bg-[#f7f7f7] text-[#797979] overflow-hidden`}>
-                                                                <div className="flex justify-center items-center w-5 h-5 pointer-events-none">
-                                                                    <svg className="text-[#494949]" width={24} height={24}>
+                                                        <div className="flex justify-between items-center w-full h-full leading-none">
+                                                            <div className={`
+                                                            flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer
+                                                            ${buzzDateInput && 'border-[#ad2314]'}
+                                                            `}>
+                                                                <div className="flex justify-start items-center size-5">
+                                                                    <svg className="flex justify-center items-center size-5" width={16} height={16}>
                                                                         <use
                                                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
@@ -1255,30 +1262,34 @@ export default function Page({ params }) {
                                                                     || finalDeliveryType == []
                                                                     || finalDeliveryTime === ''
                                                                     || finalDeliveryPrice === ''
-                                                                ) ? <div className="flex justify-start items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
-                                                                    Date & Time
-                                                                </div> : <div className="flex justify-between items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
-                                                                    <div className="block space-y-1">
-                                                                        <p className="text-sm text-[#767676] leading-none">
-                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
-                                                                        </p>
-                                                                        <p className="text-[#191919] leading-none">
-                                                                            {moment(finalDate).format('ddd')} {finalDeliveryTime}
-                                                                        </p>
+                                                                ) ? (
+                                                                    <div className="flex justify-start items-center w-full h-auto pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                        Date & Time
                                                                     </div>
+                                                                ) : (
+                                                                    <div className="flex justify-between items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                        <div className="block items-center space-y-1">
+                                                                            <p className="text-sm text-[#494949] !leading-none">
+                                                                                {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
+                                                                            </p>
+                                                                            <p className="text-[#191919] !leading-none">
+                                                                                {moment(finalDate).format('ddd')} {finalDeliveryTime}
+                                                                            </p>
+                                                                        </div>
 
-                                                                    <div className="flex justify-center items-center w-5 h-5" onClick={() => {
-                                                                        setDateStepsDone([false, false]);
-                                                                        setFinalDate('');
-                                                                        setFinalDeliveryType([]);
-                                                                        setFinalDeliveryTime('');
-                                                                        setFinalDeliveryPrice('');
-                                                                    }}>
-                                                                        <svg className="text-[#767676]" width={20} height={20}>
-                                                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
-                                                                        </svg>
+                                                                        <div className="flex justify-center items-center size-5" onClick={() => {
+                                                                            setDateStepsDone([false, false]);
+                                                                            setFinalDate('');
+                                                                            setFinalDeliveryType([]);
+                                                                            setFinalDeliveryTime('');
+                                                                            setFinalDeliveryPrice('');
+                                                                        }}>
+                                                                            <svg className="flex justify-center items-center size-5 text-[#191919]" width={20} height={20}>
+                                                                                <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                                                                            </svg>
+                                                                        </div>
                                                                     </div>
-                                                                </div>}
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </li>
@@ -1317,8 +1328,8 @@ export default function Page({ params }) {
                                                 </div>
                                             </button>
 
-                                            {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-auto h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
-                                                {qtyValArr.map((qty, index) => <button key={index} className="flex justify-center items-center w-full h-auto px-6 py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
+                                            {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-auto h-auto space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
+                                                {qtyValArr.map((qty, index) => <button key={index} className="flex justify-center items-center w-full h-auto px-6 py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] no-outline duration-75" onClick={() => {
                                                     setProductQty(qty);
                                                     setQtySelectPop(false);
                                                 }}>
@@ -1711,6 +1722,8 @@ export default function Page({ params }) {
             </div>
 
 
+            <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
+
 
             {/* SELECT DATE */}
             <AnimatePresence>
@@ -2084,63 +2097,6 @@ export default function Page({ params }) {
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* SELECT LOCATION */}
-            {/* <AnimatePresence>
-                {isSelectLocationMenuOpen && (
-                    <motion.div className="fixed bottom-[8.75rem] right-10 flex justify-start items-start w-[60%] sm:w-[60%] md:w-[25%] lg:w-[25%] xl:w-[25%] h-auto z-[600] text-[#292929]"
-                        initial={{ y: -10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -10, opacity: 0 }}
-                        onBlur={() => setIsSelectLocationMenuOpen(false)}
-                        onClick={() => setIsSelectLocationMenuOpen(true)}
-                        onFocus={() => setIsSelectLocationMenuOpen(true)}
-                    >
-                        <div className="relative z-[200] flex flex-col justify-start items-center w-full h-auto bg-white rounded-md border border-[#e5e5e5]"
-                            onBlur={() => setIsSelectLocationMenuOpen(false)}
-                            onClick={() => setIsSelectLocationMenuOpen(true)}
-                            onFocus={() => setIsSelectLocationMenuOpen(true)}
-                        >
-                            <div className="flex flex-col justify-start items-center w-full py-2.5">
-                                <div className="flex justify-start items-center w-full px-2.5 font-bold">
-                                    Enter Your Address
-                                </div>
-
-                                <div className="flex flex-col justify-start items-center w-full px-2.5 mt-1 space-y-2">
-                                    <label className="relative flex justify-center items-center w-full" htmlFor="address_input">
-                                        <div className="absolute left-1.5 flex justify-center items-center w-5 h-5">
-                                            <svg className="text-[#494949]" width={24} height={24}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd2"
-                                                ></use>
-                                            </svg>
-                                        </div>
-
-                                        <input className="flex justify-center items-center w-full h-full pl-8 p-2 rounded-md bg-[#f7f7f7] placeholder:text-[#797979] placeholder:font-medium font-semibold appearance-none"
-                                            type="number"
-                                            placeholder="Pincode"
-                                            name="address_input"
-                                            id="address_input"
-                                            onChange={handleAddressChange}
-                                            value={address}
-                                        />
-                                    </label>
-
-                                    {address !== '' ? <button className="flex justify-center items-center w-full h-9 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75" onClick={handleAddressSubmit}>
-                                        Confirm Address
-                                    </button>
-                                        :
-                                        <div className="flex justify-center items-center w-full h-9 bg-[#085b45] text-white font-semibold rounded-md duration-75 saturate-0 opacity-40">
-                                            Confirm Address
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence> */}
         </>
     )
 }
