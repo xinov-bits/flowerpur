@@ -44,7 +44,18 @@ export default function Home() {
 
 
   // GET PRODUCTS
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([])
+  const [filterProducts, setFilterProducts] = useState([])
+
+  useEffect(() => {
+    setFilterProducts(
+      Object.keys(products).filter((k) => {
+        if ((products[k].category === 'flowers') && (products[k].subCategory === 'roses')) {
+          return products[k]
+        }
+      }).map((k) => products[k])
+    )
+  }, [products])
 
   const fetchData = async () => {
     try {
@@ -52,16 +63,16 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
-      setProducts(response.data);
+      })
+      setProducts(response.data)
     } catch (error) {
-      console.error('There was a problem with your fetch operation:', error);
+      console.error('There was a problem with your fetch operation:', error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
 
   // MAIN SLIDES
@@ -117,18 +128,6 @@ export default function Home() {
       }, 1000);
     }
   }, [addedAnim])
-
-  const [filterProducts, setFilterProducts] = useState([]);
-
-  useEffect(() => {
-    setFilterProducts(
-      Object.keys(products).filter((k) => {
-        if ((products[k].category === 'flowers') && (products[k].subCategory === 'roses')) {
-          return products[k]
-        }
-      }).map((k) => products[k])
-    )
-  }, [products])
 
   // FILTER & RATINGS
   const [reviewMean, setReviewMean] = useState([]);
@@ -387,7 +386,7 @@ export default function Home() {
 
             <div className="flex justify-start items-center w-full">
               <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full">
-                {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                {(filterProducts != [] && filterProducts.length > 0) ? (
                   <Swiper
                     className="flex justify-center items-center w-full h-auto !px-8 rounded-md overflow-hidden"
                     slidesPerView={4.8}
@@ -401,16 +400,23 @@ export default function Home() {
                       }
                     }).map((item) => {
                       return (<SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                        <ProductCard key={products[item]._id}
-                          itemCode={products[item]._id}
-                          slug={products[item].slug}
-                          qty={products[item].qty}
-                          availableQty={products[item].availableQty}
-                          price={products[item].price}
-                          dimg={products[item].dimg}
-                          title={products[item].title}
-                          offer={products[item].offer}
-                        />
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ delay: 0.1 }}
+                        >
+                          <ProductCard key={products[item]._id}
+                            itemCode={products[item]._id}
+                            slug={products[item].slug}
+                            qty={products[item].qty}
+                            availableQty={products[item].availableQty}
+                            price={products[item].price}
+                            dimg={products[item].dimg}
+                            title={products[item].title}
+                            offer={products[item].offer}
+                          />
+                        </motion.div>
                       </SwiperSlide>
                       )
                     })}
@@ -429,7 +435,7 @@ export default function Home() {
               </div>
 
               <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
-                {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                {(filterProducts != [] && filterProducts.length > 0) ? (
                   <Swiper
                     className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                     slidesPerView={2.06}
@@ -444,16 +450,23 @@ export default function Home() {
                     }).map((item) => {
                       return (
                         <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                          <ProductCard
-                            itemCode={products[item]._id}
-                            slug={products[item].slug}
-                            qty={products[item].qty}
-                            availableQty={products[item].availableQty}
-                            price={products[item].price}
-                            dimg={products[item].dimg}
-                            title={products[item].title}
-                            offer={products[item].offer}
-                          />
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <ProductCard
+                              itemCode={products[item]._id}
+                              slug={products[item].slug}
+                              qty={products[item].qty}
+                              availableQty={products[item].availableQty}
+                              price={products[item].price}
+                              dimg={products[item].dimg}
+                              title={products[item].title}
+                              offer={products[item].offer}
+                            />
+                          </motion.div>
                         </SwiperSlide>
                       )
                     })}
@@ -480,7 +493,7 @@ export default function Home() {
 
               <div className="flex justify-start items-center w-full">
                 <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full">
-                  {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                  {(filterProducts != [] && filterProducts.length > 0) ? (
                     <Swiper
                       className="flex justify-center items-center w-full h-auto !px-8 rounded-md overflow-hidden"
                       slidesPerView={4.8}
@@ -511,16 +524,23 @@ export default function Home() {
                       }).map((item) => {
                         return (
                           <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                            <ProductCard key={filterProducts[item]._id}
-                              itemCode={filterProducts[item]._id}
-                              slug={filterProducts[item].slug}
-                              qty={filterProducts[item].qty}
-                              availableQty={filterProducts[item].availableQty}
-                              price={filterProducts[item].price}
-                              dimg={filterProducts[item].dimg}
-                              title={filterProducts[item].title}
-                              offer={filterProducts[item].offer}
-                            />
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ delay: 0.1 }}
+                            >
+                              <ProductCard key={filterProducts[item]._id}
+                                itemCode={filterProducts[item]._id}
+                                slug={filterProducts[item].slug}
+                                qty={filterProducts[item].qty}
+                                availableQty={filterProducts[item].availableQty}
+                                price={filterProducts[item].price}
+                                dimg={filterProducts[item].dimg}
+                                title={filterProducts[item].title}
+                                offer={filterProducts[item].offer}
+                              />
+                            </motion.div>
                           </SwiperSlide>
                         )
                       })}
@@ -539,7 +559,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
-                  {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                  {(filterProducts != [] && filterProducts.length > 0) ? (
                     <Swiper
                       className="flex justify-start items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                       slidesPerView={2.06}
@@ -570,16 +590,23 @@ export default function Home() {
                       }).map((item) => {
                         return (
                           <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                            <ProductCard key={filterProducts[item]._id}
-                              itemCode={filterProducts[item]._id}
-                              slug={filterProducts[item].slug}
-                              qty={filterProducts[item].qty}
-                              availableQty={filterProducts[item].availableQty}
-                              price={filterProducts[item].price}
-                              dimg={filterProducts[item].dimg}
-                              title={filterProducts[item].title}
-                              offer={filterProducts[item].offer}
-                            />
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ delay: 0.1 }}
+                            >
+                              <ProductCard key={filterProducts[item]._id}
+                                itemCode={filterProducts[item]._id}
+                                slug={filterProducts[item].slug}
+                                qty={filterProducts[item].qty}
+                                availableQty={filterProducts[item].availableQty}
+                                price={filterProducts[item].price}
+                                dimg={filterProducts[item].dimg}
+                                title={filterProducts[item].title}
+                                offer={filterProducts[item].offer}
+                              />
+                            </motion.div>
                           </SwiperSlide>
                         )
                       })}
