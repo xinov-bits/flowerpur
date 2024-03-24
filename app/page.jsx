@@ -422,6 +422,7 @@ export default function Home() {
                       <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
                       <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
                       <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
                     </div>
                   </div>
                 )}
@@ -527,6 +528,7 @@ export default function Home() {
                   ) : (
                     <div className="flex justify-start items-center w-full h-[12rem] sm:h-[12rem] md:h-[18.2rem] lg:h-[18.2rem] xl:h-[18.2rem] !px-8 rounded-lg">
                       <div className="flex justify-start items-center w-full h-full space-x-4">
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
                         <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
                         <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
                         <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
