@@ -129,6 +129,16 @@ const MobileHeader = () => {
 
 
     // MENU
+    const [showMenu, setShowMenu] = useState(false)
+
+    useEffect(() => {
+      if (!showMenu) {
+        setTimeout(() => {
+            setShowMenu(true);
+        }, 1000);
+      }
+    }, [showMenu])
+
     const menu = [
         {
             name: "Bouquets",
@@ -276,32 +286,42 @@ const MobileHeader = () => {
                         </button>
                     </div>
 
-                    <div className="flex justify-start items-center w-full h-auto pb-2">
-                        <Swiper
-                            className="flex justify-center items-center w-full h-full !px-4 overflow-hidden"
-                            slidesPerView={5.2}
-                            spaceBetween={10}
-                            resistanceRatio={0.4}
-                            freeMode={true}
-                            modules={[FreeMode]}
-                        >
-                            {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">
-                                <Link href={slide.url} className="flex flex-col justify-center items-center w-full h-full">
-                                    <div className="flex justify-center items-center w-auto h-auto">
-                                        <Image className="flex justify-center items-center w-auto h-14"
-                                            src={slide.img}
-                                            width={192}
-                                            height={192}
-                                            alt={slide.name}
-                                        />
-                                    </div>
+                    <div className={`flex justify-center items-center w-full h-auto duration-200`}>
+                        {showMenu ? (
+                            <Swiper
+                                className="flex justify-center items-center w-full h-full !px-4 overflow-hidden"
+                                slidesPerView={5.2}
+                                spaceBetween={10}
+                                resistanceRatio={0.4}
+                                freeMode={true}
+                                modules={[FreeMode]}
+                            >
+                                {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">
+                                    <Link href={slide.url} className="flex flex-col justify-center items-center w-full h-full">
+                                        <div className="flex justify-center items-center w-auto h-auto">
+                                            <Image className="flex justify-center items-center w-auto h-14"
+                                                src={slide.img}
+                                                width={192}
+                                                height={192}
+                                                alt={slide.name}
+                                            />
+                                        </div>
 
-                                    <div className="flex justify-center items-center w-auto leading-none font-bold text-xs">
-                                        {slide.name}
-                                    </div>
-                                </Link>
-                            </SwiperSlide>)}
-                        </Swiper>
+                                        <div className="flex justify-center items-center w-auto leading-none font-bold text-xs">
+                                            {slide.name}
+                                        </div>
+                                    </Link>
+                                </SwiperSlide>)}
+                            </Swiper>
+                        ) : (
+                            <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
+                                <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+                                <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+                                <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+                                <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+                                <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+                            </div>
+                        )}
                     </div>
                 </div>
 

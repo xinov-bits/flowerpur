@@ -77,7 +77,7 @@ const MobileBar = () => {
 
     return (
         <>
-            <div className="fixed bottom-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full h-auto select-none bg-white border-t-[1.5px] border-[#e5e5e5]">
+            <div className="fixed bottom-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full h-auto select-none bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]">
                 <ul className="flex justify-center items-center w-full h-full">
                     {menuItems.map((item, index) => {
                         return (
@@ -92,18 +92,6 @@ const MobileBar = () => {
                                                 ></use>
                                             </svg>
                                         </div>
-
-                                        <AnimatePresence>
-                                            {pathname === item.link && (
-                                                <div className="absolute z-[1] bottom-5 flex justify-center items-center duration-200">
-                                                    <motion.div className="flex justify-center items-center w-10 h-5 rounded-b-sm rounded-t-full bg-[#eaf9e4] duration-200"
-                                                        initial={{ space: 0 }}
-                                                        animate={{ space: 1 }}
-                                                        exit={{ space: 0 }}
-                                                    />
-                                                </div>
-                                            )}
-                                        </AnimatePresence>
 
                                         <div className="flex justify-center items-center w-auto text-sm font-semibold">
                                             {item.name}

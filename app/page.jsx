@@ -153,7 +153,7 @@ export default function Home() {
   return (
     <>
       <div className="block w-full h-full justify-center items-start bg-white">
-        <div className="flex w-full h-full justify-start items-start select-none py-4">
+        <div className="flex w-full h-full justify-start items-start select-none">
           <div className="relative hidden sm:hidden md:flex lg:flex xl:flex w-full h-full justify-start items-start select-none">
             {showHero > 0 ? (
               <Swiper
@@ -214,7 +214,7 @@ export default function Home() {
           <div className="flex sm:flex md:hidden lg:hidden xl:hidden w-full h-full justify-start items-start select-none">
             {showHero > 0 ? (
               <Swiper
-                className="flex justify-center items-center w-auto h-auto !px-4 overflow-hidden"
+                className="flex justify-center items-center w-auto h-auto !p-4 overflow-hidden"
                 slidesPerView={1.02}
                 spaceBetween={10}
                 resistanceRatio={0.4}
@@ -270,7 +270,7 @@ export default function Home() {
         </div>
 
 
-        <div className="block justify-start items-start w-full h-full py-6 sm:py-6 md:py-8 lg:py-8 xl:py-8 bg-white space-y-10 text-[#494949]">
+        <div className="block justify-start items-start w-full h-full py-4 sm:py-4 md:py-4 lg:py-4 xl:py-4 bg-white space-y-10 text-[#494949]">
           <div className="block items-center w-full h-full select-none">
             <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 text-2xl font-bold text-[#191919]">
               Best-Selling Bouquets

@@ -86,12 +86,12 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 </div>
 
                 <Link href={`/product/${slug}`} className="flex justify-start items-center w-full no-outline">
-                    <div className="flex justify-start items-start w-full h-8 mt-2 font-bold capitalize line-clamp-1 text-base text-ellipsis !leading-none overflow-y-hidden group-hover:underline decoration-[0.9px] underline-offset-1 text-left">
+                    <div className="flex justify-start items-start w-full h-9 mt-2 font-bold capitalize line-clamp-1 text-base text-ellipsis leading-[1.175rem] overflow-y-hidden group-hover:underline decoration-[0.9px] underline-offset-1 text-left">
                         {title}
                     </div>
                 </Link>
 
-                <div className="flex justify-between items-center w-full h-auto text-base font-semibold text-[#0e8345] !leading-none">
+                <div className="flex justify-between items-center w-full h-auto mt-1 text-base font-semibold text-[#0e8345] !leading-none">
                     ₹{price?.toFixed(2)}
                 </div>
             </motion.div>
