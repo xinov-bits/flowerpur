@@ -50,9 +50,8 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
     const router = useRouter();
 
 
-    // ADDRESS
-    // |
-    //  - TOM TOM
+    // ╭ ADDRESS
+    // ╰──── setSearchResults([])
     const [query, setQuery] = useState('')
     const [results, setResults] = useState([])
 

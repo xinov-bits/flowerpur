@@ -17,6 +17,7 @@ import UserContext from '@/context/UserContext'
 import Cart from '../function/Cart'
 import MobileMenu from '../function/MobileMenu'
 import SelectLocation from '../models/SelectLocation'
+import Search from '../models/Search';
 
 // SWIPER & SPLIDE
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -53,46 +54,6 @@ const MobileHeader = () => {
 
     // CART SIDEMENU
     const [isCartOpen, setIsCartOpen] = useState(false);
-
-
-    // SEARCH
-    const [searchKey, setSearchKey] = useState('');
-    const [isSearchMenu, setIsSearchMenu] = useState(false);
-
-    const handleChangeSearch = (e) => {
-        setSearchKey(e.target.value);
-    }
-
-    const handleSubmitSearch = (e) => {
-        e.preventDefault();
-
-        setIsSearchMenu(false);
-
-        router.push(`/search?keyword=${searchKey}`);
-    }
-
-    const trendingSearches = [
-        {
-            name: 'Birthday bouquets',
-            url: '/'
-        },
-        {
-            name: 'Flowers',
-            url: '/flowers'
-        },
-        {
-            name: 'Anniversary',
-            url: '/'
-        },
-        {
-            name: 'Birthday cakes',
-            url: '/flowers'
-        },
-        {
-            name: 'Occasional Gifts',
-            url: '/'
-        },
-    ]
 
 
     // MOBILE MENU
@@ -132,11 +93,11 @@ const MobileHeader = () => {
     const [showMenu, setShowMenu] = useState(false)
 
     useEffect(() => {
-      if (!showMenu) {
-        setTimeout(() => {
-            setShowMenu(true);
-        }, 1000);
-      }
+        if (!showMenu) {
+            setTimeout(() => {
+                setShowMenu(true);
+            }, 1000);
+        }
     }, [showMenu])
 
     const menu = [
@@ -180,6 +141,11 @@ const MobileHeader = () => {
 
     // ADDRESS
     const [isAddressChooser, setIsAddressChooser] = useState(false)
+
+
+    // Search
+    const [isSearchMenu, setIsSearchMenu] = useState(false);
+
 
     return (
         <>
@@ -286,7 +252,7 @@ const MobileHeader = () => {
                         </button>
                     </div>
 
-                    <div className={`flex justify-center items-center w-full h-auto duration-200`}>
+                    <div className="flex justify-center items-center w-full h-auto duration-200">
                         {showMenu ? (
                             <Swiper
                                 className="flex justify-center items-center w-full h-full !px-4 overflow-hidden"
@@ -329,76 +295,7 @@ const MobileHeader = () => {
                 <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
 
-                {isSearchMenu && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#191919]">
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
-
-                    <div className="absolute z-[200] top-[3.7rem] left-1 flex flex-col justify-start items-center w-[98%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
-                        onBlur={() => setIsSearchMenu(false)}
-                        onClick={() => setIsSearchMenu(true)}
-                        onFocus={() => setIsSearchMenu(true)}>
-                        <div className="relative flex flex-col justify-start items-start w-full h-full pb-2 px-[0.6rem]">
-                            <div className="flex justify-start items-start w-full h-[3.4rem] py-2">
-                                <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
-                                    <div className="absolute left-2.5 flex justify-center items-center w-auto h-full select-none pointer-events-none">
-                                        <svg className="flex justify-center items-center size-[1.35rem] text-[#191919]" width={24} height={24}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
-                                            ></use>
-                                        </svg>
-                                    </div>
-
-                                    <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#191919] font-medium outline-none hover:bg-[#eeeeee]"
-                                        onChange={handleChangeSearch}
-                                        value={searchKey}
-                                        placeholder="Search for flowers, cakes, gifts, etc."
-                                        name="search"
-                                        type="text"
-                                        autoComplete='off'
-                                        autoFocus
-                                    />
-                                </form>
-                            </div>
-
-                            <div className="block justify-start items-start w-full h-full mt-2 text-[#191919]">
-                                <div className="flex justify-start items-center w-full leading-none text-xl font-semibold">
-                                    Trending searches
-                                </div>
-
-                                <div className="flex justify-start items-center w-full mt-2 leading-none text-base font-medium">
-                                    <ul className="flex flex-col justify-start items-center w-full h-full space-y-2">
-                                        {trendingSearches.map((search, index) => <li key={index} className="flex justify-center items-center w-full h-auto">
-                                            <Link href={search.url} className="flex justify-center items-center w-full">
-                                                <button className="flex justify-between items-center w-full h-10 px-2 leading-none bg-white hover:bg-[#f7f7f7] border border-[#e5e5e5] active:border-[#e0e0e0] rounded-md">
-                                                    <div className="flex justify-start items-center w-auto space-x-1">
-                                                        <div className="flex justify-start items-center w-auto">
-                                                            <svg className="flex justify-center items-center w-5 h-5" strokeWidth={1.5}
-                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                            >
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
-                                                            </svg>
-                                                        </div>
-
-                                                        <div className="flex justify-start items-center w-auto">
-                                                            {search.name}
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="flex justify-start items-center w-auto">
-                                                        <svg className="flex justify-center items-center w-4 h-4" strokeWidth={1.8}
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                                                        </svg>
-                                                    </div>
-                                                </button>
-                                            </Link>
-                                        </li>)}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>)}
+                <Search isSearchMenu={isSearchMenu} setIsSearchMenu={setIsSearchMenu} />
 
 
                 <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
