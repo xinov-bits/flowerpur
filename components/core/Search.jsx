@@ -125,7 +125,7 @@ export const Search = () => {
 
     return (
         <>
-            <div className="block w-full h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
+            <div className="block w-full h-auto px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8">
                 <div className="flex flex-col justify-start items-center w-full select-none">
                     <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
                         Search results for &#34;{searchKeyword}&#34;

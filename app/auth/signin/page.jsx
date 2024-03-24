@@ -121,7 +121,7 @@ const Page = () => {
     return (
         <>
             <div className="flex flex-col justify-center items-center w-full h-auto bg-white py-8 sm:py-8 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
-                <div className="flex flex-col w-full max-w-3xl h-auto px-6 sm:px-6 md:px-10 lg:px-10 xl:px-10">
+                <div className="flex flex-col w-full max-w-3xl h-auto px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8">
                     <div className="flex flex-col justify-center items-center w-full select-none">
                         <div className="flex justify-start items-center w-full !leading-none text-xl sm:text-xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Sign In

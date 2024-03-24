@@ -220,8 +220,6 @@ export default function Home() {
                 resistanceRatio={0.4}
                 modules={[FreeMode]}
                 freeMode={true}
-                observer
-                rebuildOnUpdate
               >
                 {mainSlides.map((slide, index) => <SwiperSlide key={index} className="relative flex justify-start items-start w-[23rem] h-auto rounded-lg overflow-hidden">
                   <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
@@ -272,12 +270,12 @@ export default function Home() {
 
         <div className="block justify-start items-start w-full h-full py-4 sm:py-4 md:py-4 lg:py-4 xl:py-4 bg-white space-y-10 text-[#494949]">
           <div className="block items-center w-full h-full select-none">
-            <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 text-2xl font-bold text-[#191919]">
+            <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 mb-2 text-2xl font-bold text-[#191919]">
               Best-Selling Bouquets
             </div>
 
             {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
-              <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
+              <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full">
                 <Swiper
                   className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                   slidesPerView={4.8}
@@ -307,7 +305,7 @@ export default function Home() {
                 </Swiper>
               </div>
 
-              <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
+              <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
                 <Swiper
                   className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                   slidesPerView={2.06}
@@ -344,12 +342,12 @@ export default function Home() {
 
           <div className="block items-center w-full h-full select-none">
             <div className="flex flex-col justify-start items-center w-full h-full select-none">
-              <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 text-2xl font-bold text-[#191919]">
+              <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 mb-2 text-2xl font-bold text-[#191919]">
                 Top-Rated Bouquets
               </div>
 
               {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
-                <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full mt-4">
+                <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full">
                   <Swiper
                     className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                     slidesPerView={4.8}
@@ -396,7 +394,7 @@ export default function Home() {
                   </Swiper>
                 </div>
 
-                <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full mt-4">
+                <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
                   <Swiper
                     className="flex justify-start items-center w-full h-auto !px-4 rounded-md overflow-hidden"
                     slidesPerView={2.06}

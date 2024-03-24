@@ -176,8 +176,8 @@ export const FilterOptions = () => {
     return (
         <>
             <div className="block sm:block md:flex lg:flex xl:flex justify-between items-center w-full h-full">
-                <div className="flex justify-start items-center w-auto space-x-2 h-9 !px-6 overflow-x-auto">
-                    <div className="flex justify-center items-center w-full h-full">
+                <div className="flex justify-start items-center w-auto space-x-2 h-9 !px-4 overflow-x-auto">
+                    <div className="flex justify-center items-center w-auto h-full">
                         <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=offers')}>
                             <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
                                 <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
@@ -194,7 +194,7 @@ export const FilterOptions = () => {
                         </button>
                     </div>
 
-                    <div className="flex justify-center items-center w-full h-full">
+                    <div className="flex justify-center items-center w-auto h-full">
                         <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'over_4.5' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=over_4.5')}>
                             <div className="flex justify-start items-center">
                                 Over 4.5
@@ -211,7 +211,7 @@ export const FilterOptions = () => {
                         </button>
                     </div>
 
-                    <div className="flex justify-center items-center w-full h-full">
+                    <div className="flex justify-center items-center w-auto h-full">
                         <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'under_999' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919] fill-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7] fill-[#e7e7e7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=under_999')}>
                             <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
                                 <svg className="flex justify-center items-center w-4 h-4" viewBox="0 0 40 40"
@@ -248,14 +248,14 @@ export const FilterOptions = () => {
                     </div>
 
                     {!(qFilter === undefined || qFilter === null || qFilter === '' || qFilter === 'none') && (
-                        <button className="hidden sm:hidden md:flex lg:flex xl:flex justify-end items-center w-full h-full text-base text-[#191919] underline font-bold !leading-none no-outline duration-100" onClick={() => router.push('?filter=none')}>
+                        <button className="hidden sm:hidden md:flex lg:flex xl:flex justify-end items-center w-auto h-full text-base text-[#191919] underline font-bold !leading-none no-outline duration-100" onClick={() => router.push('?filter=none')}>
                             Clear all
                         </button>
                     )}
                 </div>
 
 
-                <div className="flex justify-between items-center w-auto mt-1 px-6">
+                <div className="flex justify-between items-center w-auto mt-1 px-4">
                     <div className="flex justify-start sm:justify-start md:justify-end lg:justify-end xl:justify-end items-center w-auto text-md font-medium text-[#494949]">
                         {(filterQueryProducts).length} results
                     </div>

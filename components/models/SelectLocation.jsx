@@ -146,7 +146,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
         <>
             <AnimatePresence>
                 {isAddressChooser && (
-                    <div className="fixed z-[600] top-0 left-0 flex justify-center items-end sm:items-end md:items-center lg:items-center xl:items-center w-full h-screen select-none duration-75">
+                    <div className="fixed z-[600] top-0 left-0 flex justify-center items-center xl:items-center w-full h-screen select-none duration-75">
                         <motion.div
                             className="absolute z-[600] top-0 left-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-80"
                             onClick={() => setIsAddressChooser(false)}
