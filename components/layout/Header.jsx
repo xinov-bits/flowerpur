@@ -7,7 +7,7 @@ import { getCookie } from 'cookies-next'
 // NEXT JS
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 // CONTEXT
 import CartContext from '@/context/CartContext';
@@ -20,6 +20,7 @@ import SelectLocation from '../models/SelectLocation'
 
 // MOMENT JS
 import moment from 'moment';
+import Search from '../models/Search';
 
 
 const Header = () => {
@@ -40,13 +41,14 @@ const Header = () => {
 
         isHeader,
         setIsHeader,
-    } = useContext(CartContext);
+    } = useContext(CartContext)
     const {
         user,
         isUserSignedIn,
-    } = useContext(UserContext);
+    } = useContext(UserContext)
 
-    const router = useRouter();
+    const router = useRouter()
+    const query = useSearchParams()
 
 
     // MENU ITEMS
@@ -99,43 +101,17 @@ const Header = () => {
 
 
     // SEARCH
-    const [searchKey, setSearchKey] = useState('');
-    const [isSearchMenu, setIsSearchMenu] = useState(false);
 
-    const handleChangeSearch = (e) => {
-        setSearchKey(e.target.value);
-    }
 
-    const handleSubmitSearch = (e) => {
-        e.preventDefault();
+    // Search
+    const [searchKey, setSearchKey] = useState('')
+    const [isSearchMenu, setIsSearchMenu] = useState(false)
 
-        setIsSearchMenu(false);
-
-        router.push(`/search?keyword=${searchKey}`);
-    }
-
-    const trendingSearches = [
-        {
-            name: 'Birthday bouquets',
-            url: '/'
-        },
-        {
-            name: 'Flowers',
-            url: '/flowers'
-        },
-        {
-            name: 'Anniversary',
-            url: '/'
-        },
-        {
-            name: 'Birthday cakes',
-            url: '/flowers'
-        },
-        {
-            name: 'Occasional Gifts',
-            url: '/'
-        },
-    ]
+    useEffect(() => {
+        if (query.get('keyword')) {
+            setSearchKey(query.get('keyword'))
+        }
+    }, [query])
 
 
     // USER
@@ -159,55 +135,16 @@ const Header = () => {
     const [menuReachedEnd, setMenuReachedEnd] = useState(false)
 
 
-    // MENU
-    const menu = [
-        {
-            name: "Bouquets",
-            url: "/flowers",
-            img: "/assets/icons/svg/flowers.svg",
-        },
-        {
-            name: "Vases",
-            url: "/",
-            img: "/assets/icons/svg/vase.svg",
-        },
-        {
-            name: "Birthday",
-            url: "/",
-            img: "/assets/icons/svg/cake.svg",
-        },
-        {
-            name: "Plants",
-            url: "/",
-            img: "/assets/icons/svg/plant.svg",
-        },
-        {
-            name: "Gifts",
-            url: "/",
-            img: "/assets/icons/svg/gifts.svg",
-        },
-        {
-            name: "Anniversary",
-            url: "/",
-            img: "/assets/icons/svg/anniversary.svg",
-        },
-        {
-            name: "Occasions",
-            url: "/",
-            img: "/assets/icons/svg/occasions.svg",
-        },
-    ]
-
-
     // ADDRESS
     const [isAddressChooser, setIsAddressChooser] = useState(false)
+
 
     return (
         <>
             {isHeader && <header>
                 <div className="fixed top-0 z-[500] hidden sm:hidden md:block lg:block xl:block items-center w-full bg-white text-[#292929]">
                     <div className="flex justify-center items-center w-full h-16 px-6 py-3 space-x-2 select-none">
-                        <div className="flex justify-start items-center w-[22%] h-full space-x-2 cursor-pointer">
+                        <div className="flex justify-start items-center w-[21%] h-full space-x-2 cursor-pointer">
                             <button className="relative flex justify-center items-center w-9 h-full cursor-pointer overflow-hidden duration-75 no-outline" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                                 <svg className="size-5" width={20} height={20}>
                                     <use
@@ -229,7 +166,7 @@ const Header = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center w-[48%] h-full space-x-2">
+                        <div className="flex justify-center items-center w-[50%] h-full space-x-2">
                             <li className="relative flex justify-center items-center w-[35%] h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
                                 <button className="relative flex justify-center items-center w-auto h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                     {(
@@ -271,9 +208,10 @@ const Header = () => {
                             </li>
 
                             <div className="relative flex justify-center items-center w-[65%] h-full rounded-full overflow-hidden">
-                                <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" onClick={() => setIsSearchMenu(true)}>
-                                    <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
-                                        <svg className="text-[#494949]" width={24} height={24}>
+                                <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden cursor-pointer" onClick={() => setIsSearchMenu(true)}>
+                                    <div className="absolute left-3 flex justify-center items-center w-auto h-full select-none pointer-events-none">
+                                        <svg className="flex justify-center items-center size-[1.35rem] text-[#191919]"
+                                            width={24} height={24}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
                                                 xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
@@ -281,17 +219,17 @@ const Header = () => {
                                         </svg>
                                     </div>
 
-                                    <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#e5e5e5] placeholder:text-[#191919] text-[#191919] font-medium outline-none hover:bg-[#eeeeee] hover:cursor-pointer"
-                                        placeholder="Search for flowers, cakes, gifts, etc."
-                                        name="search"
+                                    <input className="flex justify-center items-center w-full h-full pl-9 px-5 bg-[#eeeeee] placeholder:text-[#494949] text-[#191919] font-medium outline-none hover:bg-[#e5e5e5]"
+                                        value={searchKey}
+                                        placeholder={searchKey ? searchKey : "Search for flowers, gifts and more"}
                                         type="text"
-                                        autoComplete='off'
+                                        readOnly
                                     />
                                 </button>
                             </div>
                         </div>
 
-                        <div className="flex justify-end items-center w-[30%] h-full">
+                        <div className="flex justify-end items-center w-[29%] h-full">
                             <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
                                 <li className="relative flex flex-col justify-center items-center w-10 h-full bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full cursor-pointer overflow-hidden duration-75">
                                     <svg className="size-5" width={20} height={20}>
@@ -348,30 +286,6 @@ const Header = () => {
                             </ul>
                         </div>
                     </div>
-
-                    {/* Menu */}
-                    <div className="flex justify-center items-center w-full h-16 py-2 space-x-4 bg-[#f7f7f7] select-none overflow-hidden">
-                        {menu.map((slide, index) => {
-                            return (
-                                <Link key={index} href={slide.url} className="relative flex justify-center items-start !w-auto h-full px-2 rounded-full bg-white space-x-1.5 overflow-hidden">
-                                    <button className="flex justify-center items-center w-auto h-full no-outline">
-                                        <div className="flex justify-start items-center w-auto h-auto">
-                                            <Image className="flex justify-center items-center w-auto h-10"
-                                                src={slide.img}
-                                                width={192}
-                                                height={192}
-                                                alt={slide.name}
-                                            />
-                                        </div>
-
-                                        <div className="flex justify-center items-center w-auto leading-none font-semibold text-base">
-                                            {slide.name}
-                                        </div>
-                                    </button>
-                                </Link>
-                            )
-                        })}
-                    </div>
                 </div>
 
 
@@ -379,80 +293,10 @@ const Header = () => {
                 <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
 
-                {false && (<div className="fixed z-[600] top-0 left-0 flex justify-start items-start w-full h-full text-[#292929]">
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full" onClick={() => setIsSearchMenu(false)} />
-
-                    <div className="absolute z-[200] top-[3.7rem] sm:top-[3.7rem] md:-top-[0.18rem] lg:-top-[0.18rem] xl:-top-[0.18rem] left-1 sm:left-1 md:left-[16rem] lg:left-[16rem] xl:left-[16rem] flex flex-col justify-start items-center w-[98%] sm:w-[98%] md:w-[39%] lg:w-[39%] xl:w-[39%] h-auto bg-white rounded-lg border border-[#e5e5e5]"
-                        onBlur={() => setIsSearchMenu(false)}
-                        onClick={() => setIsSearchMenu(true)}
-                        onFocus={() => setIsSearchMenu(true)}>
-                        <div className="relative flex flex-col justify-start items-start w-full h-full pb-2 px-[0.6rem]">
-                            <div className="flex justify-start items-start w-full h-ful h-[3.4rem] sm:h-[3.4rem] md:h-[3.25rem] lg:h-[3.25rem] xl:h-[3.25rem] py-2">
-                                <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
-                                    <div className="absolute left-2 flex justify-center items-center w-auto h-full select-none pointer-events-none">
-                                        <svg className="text-[#494949]" width={24} height={24}>
-                                            <use
-                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
-                                            ></use>
-                                        </svg>
-                                    </div>
-
-                                    <input className="flex justify-center items-center w-full h-full pl-9 px-4 bg-[#f7f7f7] placeholder:text-[#494949] text-[#494949] font-medium outline-none hover:bg-[#eeeeee]"
-                                        onChange={handleChangeSearch}
-                                        value={searchKey}
-                                        placeholder="Search for flowers, cakes, gifts, etc."
-                                        name="search"
-                                        type="text"
-                                        autoComplete='off'
-                                        autoFocus
-                                    />
-                                </form>
-                            </div>
-
-                            <div className="block justify-start items-start w-full h-full mt-2 text-[#191919]">
-                                <div className="flex justify-start items-center w-full leading-none text-xl font-semibold">
-                                    Trending searches
-                                </div>
-
-                                <div className="flex justify-start items-center w-full mt-2 leading-none text-base font-medium">
-                                    <ul className="flex flex-col justify-start items-center w-full h-full space-y-2">
-                                        {trendingSearches.map((search, index) => <li key={index} className="flex justify-center items-center w-full h-auto">
-                                            <Link href={search.url} className="flex justify-center items-center w-full">
-                                                <button className="flex justify-between items-center w-full h-10 px-2 leading-none bg-white hover:bg-[#f7f7f7] border border-[#e5e5e5] active:border-[#e0e0e0] rounded-md">
-                                                    <div className="flex justify-start items-center w-auto space-x-1">
-                                                        <div className="flex justify-start items-center w-auto">
-                                                            <svg className="flex justify-center items-center w-5 h-5" strokeWidth={1.5}
-                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                            >
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
-                                                            </svg>
-                                                        </div>
-
-                                                        <div className="flex justify-start items-center w-auto">
-                                                            {search.name}
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="flex justify-start items-center w-auto">
-                                                        <svg className="flex justify-center items-center w-4 h-4" strokeWidth={1.8}
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                                                        </svg>
-                                                    </div>
-                                                </button>
-                                            </Link>
-                                        </li>)}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>)}
+                <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
+                
+                <Search isSearchMenu={isSearchMenu} setIsSearchMenu={setIsSearchMenu} />
             </header>}
-
-
-            <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
         </>
     )
 }

@@ -125,19 +125,15 @@ export const Search = () => {
 
     return (
         <>
-            <div className="block w-full h-auto px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8">
-                <div className="flex flex-col justify-start items-center w-full select-none">
-                    <div className="flex justify-start items-center w-full text-2xl font-bold text-[#191919]">
-                        Search results for &#34;{searchKeyword}&#34;
-                    </div>
-
-                    {filteredProducts?.length > 0 && <div className="flex justify-start items-center w-full text-md font-medium text-[#797979]">
+            <div className="block w-full h-auto p-4 sm:p-4 md:p-8 lg:p-8 xl:p-8 text-[#191919]">
+                {filteredProducts?.length > 0 && (
+                    <div className="flex justify-start items-center w-full text-md font-medium !leading-none select-none">
                         {filteredProducts.length} results
-                    </div>}
-                </div>
+                    </div>
+                )}
 
                 <div className="flex justify-start items-start w-full mt-4">
-                    {filteredProducts.length > 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-2 sm:gap-2 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full">
+                    {filteredProducts.length > 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-3 sm:gap-3 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full">
                         {Object.keys(filteredProducts).map((k) => <ProductCard key={filteredProducts[k]._id}
                             itemCode={filteredProducts[k]._id}
                             slug={filteredProducts[k].slug}

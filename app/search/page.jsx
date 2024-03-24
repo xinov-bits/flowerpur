@@ -25,7 +25,7 @@ const Page = () => {
     return (
         <>
             <Suspense>
-                <div className="block justify-start items-start w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
+                <div className="block justify-start items-start w-full h-auto bg-white">
                     <Search />
                 </div>
             </Suspense>

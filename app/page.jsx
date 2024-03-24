@@ -150,14 +150,125 @@ export default function Home() {
     fetchReviews();
   }, [products]);
 
+
+  // MENU
+  const [showMenu, setShowMenu] = useState(false)
+
+  useEffect(() => {
+    if (!showMenu) {
+      setTimeout(() => {
+        setShowMenu(true);
+      }, 1000);
+    }
+  }, [showMenu])
+
+  const menu = [
+    {
+      name: "Bouquets",
+      url: "/flowers",
+      img: "/assets/icons/svg/flowers.svg",
+    },
+    {
+      name: "Vases",
+      url: "/",
+      img: "/assets/icons/svg/vase.svg",
+    },
+    {
+      name: "Birthday",
+      url: "/",
+      img: "/assets/icons/svg/cake.svg",
+    },
+    {
+      name: "Plants",
+      url: "/",
+      img: "/assets/icons/svg/plant.svg",
+    },
+    {
+      name: "Gifts",
+      url: "/",
+      img: "/assets/icons/svg/gifts.svg",
+    },
+    {
+      name: "Anniversary",
+      url: "/",
+      img: "/assets/icons/svg/anniversary.svg",
+    },
+    {
+      name: "Occasions",
+      url: "/",
+      img: "/assets/icons/svg/occasions.svg",
+    },
+  ]
+
   return (
     <>
+      <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full h-16 py-2 space-x-4 bg-[#f7f7f7] select-none overflow-hidden">
+        {menu.map((slide, index) => {
+          return (
+            <Link key={index} href={slide.url} className="relative flex justify-center items-start !w-auto h-full px-2 rounded-full bg-white space-x-1.5 overflow-hidden">
+              <button className="flex justify-center items-center w-auto h-full no-outline">
+                <div className="flex justify-start items-center w-auto h-auto">
+                  <Image className="flex justify-center items-center w-auto h-10"
+                    src={slide.img}
+                    width={192}
+                    height={192}
+                    alt={slide.name}
+                  />
+                </div>
+
+                <div className="flex justify-center items-center w-auto leading-none font-semibold text-base">
+                  {slide.name}
+                </div>
+              </button>
+            </Link>
+          )
+        })}
+      </div>
+
+      <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2 duration-200">
+        {showMenu ? (
+          <Swiper
+            className="flex justify-center items-center w-full h-full !px-4 overflow-hidden"
+            slidesPerView={5.2}
+            spaceBetween={10}
+            resistanceRatio={0.4}
+            freeMode={true}
+            modules={[FreeMode]}
+          >
+            {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">
+              <Link href={slide.url} className="flex flex-col justify-center items-center w-full h-full">
+                <div className="flex justify-center items-center w-auto h-auto">
+                  <Image className="flex justify-center items-center w-auto h-14"
+                    src={slide.img}
+                    width={192}
+                    height={192}
+                    alt={slide.name}
+                  />
+                </div>
+
+                <div className="flex justify-center items-center w-auto leading-none font-bold text-xs">
+                  {slide.name}
+                </div>
+              </Link>
+            </SwiperSlide>)}
+          </Swiper>
+        ) : (
+          <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+          </div>
+        )}
+      </div>
+
       <div className="block w-full h-full justify-center items-start bg-white">
         <div className="flex w-full h-full justify-start items-start select-none">
           <div className="relative hidden sm:hidden md:flex lg:flex xl:flex w-full h-full justify-start items-start select-none">
             {showHero > 0 ? (
               <Swiper
-                className="flex justify-center items-center w-auto h-auto !px-4 overflow-hidden"
+                className="flex justify-center items-center w-auto h-auto !p-4 overflow-hidden"
                 slidesPerView={3.04}
                 spaceBetween={16}
                 resistanceRatio={0.4}
@@ -203,7 +314,7 @@ export default function Home() {
                 </SwiperSlide>)}
               </Swiper>
             ) : (
-              <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
+              <div className="flex justify-center items-center w-auto h-auto !p-4 space-x-4 overflow-hidden">
                 <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
                 <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
                 <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
@@ -260,7 +371,7 @@ export default function Home() {
                 </SwiperSlide>)}
               </Swiper>
             ) : (
-              <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
+              <div className="flex justify-center items-center w-auto h-auto !p-4 space-x-4 overflow-hidden">
                 <div className="flex justify-start items-start w-[23rem] h-[14rem] bg-[#f7f7f7] rounded-lg  c-skeleton" />
               </div>
             )}
@@ -268,59 +379,29 @@ export default function Home() {
         </div>
 
 
-        <div className="block justify-start items-start w-full h-full py-4 sm:py-4 md:py-4 lg:py-4 xl:py-4 bg-white space-y-10 text-[#494949]">
+        <div className="block justify-start items-start w-full h-full py-4 sm:py-4 md:py-4 lg:py-4 xl:py-4 bg-white space-y-8 text-[#494949]">
           <div className="block items-center w-full h-full select-none">
             <div className="flex justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 mb-2 text-2xl font-bold text-[#191919]">
               Best-Selling Bouquets
             </div>
 
-            {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
+            <div className="flex justify-start items-center w-full">
               <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full">
-                <Swiper
-                  className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
-                  slidesPerView={4.8}
-                  spaceBetween={16}
-                  pagination={{ clickable: true }}
-                  resistanceRatio={0}
-                >
-                  {Object.keys(products).filter((item) => {
-                    if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
-                      return products[item]
-                    }
-                  }).map((item) => {
-                    return (<SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                      <ProductCard key={products[item]._id}
-                        itemCode={products[item]._id}
-                        slug={products[item].slug}
-                        qty={products[item].qty}
-                        availableQty={products[item].availableQty}
-                        price={products[item].price}
-                        dimg={products[item].dimg}
-                        title={products[item].title}
-                        offer={products[item].offer}
-                      />
-                    </SwiperSlide>
-                    )
-                  })}
-                </Swiper>
-              </div>
-
-              <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
-                <Swiper
-                  className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
-                  slidesPerView={2.06}
-                  spaceBetween={12}
-                  pagination={{ clickable: true }}
-                  resistanceRatio={0}
-                >
-                  {Object.keys(products).filter((item) => {
-                    if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
-                      return products[item]
-                    }
-                  }).map((item) => {
-                    return (
-                      <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                        <ProductCard
+                {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                  <Swiper
+                    className="flex justify-center items-center w-full h-auto !px-8 rounded-md overflow-hidden"
+                    slidesPerView={4.8}
+                    spaceBetween={16}
+                    pagination={{ clickable: true }}
+                    resistanceRatio={0}
+                  >
+                    {Object.keys(products).filter((item) => {
+                      if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
+                        return products[item]
+                      }
+                    }).map((item) => {
+                      return (<SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                        <ProductCard key={products[item]._id}
                           itemCode={products[item]._id}
                           slug={products[item].slug}
                           qty={products[item].qty}
@@ -331,11 +412,61 @@ export default function Home() {
                           offer={products[item].offer}
                         />
                       </SwiperSlide>
-                    )
-                  })}
-                </Swiper>
+                      )
+                    })}
+                  </Swiper>
+                ) : (
+                  <div className="flex justify-start items-center w-full h-[12rem] sm:h-[12rem] md:h-[18.2rem] lg:h-[18.2rem] xl:h-[18.2rem] !px-8 rounded-lg">
+                    <div className="flex justify-start items-center w-full h-full space-x-4">
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>}
+
+              <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
+                {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                  <Swiper
+                    className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
+                    slidesPerView={2.06}
+                    spaceBetween={12}
+                    pagination={{ clickable: true }}
+                    resistanceRatio={0}
+                  >
+                    {Object.keys(products).filter((item) => {
+                      if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
+                        return products[item]
+                      }
+                    }).map((item) => {
+                      return (
+                        <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                          <ProductCard
+                            itemCode={products[item]._id}
+                            slug={products[item].slug}
+                            qty={products[item].qty}
+                            availableQty={products[item].availableQty}
+                            price={products[item].price}
+                            dimg={products[item].dimg}
+                            title={products[item].title}
+                            offer={products[item].offer}
+                          />
+                        </SwiperSlide>
+                      )
+                    })}
+                  </Swiper>
+                ) : (
+                  <div className="flex justify-start items-center w-full h-[12rem] sm:h-[12rem] md:h-[18.2rem] lg:h-[18.2rem] xl:h-[18.2rem] !px-4 rounded-lg">
+                    <div className="flex justify-start items-center w-full h-full space-x-4">
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="flex justify-center items-center w-full h-1 bg-[#f7f7f7] border-y border-[#e5e5e5]" />
@@ -346,101 +477,121 @@ export default function Home() {
                 Top-Rated Bouquets
               </div>
 
-              {!(products == [] || products === undefined || products === null || products.length <= 0) && <div className="flex justify-start items-center w-full">
+              <div className="flex justify-start items-center w-full">
                 <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-start w-full">
-                  <Swiper
-                    className="flex justify-center items-center w-full h-auto !px-4 rounded-md overflow-hidden"
-                    slidesPerView={4.8}
-                    spaceBetween={16}
-                    pagination={{ clickable: true }}
-                    resistanceRatio={0}
-                  >
-                    {Object.keys(filterProducts).filter((item) => {
-                      let reviewNames = reviewMean.map((s) => s.name);
+                  {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                    <Swiper
+                      className="flex justify-center items-center w-full h-auto !px-8 rounded-md overflow-hidden"
+                      slidesPerView={4.8}
+                      spaceBetween={16}
+                      pagination={{ clickable: true }}
+                      resistanceRatio={0}
+                    >
+                      {Object.keys(filterProducts).filter((item) => {
+                        let reviewNames = reviewMean.map((s) => s.name);
 
-                      for (let i = 0; i < reviewNames.length; i++) {
-                        const element = reviewNames[i];
+                        for (let i = 0; i < reviewNames.length; i++) {
+                          const element = reviewNames[i];
 
-                        if (filterProducts[item].slug === element) {
-                          let reviewStarNames = reviewMean.filter((s) => {
-                            if (s.stars > 4) {
-                              return s
-                            }
-                          }).map((s) => s.name);
+                          if (filterProducts[item].slug === element) {
+                            let reviewStarNames = reviewMean.filter((s) => {
+                              if (s.stars > 4) {
+                                return s
+                              }
+                            }).map((s) => s.name);
 
-                          if (!(reviewStarNames == [] || reviewStarNames === undefined || reviewStarNames === null)) {
-                            if (reviewStarNames.includes(filterProducts[item].slug)) {
-                              return filterProducts[item]
+                            if (!(reviewStarNames == [] || reviewStarNames === undefined || reviewStarNames === null)) {
+                              if (reviewStarNames.includes(filterProducts[item].slug)) {
+                                return filterProducts[item]
+                              }
                             }
                           }
                         }
-                      }
-                    }).map((item) => {
-                      return (
-                        <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                          <ProductCard key={filterProducts[item]._id}
-                            itemCode={filterProducts[item]._id}
-                            slug={filterProducts[item].slug}
-                            qty={filterProducts[item].qty}
-                            availableQty={filterProducts[item].availableQty}
-                            price={filterProducts[item].price}
-                            dimg={filterProducts[item].dimg}
-                            title={filterProducts[item].title}
-                            offer={filterProducts[item].offer}
-                          />
-                        </SwiperSlide>
-                      )
-                    })}
-                  </Swiper>
+                      }).map((item) => {
+                        return (
+                          <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                            <ProductCard key={filterProducts[item]._id}
+                              itemCode={filterProducts[item]._id}
+                              slug={filterProducts[item].slug}
+                              qty={filterProducts[item].qty}
+                              availableQty={filterProducts[item].availableQty}
+                              price={filterProducts[item].price}
+                              dimg={filterProducts[item].dimg}
+                              title={filterProducts[item].title}
+                              offer={filterProducts[item].offer}
+                            />
+                          </SwiperSlide>
+                        )
+                      })}
+                    </Swiper>
+                  ) : (
+                    <div className="flex justify-start items-center w-full h-[12rem] sm:h-[12rem] md:h-[18.2rem] lg:h-[18.2rem] xl:h-[18.2rem] !px-8 rounded-lg">
+                      <div className="flex justify-start items-center w-full h-full space-x-4">
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-start w-full">
-                  <Swiper
-                    className="flex justify-start items-center w-full h-auto !px-4 rounded-md overflow-hidden"
-                    slidesPerView={2.06}
-                    spaceBetween={12}
-                    pagination={{ clickable: true }}
-                    resistanceRatio={0}
-                  >
-                    {Object.keys(filterProducts).filter((item) => {
-                      let reviewNames = reviewMean.map((s) => s.name);
+                  {!(products == [] || products === undefined || products === null || products.length <= 0) ? (
+                    <Swiper
+                      className="flex justify-start items-center w-full h-auto !px-4 rounded-md overflow-hidden"
+                      slidesPerView={2.06}
+                      spaceBetween={12}
+                      pagination={{ clickable: true }}
+                      resistanceRatio={0}
+                    >
+                      {Object.keys(filterProducts).filter((item) => {
+                        let reviewNames = reviewMean.map((s) => s.name);
 
-                      for (let i = 0; i < reviewNames.length; i++) {
-                        const element = reviewNames[i];
+                        for (let i = 0; i < reviewNames.length; i++) {
+                          const element = reviewNames[i];
 
-                        if (filterProducts[item].slug === element) {
-                          let reviewStarNames = reviewMean.filter((s) => {
-                            if (s.stars > 4) {
-                              return s
-                            }
-                          }).map((s) => s.name);
+                          if (filterProducts[item].slug === element) {
+                            let reviewStarNames = reviewMean.filter((s) => {
+                              if (s.stars > 4) {
+                                return s
+                              }
+                            }).map((s) => s.name);
 
-                          if (!(reviewStarNames == [] || reviewStarNames === undefined || reviewStarNames === null)) {
-                            if (reviewStarNames.includes(filterProducts[item].slug)) {
-                              return filterProducts[item]
+                            if (!(reviewStarNames == [] || reviewStarNames === undefined || reviewStarNames === null)) {
+                              if (reviewStarNames.includes(filterProducts[item].slug)) {
+                                return filterProducts[item]
+                              }
                             }
                           }
                         }
-                      }
-                    }).map((item) => {
-                      return (
-                        <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
-                          <ProductCard key={filterProducts[item]._id}
-                            itemCode={filterProducts[item]._id}
-                            slug={filterProducts[item].slug}
-                            qty={filterProducts[item].qty}
-                            availableQty={filterProducts[item].availableQty}
-                            price={filterProducts[item].price}
-                            dimg={filterProducts[item].dimg}
-                            title={filterProducts[item].title}
-                            offer={filterProducts[item].offer}
-                          />
-                        </SwiperSlide>
-                      )
-                    })}
-                  </Swiper>
+                      }).map((item) => {
+                        return (
+                          <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                            <ProductCard key={filterProducts[item]._id}
+                              itemCode={filterProducts[item]._id}
+                              slug={filterProducts[item].slug}
+                              qty={filterProducts[item].qty}
+                              availableQty={filterProducts[item].availableQty}
+                              price={filterProducts[item].price}
+                              dimg={filterProducts[item].dimg}
+                              title={filterProducts[item].title}
+                              offer={filterProducts[item].offer}
+                            />
+                          </SwiperSlide>
+                        )
+                      })}
+                    </Swiper>
+                  ) : (
+                    <div className="flex justify-start items-center w-full h-[12rem] sm:h-[12rem] md:h-[18.2rem] lg:h-[18.2rem] xl:h-[18.2rem] !px-4 rounded-lg">
+                      <div className="flex justify-start items-center w-full h-full space-x-4">
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                        <div className="flex justify-center items-center w-[11.2rem] sm:w-[11.2rem] md:w-[14.4rem] lg:w-[14.4rem] xl:w-[14.4rem] h-full bg-[#f7f7f7] rounded-lg  c-skeleton" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>}
+              </div>
             </div>
           </div>
         </div>

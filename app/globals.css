@@ -116,7 +116,7 @@ input[type="number"]::-webkit-outer-spin-button {
   position: absolute;
   top: 0px;
   left: -100rem;
-  width: 100%;
+  width: 180%;
   height: 100%;
   background: linear-gradient(
     -50deg,

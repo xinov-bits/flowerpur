@@ -20,6 +20,9 @@ import CartContext from '@/context/CartContext'
 import UserContext from '@/context/UserContext'
 
 const Search = ({ isSearchMenu, setIsSearchMenu }) => {
+    const router = useRouter();
+
+
     const [searchKey, setSearchKey] = useState('');
 
     const handleChangeSearch = (e) => {
@@ -31,7 +34,9 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
 
         setIsSearchMenu(false);
 
-        router.push(`/search?keyword=${searchKey}`);
+        if (searchKey !== '' && searchKey?.replaceAll(' ', '') != '' && searchKey?.length > 0) {
+            router.push(`/search?keyword=${searchKey}`);
+        }
     }
 
 
@@ -129,7 +134,7 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                 {isSearchMenu && (
                     <div className="fixed z-[600] top-0 left-0 flex justify-center items-start w-full h-full text-[#191919]">
                         <motion.div
-                            className="absolute z-[600] top-0 left-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-80"
+                            className="absolute z-[600] top-0 left-0 flex justify-center items-center w-full h-full"
                             onClick={() => {
                                 setSearchKey('');
                                 setIsSearchMenu(false);
@@ -140,14 +145,14 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                             exit={{ opacity: 0 }}
                         />
 
-                        <motion.div className="relative z-[601] flex flex-col justify-center items-center w-full h-full bg-white"
+                        <motion.div className="relative z-[601] flex flex-col justify-center items-center w-full sm:w-full md:w-[24.4rem] lg:w-[24.4rem] xl:w-[24.4rem] h-full sm:h-full md:h-auto lg:h-auto xl:h-auto ml-0 sm:ml-0 md:ml-[7.2rem] lg:ml-[7.2rem] xl:ml-[7.2rem] bg-white rounded-none sm:rounded-none md:rounded-xl lg:rounded-xl xl:rounded-xl shadow-none sm:shadow-none md:shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)] lg:shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)] xl:shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)] overflow-hidden"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                         >
-                            <div className="relative block justify-start items-start w-full h-full py-4">
-                                <div className="block justify-start items-start w-full h-auto">
-                                    <div className="flex justify-start items-center w-auto size-6 px-4">
+                            <div className="relative block justify-start items-start w-full h-full py-4 sm:py-4 md:py-3 lg:py-3 xl:py-3">
+                                <div className="justify-start items-start w-full h-auto">
+                                    <div className="flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-auto size-6 px-4 sm:px-4 md:px-3 lg:px-3 xl:px-3">
                                         <svg
                                             className="flex justify-center items-center size-6 cursor-pointer"
                                             onClick={() => {
@@ -163,9 +168,9 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                                         </svg>
                                     </div>
 
-                                    <div className="flex justify-start items-start w-full h-12 px-4 mt-4">
+                                    <div className="flex justify-start items-start w-full h-10 px-4 sm:px-4 md:px-3 lg:px-3 xl:px-3 mt-4 sm:mt-4 md:mt-0 lg:mt-0 xl:mt-0">
                                         <form className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
-                                            <div className="absolute left-3 flex justify-center items-center w-auto h-full select-none pointer-events-none">
+                                            <div className="absolute left-2.5 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                                                 <svg className="flex justify-center items-center size-[1.35rem] text-[#191919]"
                                                     width={24} height={24} onClick={() => {
                                                         setSearchKey('');
@@ -179,10 +184,10 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                                                 </svg>
                                             </div>
 
-                                            <input className="flex justify-center items-center w-full h-full pl-10 px-6 bg-[#eeeeee] placeholder:text-[#494949] text-[#191919] font-medium outline-none hover:bg-[#e5e5e5]"
+                                            <input className="flex justify-center items-center w-full h-full pl-9 px-5 bg-[#eeeeee] placeholder:text-[#494949] text-[#191919] font-medium outline-none hover:bg-[#e5e5e5]"
                                                 onChange={handleChangeSearch}
                                                 value={searchKey}
-                                                placeholder="Search for flowers, cakes, gifts, etc."
+                                                placeholder="Search for flowers, gifts and more"
                                                 name="search"
                                                 type="text"
                                                 autoComplete='off'
@@ -204,8 +209,8 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                                                 {searchResults.map((search, index) => <li key={index} className="flex justify-start items-center w-full h-16 px-4 bg-white hover:bg-[#f7f7f7] group">
                                                     <Link href={`/product/${search.url}`} className="flex justify-start items-center w-full h-full no-outline overflow-hidden">
                                                         <div className="flex justify-start items-center w-full h-full space-x-2">
-                                                            <div className="flex justify-center items-center size-12 rounded-md overflow-hidden">
-                                                                <Image className="flex justify-center items-center size-auto"
+                                                            <div className="flex justify-center items-center size-14 rounded-md overflow-hidden">
+                                                                <Image className="flex justify-center items-center size-auto rounded-md overflow-hidden"
                                                                     src={search.img}
                                                                     width={100}
                                                                     height={100}
@@ -226,13 +231,15 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                                                                     </div>
                                                                 </div>
 
-                                                                <div className="flex justify-center itesm-center size-5 text-[#494949]">
-                                                                    <svg className="flex justify-center items-center size-full" width={24} height={24}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
-                                                                        ></use>
-                                                                    </svg>
+                                                                <div className="flex justify-center items-center w-auto">
+                                                                    <div className="flex justify-center items-center size-8 rounded-full text-[#494949] bg-[#eeeeee] group-hover:bg-white">
+                                                                        <svg className="flex justify-center items-center size-4" width={24} height={24}>
+                                                                            <use
+                                                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-search_dd"
+                                                                            ></use>
+                                                                        </svg>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -244,7 +251,7 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
 
 
                                     {searchResults?.length <= 0 && (
-                                        <div className="block justify-start items-center w-full h-auto mt-4">
+                                        <div className="block justify-start items-center w-full h-auto">
                                             <div className="flex justify-start items-center px-4 mb-2 text-xl font-bold !leading-none">
                                                 Recent searches
                                             </div>
@@ -253,22 +260,24 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                                                 {recentSearches.map((search, index) => <li key={index} className="flex justify-start items-center w-full h-12 px-4 bg-white hover:bg-[#f7f7f7] group">
                                                     <Link href={search.url} className="flex justify-start items-center w-full h-full no-outline">
                                                         <div className="flex justify-between items-center w-full h-full no-outline">
-                                                            <div className="flex justify-start items-center w-full h-full space-x-1.5">
-                                                                <div className="flex justify-center itesm-center size-5">
-                                                                    <svg className="flex justify-center items-center size-full text-[#494949]" width={24} height={24}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
-                                                                        ></use>
-                                                                    </svg>
+                                                            <div className="flex justify-start items-center w-full h-full space-x-2">
+                                                                <div className="flex justify-center items-center w-auto">
+                                                                    <div className="flex justify-center items-center size-8 rounded-full text-[#494949] bg-[#eeeeee] group-hover:bg-white">
+                                                                        <svg className="flex justify-center items-center size-4" width={24} height={24}>
+                                                                            <use
+                                                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
+                                                                            ></use>
+                                                                        </svg>
+                                                                    </div>
                                                                 </div>
 
-                                                                <div className="flex justify-start itesm-center w-full font-semibold text-base grou-hover:underline">
+                                                                <div className="flex justify-start items-center w-full font-semibold text-base grou-hover:underline">
                                                                     {search.name}
                                                                 </div>
                                                             </div>
 
-                                                            <div className="flex justify-center itesm-center size-5 text-[#494949]">
+                                                            <div className="flex justify-center items-center size-5 text-[#494949]">
                                                                 <svg className="flex justify-center items-center size-full" width={24} height={24}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
