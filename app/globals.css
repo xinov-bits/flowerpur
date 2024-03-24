@@ -101,9 +101,10 @@ input[type="number"]::-webkit-outer-spin-button {
     rgb(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 0) 80%
   );
-  opacity: 5%;
 
-  animation: skeleton_anim 1500ms linear infinite;
+  opacity: 2%;
+
+  animation: skeleton_anim 500ms linear infinite;
 }
 
 .c-skeleton {
@@ -125,7 +126,7 @@ input[type="number"]::-webkit-outer-spin-button {
   );
   opacity: 50%;
 
-  animation: skeleton_rotated_anim 2000ms linear infinite;
+  animation: skeleton_rotated_anim 1500ms linear infinite;
 }
 
 @keyframes skeleton_rotated_anim {

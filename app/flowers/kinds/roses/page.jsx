@@ -86,8 +86,7 @@ const Page = () => {
 
   // RENDER SKELETON
   const Skeleton = (
-    <div className="relative flex flex-col justify-start items-center w-[10.8rem] sm:w-[10.8rem] md:w-[17rem] lg:w-[17rem] xl:w-[17rem] h-[14.6rem] sm:h-[14.6rem] md:h-[18.5rem] lg:h-[18.5rem] xl:h-[18.5rem] bg-[#f7f7f7] rounded-md cursor-pointer select-none overflow-hidden">
-      <div className="absolute flex justify-center items-center w-full sm:w-full md:w-[17rem] lg:w-[17rem] xl:w-[17rem] h-[14.6rem] sm:h-[14.6rem] md:h-[18.5rem] lg:h-[18.5rem] xl:h-[18.5rem]  c-skeleton" />
+    <div className="flex justify-center items-center w-[10.2rem] sm:w-[10.2rem] md:w-[13.5rem] lg:w-[13.5rem] xl:w-[13.5rem] h-[13rem] sm:h-[13rem] md:h-[17.5rem] lg:h-[17.5rem] xl:h-[17.5rem] bg-[#f7f7f7] rounded-md cursor-pointer select-none overflow-hidden  c-skeleton">
     </div>
   )
 
@@ -112,7 +111,7 @@ const Page = () => {
               </div>
             </div>
 
-            {products.length <= 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-center w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 mt-10">
+            {products.length <= 0 ? <div className="relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-3 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-4 gap-y-4 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 justify-start items-start w-full px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 mt-6">
               {Skeleton}
               {Skeleton}
               {Skeleton}
