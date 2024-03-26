@@ -108,7 +108,7 @@ const MobileHeader = () => {
     return (
         <>
             {isHeader && <header>
-                <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full pt-1.5 select-none bg-white text-[#191919]">
+                <div className="fixed top-0 z-[500] block sm:block md:hidden lg:hidden xl:hidden items-center w-full py-1.5 select-none bg-white text-[#191919]">
                     <div className="flex justify-start items-center w-full h-[3.65rem] pb-1 px-4 space-x-2">
                         <div className="flex justify-between items-center w-full h-full space-x-1 cursor-pointer text-[#191919]">
                             <div className="flex justify-start items-center w-auto h-full cursor-pointer rounded-md space-x-2">

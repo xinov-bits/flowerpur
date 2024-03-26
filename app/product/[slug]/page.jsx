@@ -36,6 +36,7 @@ import { useDropzone } from 'react-dropzone'
 // COMPONENTS
 import { InputField } from '@/components/core/InputField';
 import SelectLocation from '@/components/models/SelectLocation';
+import ZoomImage from '@/components/function/ZoomImage';
 
 // REACT CALENDAR
 import Calendar from 'react-calendar';
@@ -674,54 +675,23 @@ export default function Page({ params }) {
     return (
         <>
             <div className="block justify-center items-center w-full h-full bg-white">
-                {/* <div className="flex justify-start items-center w-full h-14 px-4 bg-white text-sm text-[#191919] space-x-2 capitalize select-none">
-                    <div className="text-[#767676] underline hover:no-underline hover:text-[#191919]">
-                        <Link href={`/`}>
-                            Home
-                        </Link>
-                    </div>
-
-                    <div> / </div>
-
-                    <div className="text-[#767676] underline hover:no-underline hover:text-[#191919]">
-                        <Link href={`/${product?.category}`}>
-                            {product?.category}
-                        </Link>
-                    </div>
-
-                    <div> / </div>
-
-                    <div className="text-[#767676] underline hover:no-underline hover:text-[#191919]">
-                        <Link href={`/${product?.category}/kinds/${product?.subCategory}`}>
-                            {product?.subCategory}
-                        </Link>
-                    </div>
-
-                    <div> / </div>
-
-                    <div className="text-[#191919]">
-                        {product?.title}
-                    </div>
-                </div> */}
-
-                <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-center w-full h-full px-2 bg-white space-x-0 sm:space-x-0 md:space-x-2 lg:space-x-2 xl:space-x-2">
-                    <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-1/2 h-[30rem] py-2">
-                        {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <motion.div
+                <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-start w-full h-full px-4 sm:px-4 md:px-16 lg:px-16 xl:px-16 py-6 pt-2.5 sm:pt-2.5 md:pt-6 lg:pt-6 xl:pt-6 bg-white overflow-hidden">
+                    <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full h-full">
+                        {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <motion.div className="relative flex flex-col justify-center items-center size-[34rem] cursor-pointer rounded-lg overflow-hidden select-none"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="relative flex justify-start items-center w-[30rem] h-full cursor-pointer rounded-md overflow-hidden select-none"
                         >
                             <Swiper
-                                className="flex justify-center items-center w-full h-auto bg-[#f7f7f7] rounded-md overflow-hidden"
+                                className="flex justify-center items-center w-[30rem] h-full bg-[#fafafa] rounded-lg overflow-hidden"
                                 slidesPerView={1}
                                 pagination={{ clickable: true }}
                                 onSwiper={setSwiper}
                             >
                                 {product.img1 && (
                                     <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <Image
+                                        <ZoomImage
                                             className="flex justify-center items-center w-auto h-auto"
                                             src={product.img1}
                                             width={800}
@@ -733,7 +703,7 @@ export default function Page({ params }) {
 
                                 {product.img2 && (
                                     <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <Image
+                                        <ZoomImage
                                             className="flex justify-center items-center w-auto h-auto"
                                             src={product.img2}
                                             width={800}
@@ -745,7 +715,7 @@ export default function Page({ params }) {
 
                                 {product.img3 && (
                                     <SwiperSlide className="flex justify-center items-center w-full h-full overflow-hidden">
-                                        <Image
+                                        <ZoomImage
                                             className="flex justify-center items-center w-auto h-auto"
                                             src={product.img3}
                                             width={800}
@@ -757,7 +727,7 @@ export default function Page({ params }) {
                             </Swiper>
 
                             {/* Custom pagination */}
-                            <div className="absolute z-[1] bottom-0 left-0 -m-0.5 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
+                            <div className="flex justify-center items-center w-auto pt-2 space-x-2 select-none bg-white">
                                 {product.img1 && (
                                     <div className="flex justify-center items-center">
                                         <input
@@ -771,7 +741,7 @@ export default function Page({ params }) {
 
                                         <label
                                             htmlFor="product_image_selector-img1"
-                                            className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
+                                            className="relative flex justify-center items-center rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
                                         >
                                             <Image
                                                 className="flex justify-start items-center rounded-md"
@@ -797,7 +767,7 @@ export default function Page({ params }) {
 
                                         <label
                                             htmlFor="product_image_selector-img2"
-                                            className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
+                                            className="relative flex justify-center items-center rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
                                         >
                                             <Image
                                                 className="flex justify-start items-center rounded-md"
@@ -823,7 +793,7 @@ export default function Page({ params }) {
 
                                         <label
                                             htmlFor="product_image_selector-img3"
-                                            className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
+                                            className="relative flex justify-center items-center rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
                                         >
                                             <Image
                                                 className="flex justify-start items-center rounded-md"
@@ -838,74 +808,21 @@ export default function Page({ params }) {
                             </div>
                         </motion.div>}
 
-                        {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-[30rem] h-[30rem] py-2 cursor-pointer rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full rounded-md overflow-hidden select-none">
-                                <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                        {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center size-[32rem] cursor-pointer rounded-lg overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full rounded-lg overflow-hidden select-none">
+                                <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-lg overflow-hidden">
                                     <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                                 </div>
                             </div>
                         </div>}
                     </div>
 
-                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] py-2 sm:py-2 md:py-0 lg:py-0 xl:py-0 pr-0 sm:pr-0 md:pr-32 lg:pr-32 xl:pr-32">
-                        <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
-                            </div>
-                        </div>
-
-                        <div className="relative flex justify-start items-center w-1/4 h-8 sm:h-8 md:h-8 lg:h-8 xl:h-8 mt-4 sm:mt-4 md:mt-2 lg:mt-2 xl:mt-2 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
-                            </div>
-                        </div>
-
-                        <div className="relative flex justify-start items-center w-full h-24 sm:h-24 md:h-20 lg:h-20 xl:h-20 mt-2 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
-                            </div>
-                        </div>
-
-                        <div className="relative flex justify-start items-center w-1/2 h-14 mt-2 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
-                            </div>
-                        </div>
-
-                        <div className="relative flex justify-start items-center w-full h-12 mt-4 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
-                            </div>
-                        </div>
-
-                        <div className="relative flex justify-start items-center w-full h-24 mt-4 rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
-                            </div>
-                        </div>
-
-                        <div className="flex justify-start items-center w-full h-14 mt-2 rounded-md overflow-hidden space-x-2 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-3">
-                            <div className="relative flex justify-center items-center w-1/3 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/4 h-full rounded-md overflow-hidden select-none">
-                                <div className="relative flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                    <div className="absolute flex justify-center items-center w-full h-full  c-skeleton" />
-                                </div>
-                            </div>
-
-                            <div className="relative flex justify-center items-center w-2/3 sm:w-2/3 md:w-3/4 lg:w-3/4 xl:w-3/4 h-full rounded-md overflow-hidden select-none">
-                                <div className="relative flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
-                                    <div className="absolute flex justify-center items-center w-full h-full  c-skeleton" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>}
-
-                    {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto py-2">
-                        <motion.div
+                    {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto">
+                        <motion.div className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none"
                         >
                             <Splide className="flex justify-center items-center w-auto h-auto bg-[#f7f7f7] rounded-md overflow-hidden"
                                 hasTrack={false}
@@ -964,7 +881,7 @@ export default function Page({ params }) {
 
                                     <label
                                         htmlFor="product_image_selector-img1"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
+                                        className="relative flex justify-center items-center rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img1"
                                     >
                                         {slug !== undefined && product?.img1 !== undefined ? (
                                             <motion.div
@@ -999,7 +916,7 @@ export default function Page({ params }) {
 
                                     <label
                                         htmlFor="product_image_selector-img2"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
+                                        className="relative flex justify-center items-center rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img2"
                                     >
                                         {slug !== undefined && product?.img2 !== undefined ? (
                                             <motion.div
@@ -1034,7 +951,7 @@ export default function Page({ params }) {
 
                                     <label
                                         htmlFor="product_image_selector-img3"
-                                        className="relative flex justify-center items-center border border-[#e5e5e5] rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
+                                        className="relative flex justify-center items-center rounded-md cursor-pointer duration-75 focus:!outline-[0px]  product_image_selector-img3"
                                     >
                                         {slug !== undefined && product?.img3 !== undefined ? (
                                             <motion.div
@@ -1061,254 +978,225 @@ export default function Page({ params }) {
                     </div>}
 
 
+                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-auto">
+                        <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-1/4 h-8 sm:h-8 md:h-8 lg:h-8 xl:h-8 mt-4 sm:mt-4 md:mt-2 lg:mt-2 xl:mt-2 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-full h-24 sm:h-24 md:h-20 lg:h-20 xl:h-20 mt-2 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-1/2 h-14 mt-2 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-full h-12 mt-4 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
+                            </div>
+                        </div>
+
+                        <div className="relative flex justify-start items-center w-full h-24 mt-4 rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
+                            </div>
+                        </div>
+
+                        <div className="flex justify-start items-center w-full h-14 mt-2 rounded-md overflow-hidden space-x-2 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-3">
+                            <div className="relative flex justify-center items-center w-1/3 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/4 h-full rounded-md overflow-hidden select-none">
+                                <div className="relative flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-center items-center w-full h-full  c-skeleton" />
+                                </div>
+                            </div>
+
+                            <div className="relative flex justify-center items-center w-2/3 sm:w-2/3 md:w-3/4 lg:w-3/4 xl:w-3/4 h-full rounded-md overflow-hidden select-none">
+                                <div className="relative flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                                    <div className="absolute flex justify-center items-center w-full h-full  c-skeleton" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+
                     {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
-                        <motion.div
+                        <motion.div className="relative flex justify-center items-start w-full h-full text-[#191919]"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="relative flex justify-center items-start w-full h-full sm:h-full md:h-[30rem] lg:h-[30rem] xl:h-[30rem] text-[#191919]"
                         >
-                            <div className="relative flex flex-col justify-start items-start w-full h-full border-0 sm:border-0 md:border-l lg:border-l xl:border-l border-[#e5e5e5]">
-                                <div className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-6 text-base font-medium underline text-[#767676] decoration-[#797979] hover:no-underline capitalize cursor-pointer leading-none">
+                            <div className="relative flex flex-col justify-start items-start w-full h-full">
+                                <div className="flex justify-start items-center w-auto text-base font-medium text-[#494949] capitalize cursor-pointer leading-none">
                                     {product?.category}
                                 </div>
 
-                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-1 text-2xl font-bold capitalize">
+                                <div className="flex justify-start items-center w-full mt-1 text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold capitalize">
                                     {product?.title}
                                 </div>
 
-                                <div className="flex justify-start items-center w-auto px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 capitalize space-x-1.5 cursor-pointer">
+                                <div className="flex justify-start items-center w-auto capitalize space-x-1.5 cursor-pointer">
                                     <div className="flex justify-center items-center w-auto">
                                         {renderStarsCustom(Math.round(reviewMean), 'w-[1.175rem] h-[1.175rem]', 'text-[#E8C500]')}
                                         {renderStarsCustomE((5 - Math.round(reviewMean)), 'w-[1.175rem] h-[1.175rem]', 'text-[#E8C500]')}
                                     </div>
 
-                                    <div className="flex justify-center items-center w-auto text-[#767676] font-medium">
+                                    <div className="flex justify-center items-center w-auto text-[#494949] font-medium">
                                         {reviewMean.toFixed(1)} &#40;{approvedReviews.length}&#41;
                                     </div>
                                 </div>
 
-                                <div className="flex justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 text-2xl font-bold">
-                                    ₹{product?.price}.00
+                                <div className="flex justify-start items-center w-full mt-2 text-[1.3rem] font-bold !leading-none">
+                                    ₹{(product?.price)?.toFixed(2)}
                                 </div>
 
-                                <div className="flex flex-col justify-start items-center w-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg border-t border-[#e5e5e5] text-[#191919]">
-                                    <div className="flex justify-start items-center w-full font-semibold">
-                                        Additions, Address and Date & Time
-                                    </div>
-
-                                    <div className="block sm:block md:flex lg:flex xl:flex justify-start items-start w-full mt-2 space-x-0 sm:space-x-0 md:space-x-4 lg:space-x-4 xl:space-x-4 space-y-4 sm:space-y-4 md:space-y-0 lg:space-y-0 xl:space-y-0 select-none">
+                                <div className="flex flex-col justify-start items-center w-full mt-2 text-lg text-[#191919]">
+                                    <div className="block justify-start items-start w-full space-y-3 select-none">
                                         {/* ADDITIONS */}
-                                        <div className="flex justify-start items-start w-full h-auto py-2 bg-white border border-[#e5e5e5] rounded-lg cursor-pointer">
-                                            <ul className="flex flex-col justify-start items-center w-full text-base font-semibold divide-y divide-[#e5e5e5]">
-                                                <li className="flex justify-between items-center w-full px-2 pb-2 leading-none">
-                                                    <div className="flex justify-start items-center w-full">
-                                                        Vase
-                                                    </div>
+                                        <div className="flex justify-center items-center w-full h-auto pb-3 mb-3 border-b border-[#e5e5e5]">
+                                            <div className="flex justify-between items-center w-full h-10 px-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-lg font-semibold text-base cursor-pointer">
+                                                <div className="flex justify-start items-center w-auto">
+                                                    Additions to this product
+                                                </div>
 
-                                                    <div className="flex justify-end items-center w-auto space-x-1.5">
-                                                        <div className="flex justify-end items-center w-auto font-medium">
-                                                            ₹199
-                                                        </div>
-
-                                                        {!extrasToAdd.includes('vase') ? (
-                                                            <div className="flex justify-end items-center w-auto h-8">
-                                                                <button className="flex justify-center items-center w-auto h-full px-2 space-x-1 border border-[#e5e5e5] rounded-full text-sm hover:bg-[#f0f0f0] hover:border-[#f0f0f0] active:border-[#f0f0f0] no-outline" onClick={() => {
-                                                                    setExtrasToAdd(prevArr => ['vase', prevArr[1]])
-                                                                }}>
-                                                                    <svg className="" width={16} height={16}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
-                                                                        ></use>
-                                                                    </svg>
-
-                                                                    <div> Add </div>
-                                                                </button>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="flex justify-end items-center w-auto h-8">
-                                                                <button className="flex justify-center items-center w-auto h-full space-x-1 px-2 bg-[#00838a20] rounded-full text-sm text-[#00838a] no-outline">
-                                                                    <svg width={12} height={12}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                                                                        ></use>
-                                                                    </svg>
-
-                                                                    <div> Added </div>
-                                                                </button>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </li>
-
-                                                <li className="flex justify-between items-center w-full px-2 pt-2 leading-none">
-                                                    <div className="flex justify-start items-center w-full">
-                                                        Double flower quantity
-                                                    </div>
-
-                                                    <div className="flex justify-end items-center w-auto space-x-1.5">
-                                                        <div className="flex justify-end items-center w-auto font-medium">
-                                                            ₹349
-                                                        </div>
-
-                                                        {!extrasToAdd.includes('double') ? (
-                                                            <div className="flex justify-end items-center w-auto h-8">
-                                                                <button className="flex justify-center items-center w-full h-full space-x-1 px-2 border border-[#e5e5e5] rounded-full text-sm hover:bg-[#f0f0f0] hover:border-[#f0f0f0] active:border-[#f0f0f0] no-outline" onClick={() => {
-                                                                    setExtrasToAdd(prevArr => [prevArr[0], 'double'])
-                                                                }}>
-                                                                    <svg className="" width={16} height={16}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
-                                                                        ></use>
-                                                                    </svg>
-
-                                                                    <div> Add </div>
-                                                                </button>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="flex justify-end items-center w-auto h-8">
-                                                                <button className="flex justify-center items-center w-full h-full space-x-1 px-2 bg-[#00838a20] rounded-full text-sm text-[#00838a] no-outline">
-                                                                    <svg width={12} height={12}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-check_dd"
-                                                                        ></use>
-                                                                    </svg>
-
-                                                                    <div> Added </div>
-                                                                </button>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                <div className="flex justify-end items-center w-auto">
+                                                    <svg className="flex justify-center items-center size-5 -rotate-90" width={24} height={24}>
+                                                        <use
+                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-chevron_dd"
+                                                        ></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         {/* PINCODE & DATE TIME */}
-                                        <div className="flex justify-start items-center w-full h-full p-2 bg-white border border-[#e5e5e5] rounded-lg leading-none">
-                                            <div className="flex justify-start items-center w-full h-full">
-                                                <ul className="flex flex-col justify-start items-center w-full h-full p-1 space-y-2 text-base font-semibold divide-y divide-[#e5e5e5]">
-                                                    <li className="relative flex justify-center items-center w-full h-auto p-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
-                                                        <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
-                                                            {(
-                                                                getCookie('user_address') === '' ||
-                                                                getCookie('user_address') === undefined ||
-                                                                getCookie('user_address') === null
-                                                            ) ? (
-                                                                <div className="flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer">
-                                                                    <div className="flex justify-start items-center size-4">
-                                                                        <svg className="flex justify-center items-center size-4" width={16} height={16}>
-                                                                            <use
-                                                                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
-                                                                            ></use>
-                                                                        </svg>
-                                                                    </div>
-
-                                                                    <div className="flex justify-start items-center w-full">
-                                                                        Enter delivery address
-                                                                    </div>
-                                                                </div>
-                                                            ) : (
-                                                                <div className="flex justify-start items-center w-full h-full px-2 font-semibold space-x-1 cursor-pointer" title={getCookie('user_address')}>
+                                        <div className="flex justify-center items-center w-full h-auto p-2 border border-[#e5e5e5] rounded-lg leading-none">
+                                            <ul className="flex flex-col justify-start items-center w-full h-full space-y-2 text-base font-semibold">
+                                                <li className="relative flex justify-center items-center w-full h-auto p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full overflow-hidden">
+                                                    <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
+                                                        {(
+                                                            getCookie('user_address') === '' ||
+                                                            getCookie('user_address') === undefined ||
+                                                            getCookie('user_address') === null
+                                                        ) ? (
+                                                            <div className="flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer">
+                                                                <div className="flex justify-start items-center size-4">
                                                                     <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                         <use
                                                                             xmlnsXlink="http://www.w3.org/1999/xlink"
                                                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
                                                                         ></use>
                                                                     </svg>
+                                                                </div>
 
-                                                                    <div className="flex flex-col justify-start items-center w-full text-left">
-                                                                        <div className="flex justify-start items-center w-full font-bold text-sm !leading-none">
-                                                                            <p className="pr-3 line-clamp-1">
-                                                                                {getCookie('user_address')}
-                                                                            </p>
-                                                                        </div>
+                                                                <div className="flex justify-start items-center w-full">
+                                                                    Enter delivery address
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex justify-start items-center w-full h-full px-2 font-semibold space-x-1 cursor-pointer" title={getCookie('user_address')}>
+                                                                <svg className="flex justify-center items-center size-4" width={16} height={16}>
+                                                                    <use
+                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-pin_dd"
+                                                                    ></use>
+                                                                </svg>
 
-                                                                        <div className="flex justify-start items-center w-full mt-1 text-xs font-medium underline text-[#494949] !leading-none cursor-pointer">
-                                                                            Change your delivery address
-                                                                        </div>
+                                                                <div className="flex flex-col justify-start items-center w-full text-left">
+                                                                    <div className="flex justify-start items-center w-full font-bold text-sm !leading-none">
+                                                                        <p className="pr-3 line-clamp-1">
+                                                                            {getCookie('user_address')}
+                                                                        </p>
+                                                                    </div>
+
+                                                                    <div className="flex justify-start items-center w-full mt-1 text-xs font-medium underline text-[#494949] !leading-none cursor-pointer">
+                                                                        Change your delivery address
                                                                     </div>
                                                                 </div>
-                                                            )}
-                                                        </button>
-                                                    </li>
+                                                            </div>
+                                                        )}
+                                                    </button>
+                                                </li>
 
-                                                    <li className="relative block items-center w-full h-auto p-2 bg-[#e5e5e5] hover:bg-[#d6d6d6] rounded-full overflow-hidden">
-                                                        {buzzDateInput && <div className="flex justify-start items-center w-full mb-1 text-xs leading-none text-[#ad2314]">
-                                                            required *
-                                                        </div>}
+                                                <li className="relative block items-center w-full h-auto p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full overflow-hidden">
+                                                    {buzzDateInput && <div className="flex justify-start items-center w-full mb-1 text-xs leading-none text-[#ad2314]">
+                                                        required *
+                                                    </div>}
 
-                                                        <div className="flex justify-between items-center w-full h-full leading-none">
-                                                            <div className={`
+                                                    <div className="flex justify-between items-center w-full h-full leading-none">
+                                                        <div className={`
                                                             flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer
                                                             ${buzzDateInput && 'border-[#ad2314]'}
                                                             `}>
-                                                                <div className="flex justify-start items-center size-5">
-                                                                    <svg className="flex justify-center items-center size-5" width={16} height={16}>
-                                                                        <use
-                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
-                                                                        ></use>
-                                                                    </svg>
-                                                                </div>
-
-                                                                {(
-                                                                    finalDate === ''
-                                                                    || finalDeliveryType == []
-                                                                    || finalDeliveryTime === ''
-                                                                    || finalDeliveryPrice === ''
-                                                                ) ? (
-                                                                    <div className="flex justify-start items-center w-full h-auto pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
-                                                                        Date & Time
-                                                                    </div>
-                                                                ) : (
-                                                                    <div className="flex justify-between items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
-                                                                        <div className="block items-center space-y-1">
-                                                                            <p className="text-sm text-[#494949] !leading-none">
-                                                                                {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
-                                                                            </p>
-                                                                            <p className="text-[#191919] !leading-none">
-                                                                                {moment(finalDate).format('ddd')} {finalDeliveryTime}
-                                                                            </p>
-                                                                        </div>
-
-                                                                        <div className="flex justify-center items-center size-5" onClick={() => {
-                                                                            setDateStepsDone([false, false]);
-                                                                            setFinalDate('');
-                                                                            setFinalDeliveryType([]);
-                                                                            setFinalDeliveryTime('');
-                                                                            setFinalDeliveryPrice('');
-                                                                        }}>
-                                                                            <svg className="flex justify-center items-center size-5 text-[#191919]" width={20} height={20}>
-                                                                                <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
-                                                                            </svg>
-                                                                        </div>
-                                                                    </div>
-                                                                )}
+                                                            <div className="flex justify-start items-center size-5">
+                                                                <svg className="flex justify-center items-center size-5" width={16} height={16}>
+                                                                    <use
+                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-clock_dd"
+                                                                    ></use>
+                                                                </svg>
                                                             </div>
+
+                                                            {(
+                                                                finalDate === ''
+                                                                || finalDeliveryType == []
+                                                                || finalDeliveryTime === ''
+                                                                || finalDeliveryPrice === ''
+                                                            ) ? (
+                                                                <div className="flex justify-start items-center w-full h-auto pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                    Date & Time
+                                                                </div>
+                                                            ) : (
+                                                                <div className="flex justify-between items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
+                                                                    <div className="block items-center space-y-1">
+                                                                        <p className="text-sm text-[#494949] !leading-none">
+                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
+                                                                        </p>
+                                                                        <p className="text-[#191919] !leading-none">
+                                                                            {moment(finalDate).format('ddd')} {finalDeliveryTime}
+                                                                        </p>
+                                                                    </div>
+
+                                                                    <div className="flex justify-center items-center size-5" onClick={() => {
+                                                                        setDateStepsDone([false, false]);
+                                                                        setFinalDate('');
+                                                                        setFinalDeliveryType([]);
+                                                                        setFinalDeliveryTime('');
+                                                                        setFinalDeliveryPrice('');
+                                                                    }}>
+                                                                        <svg className="flex justify-center items-center size-5 text-[#191919]" width={20} height={20}>
+                                                                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"></use>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full h-2 sm:h-2 md:h-4 lg:h-4 xl:h-4 border-y border-[#e5e5e5] bg-[#f7f7f7]" />
-
 
                                 {/* ADD TO CART */}
-                                <motion.div
+                                <motion.div className="flex flex-col justify-start items-center w-full h-auto mt-2 text-lg text-[#191919]"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ delay: 0.8 }}
-                                    className="hidden sm:hidden md:flex lg:flex xl:flex flex-col justify-start items-center w-full sm:w-full md:w-[80%] lg:w-[80%] xl:w-[80%] h-full px-2 sm:px-2 md:px-6 lg:px-6 xl:px-6 mt-2 py-4 text-lg text-[#191919]">
+                                >
                                     <div className="flex justify-start items-center w-full h-12 space-x-2 select-none">
                                         <div className="relative flex justify-start items-center w-[28%] sm:w-[28%] md:w-[20%] lg:w-[20%] xl:w-[20%] h-full cursor-pointer">
                                             <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer"
@@ -1328,7 +1216,7 @@ export default function Page({ params }) {
                                                 </div>
                                             </button>
 
-                                            {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-auto h-auto space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
+                                            {qtySelectPop && <div className="absolute z-[800] bottom-0 flex flex-col justify-start items-center w-auto h-auto space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
                                                 {qtyValArr.map((qty, index) => <button key={index} className="flex justify-center items-center w-full h-auto px-6 py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] no-outline duration-75" onClick={() => {
                                                     setProductQty(qty);
                                                     setQtySelectPop(false);
@@ -1357,7 +1245,7 @@ export default function Page({ params }) {
                                                     }
                                                 )}>
                                                 <div>
-                                                    Add to cart
+                                                    Add {productQty} to cart • ₹{product.price * productQty}
                                                 </div>
                                             </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-md duration-75">
                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
@@ -1372,13 +1260,12 @@ export default function Page({ params }) {
                                 </motion.div>
 
                                 {/* ADD TO CART - MOBILE */}
-                                <AnimatePresence>
-                                    {(scrollY >= 200) && <motion.div
+                                {/* <AnimatePresence>
+                                    {(scrollY >= 200) && <motion.div className="fixed z-[100] left-0 bottom-0 flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-16 px-2 bg-white border-t border-[#e5e5e5]"
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
                                         transition={{ delay: 0.2 }}
-                                        className="fixed z-[100] left-0 bottom-0 flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-16 px-2 bg-white border-t border-[#e5e5e5]"
                                     >
                                         <motion.div
                                             initial={{ opacity: 0 }}
@@ -1406,7 +1293,7 @@ export default function Page({ params }) {
                                                         </div>
                                                     </button>
 
-                                                    {qtySelectPop && <div className="absolute z-[600] bottom-0 flex flex-col justify-start items-center w-full h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
+                                                    {qtySelectPop && <div className="absolute z-[800] bottom-0 flex flex-col justify-start items-center w-full h-auto p-1 space-y-1 mb-14 bg-white rounded border border-[#767676] overflow-hidden">
                                                         {qtyValArr.map((qty, index) => <button key={index} className="flex justify-center items-center w-full h-auto py-2 leading-none bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] rounded border border-white active:border-[#c0c0c0] no-outline duration-75 transition-[border]" onClick={() => {
                                                             setProductQty(qty);
                                                             setQtySelectPop(false);
@@ -1435,7 +1322,7 @@ export default function Page({ params }) {
                                                             }
                                                         )}>
                                                         <div>
-                                                            Add to cart
+                                                            Add {productQty} to cart • ₹{product.price * productQty}
                                                         </div>
                                                     </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-md duration-75">
                                                         <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
@@ -1449,7 +1336,7 @@ export default function Page({ params }) {
                                             </div>
                                         </motion.div>
                                     </motion.div>}
-                                </AnimatePresence>
+                                </AnimatePresence> */}
                             </div>
                         </motion.div>
                     )}

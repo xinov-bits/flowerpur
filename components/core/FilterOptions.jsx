@@ -176,7 +176,7 @@ export const FilterOptions = () => {
     return (
         <>
             <div className="block sm:block md:flex lg:flex xl:flex justify-between items-center w-full h-full">
-                <div className="flex justify-start items-center w-auto space-x-2 h-9 !px-4 overflow-x-auto">
+                <div className="flex justify-start items-center w-auto space-x-2 h-9 px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 overflow-x-auto">
                     <div className="flex justify-center items-center w-auto h-full">
                         <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=offers')}>
                             <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
@@ -254,8 +254,7 @@ export const FilterOptions = () => {
                     )}
                 </div>
 
-
-                <div className="flex justify-between items-center w-auto mt-1 px-4">
+                <div className="flex justify-between items-center w-auto mt-1 px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8">
                     <div className="flex justify-start sm:justify-start md:justify-end lg:justify-end xl:justify-end items-center w-auto text-md font-medium text-[#494949]">
                         {(filterQueryProducts).length} results
                     </div>

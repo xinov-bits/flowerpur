@@ -163,12 +163,12 @@ const Footer = () => {
             <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full space-x-4">
               <div className="flex justify-center items-center w-8 h-8 text-[#085b45] bg-[#f4fbeb] rounded-full">
                 <Link className="no-outline" href={"/"}>
-                  <svg className="flex justify-center items-center w-8 h-8" width={95} height={106}>
-                    <use
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      xlinkHref="/on/demandware/svg/logo.svg#logo_icon2"
-                    ></use>
-                  </svg>
+                  <Image className="flex justify-center items-center size-[2.28rem]"
+                    src="/assets/Logo/logo_icon-dark__svg.svg"
+                    width={117}
+                    height={124}
+                    alt="flowerpur logo mobile"
+                  />
                 </Link>
               </div>
 
@@ -229,7 +229,7 @@ const Footer = () => {
               <div className="flex justify-center items-center w-full">
                 <div className="flex justify-center items-center w-10 h-10 text-[#085b45] bg-[#f4fbeb] rounded-full">
                   <Link className="no-outline" href="/">
-                    <Image className="flex justify-center  items-center  size-[2.28rem]"
+                    <Image className="flex justify-center items-center size-[2.28rem]"
                       src="/assets/Logo/logo_icon-dark__svg.svg"
                       width={117}
                       height={124}
@@ -238,7 +238,6 @@ const Footer = () => {
                   </Link>
                 </div>
               </div>
-
 
               <div className="flex flex-col justify-center items-center w-full mt-2">
                 <ul className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start items-center w-full space-x-4 text-base">

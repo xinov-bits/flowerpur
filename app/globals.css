@@ -287,3 +287,10 @@ input[type="number"]::-webkit-outer-spin-button {
     59% 52%
   );
 }
+
+
+/* ZOOMABLE IMAGE */
+.iiz__btn,
+.iiz__hint {
+  display: none !important;
+}
