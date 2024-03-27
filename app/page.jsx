@@ -165,7 +165,7 @@ export default function Home() {
     {
       name: "Bouquets",
       url: "/flowers",
-      img: "/assets/icons/svg/flowers.svg",
+      img: "/assets/icons/svg/flowers.png",
     },
     {
       name: "Vases",

@@ -231,7 +231,7 @@ export const Orders = () => {
                                             <td className="flex justify-end items-center w-[12%] h-full">
                                                 <span className="pr-3">
                                                     <Link href={`/user/orders?orderId=${orders[order].orderId}`}>
-                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#e5e5e5] hover:bg-[#d6d6d6] text-sm font-semibold no-outline">
+                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#eeeeee] hover:bg-[#e5e5e5] text-sm font-semibold no-outline">
                                                             View Products
                                                         </button>
                                                     </Link>
@@ -368,7 +368,7 @@ export const Orders = () => {
                                             <td className="flex justify-end items-center w-[15%] h-full">
                                                 <span className="pr-3">
                                                     <Link href={`/product/${products[item].url}`}>
-                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#e5e5e5] hover:bg-[#d6d6d6] text-sm font-semibold no-outline">
+                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#eeeeee] hover:bg-[#e5e5e5] text-sm font-semibold no-outline">
                                                             View Product
                                                         </button>
                                                     </Link>

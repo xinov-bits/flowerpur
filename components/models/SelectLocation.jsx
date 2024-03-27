@@ -324,7 +324,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
 
                                     <div className="block justify-start items-center w-full mt-2 space-y-2">
                                         <div className="flex justify-start items-center w-full px-4">
-                                            <button className="flex justify-center items-center w-full py-2 rounded-lg bg-[#eeeeee] hover:bg-[#e5e5e5] no-outline"
+                                            <button className="flex justify-center items-center w-full py-3 rounded-lg bg-[#eeeeee] hover:bg-[#e5e5e5] no-outline"
                                                 onClick={() => {
                                                     deleteCookie('user_address')
                                                     setIsAddressChooser(true)
@@ -333,7 +333,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                     router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
                                                 }}
                                             >
-                                                <div className="flex justify-start items-center w-8 h-4">
+                                                <div className="flex justify-start items-center w-10 h-4">
                                                     <svg className="flex justify-center items-center size-full" width={16} height={16}>
                                                         <use
                                                             xmlnsXlink="http://www.w3.org/1999/xlink"
