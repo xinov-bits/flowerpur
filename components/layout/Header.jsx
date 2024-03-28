@@ -18,9 +18,7 @@ import Cart from '../function/Cart';
 import MobileMenu from '../function/MobileMenu';
 import SelectLocation from '../models/SelectLocation'
 import Search2 from '../models/Search2';
-
-// FRAMER MOTION
-import { motion, AnimatePresence } from 'framer-motion';
+import UserMenu from '../function/UserMenu';
 
 // AXIOS
 import axios from 'axios';
@@ -139,18 +137,22 @@ const Header = () => {
     }, [query])
 
 
-    // SIDE MENU
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
     // ADDRESS
     const [isAddressChooser, setIsAddressChooser] = useState(false)
 
     const [userAddress, setUserAddress] = useState([])
 
     useEffect(() => {
-        setUserAddress(getCookie('user_address')?.split(','))
+        setUserAddress(getCookie('user_address')?.split(', '))
     }, [getCookie('user_address')])
+
+
+    // SIDE MENU
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+
+    // USER MENU
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
 
 
     return (
@@ -210,7 +212,7 @@ const Header = () => {
                                         </button>
                                     </div>
                                 ) : (
-                                    <div className="relative justify-start items-center w-[40%] h-full pr-2 bg-white overflow-hidden duration-200">
+                                    <div className="relative justify-start items-center w-[28%] h-full pr-2 bg-white overflow-hidden duration-200">
                                         <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                             <div className="flex justify-start items-center w-full h-full px-2 space-x-1 font-semibold cursor-pointer" title={getCookie('user_address')}>
                                                 <svg className="flex justify-center items-center size-5" width={16} height={16}>
@@ -221,7 +223,7 @@ const Header = () => {
                                                 </svg>
 
                                                 <div className="flex justify-start items-center w-full text-left font-bold text-base !leading-none">
-                                                    {userAddress[0]}, {userAddress[1]}
+                                                    {userAddress?.length > 1 ? `${userAddress[0], userAddress[1]}` : userAddress}
                                                 </div>
                                             </div>
 
@@ -277,7 +279,9 @@ const Header = () => {
                                     </li>
 
                                     {isUserSignedIn ? (
-                                        <li className="relative flex flex-col justify-center items-center size-10 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full cursor-pointer duration-100">
+                                        <li className="relative flex flex-col justify-center items-center size-10 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full cursor-pointer duration-100" onClick={() => {
+                                            setIsUserMenuOpen(true)
+                                        }}>
                                             <svg className="flex justify-center items-center size-6" width={20} height={20}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -312,6 +316,7 @@ const Header = () => {
                 <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
                 <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
+                <UserMenu isUserMenuOpen={isUserMenuOpen} setIsUserMenuOpen={setIsUserMenuOpen} />
 
                 <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
 

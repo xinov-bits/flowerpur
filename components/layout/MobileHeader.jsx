@@ -18,11 +18,7 @@ import Cart from '../function/Cart'
 import MobileMenu from '../function/MobileMenu'
 import SelectLocation from '../models/SelectLocation'
 import Search from '../models/Search';
-
-// SWIPER & SPLIDE
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
-import 'swiper/swiper-bundle.css'
+import UserMenu from '../function/UserMenu';
 
 
 const MobileHeader = () => {
@@ -105,6 +101,10 @@ const MobileHeader = () => {
     }, [query])
 
 
+    // USER MENU
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+
+
     return (
         <>
             {isHeader && <header>
@@ -137,8 +137,10 @@ const MobileHeader = () => {
 
                             <div className="flex justify-end items-center w-auto h-full space-x-1 cursor-pointer rounded-md text-[#191919]">
                                 <div className="flex justify-center items-center size-9 p-1.5">
-                                    {isUserSignedIn && <Link href="/user/orders" className="flex justify-center items-center size-full no-outline">
-                                        <button className="z-[1] flex justify-center items-center size-full no-outline">
+                                    {isUserSignedIn && (
+                                        <button className="z-[1] flex justify-center items-center size-full no-outline" onClick={() => {
+                                            setIsUserMenuOpen(true)
+                                        }}>
                                             <svg className="flex justify-center items-center size-full" width={24} height={24}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -146,21 +148,26 @@ const MobileHeader = () => {
                                                 ></use>
                                             </svg>
                                         </button>
-                                    </Link>}
-                                    {!isUserSignedIn && <Link href="/auth/signup" className="flex justify-center items-center size-full no-outline">
-                                        <button className="z-[1] flex justify-center items-center size-full no-outline">
-                                            <svg className="flex justify-center items-center size-full" width={24} height={24}>
-                                                <use
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd2"
-                                                ></use>
-                                            </svg>
-                                        </button>
-                                    </Link>}
+                                    )}
+
+                                    {!isUserSignedIn && (
+                                        <Link href="/auth/signup" className="flex justify-center items-center size-full no-outline">
+                                            <button className="z-[1] flex justify-center items-center size-full no-outline">
+                                                <svg className="flex justify-center items-center size-full" width={24} height={24}>
+                                                    <use
+                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd2"
+                                                    ></use>
+                                                </svg>
+                                            </button>
+                                        </Link>
+                                    )}
                                 </div>
 
                                 <div className="flex justify-center items-center size-9 p-1.5">
-                                    <button className="z-[1] flex justify-center items-center size-full no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
+                                    <button className="z-[1] flex justify-center items-center size-full no-outline" onClick={() => {
+                                        setIsAddressChooser(!isAddressChooser)
+                                    }}>
                                         <svg className="flex justify-center items-center size-full" width={24} height={24}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -191,7 +198,9 @@ const MobileHeader = () => {
                     </div>
 
                     <div className="flex justify-start items-center w-full h-[3.25rem] pt-2 px-4 space-x-2">
-                        <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden cursor-pointer" onClick={() => setIsSearchMenu(true)}>
+                        <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden cursor-pointer" onClick={() => {
+                            setIsSearchMenu(true)
+                        }}>
                             <div className="absolute left-3 flex justify-center items-center w-auto h-full select-none pointer-events-none">
                                 <svg className="flex justify-center items-center size-[1.35rem] text-[#191919]"
                                     width={24} height={24}>
@@ -215,10 +224,9 @@ const MobileHeader = () => {
                 <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
                 <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
+                <UserMenu isUserMenuOpen={isUserMenuOpen} setIsUserMenuOpen={setIsUserMenuOpen} />
 
                 <Search isSearchMenu={isSearchMenu} setIsSearchMenu={setIsSearchMenu} />
-
-
                 <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
             </header>}
         </>
