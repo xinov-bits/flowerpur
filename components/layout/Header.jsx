@@ -273,7 +273,7 @@ const Header = () => {
                                             ></use>
                                         </svg>
 
-                                        <div className="absolute -top-[1px] -right-[1px] flex justify-center items-center text-xs text-medium size-5 bg-[#0e8345] text-white font-semibold rounded-full !leading-none">
+                                        <div className="absolute -top-[1px] -right-[1px] flex justify-center items-center text-xs text-medium size-5 bg-[#085b45] text-white font-semibold rounded-full !leading-none">
                                             {numTotal ? numTotal : 0}
                                         </div>
                                     </li>

@@ -49,7 +49,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.1 }}
-                className="relative flex flex-col justify-start items-center w-full bg-white text-[#191919] rounded-md cursor-pointer select-none group">
+                className="relative flex flex-col justify-start items-center w-full bg-white text-[#191919] rounded-md cursor-pointer select-none">
                 <div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden bg-[#fafafa]">
                     <motion.div className="relative flex justify-start items-center w-full rounded-lg overflow-hidden"
                         initial={{ opacity: 0 }}
@@ -86,12 +86,12 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                 </div>
 
                 <Link href={`/product/${slug}`} className="flex justify-start items-center w-full no-outline">
-                    <div className="flex justify-start items-start w-full h-9 mt-2 font-bold capitalize line-clamp-1 text-base text-ellipsis leading-[1.175rem] overflow-y-hidden group-hover:underline decoration-[0.9px] underline-offset-1 text-left">
+                    <div className="flex justify-start items-start w-full h-9 mt-2 font-bold capitalize line-clamp-1 text-base text-ellipsis leading-[1.175rem] overflow-y-hidden hover:underline text-left">
                         {title}
                     </div>
                 </Link>
 
-                <div className="flex justify-between items-center w-full h-auto mt-1 text-base font-semibold text-[#0e8345] !leading-none">
+                <div className="flex justify-between items-center w-full h-auto mt-1 text-lg font-semibold text-[#0e8345] !leading-none">
                     ₹{price?.toFixed(2)}
                 </div>
             </motion.div>

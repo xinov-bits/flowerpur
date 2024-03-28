@@ -41,6 +41,7 @@ import ZoomImage from '@/components/function/ZoomImage';
 // REACT CALENDAR
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Additions from '@/components/models/Additions';
 
 
 export default function Page({ params }) {
@@ -672,6 +673,10 @@ export default function Page({ params }) {
     const [isAddressChooser, setIsAddressChooser] = useState(false)
 
 
+    // ADDITIONS
+    const [isAdditions, setIsAdditions] = useState(false)
+
+
     return (
         <>
             <div className="block justify-center items-center w-full h-full bg-white">
@@ -1065,7 +1070,9 @@ export default function Page({ params }) {
                                     <div className="block justify-start items-start w-full space-y-3 select-none">
                                         {/* ADDITIONS */}
                                         <div className="flex justify-center items-center w-full h-auto pb-3 mb-3 border-b border-[#e5e5e5]">
-                                            <div className="flex justify-between items-center w-full h-10 px-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-lg font-semibold text-base cursor-pointer">
+                                            <div className="flex justify-between items-center w-full h-10 px-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-lg font-semibold text-base cursor-pointer" onClick={() => {
+                                                setIsAdditions(true)
+                                            }}>
                                                 <div className="flex justify-start items-center w-auto">
                                                     Additions to this product
                                                 </div>
@@ -1199,7 +1206,7 @@ export default function Page({ params }) {
                                 >
                                     <div className="flex justify-start items-center w-full h-12 space-x-2 select-none">
                                         <div className="relative flex justify-start items-center w-[28%] sm:w-[28%] md:w-[20%] lg:w-[20%] xl:w-[20%] h-full cursor-pointer">
-                                            <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-md  cursor-pointer"
+                                            <button className="flex justify-between items-center w-full h-full px-2.5 space-x-1.5 bg-white hover:bg-[#f7f7f7] active:bg-[#f0f0f0] border border-[#767676] rounded-lg  cursor-pointer"
                                                 onClick={() => setQtySelectPop(!qtySelectPop)}
                                             >
                                                 <div className="flex justify-start items-center w-full font-normal"> Qty </div>
@@ -1227,7 +1234,7 @@ export default function Page({ params }) {
                                         </div>
 
                                         <div className="flex justify-start items-center w-[72%] sm:w-[72%] md:w-[80%] lg:w-[80%] xl:w-[80%] h-full">
-                                            {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75"
+                                            {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-lg duration-75"
                                                 onClick={() => addProductToCart(
                                                     product.slug,
                                                     product.slug,
@@ -1247,7 +1254,7 @@ export default function Page({ params }) {
                                                 <div>
                                                     Add {productQty} to cart • ₹{product.price * productQty}
                                                 </div>
-                                            </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-md duration-75">
+                                            </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-lg duration-75">
                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                     <use
                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1609,8 +1616,9 @@ export default function Page({ params }) {
             </div>
 
 
-            <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
+            <Additions isAdditions={isAdditions} setIsAdditions={setIsAdditions} />
 
+            <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
 
             {/* SELECT DATE */}
             <AnimatePresence>

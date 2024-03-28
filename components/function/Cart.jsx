@@ -155,129 +155,160 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                     </div>
                                 </div>
 
-                                <div className="flex justify-start items-center w-full mt-2 text-2xl font-bold leading-none">
-                                    Your cart
-                                </div>
+                                {mappedCart?.length > 0 && (
+                                    <div className="flex justify-start items-center w-full mt-2 text-2xl font-bold leading-none">
+                                        Your cart
+                                    </div>
+                                )}
                             </div>
 
                             <div className="relative block justify-start items-start w-full h-screen mt-2 pb-4">
-                                <ul className="flex flex-col justify-start items-center w-full h-[37.2rem] sm:h-[37.2rem] md:h-[31.6rem] lg:h-[31.6rem] xl:h-[31.6rem] bg-white text-[#191919] overflow-y-auto">
-                                    {mappedCart.map((item, index) => {
-                                        return (<li key={index} className="flex justify-between items-center w-full h-28 px-4 border-b border-[#e5e5e5] last:border-b-0 bg-white hover:bg-[#f7f7f7] cursor-pointer">
-                                            <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
-                                                <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
-                                                    <Image className="flex justify-center items-center w-[5.5rem] h-[5.5rem] rounded-md overflow-hidden no-outline"
-                                                        src={item.img}
-                                                        width={800}
-                                                        height={800}
-                                                        alt={item.slug}
-                                                    />
-                                                </div>
-                                            </Link>
-
-                                            <div className="flex justify-start items-center w-[70%] h-[85%] text-[#191919]">
-                                                <div className="flex flex-col justify-start items-center w-[58%] h-full text-start font-semibold">
-                                                    <Link className="flex justify-center items-start w-full h-full no-outline" href={`/product/${item.url}`}>
-                                                        <div className="flex justify-start items-start w-full h-auto capitalize leading-tight hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer" onClick={() => {
-                                                            setIsCartOpen(false);
-                                                            setIsCartOpenATC(false);
-                                                        }}>
-                                                            <p className="line-clamp-2 text-ellipsis overflow-y-hidden"> {item.name} </p>
-                                                        </div>
-                                                    </Link>
-
-                                                    {item.offer === 'buy-2-get-1-free' && <div className="flex justify-start items-start w-full h-auto">
-                                                        <div className="relative flex justify-center items-center w-auto h-6 px-2 leading-none bg-[#0e8345] text-white rounded-md text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
-                                                            <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
-                                                                <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
-                                                                    ></use>
-                                                                </svg>
-                                                            </div>
-
-                                                            <div className="flex justify-start items-center">
-                                                                Buy 2 Get 1 Free
-                                                            </div>
-                                                        </div>
-                                                    </div>}
-
-                                                    <div className="flex justify-start items-end w-full h-auto mt-1">
-                                                        ₹{(item.price) * item.qty}.00
+                                {mappedCart?.length > 0 && (
+                                    <ul className="flex flex-col justify-start items-center w-full h-[37.2rem] sm:h-[37.2rem] md:h-[31.6rem] lg:h-[31.6rem] xl:h-[31.6rem] bg-white text-[#191919] overflow-y-auto">
+                                        {mappedCart.map((item, index) => (
+                                            <li key={index} className="flex justify-between items-center w-full h-28 px-4 border-b border-[#e5e5e5] last:border-b-0 bg-white hover:bg-[#f7f7f7] cursor-pointer">
+                                                <Link className="flex justify-center items-center w-[30%] h-full no-outline" href={`/${item.url}`}>
+                                                    <div className="relative flex justify-start items-center w-full h-full overflow-hidden">
+                                                        <Image className="flex justify-center items-center w-[5.5rem] h-[5.5rem] rounded-md overflow-hidden no-outline"
+                                                            src={item.img}
+                                                            width={800}
+                                                            height={800}
+                                                            alt={item.slug}
+                                                        />
                                                     </div>
-                                                </div>
+                                                </Link>
 
-                                                <div className="flex justify-end items-center w-[42%] h-full">
-                                                    <div className="flex justify-center items-center w-full h-full">
-                                                        <div className="flex justify-between items-center w-full h-[2.75rem] sm:h-[2.75rem] md:h-10 lg:h-10 xl:h-10 px-1 bg-[#f7f7f7] rounded-full border border-[#e5e5e5] text-[#292929] overflow-hidden no-outline">
-                                                            {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] no-outline" onClick={() =>
-                                                                removeProductToCart(
-                                                                    item.url,
-                                                                    item.url,
-                                                                    item.qty,
-                                                                    item.availableQty,
-                                                                    item.price,
-                                                                    item.img,
-                                                                    item.name,
-                                                                )
-                                                            }>
-                                                                <svg className="" width={14} height={14}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-bin_dd"
-                                                                    ></use>
-                                                                </svg>
-                                                            </button>}
-                                                            {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden no-outline">
-                                                                <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
-                                                                    ></use>
-                                                                </svg>
-                                                            </button>}
-
-                                                            <div className="flex justify-center items-center w-auto font-semibold text-sm sm:text-sm md:text-base lg:text-base xl:text-base">
-                                                                {item.qty}×
+                                                <div className="flex justify-start items-center w-[70%] h-[85%] text-[#191919]">
+                                                    <div className="flex flex-col justify-start items-center w-[58%] h-full text-start font-semibold">
+                                                        <Link className="flex justify-center items-start w-full h-full no-outline" href={`/product/${item.url}`}>
+                                                            <div className="flex justify-start items-start w-full h-auto capitalize leading-tight hover:underline decoration-[#797979] decoration-[0.5px] underline-offset-2 cursor-pointer" onClick={() => {
+                                                                setIsCartOpen(false);
+                                                                setIsCartOpenATC(false);
+                                                            }}>
+                                                                <p className="line-clamp-2 text-ellipsis overflow-y-hidden"> {item.name} </p>
                                                             </div>
+                                                        </Link>
 
-                                                            {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] no-outline" onClick={() =>
-                                                                addProductToCart(
-                                                                    item.url,
-                                                                    item.url,
-                                                                    1,
-                                                                    item.availableQty,
-                                                                    item.price,
-                                                                    item.img,
-                                                                    item.name,
-                                                                )
-                                                            }>
-                                                                <svg className="" width={14} height={14}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
-                                                                    ></use>
-                                                                </svg>
-                                                            </button>}
-                                                            {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden no-outline">
-                                                                <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
-                                                                    <use
-                                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
-                                                                    ></use>
-                                                                </svg>
-                                                            </button>}
+                                                        {item.offer === 'buy-2-get-1-free' && <div className="flex justify-start items-start w-full h-auto">
+                                                            <div className="relative flex justify-center items-center w-auto h-6 px-2 leading-none bg-[#0e8345] text-white rounded-md text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs  anim__pulse-wave">
+                                                                <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
+                                                                    <svg className="flex justify-center items-center w-3 h-3" width={24} height={24}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-offers_dd"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </div>
+
+                                                                <div className="flex justify-start items-center">
+                                                                    Buy 2 Get 1 Free
+                                                                </div>
+                                                            </div>
+                                                        </div>}
+
+                                                        <div className="flex justify-start items-end w-full h-auto mt-1">
+                                                            ₹{(item.price) * item.qty}.00
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </li>)
-                                    })}
-                                </ul>
 
-                                <div className="fixed bottom-0 flex justify-center items-center w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-16 px-4 py-2 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]">
-                                    {subTotal > 0 ? (
+                                                    <div className="flex justify-end items-center w-[42%] h-full">
+                                                        <div className="flex justify-center items-center w-full h-full">
+                                                            <div className="flex justify-between items-center w-full h-[2.75rem] sm:h-[2.75rem] md:h-10 lg:h-10 xl:h-10 px-1 bg-[#f7f7f7] rounded-full border border-[#e5e5e5] text-[#292929] overflow-hidden no-outline">
+                                                                {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] no-outline" onClick={() =>
+                                                                    removeProductToCart(
+                                                                        item.url,
+                                                                        item.url,
+                                                                        item.qty,
+                                                                        item.availableQty,
+                                                                        item.price,
+                                                                        item.img,
+                                                                        item.name,
+                                                                    )
+                                                                }>
+                                                                    <svg className="" width={14} height={14}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-bin_dd"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </button>}
+                                                                {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden no-outline">
+                                                                    <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </button>}
+
+                                                                <div className="flex justify-center items-center w-auto font-semibold text-sm sm:text-sm md:text-base lg:text-base xl:text-base">
+                                                                    {item.qty}×
+                                                                </div>
+
+                                                                {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] no-outline" onClick={() =>
+                                                                    addProductToCart(
+                                                                        item.url,
+                                                                        item.url,
+                                                                        1,
+                                                                        item.availableQty,
+                                                                        item.price,
+                                                                        item.img,
+                                                                        item.name,
+                                                                    )
+                                                                }>
+                                                                    <svg className="" width={14} height={14}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-plus_dd"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </button>}
+                                                                {(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') && <button className="flex justify-center items-center w-[2.125rem] sm:w-[2.125rem] md:w-7 lg:w-7 xl:w-7 h-[2.125rem] sm:h-[2.125rem] md:h-7 lg:h-7 xl:h-7 bg-white rounded-full border border-[#e5e5e5] cursor-default overflow-hidden no-outline">
+                                                                    <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
+                                                                        <use
+                                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </button>}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+
+                                {mappedCart?.length === 0 && (
+                                    <div className="flex flex-col justify-center items-center w-full h-full px-6 bg-white text-[#191919] text-center overflow-y-auto">
+                                        <div className="flex justify-center items-center w-full">
+                                            <Image className="flex justify-center items-center size-auto"
+                                                src="/assets/icons/empty_cart.svg"
+                                                width={176}
+                                                height={177}
+                                                alt="empty cart"
+                                            />
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-full text-2xl font-bold">
+                                            Add items to start a cart
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-full text-base font-semibold text-[#494949] leading-tight">
+                                            Once you add items from a restaurant or store, your cart will appear here.
+                                        </div>
+
+                                        <div className="flex justify-center items-center w-full h-10 mt-4">
+                                            <button className="flex justify-center items-center w-auto h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75">
+                                                Start Shopping
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {subTotal > 0 && (
+                                    <div className="fixed bottom-0 flex justify-center items-center w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-16 px-4 py-2 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]">
                                         <div className="flex justify-center items-center w-full h-full">
                                             <button className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
                                                 setIsCartOpen(false);
@@ -289,23 +320,13 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                     Checkout
                                                 </div>
 
-                                                <div className="flex justify-start items-center w-auto h-full">
+                                                <div className="flex justify-end items-center w-auto h-full">
                                                     ₹{subTotal}.00
                                                 </div>
                                             </button>
                                         </div>
-                                    ) : (
-                                        <div className="flex justify-between items-center w-full h-full px-4 bg-[#085b45] rounded-full text-white font-bold saturate-0 opacity-40">
-                                            <div className="flex justify-start items-center w-full h-full">
-                                                Checkout
-                                            </div>
-
-                                            <div className="flex justify-start items-center w-full h-full">
-                                                ₹{subTotal.toFixed(2)}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </motion.div>

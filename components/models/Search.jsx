@@ -200,7 +200,7 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
                                             </div>
 
                                             <ul className="block justify-start items-center w-full divide-y divide-[#e5e5e5]">
-                                                {searchResults.map((search, index) => <li key={index} className="flex justify-start items-center w-full h-16 px-4 bg-white hover:bg-[#f7f7f7] group">
+                                                {searchResults.map((search, index) => <li key={index} className="flex justify-start items-center w-full h-16 px-4 bg-white hover:bg-[#f7f7f7]">
                                                     <Link href={`/product/${search.url}`} className="flex justify-start items-center w-full h-full no-outline overflow-hidden">
                                                         <div className="flex justify-start items-center w-full h-full space-x-2">
                                                             <div className="flex justify-center items-center size-14 rounded-md overflow-hidden">
@@ -214,7 +214,7 @@ const Search = ({ isSearchMenu, setIsSearchMenu }) => {
 
                                                             <div className="flex justify-between items-center w-auto h-full space-x-2 no-outline">
                                                                 <div className="block justify-start items-center w-auto font-semibold">
-                                                                    <div className="flex justify-start items-center w-auto font-semibold text-base group-hover:underline">
+                                                                    <div className="flex justify-start items-center w-auto font-semibold text-base hover:underline">
                                                                         <span className="line-clamp-1">
                                                                             {search.name}
                                                                         </span>

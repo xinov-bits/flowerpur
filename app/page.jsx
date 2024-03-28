@@ -18,7 +18,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 // SWIPER & SPLIDE
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
+import { Autoplay, FreeMode } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 
 // CONTEXT
@@ -271,8 +271,12 @@ export default function Home() {
                 slidesPerView={3.04}
                 spaceBetween={16}
                 resistanceRatio={0.4}
-                modules={[FreeMode]}
                 freeMode={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                modules={[Autoplay, FreeMode]}
               >
                 {mainSlides.map((slide, index) => <SwiperSlide key={index} className="relative flex justify-start items-start w-[23rem] h-auto rounded-lg overflow-hidden">
                   <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
@@ -328,8 +332,12 @@ export default function Home() {
                 slidesPerView={1.02}
                 spaceBetween={10}
                 resistanceRatio={0.4}
-                modules={[FreeMode]}
                 freeMode={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                modules={[Autoplay, FreeMode]}
               >
                 {mainSlides.map((slide, index) => <SwiperSlide key={index} className="relative flex justify-start items-start w-[23rem] h-auto rounded-lg overflow-hidden">
                   <div className={`flex justify-start items-start w-[23rem] h-[14rem] ${slide.color[0]} rounded-lg overflow-hidden`}>
