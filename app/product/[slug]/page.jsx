@@ -978,9 +978,9 @@ export default function Page({ params }) {
                     </div>}
 
 
-                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-auto p-4 sm:p-4 md:p-0 lg:p-0 xl:p-0">
-                        <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
-                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
+                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-auto p-0 sm:p-0 md:p-4 lg:p-4 xl:p-4">
+                        <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-none sm:rounded-none md:rounded-md lg:rounded-md xl:rounded-md overflow-hidden select-none">
+                            <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-none sm:rounded-none md:rounded-md lg:rounded-md xl:rounded-md overflow-hidden">
                                 <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
                             </div>
                         </div>

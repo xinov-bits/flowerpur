@@ -18,9 +18,7 @@ import Cart from '../function/Cart';
 import MobileMenu from '../function/MobileMenu';
 import SelectLocation from '../models/SelectLocation'
 import Search2 from '../models/Search2';
-
-// FRAMER MOTION
-import { motion, AnimatePresence } from 'framer-motion';
+import UserMenu from '../function/UserMenu';
 
 // AXIOS
 import axios from 'axios';
@@ -139,10 +137,6 @@ const Header = () => {
     }, [query])
 
 
-    // SIDE MENU
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
     // ADDRESS
     const [isAddressChooser, setIsAddressChooser] = useState(false)
 
@@ -151,6 +145,14 @@ const Header = () => {
     useEffect(() => {
         setUserAddress(getCookie('user_address')?.split(','))
     }, [getCookie('user_address')])
+
+
+    // SIDE MENU
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+
+    // USER MENU
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
 
 
     return (
@@ -277,7 +279,9 @@ const Header = () => {
                                     </li>
 
                                     {isUserSignedIn ? (
-                                        <li className="relative flex flex-col justify-center items-center size-10 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full cursor-pointer duration-100">
+                                        <li className="relative flex flex-col justify-center items-center size-10 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full cursor-pointer duration-100" onClick={() => {
+                                            setIsUserMenuOpen(true)
+                                        }}>
                                             <svg className="flex justify-center items-center size-6" width={20} height={20}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -312,6 +316,7 @@ const Header = () => {
                 <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
                 <MobileMenu isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
+                <UserMenu isUserMenuOpen={isUserMenuOpen} setIsUserMenuOpen={setIsUserMenuOpen} />
 
                 <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
 

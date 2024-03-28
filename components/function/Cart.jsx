@@ -83,36 +83,36 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
 
     // SWIPE TO CLOSE
-    const [dragStartX, setDragStartX] = useState(0);
-    const dragX = useMotionValue(0);
+    const [dragStartX, setDragStartX] = useState(0)
+    const dragX = useMotionValue(0)
 
     const handleTouchStart = (e) => {
-        setDragStartX(e.touches[0].clientX);
-    };
+        setDragStartX(e.touches[0].clientX)
+    }
 
     const handleTouchMove = (e) => {
-        const offsetX = e.touches[0].clientX - dragStartX;
+        const offsetX = e.touches[0].clientX - dragStartX
 
         if (offsetX >= 0) {
-            dragX.set(offsetX);
+            dragX.set(offsetX)
         } else {
-            dragX.set(0);
+            dragX.set(0)
         }
-    };
+    }
 
     const handleTouchEnd = (e) => {
         const offsetX = e.changedTouches[0].clientX - dragStartX;
 
         if (offsetX <= 200) {
-            dragX.set(0, { duration: 0.15 });
+            dragX.set(0, { duration: 0.15 })
         }
         else if (offsetX > 200) {
-            dragX.set(450, { duration: 0.15 });
+            dragX.set(450, { duration: 0.15 })
 
-            setIsCartOpen(false);
-            setIsCartOpenATC(false);
+            setIsCartOpen(false)
+            setIsCartOpenATC(false)
         }
-    };
+    }
 
 
     return (

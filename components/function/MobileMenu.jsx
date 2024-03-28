@@ -121,7 +121,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
                                     {menu.map((item, index) => (
                                         <Link key={index} href={item.url} className="flex justify-start items-center w-full no-outline">
                                             <li key={index} className="flex justify-start items-center w-full h-auto p-4 space-x-2 text-lg font-bold border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] !leading-none cursor-pointer" onClick={() => setIsMobileMenuOpen(false)}>
-                                                <svg className="flex justify-center items-center size-[1.3rem] cursor-pointer" width={24} height={24}>
+                                                <svg className="flex justify-center items-center size-6 cursor-pointer" width={24} height={24}>
                                                     <use
                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                                         xlinkHref={`/on/demandware/svg/non-critical.svg#${item.icon}`}
@@ -135,7 +135,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 
                                     <Link className="flex justify-start items-center w-full no-outline" href="/auth/signup">
                                         <li className="flex justify-start items-center w-full h-auto p-4 space-x-2 text-lg font-bold border-b border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] !leading-none cursor-pointer" onClick={() => setIsMobileMenuOpen(false)}>
-                                            <svg className="flex justify-center items-center size-[1.3rem] cursor-pointer" width={24} height={24}>
+                                            <svg className="flex justify-center items-center size-6 cursor-pointer" width={24} height={24}>
                                                 <use
                                                     xmlnsXlink="http://www.w3.org/1999/xlink"
                                                     xlinkHref="/on/demandware/svg/non-critical.svg#icon-user_dd"
