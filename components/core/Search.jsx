@@ -134,7 +134,7 @@ export const Search = () => {
 
                 <div className="flex justify-start items-start w-full mt-4">
                     {filteredProducts.length > 0 ? <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-3 sm:gap-3 md:gap-5 lg:gap-5 xl:gap-5 justify-start items-start w-full">
-                        {Object.keys(filteredProducts).map((k) => <ProductCard key={filteredProducts[k]._id}
+                        {Object.keys(filteredProducts).map((k, index) => <ProductCard key={index}
                             itemCode={filteredProducts[k]._id}
                             slug={filteredProducts[k].slug}
                             qty={filteredProducts[k].qty}

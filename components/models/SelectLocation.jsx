@@ -236,14 +236,14 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                             if (result?.address?.municipalitySubdivision?.includes(',')) {
                                                                 return result
                                                             }
-                                                        }).map((result) => (
-                                                            <ul key={result.id} className="flex flex-col justify-end items-center w-full">
+                                                        }).map((result, index) => (
+                                                            <ul key={index} className="flex flex-col justify-end items-center w-full">
                                                                 {additionalResults.filter((k) => {
                                                                     if (k.id === result.id) {
                                                                         return k
                                                                     }
-                                                                }).map((k) => (
-                                                                    <div key={k.id} className="flex flex-col justify-end items-center w-full">
+                                                                }).map((k, index) => (
+                                                                    <div key={index} className="flex flex-col justify-end items-center w-full">
                                                                         {k.address.map((item, index) => <li key={index} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(`${item}, ${k.ffa}`)}>
                                                                             <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
                                                                                 <svg className="flex justify-center items-center size-4" width={16} height={16}>
@@ -273,8 +273,8 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                             if (!result?.address?.municipalitySubdivision?.includes(',')) {
                                                                 return result
                                                             }
-                                                        }).map((result) => (
-                                                            <li key={result.id} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(result.address.freeformAddress)}>
+                                                        }).map((result, index) => (
+                                                            <li key={index} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(result.address.freeformAddress)}>
                                                                 <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
                                                                     <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                         <use

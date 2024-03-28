@@ -80,8 +80,8 @@ const Page = () => {
                             modules={[FreeMode]}
                             freeMode={true}
                         >
-                            {Object.keys(flowerCategories).map((item) => {
-                                return <SwiperSlide key={flowerCategories[item].name} className="flex justify-start items-center w-full h-auto">
+                            {Object.keys(flowerCategories).map((item, index) => {
+                                return <SwiperSlide key={index} className="flex justify-start items-center w-full h-auto">
                                     <Link href={flowerCategories[item].url} className="rounded-lg">
                                         <div className="flex justify-center items-center w-full h-full p-2 bg-[#f6edec] rounded-md">
                                             <Image className="flex justify-center items-center w-full h-full rounded-md"
@@ -110,9 +110,9 @@ const Page = () => {
                             modules={[FreeMode]}
                             freeMode={true}
                         >
-                            {Object.keys(flowerCategories).map((item) => {
+                            {Object.keys(flowerCategories).map((item, index) => {
                                 return (
-                                    <SwiperSlide key={flowerCategories[item].name} className="flex justify-start items-center w-full">
+                                    <SwiperSlide key={index} className="flex justify-start items-center w-full">
                                         <Link href={flowerCategories[item].url} className="rounded-lg">
                                             <div className="flex justify-center items-center w-full h-full p-2 bg-[#f6edec] rounded-md">
                                                 <Image
@@ -156,8 +156,8 @@ const Page = () => {
                             modules={[FreeMode]}
                             freeMode={true}
                         >
-                            {Object.keys(flowerKinds).map((item) => {
-                                return <SwiperSlide key={flowerKinds[item].name} className="flex justify-start items-center w-full h-auto">
+                            {Object.keys(flowerKinds).map((item, index) => {
+                                return <SwiperSlide key={index} className="flex justify-start items-center w-full h-auto">
                                     <Link href={flowerKinds[item].url} className="rounded-lg">
                                         <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md">
                                             <Image className="flex justify-center items-center w-full h-full rounded-md"
@@ -186,8 +186,8 @@ const Page = () => {
                             modules={[FreeMode]}
                             freeMode={true}
                         >
-                            {Object.keys(flowerKinds).map((item) => {
-                                return <SwiperSlide key={flowerKinds[item].name} className="flex justify-start items-center w-full h-auto">
+                            {Object.keys(flowerKinds).map((item, index) => {
+                                return <SwiperSlide key={index} className="flex justify-start items-center w-full h-auto">
                                     <Link href={flowerKinds[item].url} className="rounded-lg">
                                         <div className="flex justify-center items-center w-full h-full bg-[#f7f7f7] rounded-md">
                                             <Image className="flex justify-center items-center w-full h-full rounded-md"

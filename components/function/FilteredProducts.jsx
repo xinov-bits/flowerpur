@@ -144,8 +144,8 @@ export const FilteredProducts = () => {
                 else {
                     return filterProducts[item]
                 }
-            }).map((item) => {
-                return <ProductCard key={filterProducts[item]._id}
+            }).map((item, index) => {
+                return <ProductCard key={index}
                     itemCode={filterProducts[item]._id}
                     slug={filterProducts[item].slug}
                     qty={filterProducts[item].qty}

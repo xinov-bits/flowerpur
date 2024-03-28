@@ -234,7 +234,7 @@ export default function Home() {
             freeMode={true}
             modules={[FreeMode]}
           >
-            {menu.map((slide) => <SwiperSlide key={slide.name} className="relative flex justify-center items-start w-auto h-full">
+            {menu.map((slide, index) => <SwiperSlide key={index} className="relative flex justify-center items-start w-auto h-full">
               <Link href={slide.url} className="flex flex-col justify-center items-center w-full h-full">
                 <div className="flex justify-center items-center w-auto h-auto">
                   <Image className="flex justify-center items-center w-auto h-14"
@@ -398,8 +398,8 @@ export default function Home() {
                       if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
                         return products[item]
                       }
-                    }).map((item) => {
-                      return (<SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                    }).map((item, index) => {
+                      return (<SwiperSlide key={index} className="flex justify-center items-center w-full h-full overflow-hidden">
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
@@ -447,9 +447,9 @@ export default function Home() {
                       if ((products[item].category === 'flowers') && (products[item].subCategory === 'roses')) {
                         return products[item]
                       }
-                    }).map((item) => {
+                    }).map((item, index) => {
                       return (
-                        <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                        <SwiperSlide key={index} className="flex justify-center items-center w-full h-full overflow-hidden">
                           <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -587,9 +587,9 @@ export default function Home() {
                             }
                           }
                         }
-                      }).map((item) => {
+                      }).map((item, index) => {
                         return (
-                          <SwiperSlide key={products[item]._id} className="flex justify-center items-center w-full h-full overflow-hidden">
+                          <SwiperSlide key={index} className="flex justify-center items-center w-full h-full overflow-hidden">
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}

@@ -120,8 +120,12 @@ const Page = () => {
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center w-full h-auto bg-white py-8 sm:py-8 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
-                <div className="flex flex-col w-full max-w-3xl h-auto px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8">
+            <div className="flex flex-col justify-center items-center w-full h-auto bg-white py-4 sm:py-4 md:py-8 lg:py-8 xl:py-8 text-[#494949]">
+                <motion.div className="flex flex-col w-full max-w-2xl h-auto px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
                     <div className="flex flex-col justify-center items-center w-full select-none">
                         <div className="flex justify-start items-center w-full !leading-none text-xl sm:text-xl md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#191919]">
                             Sign In
@@ -148,15 +152,15 @@ const Page = () => {
                                 </div>
 
 
-                                <div className="flex flex-col justify-start items-end w-full h-20">
-                                    <div className="flex justify-end items-center w-full h-auto mb-2.5 leading-none text-lg font-medium text-[#767676]">
-                                        <div> or </div>
-                                        &nbsp;
-                                        <Link href="/auth/signup" className="underline text-[#292929] no-outline">
-                                            sign up
-                                        </Link>
-                                    </div>
+                                <div className="flex justify-end items-center w-full h-auto mb-2.5 leading-none text-lg font-medium text-[#767676]">
+                                    <div> or </div>
+                                    &nbsp;
+                                    <Link href="/auth/signup" className="underline text-[#292929] no-outline">
+                                        sign up
+                                    </Link>
+                                </div>
 
+                                <div className="flex flex-col justify-start items-end w-full h-12">
                                     {(!(
                                         userEmail === '' &&
                                         userEmail.length === 0 &&
@@ -168,31 +172,33 @@ const Page = () => {
                                             userEmail.includes('@') &&
                                             userPhone.length === 10
                                         )
-                                    ) ? <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                        {!signinLoading ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="submit">
-                                            Continue to Sign in
-                                        </button>
-                                            :
-                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="button">
-                                                <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
-                                                    <use
-                                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                        xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
-                                                    ></use>
-                                                </svg>
-                                            </button>}
-                                    </div>
-                                        :
+                                    ) ? (
+                                        <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
+                                            {!signinLoading ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="submit">
+                                                Continue to Sign in
+                                            </button>
+                                                :
+                                                <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="button">
+                                                    <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
+                                                        <use
+                                                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-spinner_dd"
+                                                        ></use>
+                                                    </svg>
+                                                </button>}
+                                        </div>
+                                    ) : (
                                         <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
                                             <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] rounded-full text-white font-bold saturate-0 opacity-40" type="button">
                                                 Continue to Sign in
                                             </button>
-                                        </div>}
+                                        </div>
+                                    )}
                                 </div>
                             </form>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 <Toaster
                     position="top-center"

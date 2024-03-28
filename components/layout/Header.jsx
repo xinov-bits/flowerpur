@@ -22,6 +22,9 @@ import Search2 from '../models/Search2';
 // FRAMER MOTION
 import { motion, AnimatePresence } from 'framer-motion';
 
+// AXIOS
+import axios from 'axios';
+
 
 const Header = () => {
     // USE CONTEXT
@@ -58,6 +61,76 @@ const Header = () => {
     // SEARCH
     const [searchKey, setSearchKey] = useState('')
     const [isSearchMenu, setIsSearchMenu] = useState(false)
+
+    const handleChangeSearch = (e) => {
+        setSearchKey(e.target.value);
+    }
+    
+    const handleSubmitSearch = (e) => {
+        e.preventDefault();
+
+        setIsSearchMenu(false);
+
+        if (searchKey !== '' && searchKey?.replaceAll(' ', '') != '' && searchKey?.length > 0) {
+            router.push(`/search?keyword=${searchKey}`);
+        }
+    }
+
+    const [products, setProducts] = useState([]);
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/getproducts`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setProducts(response.data);
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+
+    const [searchResults, setSearchResults] = useState([])
+
+    useEffect(() => {
+        fetchData()
+
+        const filtered = Object.keys(products).filter((k) => {
+            if (searchKey !== '') {
+                if (products[k]?.category !== 'Special') {
+                    if (JSON.stringify(products[k]?.title)?.toLowerCase()?.includes(searchKey.toLowerCase())) {
+                        return products[k]
+                    }
+                }
+            }
+        }).map((k) => {
+            return (
+                products[k]
+            )
+        })
+
+        if (searchKey !== '' && searchKey?.replaceAll(' ', '') != '' && searchKey?.length > 0) {
+            setSearchResults(filtered)
+        } else {
+            setSearchResults([])
+        }
+    }, [searchKey])
+
+
+    const recentSearches = [
+        {
+            name: 'Birthday bouquets',
+            url: '/'
+        },
+        {
+            name: 'Flowers',
+            url: '/flowers'
+        },
+        {
+            name: 'Anniversary',
+            url: '/'
+        },
+    ]
 
     useEffect(() => {
         if (query.get('keyword')) {
@@ -116,7 +189,7 @@ const Header = () => {
                                     getCookie('user_address') === undefined ||
                                     getCookie('user_address') === null
                                 ) ? (
-                                    <div className="relative justify-start items-center w-[40%] h-full pr-2 overflow-hidden duration-200">
+                                    <div className="relative justify-start items-center w-[20%] h-full pr-2 bg-white overflow-hidden duration-200">
                                         <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                             <div className="flex justify-start items-center w-auto h-full space-x-1 font-semibold cursor-pointer">
                                                 <svg className="flex justify-center items-center size-4" width={16} height={16}>
@@ -137,7 +210,7 @@ const Header = () => {
                                         </button>
                                     </div>
                                 ) : (
-                                    <div className="relative justify-start items-center w-[40%] h-full pr-2 overflow-hidden duration-200">
+                                    <div className="relative justify-start items-center w-[40%] h-full pr-2 bg-white overflow-hidden duration-200">
                                         <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                             <div className="flex justify-start items-center w-full h-full px-2 space-x-1 font-semibold cursor-pointer" title={getCookie('user_address')}>
                                                 <svg className="flex justify-center items-center size-5" width={16} height={16}>
@@ -171,19 +244,26 @@ const Header = () => {
                                             ></use>
                                         </svg>
 
-                                        <input className="flex justify-center items-center w-full h-full bg-[#eeeeee00] placeholder:text-[#494949] text-[#191919] font-medium outline-none no-outline"
-                                            value={searchKey}
-                                            placeholder={searchKey ? searchKey : "Search for flowers, gifts and more"}
-                                            type="text"
-                                            readOnly
-                                        />
+                                        <form className="relative flex justify-center items-center w-full h-full overflow-hidden" htmlFor="search" onSubmit={handleSubmitSearch}>
+                                            <input className="flex justify-center items-center w-full h-full bg-[#eeeeee] placeholder:text-[#494949] text-[#191919] font-medium hover:bg-[#e5e5e5] no-outline outline-none"
+                                                onChange={handleChangeSearch}
+                                                value={searchKey}
+                                                placeholder="Search for flowers, gifts and more"
+                                                name="search"
+                                                type="text"
+                                                autoComplete='off'
+                                                autoFocus
+                                            />
+                                        </form>
                                     </button>
                                 </div>
                             </div>
 
                             <div className="flex justify-end items-center w-auto h-full">
                                 <ul className="flex justify-end items-center w-full h-full space-x-2 text-base font-semibold">
-                                    <li className="relative flex flex-col justify-center items-center size-10 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full cursor-pointer duration-100">
+                                    <li className="relative flex flex-col justify-center items-center size-10 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full cursor-pointer duration-100" onClick={() => {
+                                        setIsCartOpen(true)
+                                    }}>
                                         <svg className="flex justify-center items-center size-6" width={20} height={20}>
                                             <use
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -235,7 +315,7 @@ const Header = () => {
 
                 <SelectLocation isAddressChooser={isAddressChooser} setIsAddressChooser={setIsAddressChooser} />
 
-                <Search2 isSearchMenu={isSearchMenu} setIsSearchMenu={setIsSearchMenu} />
+                <Search2 isSearchMenu={isSearchMenu} setIsSearchMenu={setIsSearchMenu} searchResults={searchResults} recentSearches={recentSearches} />
             </header>}
         </>
     )
