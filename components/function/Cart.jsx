@@ -134,24 +134,25 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                         transition={{ duration: 0.2 }}
                     >
                         <div className="absolute z-[610] top-0 left-0 flex justify-center items-center w-full h-full bg-[#292929] bg-opacity-0" onClick={() => {
-                            setIsCartOpen(false);
-                            setIsCartOpenATC(false);
+                            setIsCartOpen(false)
+                            setIsCartOpenATC(false)
                         }} />
 
 
                         <div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full py-4 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]">
                             <div className="block justify-start items-center w-full px-4 space-y-2">
                                 <div className="flex justify-start items-center w-full h-6">
-                                    <svg
-                                        className="flex justify-center items-center size-6 cursor-pointer"
-                                        onClick={() => setIsAddressChooser(false)}
-                                        width={24} height={24}
-                                    >
-                                        <use
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
-                                        ></use>
-                                    </svg>
+                                    <div className="flex justify-center items-center size-6" onClick={() => {
+                                        setIsCartOpen(false)
+                                        setIsCartOpenATC(false)
+                                    }}>
+                                        <svg className="flex justify-center items-center size-6 cursor-pointer" width={24} height={24}>
+                                            <use
+                                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
+                                            ></use>
+                                        </svg>
+                                    </div>
                                 </div>
 
                                 <div className="flex justify-start items-center w-full mt-2 text-2xl font-bold leading-none">

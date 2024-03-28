@@ -83,8 +83,8 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
             <AnimatePresence>
                 {(isMobileMenuOpen) && (
                     <div className="fixed z-[600] top-0 right-0 flex justify-start items-center w-full h-screen select-none duration-75">
-                        <motion.div className="absolute z-[610] top-0 right-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-80" onClick={() => {
-                            setIsMobileMenuOpen(false);
+                        <motion.div className="absolute z-[610] top-0 right-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-0" onClick={() => {
+                            setIsMobileMenuOpen(false)
                         }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -92,7 +92,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
                         />
 
 
-                        <motion.div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[28%] lg:w-[28%] xl:w-[28%] h-full py-4 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]"
+                        <motion.div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[28%] lg:w-[28%] xl:w-[28%] h-full py-4 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)] duration-75"
                             style={{ x: dragX }}
                             onTouchStart={handleTouchStart}
                             onTouchMove={handleTouchMove}
@@ -104,12 +104,16 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
                             transition={{ duration: 0.2 }}
                         >
                             <div className="block justify-start items-center w-full h-6 px-4 mb-4">
+                                <div className="flex justify-center items-center size-6 cursor-pointer" onClick={() => {
+                                    setIsMobileMenuOpen(false)
+                                }}>
                                 <svg className="flex justify-center items-center size-6 cursor-pointer" width={24} height={24}>
                                     <use
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                         xlinkHref="/on/demandware/svg/non-critical.svg#icon-close_dd"
                                     ></use>
                                 </svg>
+                                </div>
                             </div>
 
                             <div className="block justify-start items-start w-full h-auto pb-4">

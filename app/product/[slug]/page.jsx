@@ -675,8 +675,8 @@ export default function Page({ params }) {
     return (
         <>
             <div className="block justify-center items-center w-full h-full bg-white">
-                <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-start w-full h-full px-4 sm:px-4 md:px-16 lg:px-16 xl:px-16 py-6 pt-2.5 sm:pt-2.5 md:pt-6 lg:pt-6 xl:pt-6 bg-white overflow-hidden">
-                    <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full h-full">
+                <div className="block sm:block md:flex lg:flex xl:flex justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between items-start w-full h-full p-0 sm:p-0 md:px-16 lg:px-16 xl:px-16 py-6 pt-1 sm:pt-1 md:pt-6 lg:pt-6 xl:pt-6 bg-white overflow-hidden">
+                    <div className="relative hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full h-full mb-6">
                         {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <motion.div className="relative flex flex-col justify-center items-center size-[34rem] cursor-pointer rounded-lg overflow-hidden select-none"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -818,13 +818,13 @@ export default function Page({ params }) {
                     </div>
 
                     {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-center items-center w-full h-auto">
-                        <motion.div className="relative flex justify-center items-center w-auto h-auto cursor-pointer rounded-md overflow-hidden select-none"
+                        <motion.div className="relative flex justify-center items-center w-auto h-auto cursor-pointer overflow-hidden select-none"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ delay: 0.2 }}
                         >
-                            <Splide className="flex justify-center items-center w-auto h-auto bg-[#f7f7f7] rounded-md overflow-hidden"
+                            <Splide className="flex justify-center items-center w-auto h-auto bg-[#f7f7f7] overflow-hidden"
                                 hasTrack={false}
                                 options={{
                                     rewind: true,
@@ -837,7 +837,7 @@ export default function Page({ params }) {
                                 }}
                                 ref={splideRef}
                             >
-                                <SplideTrack className="flex justify-center items-center w-full h-auto rounded-md overflow-hidden">
+                                <SplideTrack className="flex justify-center items-center w-full h-auto overflow-hidden">
                                     <SplideSlide className="flex justify-center items-center w-auto h-auto overflow-hidden">
                                         <Image className="flex justify-center items-center w-auto h-auto"
                                             src={product?.img1}
@@ -868,7 +868,7 @@ export default function Page({ params }) {
                             </Splide>
 
                             {/* Custom pagination */}
-                            <div className="absolute bottom-0 left-0 -m-0.5 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
+                            <div className="absolute bottom-0 left-0 flex justify-center items-center w-auto p-2 space-x-2 select-none bg-white rounded-tr-md">
                                 {(product?.img1 != '' || product?.img1 != undefined) && <div className="flex justify-center items-center">
                                     <input
                                         className="absolute w-10 h-10 z-50 hidden cursor-pointer"
@@ -978,7 +978,7 @@ export default function Page({ params }) {
                     </div>}
 
 
-                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-auto">
+                    {(product.title === undefined || product.title === '' || product.title === null || product.title == []) && <div className="relative block justify-start items-center w-full h-auto p-4 sm:p-4 md:p-0 lg:p-0 xl:p-0">
                         <div className="relative flex sm:flex md:hidden lg:hidden xl:hidden justify-start items-center w-full h-[360px] rounded-md overflow-hidden select-none">
                             <div className="relative flex justify-start items-center w-full h-full bg-[#f7f7f7] rounded-md overflow-hidden">
                                 <div className="absolute flex justify-start items-center w-full h-full  c-skeleton" />
@@ -1031,7 +1031,7 @@ export default function Page({ params }) {
                     </div>}
 
                     {!(product.title === undefined || product.title === '' || product.title === null || product.title == []) && (
-                        <motion.div className="relative flex justify-center items-start w-full h-full text-[#191919]"
+                        <motion.div className="relative flex justify-center items-start w-full h-full p-4 sm:p-4 md:p-0 lg:p-0 xl:p-0 text-[#191919]"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
