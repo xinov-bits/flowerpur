@@ -76,7 +76,7 @@ const UserMenu = ({ isUserMenuOpen, setIsUserMenuOpen }) => {
         <>
             <AnimatePresence>
                 {(isUserMenuOpen) && (
-                    <div className="fixed z-[600] top-0 right-0 flex justify-start items-center w-full h-screen select-none duration-75">
+                    <div className="fixed z-[600] top-0 right-0 flex justify-end items-center w-full h-screen select-none duration-75">
                         <motion.div className="absolute z-[610] top-0 right-0 flex justify-center items-center w-full h-full bg-[#262626] bg-opacity-0" onClick={() => {
                             setIsUserMenuOpen(false)
                         }}
@@ -86,7 +86,7 @@ const UserMenu = ({ isUserMenuOpen, setIsUserMenuOpen }) => {
                         />
 
 
-                        <motion.div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[28%] lg:w-[28%] xl:w-[28%] h-full py-4 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)] duration-75"
+                        <motion.div className="relative z-[620] flex flex-col justify-start items-start w-full sm:w-full md:w-[32%] lg:w-[32%] xl:w-[32%] h-full py-4 bg-white shadow-[0px_0px_15px_4px_rgba(25,25,25,0.1)]"
                             style={{ x: dragX }}
                             onTouchStart={handleTouchStart}
                             onTouchMove={handleTouchMove}
