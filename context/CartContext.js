@@ -122,31 +122,26 @@ export const CartProvider = ({ children }) => {
         let numTotal = 0;
         let mrptTotal = 0;
 
-        const b2g1freeProducts = Object.keys(cartData).filter((k) => {
-            if (cartData[k].offer === 'buy-2-get-1-free') {
-                return cartData[k]
-            }
-        }).map((k) => cartData[k]);
+        const b2g1freeProducts = Object.values(cartData).filter(item => item.offer === 'buy-2-get-1-free');
 
-        for (const item of Object.values(cartData)) {
-            // BUY 2 GET 1 FREE
+        for (const product of b2g1freeProducts) {
             let b2g1freeDiscount = 0;
 
-            for (let i = 0; i < b2g1freeProducts.length; i++) {
-                const product = b2g1freeProducts[i];
-
-                if (product.qty % 2 === 0) {
-                    b2g1freeDiscount = (product.qty * product.price) / 2
-                }
-                else if ((product.qty % 2 - 1) === 0) {
-                    b2g1freeDiscount = ((product.qty - 1) * product.price) / 2
-                }
+            if (product.qty % 2 === 0) {
+                b2g1freeDiscount = (product.qty * product.price) / 2;
+            } else {
+                b2g1freeDiscount = ((product.qty - 1) * product.price) / 2;
             }
 
-            subTotal += ((item.price * item.qty) - (b2g1freeDiscount));
+            product.discount = b2g1freeDiscount;
+        }
 
+        for (const item of Object.values(cartData)) {
+            const b2g1PriceSum = b2g1freeProducts.reduce((acc, product) => acc + product.price * product.qty, 0);
+
+            subTotal += (item.price * item.qty) - (item.discount || 0);
             numTotal += item.qty;
-            mrptTotal += ((item.price * item.qty) * 100) / 40;
+            mrptTotal += (item.price * item.qty * 100) / 40;
         }
 
         // COUPON

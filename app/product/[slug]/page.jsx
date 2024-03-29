@@ -6,7 +6,7 @@ import { getCookie, getCookies, hasCookie, setCookie, deleteCookie } from 'cooki
 // NEXT JS
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 // CRYPTO JS
 import CryptoJS from 'crypto-js'
@@ -61,8 +61,17 @@ export default function Page({ params }) {
         setIsCartOpenATC,
     } = useContext(CartContext);
 
-    const slug = params.slug;
-    const router = useRouter();
+    const slug = params.slug
+    const router = useRouter()
+    const paramsRouter = useParams()
+
+
+    const [hashParam, setHashParam] = useState('')
+
+    useEffect(() => {
+        setHashParam(window.location.hash);
+    }, [paramsRouter]);
+
 
 
     // GET PRODUCTS
@@ -331,8 +340,6 @@ export default function Page({ params }) {
     // ADD TO CART
     const [cartLoading, setCartLoading] = useState(false);
 
-    const [extrasToAdd, setExtrasToAdd] = useState(['', '']);
-
     const [addExtraToCart, setAddExtraToCart] = useState(false);
     const [addExtrasToCart, setAddExtrasToCart] = useState(false);
 
@@ -365,18 +372,16 @@ export default function Page({ params }) {
                     deliveryOptions
                 );
 
-                if (extrasToAdd != ['', ''] && (extrasToAdd[0] !== '' || extrasToAdd[1] !== '') && (extrasToAdd[0] === '' || extrasToAdd[1] === '')) {
+                if (hashParam !== undefined || hashParam !== null || hashParam !== '' || hashParam !== '#additionals=') {
                     setAddExtraToCart(true);
-                } else if (extrasToAdd != ['', ''] && extrasToAdd[0] !== '' && extrasToAdd[1] !== '') {
-                    setAddExtrasToCart(true);
                 }
-            }, 1000);
+            }, 1000)
         }
     }
 
     useEffect(() => {
-        if (addExtraToCart && extrasToAdd != ['', '']) {
-            if (extrasToAdd.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase'))) {
+        if (addExtraToCart && (hashParam.includes('vase') || hashParam.includes('double'))) {
+            if (hashParam.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase'))) {
                 addToCart(
                     'special__vase',
                     'special__vase',
@@ -386,9 +391,9 @@ export default function Page({ params }) {
                     'https://i.ibb.co/QjvwMwP/image.png',
                     'Minimal Flower Vase',
                     '',
-                );
+                )
             }
-            else if (extrasToAdd.includes('double') && !(JSON.stringify(cart)?.includes('special__double'))) {
+            else if (hashParam.includes('double') && !(JSON.stringify(cart)?.includes('special__double'))) {
                 addToCart(
                     'special__double',
                     'special__double',
@@ -398,19 +403,21 @@ export default function Page({ params }) {
                     'https://i.ibb.co/3RTxMGR/x2-flowers.png',
                     'Double Flower Quantity',
                     '',
-                );
+                )
             }
         }
 
-        setAddExtraToCart(false);
+        setAddExtraToCart(false)
     }, [addExtraToCart])
 
+    console.log(hashParam.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase')))
+
     useEffect(() => {
-        if (addExtrasToCart && extrasToAdd.length > 0) {
+        if (addExtrasToCart && hashParam.length > 0) {
             if (
-                extrasToAdd.includes('vase') &&
+                hashParam.includes('vase') &&
                 !(JSON.stringify(cart)?.includes('special__vase')) &&
-                extrasToAdd.includes('double') &&
+                hashParam.includes('double') &&
                 !(JSON.stringify(cart)?.includes('special__double'))
             ) {
                 addMultipleToCart(
@@ -1136,11 +1143,11 @@ export default function Page({ params }) {
                                                     </button>
                                                 </li>
 
-                                                <li className="relative block items-center w-full h-auto p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full overflow-hidden">
-                                                    {buzzDateInput && <div className="flex justify-start items-center w-full mb-1 text-xs leading-none text-[#ad2314]">
-                                                        required *
-                                                    </div>}
+                                                {buzzDateInput && <div className="flex justify-start items-center w-full mb-1 text-sm leading-none text-[#ad2314]">
+                                                    required *
+                                                </div>}
 
+                                                <li className="relative block items-center w-full h-auto min-h-10 p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full overflow-hidden">
                                                     <div className="flex justify-between items-center w-full h-full leading-none">
                                                         <div className={`
                                                             flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer

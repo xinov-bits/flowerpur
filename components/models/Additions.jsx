@@ -52,13 +52,25 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
 
     // ADD TO CART
     const [cartLoading, setCartLoading] = useState(false)
-    const additionals = []
+    const [additionals, setAdditionals] = useState([])
 
-    useEffect(() => {
-        // setAdditionals([])
+    const addAdditionals = () => {
+        if (additionals?.length > 0) {
+            if (additionals.length === 1 && additionals[0] === 'vase') {
+                router.push('#additionals=vase')
+            }
+            else if (additionals.length === 1 && additionals[0] === 'double') {
+                router.push('#additionals=double')
+            }
+            else if (additionals.length === 2 && additionals.includes('vase') && additionals.includes('double')) {
+                router.push('#additionals=vase&double')
+            }
+        }
 
-        console.log(additionals)
-    }, [additionals])
+        setAdditionals([])
+        setIsAdditions(false)
+    }
+
 
     return (
         <>
@@ -83,23 +95,33 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                 <label htmlFor="additions_selector-vase" className="flex justify-between items-center w-full h-auto p-2.5 bg-white rounded-lg border-[1.5px] border-[#e5e5e5] cursor-pointer hover:bg-[#f7f7f7] duration-100" id="additions_selector">
                                     <div className="flex justify-start items-center w-auto">
                                         <div className="relative flex justify-center items-center size-[1.175rem] overflow-hidden">
-                                            <input className="absolute flex justify-center items-center size-full opacity-0"
+                                            <input
+                                                className="absolute flex justify-center items-center size-full opacity-0"
                                                 type="checkbox"
                                                 name="additions_selector"
                                                 id="additions_selector-vase"
                                                 value="vase"
                                                 onChange={(e) => {
-                                                    if (e.target.checked) {
-                                                        additionals.push(e.target.value)
-                                                        console.log(additionals)
+                                                    const isChecked = e.target.checked;
+                                                    const selectedValue = e.target.value;
+
+                                                    // Ensure additionals is initialized as an array
+                                                    const updatedAdditionals = Array.isArray(additionals) ? [...additionals] : [];
+
+                                                    if (isChecked) {
+                                                        updatedAdditionals.push(selectedValue);
                                                     } else {
-                                                        if (additionals.includes(e.target.value)) {
-                                                            additionals.pop(e.target.value)
-                                                            console.log(additionals)
+                                                        const index = updatedAdditionals.indexOf(selectedValue);
+                                                        if (index !== -1) {
+                                                            updatedAdditionals.splice(index, 1);
                                                         }
                                                     }
+
+                                                    setAdditionals(updatedAdditionals);
                                                 }}
+
                                             />
+
 
                                             <div className="absolute flex justify-center items-center size-full bg-white border-2 border-[#191919] rounded-md curosr-pointer duration-100 pointer-events-none overflow-hidden" id="additions_c_input-vase">
                                                 <svg className="z-[2] flex justify-center items-center size-2.5 text-white" width={10} height={9}>
@@ -140,16 +162,24 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                                 id="additions_selector-double"
                                                 value="double"
                                                 onChange={(e) => {
-                                                    if (e.target.checked) {
-                                                        additionals.push(e.target.value)
-                                                        console.log(additionals)
+                                                    const isChecked = e.target.checked;
+                                                    const selectedValue = e.target.value;
+
+                                                    // Ensure additionals is initialized as an array
+                                                    const updatedAdditionals = Array.isArray(additionals) ? [...additionals] : [];
+
+                                                    if (isChecked) {
+                                                        updatedAdditionals.push(selectedValue);
                                                     } else {
-                                                        if (additionals.includes(e.target.value)) {
-                                                            additionals.pop(e.target.value)
-                                                            console.log(additionals)
+                                                        const index = updatedAdditionals.indexOf(selectedValue);
+                                                        if (index !== -1) {
+                                                            updatedAdditionals.splice(index, 1);
                                                         }
                                                     }
+
+                                                    setAdditionals(updatedAdditionals);
                                                 }}
+
                                             />
 
                                             <div className="absolute flex justify-center items-center size-full bg-white border-2 border-[#191919] rounded-md curosr-pointer duration-100 pointer-events-none overflow-hidden" id="additions_c_input-double">
@@ -185,23 +215,7 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                 {additionals.length > 0 ? (
                                     <div className="flex justify-center items-center w-full h-12 mt-4">
                                         {!cartLoading ? (
-                                            <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-lg duration-75"
-                                                onClick={() => addProductToCart(
-                                                    product.slug,
-                                                    product.slug,
-                                                    1,
-                                                    product.availableQty,
-                                                    product.price,
-                                                    product.dimg,
-                                                    product.title,
-                                                    product.offer,
-                                                    {
-                                                        date: finalDate,
-                                                        type: finalDeliveryType,
-                                                        time: finalDeliveryTime,
-                                                        price: finalDeliveryPrice,
-                                                    }
-                                                )}>
+                                            <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-lg duration-75" onClick={() => addAdditionals()}>
                                                 <div>
                                                     Add additionals to cart
                                                 </div>
