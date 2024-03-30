@@ -74,13 +74,13 @@ export const Search = () => {
 
 
     // ADD TO CART
-    const [cartLoading, setCartLoading] = useState([false, '']);
+    const [cartLoading, setCartLoading] = useState([false, ''])
 
     const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
-        setCartLoading([true, url]);
+        setCartLoading([true, url])
 
         setTimeout(() => {
-            setCartLoading([false, '']);
+            setCartLoading([false, ''])
 
             addToCart(
                 itemCode,
@@ -91,9 +91,9 @@ export const Search = () => {
                 img,
                 name,
                 offer,
-            );
-            setAddedAnim([true, url]);
-        }, 1000);
+            )
+            setAddedAnim([true, url])
+        }, 1000)
     }
 
 

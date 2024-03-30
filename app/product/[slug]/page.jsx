@@ -53,7 +53,6 @@ export default function Page({ params }) {
         favList,
         recentView,
         addToCart,
-        addMultipleToCart,
         clearCart,
         removeFromCart,
         removeAtOnce,
@@ -369,84 +368,12 @@ export default function Page({ params }) {
                     img,
                     name,
                     offer,
-                    deliveryOptions
+                    deliveryOptions,
+                    [ hashParam.replaceAll('#additionals=', '') ]
                 );
-
-                if (hashParam !== undefined || hashParam !== null || hashParam !== '' || hashParam !== '#additionals=') {
-                    setAddExtraToCart(true);
-                }
             }, 1000)
         }
     }
-
-    useEffect(() => {
-        if (addExtraToCart && (hashParam.includes('vase') || hashParam.includes('double'))) {
-            if (hashParam.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase'))) {
-                addToCart(
-                    'special__vase',
-                    'special__vase',
-                    1,
-                    999,
-                    199,
-                    'https://i.ibb.co/QjvwMwP/image.png',
-                    'Minimal Flower Vase',
-                    '',
-                )
-            }
-            else if (hashParam.includes('double') && !(JSON.stringify(cart)?.includes('special__double'))) {
-                addToCart(
-                    'special__double',
-                    'special__double',
-                    1,
-                    999,
-                    349,
-                    'https://i.ibb.co/3RTxMGR/x2-flowers.png',
-                    'Double Flower Quantity',
-                    '',
-                )
-            }
-        }
-
-        setAddExtraToCart(false)
-    }, [addExtraToCart])
-
-    console.log(hashParam.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase')))
-
-    useEffect(() => {
-        if (addExtrasToCart && hashParam.length > 0) {
-            if (
-                hashParam.includes('vase') &&
-                !(JSON.stringify(cart)?.includes('special__vase')) &&
-                hashParam.includes('double') &&
-                !(JSON.stringify(cart)?.includes('special__double'))
-            ) {
-                addMultipleToCart(
-                    [
-                        'special__vase',
-                        'special__vase',
-                        1,
-                        999,
-                        199,
-                        'https://i.ibb.co/QjvwMwP/image.png',
-                        'Minimal Flower Vase',
-                        ''
-                    ],
-                    [
-                        'special__double',
-                        'special__double',
-                        1,
-                        999,
-                        349,
-                        'https://i.ibb.co/3RTxMGR/x2-flowers.png',
-                        'Double Flower Quantity',
-                        ''
-                    ],
-                )
-            }
-        }
-
-        setAddExtrasToCart(false);
-    }, [addExtrasToCart])
 
 
     // SCROLL VALUE

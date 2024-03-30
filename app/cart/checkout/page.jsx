@@ -97,13 +97,13 @@ const Page = () => {
     const mappedCart = Object.keys(cart).map((k) => cart[k]);
 
     // ADD TO CART
-    const [cartLoading, setCartLoading] = useState([false, '', '']);
+    const [cartLoading, setCartLoading] = useState([false, '', ''])
 
     const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
-        setCartLoading([true, url, 'add']);
+        setCartLoading([true, url, 'add'])
 
         setTimeout(() => {
-            setCartLoading([false, '', '']);
+            setCartLoading([false, '', ''])
 
             addToCart(
                 itemCode,
@@ -114,8 +114,8 @@ const Page = () => {
                 img,
                 name,
                 offer,
-            );
-        }, 800);
+            )
+        }, 800)
     }
     const removeProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
         setCartLoading([true, url, 'delete']);
