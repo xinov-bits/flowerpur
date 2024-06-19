@@ -182,7 +182,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                     </Link>
 
                                                     <div className="flex justify-start items-center w-[75%] h-[78%] space-x-1 text-[#191919]">
+<<<<<<< HEAD
                                                         <div className="flex flex-col justify-start items-center w-[64%] h-full text-start font-medium">
+=======
+                                                        <div className="flex flex-col justify-start items-center w-[64%] h-full text-start font-semibold">
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                             <Link className="flex justify-center items-start w-full h-full no-outline text-base font-bold !leading-none" href={`/product/${item.url}`}>
                                                                 <div className="flex justify-start items-start w-full h-auto capitalize leading-tight hover:underline cursor-pointer" onClick={() => {
                                                                     setIsCartOpen(false)
@@ -215,9 +219,15 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                         </div>
 
                                                         <div className="flex flex-col justify-start items-end w-[36%] h-full space-y-2 text-[#191919]">
+<<<<<<< HEAD
                                                             <div className="flex justify-between items-center w-full h-8 rounded-[--global-radius-md] bg-[#f7f7f7] overflow-hidden shadow-[rgba(0,0,0,0.2)_0px_2px_8px]">
                                                                 {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') ? (
                                                                     <div className="flex justify-center items-center size-8 bg-white rounded-[--global-radius-md]" onClick={() => {
+=======
+                                                            <div className="flex justify-between items-center w-full h-8 rounded-full bg-[#f7f7f7] overflow-hidden shadow-[rgba(0,0,0,0.2)_0px_2px_8px]">
+                                                                {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'delete') ? (
+                                                                    <div className="flex justify-center items-center size-8 bg-white rounded-full" onClick={() => {
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                         removeProductToCart(
                                                                             item.url,
                                                                             item.url,
@@ -235,7 +245,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                         </svg>
                                                                     </div>
                                                                 ) : (
+<<<<<<< HEAD
                                                                     <div className="flex justify-center items-center size-8 bg-white rounded-[--global-radius-md]">
+=======
+                                                                    <div className="flex justify-center items-center size-8 bg-white rounded-full">
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                         <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                                                             <use
                                                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -245,12 +259,20 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                     </div>
                                                                 )}
 
+<<<<<<< HEAD
                                                                 <div className="flex justify-center items-center size-8 font-medium">
+=======
+                                                                <div className="flex justify-center items-center size-8 font-semibold">
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                     {item.qty}×
                                                                 </div>
 
                                                                 {!(cartLoading[0] && cartLoading[1] === item.url && cartLoading[2] === 'add') ? (
+<<<<<<< HEAD
                                                                     <div className="flex justify-center items-center size-8 bg-white rounded-[--global-radius-md]" onClick={() => {
+=======
+                                                                    <div className="flex justify-center items-center size-8 bg-white rounded-full" onClick={() => {
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                         addProductToCart(
                                                                             item.url,
                                                                             item.url,
@@ -268,7 +290,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                         </svg>
                                                                     </div>
                                                                 ) : (
+<<<<<<< HEAD
                                                                     <div className="flex justify-center items-center size-8 bg-white rounded-[--global-radius-md]">
+=======
+                                                                    <div className="flex justify-center items-center size-8 bg-white rounded-full">
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                         <svg className="animate-[spin_600ms_linear_infinite]" width={12} height={12}>
                                                                             <use
                                                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -279,8 +305,13 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                 )}
                                                             </div>
 
+<<<<<<< HEAD
                                                             <div className="flex justify-between items-center size-8 rounded-[--global-radius-md] bg-[#f7f7f7] overflow-hidden shadow-[rgba(0,0,0,0.2)_0px_2px_8px]">
                                                                 <div className="flex justify-center items-center size-8 bg-white hover:bg-[#f7f7f7] rounded-[--global-radius-md]" onClick={() => removeAtOnce(item.url)}>
+=======
+                                                            <div className="flex justify-between items-center size-8 rounded-full bg-[#f7f7f7] overflow-hidden shadow-[rgba(0,0,0,0.2)_0px_2px_8px]">
+                                                                <div className="flex justify-center items-center size-8 bg-white hover:bg-[#f7f7f7] rounded-full" onClick={() => removeAtOnce(item.url)}>
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                     <svg className="flex justify-center items-center size-4 text-[#494949]" width={10} height={10}>
                                                                         <use
                                                                             xlinkHref="/on/demandware/svg/non-critical.svg#icon-bin_dd"
@@ -292,8 +323,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                     </div>
                                                 </div>
 
+<<<<<<< HEAD
                                                 {console.log(extraCart)}
 
+=======
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                 {(extraCart.find(k => k && k[0]?.product === item.url))?.length > 0 && (
                                                     <ul className="block justify-start items-center w-full h-full px-4 py-2 space-y-2 capitalize">
                                                         {(extraCart.find(k => k && k[0]?.product === item.url)).map((k, index) => (
@@ -305,7 +339,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                                                                     alt={k.addition}
                                                                 />
 
+<<<<<<< HEAD
                                                                 <div className="flex justify-between items-center w-full font-medium">
+=======
+                                                                <div className="flex justify-between items-center w-full font-semibold">
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                                                                     <div className="flex justify-start items-center w-auto">
                                                                         {k.addition}
                                                                     </div>

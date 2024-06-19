@@ -50,6 +50,206 @@ const Page = () => {
     
     const mappedCart = Object.keys(cart).map((k) => cart[k]);
 
+<<<<<<< HEAD
+=======
+    // ADD TO CART
+    const [cartLoading, setCartLoading] = useState([false, '', ''])
+
+    const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
+        setCartLoading([true, url, 'add'])
+
+        setTimeout(() => {
+            setCartLoading([false, '', ''])
+
+            addToCart(
+                itemCode,
+                url,
+                qty,
+                availableQty,
+                price,
+                img,
+                name,
+                offer,
+            )
+        }, 800)
+    }
+    const removeProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
+        setCartLoading([true, url, 'delete']);
+
+        setTimeout(() => {
+            setCartLoading([false, '', '']);
+
+            removeFromCart(
+                itemCode,
+                url,
+                qty,
+                availableQty,
+                price,
+                img,
+                name,
+                offer,
+            );
+        }, 800);
+    }
+
+
+    // SIGN UP
+
+    const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userPhone, setUserPhone] = useState(0);
+
+    const [signupLoading, setSignupLoading] = useState(false);
+    const [signinLoading, setSigninLoading] = useState(false);
+
+    const AES_SECRET = '09182__signin__65701';
+
+    const handleSignupSubmit = async (e) => {
+        e.preventDefault();
+
+        const userData = {
+            name: userName,
+            email: userEmail,
+            phone: parseInt(userPhone)
+        }
+
+
+        setSignupLoading(true);
+
+        setTimeout(async () => {
+            try {
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, [
+                    userData
+                ]);
+
+                if (res.status === 200) {
+                    notify('success', 'Account successfully created.');
+                }
+            } catch (error) {
+                if (error.response.data?.details.includes('E11000 duplicate key error')) {
+                    notify('error', 'Account already exists.');
+                } else {
+                    console.log('An error occurred while signing up:', error);
+                }
+            }
+
+            setSignupLoading(false);
+        }, 1500);
+    }
+
+    const handleSigninSubmit = async (event) => {
+        event.preventDefault();
+
+        const userData = [{
+            email: userEmail,
+            phone: parseInt(userPhone),
+        }]
+
+        setSigninLoading(true);
+
+        setTimeout(async () => {
+            try {
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/signin`, userData);
+
+                if (res.status === 200) {
+                    notify('success', 'Signed in successfully.');
+
+                    let strUserData = [res.data.name, res.data.email, res.data.phone, res.data.token]
+                    const encUserData = CryptoJS.AES.encrypt(JSON.stringify(strUserData), AES_SECRET).toString();
+
+                    localStorage.setItem('user', encUserData);
+
+                    router.push(`/cart/checkout?rmd=${(Math.random() * 1000).toFixed(0)}`);
+                }
+            } catch (error) {
+                if (error.response?.data?.details?.includes('Invalid Credentials.')) {
+                    notify('error', 'Invalid Credentials.');
+                } else if (error.response?.data?.error?.includes('No Such User Found')) {
+                    notify('error', 'User not found.');
+                } else {
+                    notify('error', JSON.stringify(error.response?.data?.details));
+
+                    console.log(error);
+                }
+            }
+
+            setSigninLoading(false);
+        }, 1500);
+    }
+
+    // CHECK AUTHORIZATION
+    const [authStep, setAuthStep] = useState('signin');
+
+
+    // STEPS
+    const [steps, setSteps] = useState([0, 0, 0]);
+
+    useEffect(() => {
+        if (isUserSignedIn) {
+            setSteps([1, 0, 0]);
+        }
+    }, [user, isUserSignedIn]);
+
+
+    // ADDRESS
+    const [address, setAddress] = useState('');
+    const [pincodes, setPincodes] = useState([]);
+    const [userAddressState, setUserAddressState] = useState('');
+    const [isSelectLocationMenuOpen, setIsSelectLocationMenuOpen] = useState(false);
+    const [isSelectDateOpen, setIsSelectDateOpen] = useState(false);
+
+    const addAddressToCookie = () => {
+        setCookie('user_pincode', address)
+    };
+
+    const addStateToCookie = (data) => {
+        setCookie('user_state', data)
+
+        setUserAddressState(data);
+    };
+
+    const fetchPincodeData = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/pincodes`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setPincodes(response.data);
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchPincodeData();
+    }, []);
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value);
+    };
+
+    const handleAddressSubmit = (e) => {
+        e.preventDefault();
+
+        const pinArr = pincodes;
+
+        if (JSON.stringify(pinArr)?.includes(address)) {
+            addAddressToCookie();
+
+            const filteredPins = pincodes?.filter((k) => k[0].includes(getCookie('user_pincode')));
+
+            if (filteredPins && filteredPins.length > 0) {
+                let uState = filteredPins[0][1];
+                addStateToCookie(uState);
+
+                router.push(`?rmd=${(Math.random() * 1000).toFixed(0)}`)
+            } else {
+                console.log('No matching pins found.');
+            }
+        }
+    };
+
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
 
     // COUPON
     const [isCouponOpen, setIsCouponOpen] = useState(false);

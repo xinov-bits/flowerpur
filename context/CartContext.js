@@ -14,14 +14,15 @@ import CryptoJS from 'crypto-js';
 import axios from 'axios';
 
 // CONTEXT
-const CartContext = createContext();
+const CartContext = createContext()
 
 
 export const CartProvider = ({ children }) => {
     const router = useRouter();
-    const query = useSearchParams();
-    const pathname = usePathname();
+    const query = useSearchParams()
+    const pathname = usePathname()
 
+<<<<<<< HEAD
 
     // USER
     const [user, setUser] = useState('');
@@ -59,6 +60,16 @@ export const CartProvider = ({ children }) => {
     const [favList, setFavList] = useState({}) // Favorite items
     const [recentView, setRecentView] = useState({}) // Recently viewed items
 
+=======
+    // State variables for cart, favorites, and recent views
+    const [cart, setCart] = useState([]) // Object to store cart items
+    const [subTotal, setSubTotal] = useState(0) // Total price of items in cart
+    const [numTotal, setNumTotal] = useState(0) // Total quantity of items in cart
+    const [mrpTotal, setMrpTotal] = useState(0) // Total MRP (Maximum Retail Price) of items in cart
+    const [favList, setFavList] = useState({}) // Favorite items
+    const [recentView, setRecentView] = useState({}) // Recently viewed items
+
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
     const [isCartOpenATC, setIsCartOpenATC] = useState(false)
 
     const [cartAdditions, setCartAdditions] = useState([])
@@ -159,6 +170,7 @@ export const CartProvider = ({ children }) => {
         let numTotal = 0
         let mrptTotal = 0
 
+<<<<<<< HEAD
         const arrSum = arr => arr.reduce((a, b) => a + b, 0)
 
         const filteredCart = Object.keys(cartData)?.filter(k => k !== 'additionals')?.map(k => cartData[k])
@@ -166,6 +178,15 @@ export const CartProvider = ({ children }) => {
         let additionalCart = cartData['additionals']?.length > 0 ? cartData['additionals'] : []
         const additionalPrice = (additionalCart && additionalCart?.length > 0) ? (arrSum(additionalCart?.map((item) => item.price))) : 0
 
+=======
+        const arrSum = arr => arr.reduce((a,b) => a + b, 0)
+
+        const filteredCart = Object.keys(cartData).filter(k => !cartData[k]?.additionals).map(k => cartData[k])
+        
+        let additionalCart = Object.keys(cartData).filter(k => cartData[k]?.additionals).map(k => cartData[k])[0]?.additionals
+        const additionalPrice = (additionalCart && additionalCart?.length > 0) ? (arrSum(additionalCart?.map((item) => item.price))) : 0
+
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
         for (const item of Object.values(filteredCart)) {
             subTotal += (item.price * item.qty) + additionalPrice
             numTotal += item.qty
@@ -206,7 +227,11 @@ export const CartProvider = ({ children }) => {
 
     // Function to add item to cart
     const addToCart = (itemCode, url, qty, availableQty, price, img, name, offer, deliveryOptions, additionals) => {
+<<<<<<< HEAD
         let newCart = { ...cart };
+=======
+        let newCart = { ...cart }
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
 
         if (itemCode in cart) {
             if (newCart[itemCode]["qty"] < 9) {
@@ -216,6 +241,7 @@ export const CartProvider = ({ children }) => {
             newCart[itemCode] = { qty, availableQty, url, price, img, name, offer, deliveryOptions };
         }
 
+<<<<<<< HEAD
         let additionalsToAdd = additionals !== undefined ? (additionals[0].includes('&') ? additionals[0].split('&') : additionals) : [];
         const additionalsArr = []
 
@@ -224,13 +250,29 @@ export const CartProvider = ({ children }) => {
                 let baseObj = {}
 
                 if (additional === 'vase') {
+=======
+
+        let additionalsToAdd = additionals !== undefined ? (additionals[0].includes('&') ? additionals[0].split('&') : additionals) : []
+        const additionalsArr = []
+
+        if (additionalsToAdd.length > 0) {
+            if (additionalsToAdd.length === 1) {
+                let baseObj = {}
+
+                if (additionals[0] === 'vase') {
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                     baseObj = {
                         product: url,
                         addition: 'vase',
                         img: 'https://i.ibb.co/QjvwMwP/image.png',
                         price: 349
                     }
+<<<<<<< HEAD
                 } else if (additional === 'double') {
+=======
+                }
+                else if (additionals[0] === 'double') {
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                     baseObj = {
                         product: url,
                         addition: 'double',
@@ -240,6 +282,7 @@ export const CartProvider = ({ children }) => {
                 }
 
                 additionalsArr.push(baseObj)
+<<<<<<< HEAD
             });
 
             newCart['additionals'] = additionalsArr
@@ -249,16 +292,53 @@ export const CartProvider = ({ children }) => {
             setIsCartOpenATC(true)
         }
 
+=======
+            }
+            else {
+                let baseArr = [
+                    {
+                        product: url,
+                        addition: 'vase',
+                        img: 'https://i.ibb.co/QjvwMwP/image.png',
+                        price: 349
+                    },
+                    {
+                        product: url,
+                        addition: 'double',
+                        img: 'https://i.ibb.co/3RTxMGR/x2-flowers.png',
+                        price: 199
+                    }
+                ]
+                let finalArr = additionalsArr.concat(baseArr)
+
+                additionalsArr.push(...finalArr)
+            }
+
+            newCart['additionals'] = { additionals: additionalsArr }
+        }
+
+
+        if (isCartOpenATC === false) {
+            setIsCartOpenATC(true)
+        }
+
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
         setCart(newCart)
         saveCart(newCart)
     }
 
     // Function to save cart data to local storage
+<<<<<<< HEAD
     const saveCart = async (myCart) => {
         const encCart = CryptoJS.AES.encrypt(JSON.stringify(myCart), 'cart').toString();
+=======
+    const saveCart = (myCart) => {
+        const encCart = CryptoJS.AES.encrypt(JSON.stringify(myCart), 'cart').toString()
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
 
-        localStorage.setItem("cart", encCart);
+        localStorage.setItem("cart", encCart)
 
+<<<<<<< HEAD
         calculateCartTotals(myCart);
 
         console.log(user);
@@ -279,10 +359,14 @@ export const CartProvider = ({ children }) => {
                 console.log("Success [user__cart]");
             }
         }
+=======
+        calculateCartTotals(myCart)
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
     }
 
 
     useEffect(() => {
+<<<<<<< HEAD
         let filteredCart = cart['additionals']?.length > 0 ? cart['additionals'] : [];
 
         if (filteredCart?.length > 0) {
@@ -314,6 +398,42 @@ export const CartProvider = ({ children }) => {
         else {
             setIsCartAdditions(false)
             setCartAdditions([])
+=======
+        let filteredCart = Object.keys(cart).map((k) => cart[k].additionals)
+
+        for (let i = 0; i < filteredCart.length; i++) {
+            const item = filteredCart[i];
+
+            if (item?.length > 0) {
+                let productSlugs = Object.keys(cart).filter((k) => cart[k].url !== undefined).map((k) => cart[k].url)
+                let additionalArr = cart['additionals']['additionals']
+
+                if (productSlugs?.length > 0) {
+                    for (let index = 0; index < productSlugs.length; index++) {
+                        const slug = productSlugs[index];
+
+                        const itemInCart = (item.map((k) => k.product))?.includes(slug)
+
+                        if (!itemInCart) {
+                            for (let i = additionalArr.length - 1; i >= 0; i--) {
+                                if (additionalArr[i].product === slug) {
+                                    additionalArr.splice(i, 1)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    additionalArr.splice(0, additionalArr.length)
+                }
+
+
+                setIsCartAdditions(true)
+                setCartAdditions(filteredCart)
+            } else {
+                setIsCartAdditions(false)
+                setCartAdditions([])
+            }
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
         }
     }, [cart])
 
@@ -355,7 +475,48 @@ export const CartProvider = ({ children }) => {
 
     const removeAdditionalFromCart = (itemCode, addition) => {
         let newCart = { ...cart }
+<<<<<<< HEAD
         let additionalCart = cart?.additionals.find(k => k.product === itemCode)
+=======
+        let additionalCart = cart?.additionals?.additionals.find(k => k.product === itemCode)
+
+        if (additionalCart) {
+            if (addition === 'vase' || addition === 'double') {
+                let prevAdditionals = [...cart?.additionals?.additionals]
+                let prevAdditionalIndex = prevAdditionals.findIndex(k => k.addition === addition)
+
+                if (prevAdditionalIndex !== -1) {
+                    prevAdditionals.splice(prevAdditionalIndex, 1)
+                    cart['additionals']['additionals'].splice(prevAdditionalIndex, 1)
+                } else {
+                    console.log('Item not found in cart:', addition, prevAdditionals)
+                }
+            }
+        }
+        else {
+            console.log('not working...')
+        }
+
+        setCart(newCart)
+        saveCart(newCart)
+    }
+
+    console.log(cart)
+
+    useEffect(() => {
+        if (cart) {
+            if (cart?.additionals) {
+                if (cart?.additionals?.additionals && cart?.additionals?.additionals.length === 0) {
+                    delete cart.additionals
+
+                    setIsCartAdditions(false)
+                    setCartAdditions([])
+                }
+            }
+        }
+    }, [cart])
+
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
 
         if (additionalCart) {
             if (addition === 'vase' || addition === 'double') {
@@ -403,7 +564,11 @@ export const CartProvider = ({ children }) => {
         <CartContext.Provider
             value={{
                 key,
+<<<<<<< HEAD
                 cart: !isCartAdditions ? cart : Object.keys(cart).filter(k => cart[k]?.qty).map(k => cart[k]),
+=======
+                cart: !isCartAdditions ? cart : Object.keys(cart).filter(k => !cart[k]?.additionals).map(k => cart[k]),
+>>>>>>> ec272fc8b6da1d8dc92df3fafdbd3b735faff397
                 extraCart: cartAdditions,
                 subTotal,
                 numTotal,
