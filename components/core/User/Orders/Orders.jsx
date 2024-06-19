@@ -110,7 +110,7 @@ export const Orders = () => {
                         <div className="block justify-start items-center w-full p-4 sm:p-4 md:p-6 lg:p-6 xl:p-6 border-t border-[#e5e5e5] overflow-hidden">
                             {!(orders === undefined || orders === null || orders == [] || orders.length <= 0) && <div className="flex justify-center items-center w-full border border-[#e5e5e5] rounded-md shadow-[0px_0px_12px_6px] shadow-black/[0.025] overflow-hidden">
                                 <table className="block justify-center items-center w-full bg-white rounded-md overflow-x-scroll">
-                                    <thead className="flex justify-start items-center w-[72rem] text-sm font-semibold">
+                                    <thead className="flex justify-start items-center w-[72rem] text-sm font-medium">
                                         <td className="flex justify-start items-center w-[12%] !leading-none">
                                             <span className="pl-3 py-3">
                                                 Order ID
@@ -154,7 +154,7 @@ export const Orders = () => {
                                         </td>
                                     </thead>
 
-                                    <tbody className="block justify-start items-center w-[72rem] text-base font-semibold">
+                                    <tbody className="block justify-start items-center w-[72rem] text-base font-medium">
                                         {Object.keys(orders).map((order, index) => <tr key={orders[order]._id} className="flex justify-start items-center w-full h-16 first:border-t-[1.5px] border-t border-[#e5e5e5] last:border-b-2 bg-white hover:bg-[#f7f7f7] cursor-pointer">
                                             <td className="flex justify-start items-center w-[12%] h-full">
                                                 <span className="pl-3 text-ellipsis underline overflow-hidden">
@@ -182,7 +182,7 @@ export const Orders = () => {
 
                                             <td className="flex justify-start items-center w-[11%] h-full capitalize">
                                                 {orders[order].status === 'delivered' && (
-                                                    <span className="flex justify-center items-center pl-3 space-x-1 font-semibold text-[#00ab42]">
+                                                    <span className="flex justify-center items-center pl-3 space-x-1 font-medium text-[#00ab42]">
                                                         <svg className="w-5 h-5" strokeWidth={2.5}
                                                             fill="none" viewBox="0 0 24 24"
                                                             stroke="currentColor"
@@ -195,7 +195,7 @@ export const Orders = () => {
                                                 )}
 
                                                 {orders[order].status === 'dispatched' && (
-                                                    <span className="flex justify-center items-center pl-3 space-x-1 font-semibold text-[#00838a]">
+                                                    <span className="flex justify-center items-center pl-3 space-x-1 font-medium text-[#00838a]">
                                                         <svg className="w-5 h-5" strokeWidth={2}
                                                             fill="none" viewBox="0 0 24 24"
                                                             stroke="currentColor"
@@ -208,7 +208,7 @@ export const Orders = () => {
                                                 )}
 
                                                 {orders[order].status === 'cancelled' && (
-                                                    <span className="flex justify-center items-center pl-3 space-x-1 font-semibold text-[#d91400]">
+                                                    <span className="flex justify-center items-center pl-3 space-x-1 font-medium text-[#d91400]">
                                                         <svg className="w-5 h-5" strokeWidth={2.5}
                                                             fill="none" viewBox="0 0 24 24"
                                                             stroke="currentColor"
@@ -231,7 +231,7 @@ export const Orders = () => {
                                             <td className="flex justify-end items-center w-[12%] h-full">
                                                 <span className="pr-3">
                                                     <Link href={`/user/orders?orderId=${orders[order].orderId}`}>
-                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#eeeeee] hover:bg-[#e5e5e5] text-sm font-semibold no-outline">
+                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#eeeeee] hover:bg-[#e5e5e5] text-sm font-medium no-outline">
                                                             View Products
                                                         </button>
                                                     </Link>
@@ -260,7 +260,7 @@ export const Orders = () => {
                         <div className="hidden sm:hidden md:block lg:block xl:block justify-start items-center w-full p-4 sm:p-4 md:p-6 lg:p-6 xl:p-6 border-t border-[#e5e5e5] overflow-hidden">
                             {!(products === undefined || products === null || products == [] || products.length <= 0) && <div className="flex justify-center items-center w-full border border-[#e5e5e5] rounded-md shadow-[0px_0px_12px_6px] shadow-black/[0.025] overflow-hidden">
                                 <table className="block justify-center items-center w-full bg-white rounded-md">
-                                    <thead className="flex justify-start items-center w-full text-sm font-semibold">
+                                    <thead className="flex justify-start items-center w-full text-sm font-medium">
                                         <td className="flex justify-start items-center w-[6%] !leading-none">
                                             <span className="pl-3 py-3">
                                                 S No.
@@ -310,7 +310,7 @@ export const Orders = () => {
                                         </td>
                                     </thead>
 
-                                    <tbody className="block justify-start items-center w-full text-base font-semibold">
+                                    <tbody className="block justify-start items-center w-full text-base font-medium">
                                         {Object.keys(products).map((item, index) => <tr key={products[item]._id} className="flex justify-start items-center w-full h-16 first:border-t-[1.5px] border-t border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] cursor-pointer">
                                             <td className="flex justify-start items-center w-[6%] h-full">
                                                 <span className="pl-3 text-ellipsis overflow-hidden">
@@ -357,7 +357,7 @@ export const Orders = () => {
                                             <td className="flex justify-end items-center w-[15%] h-full">
                                                 <span className="pr-1 ">
                                                     {products[item].offer === 'buy-2-get-1-free' && (
-                                                        <div className="flex justify-center items-center w-full h-full p-3 leading-none text-sm rounded-md bg-[#d7f5f5] text-[#00838a] font-semibold no-outline">
+                                                        <div className="flex justify-center items-center w-full h-full p-3 leading-none text-sm rounded-md bg-[#d7f5f5] text-[#00838a] font-medium no-outline">
                                                             Buy 2 get 1 Free
                                                         </div>
                                                     )}
@@ -368,7 +368,7 @@ export const Orders = () => {
                                             <td className="flex justify-end items-center w-[15%] h-full">
                                                 <span className="pr-3">
                                                     <Link href={`/product/${products[item].url}`}>
-                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#eeeeee] hover:bg-[#e5e5e5] text-sm font-semibold no-outline">
+                                                        <button className="flex justify-center items-center w-full h-full p-3 leading-none rounded-md bg-[#eeeeee] hover:bg-[#e5e5e5] text-sm font-medium no-outline">
                                                             View Product
                                                         </button>
                                                     </Link>
@@ -394,23 +394,23 @@ export const Orders = () => {
                                         </div>
 
                                         <div className="block justify-start items-center w-[70%] pr-1 py-2 h-full">
-                                            <div className="flex justify-start items-center w-full text-base font-semibold leading-none">
+                                            <div className="flex justify-start items-center w-full text-base font-medium leading-none">
                                                 {products[item].name}
                                             </div>
 
-                                            <div className="flex justify-between items-center w-full mt-1.5 text-lg font-semibold leading-none">
-                                                <div className="flex justify-start items-center w-full text-lg font-semibold leading-none">
+                                            <div className="flex justify-between items-center w-full mt-1.5 text-lg font-medium leading-none">
+                                                <div className="flex justify-start items-center w-full text-lg font-medium leading-none">
                                                     ₹{(products[item].price)?.toFixed(2)}
                                                 </div>
 
-                                                <div className="flex justify-end items-center w-full text-base font-semibold leading-none">
+                                                <div className="flex justify-end items-center w-full text-base font-medium leading-none">
                                                     Qty. {products[item].qty}
                                                 </div>
                                             </div>
 
                                             <div className="flex justify-start items-center w-full mt-1.5">
                                                 {products[item].offer === 'buy-2-get-1-free' && (
-                                                    <div className="flex justify-center items-center w-auto h-full p-1.5 leading-none text-sm rounded bg-[#d7f5f5] text-[#00838a] font-semibold no-outline">
+                                                    <div className="flex justify-center items-center w-auto h-full p-1.5 leading-none text-sm rounded bg-[#d7f5f5] text-[#00838a] font-medium no-outline">
                                                         Buy 2 get 1 Free
                                                     </div>
                                                 )}

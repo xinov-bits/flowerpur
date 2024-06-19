@@ -6,7 +6,7 @@ export function GlobalProvider({ children }) {
     return <Suspense>
         <CartProvider>
             <UserProvider>
-                {children}
+                    {children}
             </UserProvider>
         </CartProvider>
     </Suspense>

@@ -53,7 +53,6 @@ export default function Page({ params }) {
         favList,
         recentView,
         addToCart,
-        addMultipleToCart,
         clearCart,
         removeFromCart,
         removeAtOnce,
@@ -299,12 +298,12 @@ export default function Page({ params }) {
 
         return (
             <div className="flex justify-center items-center w-full h-2.5 space-x-2">
-                <div className="flex justify-start items-center w-auto h-full leading-none text-xs font-semibold">
+                <div className="flex justify-start items-center w-auto h-full leading-none text-xs font-medium">
                     {count}
                 </div>
 
-                <div className="relative flex justify-center items-center w-full h-full bg-[#e7e7e7] rounded-full overflow-hidden">
-                    <div className={`absolute left-0 flex justify-start items-center h-full bg-[#e8c500] rounded-full`} style={{
+                <div className="relative flex justify-center items-center w-full h-full bg-[#e7e7e7] rounded-[--global-radius-md] overflow-hidden">
+                    <div className={`absolute left-0 flex justify-start items-center h-full bg-[#e8c500] rounded-[--global-radius-md]`} style={{
                         width: size ? size : 0
                     }} />
                 </div>
@@ -369,84 +368,12 @@ export default function Page({ params }) {
                     img,
                     name,
                     offer,
-                    deliveryOptions
+                    deliveryOptions,
+                    [ hashParam.replaceAll('#additionals=', '') ]
                 );
-
-                if (hashParam !== undefined || hashParam !== null || hashParam !== '' || hashParam !== '#additionals=') {
-                    setAddExtraToCart(true);
-                }
             }, 1000)
         }
     }
-
-    useEffect(() => {
-        if (addExtraToCart && (hashParam.includes('vase') || hashParam.includes('double'))) {
-            if (hashParam.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase'))) {
-                addToCart(
-                    'special__vase',
-                    'special__vase',
-                    1,
-                    999,
-                    199,
-                    'https://i.ibb.co/QjvwMwP/image.png',
-                    'Minimal Flower Vase',
-                    '',
-                )
-            }
-            else if (hashParam.includes('double') && !(JSON.stringify(cart)?.includes('special__double'))) {
-                addToCart(
-                    'special__double',
-                    'special__double',
-                    1,
-                    999,
-                    349,
-                    'https://i.ibb.co/3RTxMGR/x2-flowers.png',
-                    'Double Flower Quantity',
-                    '',
-                )
-            }
-        }
-
-        setAddExtraToCart(false)
-    }, [addExtraToCart])
-
-    console.log(hashParam.includes('vase') && !(JSON.stringify(cart)?.includes('special__vase')))
-
-    useEffect(() => {
-        if (addExtrasToCart && hashParam.length > 0) {
-            if (
-                hashParam.includes('vase') &&
-                !(JSON.stringify(cart)?.includes('special__vase')) &&
-                hashParam.includes('double') &&
-                !(JSON.stringify(cart)?.includes('special__double'))
-            ) {
-                addMultipleToCart(
-                    [
-                        'special__vase',
-                        'special__vase',
-                        1,
-                        999,
-                        199,
-                        'https://i.ibb.co/QjvwMwP/image.png',
-                        'Minimal Flower Vase',
-                        ''
-                    ],
-                    [
-                        'special__double',
-                        'special__double',
-                        1,
-                        999,
-                        349,
-                        'https://i.ibb.co/3RTxMGR/x2-flowers.png',
-                        'Double Flower Quantity',
-                        ''
-                    ],
-                )
-            }
-        }
-
-        setAddExtrasToCart(false);
-    }, [addExtrasToCart])
 
 
     // SCROLL VALUE
@@ -1077,7 +1004,7 @@ export default function Page({ params }) {
                                     <div className="block justify-start items-start w-full space-y-3 select-none">
                                         {/* ADDITIONS */}
                                         <div className="flex justify-center items-center w-full h-auto pb-3 mb-3 border-b border-[#e5e5e5]">
-                                            <div className="flex justify-between items-center w-full h-10 px-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-lg font-semibold text-base cursor-pointer" onClick={() => {
+                                            <div className="flex justify-between items-center w-full h-10 px-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-lg font-medium text-base cursor-pointer" onClick={() => {
                                                 setIsAdditions(true)
                                             }}>
                                                 <div className="flex justify-start items-center w-auto">
@@ -1096,15 +1023,15 @@ export default function Page({ params }) {
 
                                         {/* PINCODE & DATE TIME */}
                                         <div className="flex justify-center items-center w-full h-auto p-2 border border-[#e5e5e5] rounded-lg leading-none">
-                                            <ul className="flex flex-col justify-start items-center w-full h-full space-y-2 text-base font-semibold">
-                                                <li className="relative flex justify-center items-center w-full h-auto p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full overflow-hidden">
+                                            <ul className="flex flex-col justify-start items-center w-full h-full space-y-2 text-base font-medium">
+                                                <li className="relative flex justify-center items-center w-full h-auto p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-[--global-radius-md] overflow-hidden">
                                                     <button className="relative flex justify-center items-center w-full h-full cursor-pointer no-outline" onClick={() => setIsAddressChooser(!isAddressChooser)}>
                                                         {(
                                                             getCookie('user_address') === '' ||
                                                             getCookie('user_address') === undefined ||
                                                             getCookie('user_address') === null
                                                         ) ? (
-                                                            <div className="flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer">
+                                                            <div className="flex justify-between items-center w-full h-full px-1 space-x-1 font-medium cursor-pointer">
                                                                 <div className="flex justify-start items-center size-4">
                                                                     <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                         <use
@@ -1119,7 +1046,7 @@ export default function Page({ params }) {
                                                                 </div>
                                                             </div>
                                                         ) : (
-                                                            <div className="flex justify-start items-center w-full h-full px-2 font-semibold space-x-1 cursor-pointer" title={getCookie('user_address')}>
+                                                            <div className="flex justify-start items-center w-full h-full px-2 font-medium space-x-1 cursor-pointer" title={getCookie('user_address')}>
                                                                 <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                     <use
                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1147,10 +1074,10 @@ export default function Page({ params }) {
                                                     required *
                                                 </div>}
 
-                                                <li className="relative block items-center w-full h-auto min-h-10 p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-full overflow-hidden">
+                                                <li className="relative block items-center w-full h-auto min-h-10 p-2 bg-[#eeeeee] hover:bg-[#e5e5e5] rounded-[--global-radius-md] overflow-hidden">
                                                     <div className="flex justify-between items-center w-full h-full leading-none">
                                                         <div className={`
-                                                            flex justify-between items-center w-full h-full px-1 space-x-1 font-semibold cursor-pointer
+                                                            flex justify-between items-center w-full h-full px-1 space-x-1 font-medium cursor-pointer
                                                             ${buzzDateInput && 'border-[#ad2314]'}
                                                             `}>
                                                             <div className="flex justify-start items-center size-5">
@@ -1175,7 +1102,7 @@ export default function Page({ params }) {
                                                                 <div className="flex justify-between items-center w-full h-full pl-1 font-medium appearance-none no-outline cursor-pointer" onClick={() => setIsSelectDateOpen(true)}>
                                                                     <div className="block items-center space-y-1">
                                                                         <p className="text-sm text-[#494949] !leading-none">
-                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-semibold">₹{finalDeliveryPrice}</span>
+                                                                            {moment(finalDate).format('DD')} {moment(finalDate).format('MMM')} {JSON.stringify(finalDeliveryType)?.replaceAll('"', '')?.split(',')[1]}: <span className="font-medium">₹{finalDeliveryPrice}</span>
                                                                         </p>
                                                                         <p className="text-[#191919] !leading-none">
                                                                             {moment(finalDate).format('ddd')} {finalDeliveryTime}
@@ -1241,7 +1168,7 @@ export default function Page({ params }) {
                                         </div>
 
                                         <div className="flex justify-start items-center w-[72%] sm:w-[72%] md:w-[80%] lg:w-[80%] xl:w-[80%] h-full">
-                                            {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-lg duration-75"
+                                            {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] text-white font-medium rounded-lg duration-75"
                                                 onClick={() => addProductToCart(
                                                     product.slug,
                                                     product.slug,
@@ -1261,7 +1188,7 @@ export default function Page({ params }) {
                                                 <div>
                                                     Add {productQty} to cart • ₹{product.price * productQty}
                                                 </div>
-                                            </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-lg duration-75">
+                                            </button> : <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] text-white font-medium rounded-lg duration-75">
                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                     <use
                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1318,7 +1245,7 @@ export default function Page({ params }) {
                                                 </div>
 
                                                 <div className="flex justify-center items-center w-[72%] h-full">
-                                                    {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-md duration-75"
+                                                    {!cartLoading ? <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] text-white font-medium rounded-md duration-75"
                                                         onClick={() => addProductToCart(
                                                             product.slug,
                                                             product.slug,
@@ -1338,7 +1265,7 @@ export default function Page({ params }) {
                                                         <div>
                                                             Add {productQty} to cart • ₹{product.price * productQty}
                                                         </div>
-                                                    </button> : <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-md duration-75">
+                                                    </button> : <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] text-white font-medium rounded-md duration-75">
                                                         <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                             <use
                                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -1414,7 +1341,7 @@ export default function Page({ params }) {
                                             <div className="flex flex-col justify-start items-start w-full h-auto no-outline space-y-2">
                                                 <div className="flex flex-col justify-start items-center w-full h-auto text-left leading-snug">
                                                     <div className="flex justify-start items-center w-full">
-                                                        <p className="pb-1 text-[#191919] font-medium sm:font-medium md:font-semibold lg:font-semibold xl:font-semibold leading-none">
+                                                        <p className="pb-1 text-[#191919] font-medium sm:font-medium md:font-medium lg:font-medium xl:font-medium leading-none">
                                                             {review.title}
                                                         </p>
                                                     </div>
@@ -1447,7 +1374,7 @@ export default function Page({ params }) {
 
                             {/* POST REVIEW */}
                             {false && <div className="flex flex-col justify-start items-start w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-full bg-white border border-[#e5e5e5] rounded-lg text-[#191919] overflow-hidden">
-                                <div className="flex justify-start items-center w-full p-2 border-b border-[#e5e5e5] text-base font-semibold text-[#191919] select-none">
+                                <div className="flex justify-start items-center w-full p-2 border-b border-[#e5e5e5] text-base font-medium text-[#191919] select-none">
                                     Post Review
                                 </div>
 
@@ -1460,7 +1387,7 @@ export default function Page({ params }) {
 
                                                 {selectedImage === '' && (
                                                     <>
-                                                        <label htmlFor="r_image" className="flex justify-center items-center w-auto h-full px-3 py-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-full space-x-1 cursor-pointer select-none no-outline">
+                                                        <label htmlFor="r_image" className="flex justify-center items-center w-auto h-full px-3 py-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-[--global-radius-md] space-x-1 cursor-pointer select-none no-outline">
                                                             <svg className="flex justify-center items-center w-4 h-4" strokeWidth={1.5} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                                             </svg>
@@ -1471,7 +1398,7 @@ export default function Page({ params }) {
                                                 )}
 
                                                 {imgSuccess && selectedImage !== '' && (
-                                                    <div className="flex justify-center items-center w-auto h-full p-1 pr-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-full space-x-1 cursor-pointer select-none overflow-hidden">
+                                                    <div className="flex justify-center items-center w-auto h-full p-1 pr-2 text-sm border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] rounded-[--global-radius-md] space-x-1 cursor-pointer select-none overflow-hidden">
                                                         <div className="flex justify-center items-center w-8 h-8 rounded-l-full rounded-lg overflow-hidden">
                                                             <Image className="flex justify-center items-center w-full h-full rounded-l-full rounded-lg overflow-hidden"
                                                                 src={rImg}
@@ -1588,14 +1515,14 @@ export default function Page({ params }) {
                                             rStars <= 0 &&
                                             !rEmail.includes('@')
                                         )
-                                        ) ? <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" type="submit">
+                                        ) ? <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-medium">
+                                            <button className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] rounded-[--global-radius-md] text-white font-bold duration-75" type="submit">
                                                 Post your review
                                             </button>
                                         </div>
                                             :
-                                            <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-semibold">
-                                                <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] rounded-full text-white font-bold saturate-0 opacity-40" type="button">
+                                            <div className="flex justify-start items-center w-full h-full leading-none text-xl sm:text-xl md:text-base lg:text-base xl:text-base font-medium">
+                                                <button className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] rounded-[--global-radius-md] text-white font-bold saturate-0 opacity-40" type="button">
                                                     Post your review
                                                 </button>
                                             </div>}
@@ -1640,7 +1567,7 @@ export default function Page({ params }) {
                         <div className="relative z-[200] flex justify-center items-center w-full h-auto max-w-md p-4 bg-white rounded-lg border-[1.5px] border-[#e5e5e5]">
                             {dateStepsDone[0] === false && <div className="flex flex-col justify-center items-center w-full h-full">
                                 <div className="flex justify-between items-center w-full">
-                                    <div className="flex justify-start items-center w-auto leading-none text-lg font-semibold">
+                                    <div className="flex justify-start items-center w-auto leading-none text-lg font-medium">
                                         Choose delivery date
                                     </div>
 
@@ -1662,7 +1589,7 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
+                                    <button className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] rounded-[--global-radius-md] text-white font-bold duration-75" onClick={() => {
                                         setDateStepsDone([true, false]);
                                         setFinalDate(selectedDate)
                                     }}>
@@ -1686,7 +1613,7 @@ export default function Page({ params }) {
                                             </button>
                                         </div>
 
-                                        <div className="flex justify-start items-center w-full leading-none text-lg font-semibold">
+                                        <div className="flex justify-start items-center w-full leading-none text-lg font-medium">
                                             Choose delivery type
                                         </div>
                                     </div>
@@ -1716,7 +1643,7 @@ export default function Page({ params }) {
                                                     />
 
                                                     <div className="flex flex-col justify-start items-center w-full h-full ml-2">
-                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                        <div className="flex justify-start items-center w-full h-full font-medium">
                                                             Express Delivery
                                                         </div>
                                                         <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
@@ -1725,7 +1652,7 @@ export default function Page({ params }) {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-medium leading-none text-[#767676]">
                                                     ₹19
                                                 </div>
                                             </label>
@@ -1746,7 +1673,7 @@ export default function Page({ params }) {
                                                     />
 
                                                     <div className="flex flex-col justify-start items-center w-full h-full ml-2">
-                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                        <div className="flex justify-start items-center w-full h-full font-medium">
                                                             Morning Delivery
                                                         </div>
                                                         <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
@@ -1755,7 +1682,7 @@ export default function Page({ params }) {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-medium leading-none text-[#767676]">
                                                     ₹200
                                                 </div>
                                             </label>
@@ -1776,7 +1703,7 @@ export default function Page({ params }) {
                                                     />
 
                                                     <div className="flex flex-col justify-start items-center w-full h-full ml-2">
-                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                        <div className="flex justify-start items-center w-full h-full font-medium">
                                                             Express Delivery
                                                         </div>
                                                         <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
@@ -1785,7 +1712,7 @@ export default function Page({ params }) {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-medium leading-none text-[#767676]">
                                                     ₹49
                                                 </div>
                                             </label>
@@ -1806,7 +1733,7 @@ export default function Page({ params }) {
                                                     />
 
                                                     <div className="flex flex-col justify-start items-center w-full h-full ml-2">
-                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                        <div className="flex justify-start items-center w-full h-full font-medium">
                                                             Fixed Time Delivery
                                                         </div>
                                                         <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
@@ -1815,7 +1742,7 @@ export default function Page({ params }) {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-medium leading-none text-[#767676]">
                                                     ₹200
                                                 </div>
                                             </label>
@@ -1836,7 +1763,7 @@ export default function Page({ params }) {
                                                     />
 
                                                     <div className="flex flex-col justify-start items-center w-full h-full ml-2">
-                                                        <div className="flex justify-start items-center w-full h-full font-semibold">
+                                                        <div className="flex justify-start items-center w-full h-full font-medium">
                                                             Pre-Midnight Delivery
                                                         </div>
                                                         <div className="flex justify-start items-center w-full h-full text-[#767676] font-medium text-sm">
@@ -1845,7 +1772,7 @@ export default function Page({ params }) {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-semibold leading-none text-[#767676]">
+                                                <div className="flex justify-end items-center w-[20%] px-2 text-base font-medium leading-none text-[#767676]">
                                                     ₹249
                                                 </div>
                                             </label>
@@ -1854,14 +1781,14 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    {(selectedDeliveryType.length !== 0) ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
+                                    {(selectedDeliveryType.length !== 0) ? <button className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] rounded-[--global-radius-md] text-white font-bold duration-75" onClick={() => {
                                         setDateStepsDone([true, true]);
                                         setFinalDeliveryType(selectedDeliveryType);
                                     }}>
                                         Continue to delivery time
                                     </button>
                                         :
-                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] saturate-0 opacity-40 rounded-full text-white font-bold">
+                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] saturate-0 opacity-40 rounded-[--global-radius-md] text-white font-bold">
                                             Continue to delivery time
                                         </div>
                                     }
@@ -1883,7 +1810,7 @@ export default function Page({ params }) {
                                             </button>
                                         </div>
 
-                                        <div className="flex flex-col justify-start items-center w-full leading-none text-lg font-semibold">
+                                        <div className="flex flex-col justify-start items-center w-full leading-none text-lg font-medium">
                                             <div className="flex justify-start items-center w-full leading-none"> Choose delivery time </div>
 
                                             <div className="flex justify-start items-center w-full text-sm text-[#767676] leading-none">
@@ -1964,7 +1891,7 @@ export default function Page({ params }) {
                                                         onChange={(e) => setSelectedDeliveryTime(e.target.value)}
                                                     />
 
-                                                    <div className="flex justify-start items-center w-full h-full ml-2 font-semibold">
+                                                    <div className="flex justify-start items-center w-full h-full ml-2 font-medium">
                                                         {item}
                                                     </div>
                                                 </div>
@@ -1974,7 +1901,7 @@ export default function Page({ params }) {
                                 </div>
 
                                 <div className="flex justify-center items-center w-full h-14 mt-3 pt-3 border-t border-[#e5e5e5]">
-                                    {selectedDeliveryTime !== '' ? <button className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] rounded-full text-white font-bold duration-75" onClick={() => {
+                                    {selectedDeliveryTime !== '' ? <button className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] rounded-[--global-radius-md] text-white font-bold duration-75" onClick={() => {
                                         setFinalDeliveryTime(selectedDeliveryTime);
                                         setFinalDeliveryPrice(
                                             timeOfDelivery.filter((k) => {
@@ -1989,7 +1916,7 @@ export default function Page({ params }) {
                                         Continue
                                     </button>
                                         :
-                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[#085b45] saturate-0 opacity-40 rounded-full text-white font-bold">
+                                        <div className="flex justify-center items-center w-full h-full px-4 bg-[--global-button-color-default] saturate-0 opacity-40 rounded-[--global-radius-md] text-white font-bold">
                                             Continue to delivery time
                                         </div>
                                     }

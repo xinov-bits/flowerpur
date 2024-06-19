@@ -179,7 +179,7 @@ const MobileHeader = () => {
 
                                 <div className="flex justify-center items-center size-9 p-1.5">
                                     <div className="relative flex justify-center items-center size-full">
-                                        <div className="absolute z-[2] top-0 right-0 flex justify-center items-center size-[14px] m-[-4px] leading-none text-[10px] bg-[#085b45] rounded-full font-semibold text-white text-ellipsis overflow-hidden">
+                                        <div className="absolute z-[2] top-0 right-0 flex justify-center items-center size-[14px] m-[-4px] leading-none text-[10px] bg-[--global-button-color-default] rounded-[--global-radius-md] font-medium text-white text-ellipsis overflow-hidden">
                                             {numTotal}
                                         </div>
 
@@ -198,7 +198,7 @@ const MobileHeader = () => {
                     </div>
 
                     <div className="flex justify-start items-center w-full h-[3.25rem] pt-2 px-4 space-x-2">
-                        <button className="relative flex justify-center items-center w-full h-full rounded-full overflow-hidden cursor-pointer" onClick={() => {
+                        <button className="relative flex justify-center items-center w-full h-full rounded-[--global-radius-md] overflow-hidden cursor-pointer" onClick={() => {
                             setIsSearchMenu(true)
                         }}>
                             <div className="absolute left-3 flex justify-center items-center w-auto h-full select-none pointer-events-none">

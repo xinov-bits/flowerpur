@@ -1,11 +1,11 @@
 'use client';
 
 // REACT JS
-import React, { useState, useEffect, useContext, createContext } from 'react'
-import { useRouter, useSearchParams } from "next/navigation"
+import React, { useState, useEffect, useContext, createContext } from 'react';
+import { useRouter, useSearchParams } from "next/navigation";
 
 // CRYPTO JS
-import CryptoJS from 'crypto-js'
+import CryptoJS from 'crypto-js';
 
 // CONTEXT
 const UserContext = createContext();

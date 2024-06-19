@@ -153,9 +153,9 @@ const Page = () => {
               </div>
 
               <div className="flex justify-start items-center w-full p-4 bg-white">
-                <div className="flex justify-start items-center w-full leading-none text-base font-semibold">
+                <div className="flex justify-start items-center w-full leading-none text-base font-medium">
                   <div className="flex justify-start items-center w-full">
-                    <button className="flex justify-center items-center w-auto p-3 bg-white border border-[#e5e5e5] hover:bg-[#f7f7f7] rounded-full leading-none text-sm">
+                    <button className="flex justify-center items-center w-auto p-3 bg-white border border-[#e5e5e5] hover:bg-[#f7f7f7] rounded-[--global-radius-md] leading-none text-sm">
                       Something
                     </button>
                   </div>

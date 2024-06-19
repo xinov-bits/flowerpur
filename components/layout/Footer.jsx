@@ -95,7 +95,7 @@ const Footer = () => {
         <div className="hidden sm:hidden md:block lg:block xl:block justify-start items-center w-full h-full mt-auto p-6 sm:p-6 md:p-10 lg:p-10 xl:p-10 bg-white border-t border-[#e5e5e5] overflow-x-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-y-4 sm:gap-y-4 md:gap-y-0 lg:gap-y-0 xl:gap-y-0 justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start items-start w-full h-full text-center sm:text-center md:text-left lg:text-left xl:text-left text-[#191919]">
             {footerMenu.map((k, index) => <div key={index} className="block justify-center items-center w-full">
-              <div className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start items-center w-auto text-lg font-semibold leading-none">
+              <div className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start items-center w-auto text-lg font-medium leading-none">
                 {k.name}
               </div>
 
@@ -161,7 +161,7 @@ const Footer = () => {
 
           <div className="flex justify-between items-center w-full h-full mt-8 text-[#191919]">
             <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-start items-center w-full space-x-4">
-              <div className="flex justify-center items-center w-8 h-8 text-[#085b45] bg-[#f4fbeb] rounded-full">
+              <div className="flex justify-center items-center w-8 h-8 text-[--global-button-color-default] bg-[#f4fbeb] rounded-[--global-radius-md]">
                 <Link className="no-outline" href={"/"}>
                   <Image className="flex justify-center items-center size-[2.28rem]"
                     src="/assets/Logo/logo_icon-dark__svg.svg"
@@ -227,7 +227,7 @@ const Footer = () => {
 
             <div className="block sm:block md:hidden lg:hidden xl:hidden justify-center items-start w-full space-y-2">
               <div className="flex justify-center items-center w-full">
-                <div className="flex justify-center items-center w-10 h-10 text-[#085b45] bg-[#f4fbeb] rounded-full">
+                <div className="flex justify-center items-center w-10 h-10 text-[--global-button-color-default] bg-[#f4fbeb] rounded-[--global-radius-md]">
                   <Link className="no-outline" href="/">
                     <Image className="flex justify-center items-center size-[2.28rem]"
                       src="/assets/Logo/logo_icon-dark__svg.svg"

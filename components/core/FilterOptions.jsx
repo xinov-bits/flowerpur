@@ -88,13 +88,13 @@ export const FilterOptions = () => {
 
 
     // ADD TO CART
-    const [cartLoading, setCartLoading] = useState([false, '']);
+    const [cartLoading, setCartLoading] = useState([false, ''])
 
     const addProductToCart = (itemCode, url, qty, availableQty, price, img, name, offer) => {
-        setCartLoading([true, url]);
+        setCartLoading([true, url])
 
         setTimeout(() => {
-            setCartLoading([false, '']);
+            setCartLoading([false, ''])
 
             addToCart(
                 itemCode,
@@ -105,9 +105,9 @@ export const FilterOptions = () => {
                 img,
                 name,
                 offer,
-            );
-            setAddedAnim([true, url]);
-        }, 1000);
+            )
+            setAddedAnim([true, url])
+        }, 1000)
     }
 
 
@@ -178,7 +178,7 @@ export const FilterOptions = () => {
             <div className="block sm:block md:flex lg:flex xl:flex justify-between items-center w-full h-full">
                 <div className="flex justify-start items-center w-auto space-x-2 h-9 px-4 sm:px-4 md:px-8 lg:px-8 xl:px-8 overflow-x-auto">
                     <div className="flex justify-center items-center w-auto h-full">
-                        <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=offers')}>
+                        <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'offers' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-[--global-radius-md] font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=offers')}>
                             <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
                                 <svg className="flex justify-center items-center w-4 h-4" width={24} height={24}>
                                     <use
@@ -195,7 +195,7 @@ export const FilterOptions = () => {
                     </div>
 
                     <div className="flex justify-center items-center w-auto h-full">
-                        <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'over_4.5' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=over_4.5')}>
+                        <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'over_4.5' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7]'} rounded-[--global-radius-md] font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=over_4.5')}>
                             <div className="flex justify-start items-center">
                                 Over 4.5
                             </div>
@@ -212,7 +212,7 @@ export const FilterOptions = () => {
                     </div>
 
                     <div className="flex justify-center items-center w-auto h-full">
-                        <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'under_999' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919] fill-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7] fill-[#e7e7e7]'} rounded-full font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=under_999')}>
+                        <button className={`flex justify-center items-center w-max h-full px-2.5 text-base ${qFilter === 'under_999' ? 'bg-[#191919] text-white hover:bg-[#191919] active:bg-[#191919] fill-[#191919]' : 'text-[#191919] bg-[#e7e7e7] active:bg-[#d6d6d6] hover:bg-[#f7f7f7] fill-[#e7e7e7]'} rounded-[--global-radius-md] font-bold overflow-hidden no-outline duration-100`} onClick={() => router.push('?filter=under_999')}>
                             <div className="flex justify-center items-center w-5 h-5 pr-1 mr-0.5">
                                 <svg className="flex justify-center items-center w-4 h-4" viewBox="0 0 40 40"
                                     fill="none"

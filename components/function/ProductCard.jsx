@@ -67,7 +67,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                         </Link>
 
                         <div className="absolute top-2 left-0 flex justify-center items-center space-x-1 overflow-hidden">
-                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-2 rounded-r-full bg-[#0e8345] leading-none text-xs font-semibold text-white overflow-hidden">
+                            {JSON.stringify(offer)?.includes('buy-2-get-1-free') && (<div className="flex justify-center items-center w-auto h-6 px-2 rounded-r-full bg-[#0e8345] leading-none text-xs font-medium text-white overflow-hidden">
                                 <div className="flex justify-center items-center w-4 h-4 pr-1 mr-0.5">
                                     <svg className="flex justify-center items-center size-2.5" width={24} height={24}>
                                         <use
@@ -91,7 +91,7 @@ const ProductCard = ({ itemCode, slug, qty, availableQty, price, dimg, title, of
                     </div>
                 </Link>
 
-                <div className="flex justify-between items-center w-full h-auto mt-1 text-lg font-semibold text-[#0e8345] !leading-none">
+                <div className="flex justify-between items-center w-full h-auto mt-1 text-lg font-medium text-[#0e8345] !leading-none">
                     ₹{price?.toFixed(2)}
                 </div>
             </motion.div>

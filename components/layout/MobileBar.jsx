@@ -81,7 +81,7 @@ const MobileBar = () => {
                 <ul className="flex justify-center items-center w-full h-full">
                     {menuItems.map((item, index) => {
                         return (
-                            <li key={index} className={`flex justify-center items-center w-full h-full py-2.5 ${pathname === item.link ? 'text-[#085b45]' : 'text-[#848484]'} duration-200`}>
+                            <li key={index} className={`flex justify-center items-center w-full h-full py-2.5 ${pathname === item.link ? 'text-[--global-button-color-default]' : 'text-[#848484]'} duration-200`}>
                                 <Link href={item.link} className="no-outline">
                                     <div className="relative flex flex-col justify-center items-center w-full h-full">
                                         <div className="relative z-[2] flex justify-center items-center w-full h-full">
@@ -93,7 +93,7 @@ const MobileBar = () => {
                                             </svg>
                                         </div>
 
-                                        <div className="flex justify-center items-center w-auto text-sm font-semibold">
+                                        <div className="flex justify-center items-center w-auto text-sm font-medium">
                                             {item.name}
                                         </div>
                                     </div>

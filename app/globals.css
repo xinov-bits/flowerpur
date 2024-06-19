@@ -8,7 +8,15 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-color: #fff;
+  --background-color: #ffffff;
+
+  --global-radius-sm: 4px;
+  --global-radius-md: 6px;
+  --global-radius-lg: 8px;
+  --global-radius-full: 1000px;
+
+  --global-button-color-default: #085b45;
+  --global-button-color-hover: #09674d;
 }
 
 * {

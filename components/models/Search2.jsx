@@ -76,7 +76,7 @@ const Search2 = ({ isSearchMenu, setIsSearchMenu, searchResults, recentSearches 
                                                         <div className="flex justify-between items-center w-full h-full no-outline">
                                                             <div className="flex justify-start items-center w-full h-full space-x-2">
                                                                 <div className="flex justify-center items-center w-auto">
-                                                                    <div className="flex justify-center items-center size-8 rounded-full text-[#494949] bg-[#eeeeee] group-hover:bg-white">
+                                                                    <div className="flex justify-center items-center size-8 rounded-[--global-radius-md] text-[#494949] bg-[#eeeeee] group-hover:bg-white">
                                                                         <svg className="flex justify-center items-center size-4" width={24} height={24}>
                                                                             <use
                                                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -86,7 +86,7 @@ const Search2 = ({ isSearchMenu, setIsSearchMenu, searchResults, recentSearches 
                                                                     </div>
                                                                 </div>
 
-                                                                <div className="flex justify-start items-center w-full font-semibold text-base grou-hover:underline">
+                                                                <div className="flex justify-start items-center w-full font-medium text-base grou-hover:underline">
                                                                     {search.name}
                                                                 </div>
                                                             </div>

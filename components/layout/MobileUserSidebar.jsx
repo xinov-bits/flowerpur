@@ -143,9 +143,9 @@ export const MobileUserSidebar = () => {
                     <ul
                         id="menuElement"
                         ref={menuRef}
-                        className="flex justify-start items-center w-[100rem] text-base font-semibold space-x-4 overflow-x-auto"
+                        className="flex justify-start items-center w-[100rem] text-base font-medium space-x-4 overflow-x-auto"
                     >
-                        {menu.map((k, index) => <li key={index} className="flex justify-start items-center w-auto py-4 bg-[#f7f7f7] leading-none text-base font-semibold capitalize">
+                        {menu.map((k, index) => <li key={index} className="flex justify-start items-center w-auto py-4 bg-[#f7f7f7] leading-none text-base font-medium capitalize">
                             <Link href={k.url} className="flex justify-start items-center w-max no-outline">
                                 {k.name}
                             </Link>

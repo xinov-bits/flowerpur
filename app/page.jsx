@@ -204,7 +204,7 @@ export default function Home() {
       <div className="hidden sm:hidden md:flex lg:flex xl:flex justify-center items-center w-full h-16 py-2 space-x-4 bg-[#f7f7f7] select-none overflow-hidden">
         {menu.map((slide, index) => {
           return (
-            <Link key={index} href={slide.url} className="relative flex justify-center items-start !w-auto h-full px-2 rounded-full bg-white space-x-1.5 overflow-hidden">
+            <Link key={index} href={slide.url} className="relative flex justify-center items-start !w-auto h-full px-2 rounded-[--global-radius-md] bg-white space-x-1.5 overflow-hidden">
               <button className="flex justify-center items-center w-auto h-full no-outline">
                 <div className="flex justify-start items-center w-auto h-auto">
                   <Image className="flex justify-center items-center w-auto h-10"
@@ -215,7 +215,7 @@ export default function Home() {
                   />
                 </div>
 
-                <div className="flex justify-center items-center w-auto leading-none font-semibold text-base">
+                <div className="flex justify-center items-center w-auto leading-none font-medium text-base">
                   {slide.name}
                 </div>
               </button>
@@ -253,11 +253,11 @@ export default function Home() {
           </Swiper>
         ) : (
           <div className="flex justify-center items-center w-auto h-auto !px-4 space-x-4 overflow-hidden">
-            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
-            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
-            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
-            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
-            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-full  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-[--global-radius-md]  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-[--global-radius-md]  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-[--global-radius-md]  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-[--global-radius-md]  c-skeleton" />
+            <div className="flex justify-start items-start size-[3.5rem] bg-[#f7f7f7] rounded-[--global-radius-md]  c-skeleton" />
           </div>
         )}
       </div>
@@ -285,12 +285,12 @@ export default function Home() {
                         {slide.name}
                       </div>
 
-                      <div className="flex justify-start items-center w-full mt-1 text-[0.82rem] font-semibold !leading-none"
+                      <div className="flex justify-start items-center w-full mt-1 text-[0.82rem] font-medium !leading-none"
                         dangerouslySetInnerHTML={{ __html: slide.desc }}
                       />
 
                       <div className="flex justify-start items-center w-full mt-2.5 text-sm">
-                        <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
+                        <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-medium !leading-none ${slide.color[2]} text-white rounded-[--global-radius-md]`}>
                           Shop now
                         </button>
                       </div>
@@ -346,12 +346,12 @@ export default function Home() {
                         {slide.name}
                       </div>
 
-                      <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-semibold !leading-none"
+                      <div className="flex justify-start items-center w-full mt-1 text-[0.7rem] min-[412px]:text-[0.9rem] font-medium !leading-none"
                         dangerouslySetInnerHTML={{ __html: slide.desc }}
                       />
 
                       <div className="flex justify-start items-center w-full mt-2.5 text-[0.8rem] min-[412px]:text-[0.85rem]">
-                        <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-semibold !leading-none ${slide.color[2]} text-white rounded-full`}>
+                        <button className={`flex justify-center items-center w-auto h-auto px-3 py-2 font-medium !leading-none ${slide.color[2]} text-white rounded-[--global-radius-md]`}>
                           Shop now
                         </button>
                       </div>

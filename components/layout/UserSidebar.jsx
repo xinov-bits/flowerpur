@@ -125,13 +125,13 @@ export const UserSidebar = () => {
                 </div>
 
                 <div className="block justify-start items-center w-full h-auto mt-4">
-                    <ul className="block justify-start items-center w-full text-base font-semibold space-y-[1.85rem]">
+                    <ul className="block justify-start items-center w-full text-base font-medium space-y-[1.85rem]">
                         {menu.map((item, index) => <li key={index} className="block justify-center items-center w-full !leading-none">
                             <div className="flex justify-start items-center w-full px-4 text-sm font-bold uppercase tracking-wide">
                                 {item.name}
                             </div>
 
-                            <ul className="block justify-start items-center w-full mt-2 text-base font-semibold capitalize">
+                            <ul className="block justify-start items-center w-full mt-2 text-base font-medium capitalize">
                                 {item.lists.map((k, index) => <li key={index} className="flex justify-start items-center w-full py-2 bg-[#f7f7f7] hover:bg-[#f0f0f0] px-4">
                                     <Link href={k.url} className="flex justify-start items-center w-full no-outline">
                                         {k.name}

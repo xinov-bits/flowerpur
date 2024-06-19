@@ -245,7 +245,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                                 }).map((k, index) => (
                                                                     <div key={index} className="flex flex-col justify-end items-center w-full">
                                                                         {k.address.map((item, index) => <li key={index} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(`${item}, ${k.ffa}`)}>
-                                                                            <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
+                                                                            <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-[--global-radius-md]">
                                                                                 <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                                     <use
                                                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -255,7 +255,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                                             </div>
 
                                                                             <div className="flex flex-col justify-end items-center w-full">
-                                                                                <div className="flex justify-end items-center w-full text-base font-semibold text-right">
+                                                                                <div className="flex justify-end items-center w-full text-base font-medium text-right">
                                                                                     {item}
                                                                                 </div>
 
@@ -275,7 +275,7 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
                                                             }
                                                         }).map((result, index) => (
                                                             <li key={index} className="flex justify-between items-center w-full h-auto min-h-12 py-1 px-4 bg-white hover:bg-[#eeeeee] group cursor-pointer" onClick={() => setSelectedAddress(result.address.freeformAddress)}>
-                                                                <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-full">
+                                                                <div className="flex justify-center items-center size-8 bg-[#eeeeee] group-hover:bg-white rounded-[--global-radius-md]">
                                                                     <svg className="flex justify-center items-center size-4" width={16} height={16}>
                                                                         <use
                                                                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -286,11 +286,11 @@ const SelectLocation = ({ isAddressChooser, setIsAddressChooser }) => {
 
                                                                 <div className="flex flex-col justify-end items-center w-full">
                                                                     {!(result.poi && result.address.municipalitySubdivision) ? (
-                                                                        <div className="flex justify-end items-center w-full text-base font-semibold text-right">
+                                                                        <div className="flex justify-end items-center w-full text-base font-medium text-right">
                                                                             {result.poi && result.poi.name}&nbsp;{result.address.municipalitySubdivision && result.address.municipalitySubdivision}
                                                                         </div>
                                                                     ) : (
-                                                                        <div className="flex justify-end items-center w-full text-base font-semibold text-right">
+                                                                        <div className="flex justify-end items-center w-full text-base font-medium text-right">
                                                                             {`${result.poi.name}, ${result.address.municipalitySubdivision && result.address.municipalitySubdivision}`}
                                                                         </div>
                                                                     )}

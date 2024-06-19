@@ -30,7 +30,7 @@ export const InputField = ({ name, type, placeholder, change }) => {
     return (
         <>
             <label htmlFor={name} className="relative block justify-start items-center w-full h-full rounded-md select-none">
-                <div className={`flex justify-start items-center w-full ${name === 'promo_code' ? 'font-bold' : 'font-semibold'} text-[#191919] capitalize`}>
+                <div className={`flex justify-start items-center w-full ${name === 'promo_code' ? 'font-bold' : 'font-medium'} text-[#191919] capitalize`}>
                     {name === 'promo_code' && 'Enter'} {placeholder}
                 </div>
 

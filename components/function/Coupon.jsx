@@ -133,7 +133,7 @@ export const Coupon = ({ isCouponOpen, setIsCouponOpen }) => {
                                 Promo codes, offers & gift cards
                             </div>
 
-                            <div className="flex justify-center items-center w-full h-auto mt-4 text-lg font-semibold">
+                            <div className="flex justify-center items-center w-full h-auto mt-4 text-lg font-medium">
                                 <div className="block justify-center items-center w-full h-auto">
                                     <div className="flex justify-start items-center w-full font-bold text-[#191919] capitalize">
                                         Enter Promo Code

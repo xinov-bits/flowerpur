@@ -137,7 +137,7 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                                 Minimal Flower Vase
                                             </div>
 
-                                            <div className="flex justify-start items-center w-auto text-[#00838a] text-lg font-semibold">
+                                            <div className="flex justify-start items-center w-auto text-[#00838a] text-lg font-medium">
                                                 ₹199.00
                                             </div>
                                         </div>
@@ -196,7 +196,7 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                                 Double Flower Quantity
                                             </div>
 
-                                            <div className="flex justify-start items-center w-auto text-[#00838a] text-lg font-semibold">
+                                            <div className="flex justify-start items-center w-auto text-[#00838a] text-lg font-medium">
                                                 ₹349.00
                                             </div>
                                         </div>
@@ -215,13 +215,13 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                 {additionals.length > 0 ? (
                                     <div className="flex justify-center items-center w-full h-12 mt-4">
                                         {!cartLoading ? (
-                                            <button className="flex justify-center items-center w-full h-full bg-[#085b45] hover:bg-[#09674d] active:bg-[#064434] text-white font-semibold rounded-lg duration-75" onClick={() => addAdditionals()}>
+                                            <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] hover:bg-[--global-button-color-hover] active:bg-[#064434] text-white font-medium rounded-lg duration-75" onClick={() => addAdditionals()}>
                                                 <div>
                                                     Add additionals to cart
                                                 </div>
                                             </button>
                                         ) : (
-                                            <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-lg duration-75">
+                                            <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] text-white font-medium rounded-lg duration-75">
                                                 <svg className="animate-[spin_600ms_linear_infinite]" width={16} height={16}>
                                                     <use
                                                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -233,7 +233,7 @@ const Additions = ({ isAdditions, setIsAdditions }) => {
                                     </div>
                                 ) : (
                                     <div className="flex justify-center items-center w-full h-12 mt-4">
-                                        <button className="flex justify-center items-center w-full h-full bg-[#085b45] text-white font-semibold rounded-lg saturate-0 opacity-40 cursor-not-allowed">
+                                        <button className="flex justify-center items-center w-full h-full bg-[--global-button-color-default] text-white font-medium rounded-lg saturate-0 opacity-40 cursor-not-allowed">
                                             <div>
                                                 Add additionals to cart
                                             </div>

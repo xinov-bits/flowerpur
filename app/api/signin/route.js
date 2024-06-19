@@ -5,9 +5,6 @@ import { NextResponse } from 'next/server';
 // JSON WEB TOKEN
 import jwt from 'jsonwebtoken';
 
-// CRYPTO JS
-import CryptoJS from 'crypto-js';
-
 // Establish MongoDB connection
 connectDb();
 
@@ -24,7 +21,7 @@ export async function POST(req) {
                 }
 
                 const token = jwt.sign({ phone: user.phone }, process.env.JWT_SECRET);
-                return NextResponse.json({ success: true, token, name: user.name, email: user.email, phone: user.phone }, { status: 200 });
+                return NextResponse.json({ success: true, token, name: user.name, email: user.email, phone: user.phone, cart: user.cart }, { status: 200 });
             } else {
                 return NextResponse.json({ error: "Invalid Credentials." }, { status: 400 });
             }

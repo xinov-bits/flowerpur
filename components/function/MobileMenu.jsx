@@ -151,7 +151,7 @@ const MobileMenu = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 
                                 <ul className="flex flex-col justify-start items-start w-full h-auto text-[#191919] overflow-y-auto">
                                     {secondaryMenu.map((item, index) => (
-                                        <li key={index} className="flex justify-start items-center w-full h-auto p-4 space-x-2 text-base font-semibold bg-white hover:bg-[#f7f7f7] !leading-none cursor-pointer">
+                                        <li key={index} className="flex justify-start items-center w-full h-auto p-4 space-x-2 text-base font-medium bg-white hover:bg-[#f7f7f7] !leading-none cursor-pointer">
                                             <div> {item.name} </div>
                                         </li>
                                     ))}
